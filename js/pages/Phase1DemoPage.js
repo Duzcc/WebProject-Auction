@@ -1,6 +1,6 @@
 import { createElement } from '../utils/dom.js';
-import { CountdownTimer } from '../components/Shared/CountdownTimer.js';
-import { BiddingModal } from '../components/Shared/BiddingModal.js';
+import { CountdownTimer } from './shared/CountdownTimer.js';
+import { BiddingModal } from './shared/BiddingModal.js';
 
 /**
  * Demo Page for Phase 1 Features

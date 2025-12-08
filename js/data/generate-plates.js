@@ -144,8 +144,30 @@ function generateCarPlates(count) {
 
     for (let i = 1; i <= count; i++) {
         const plateType = selectPlateType();
-        const province = getRandomProvinces();
-        const plateNumber = generatePlateNumber(true, plateType);
+        const province = getRandomItem(provinces); // Single province selection
+        const series = getRandomItem(carSeries);
+
+        // Generate number based on type pattern
+        let number;
+        const patterns = types[plateType].patterns;
+        const pattern = getRandomItem(patterns);
+
+        if (pattern === 'XXX.XX' || pattern === 'XXXX') {
+            // Generate repeating pattern for Ngũ quý and Tứ quý
+            const digit = Math.floor(Math.random() * 10);
+            if (pattern === 'XXX.XX') {
+                number = `${digit}${digit}${digit}.${digit}${digit}`;
+            } else {
+                number = `${digit}${digit}${digit}${digit}`;
+            }
+        } else if (pattern.includes('X')) {
+            // Replace X with random digits
+            number = pattern.replace(/X/g, () => Math.floor(Math.random() * 10));
+        } else {
+            number = pattern;
+        }
+
+        const plateNumber = `${province.code}${series} - ${number}`;
         const startPrice = getRandomPrice(plateType);
         const plateColor = getPlateColor();
 
@@ -153,7 +175,7 @@ function generateCarPlates(count) {
             id: i,
             plateNumber,
             startPrice,
-            province: province.name,
+            province: province.name, // Use same province
             type: plateType,
             plateColor // white or yellow
         });
@@ -167,8 +189,30 @@ function generateMotorbikePlates(count) {
 
     for (let i = 1; i <= count; i++) {
         const plateType = selectPlateType();
-        const province = getRandomProvinces();
-        const plateNumber = generatePlateNumber(false, plateType);
+        const province = getRandomItem(provinces); // Single province selection
+        const series = getRandomItem(bikeSeries);
+
+        // Generate number based on type pattern
+        let number;
+        const patterns = types[plateType].patterns;
+        const pattern = getRandomItem(patterns);
+
+        if (pattern === 'XXX.XX' || pattern === 'XXXX') {
+            // Generate repeating pattern for Ngũ quý and Tứ quý
+            const digit = Math.floor(Math.random() * 10);
+            if (pattern === 'XXX.XX') {
+                number = `${digit}${digit}${digit}.${digit}${digit}`;
+            } else {
+                number = `${digit}${digit}${digit}${digit}`;
+            }
+        } else if (pattern.includes('X')) {
+            // Replace X with random digits
+            number = pattern.replace(/X/g, () => Math.floor(Math.random() * 10));
+        } else {
+            number = pattern;
+        }
+
+        const plateNumber = `${province.code}${series} - ${number}`;
 
         // Motorbikes have lower prices
         const basePrice = plateType === 'Ngũ quý' ? 50000000 : 5000000;
@@ -181,7 +225,7 @@ function generateMotorbikePlates(count) {
             id: i,
             plateNumber,
             startPrice,
-            province: province.name,
+            province: province.name, // Use same province
             type: plateType,
             plateColor // white or yellow
         });

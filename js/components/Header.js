@@ -102,6 +102,7 @@ export function Header({ activePage, onNavigate }) {
                         <span class="${navClass('cars')}" data-page="cars">Xe ô tô</span>
                         <span class="${navClass('motorbikes')}" data-page="motorbikes">Xe máy</span>
                         <span class="${navClass('assets')}" data-page="assets">Tài sản khác</span>
+                        <span class="${navClass('news')}" data-page="news">Tin tức</span>
                     </nav>
 
                     <!-- Search Bar & User Actions -->
@@ -228,6 +229,7 @@ export function Header({ activePage, onNavigate }) {
                         <div class="${navClass('cars')} block py-3 font-semibold border-b border-gray-100" data-page="cars">Xe ô tô</div>
                         <div class="${navClass('motorbikes')} block py-3 font-semibold border-b border-gray-100" data-page="motorbikes">Xe máy</div>
                         <div class="${navClass('assets')} block py-3 font-semibold border-b border-gray-100" data-page="assets">Tài sản khác</div>
+                        <div class="${navClass('news')} block py-3 font-semibold border-b border-gray-100" data-page="news">Tin tức</div>
                     </nav>
                 </div>
             </div>

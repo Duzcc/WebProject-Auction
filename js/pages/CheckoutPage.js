@@ -4,7 +4,7 @@
  */
 
 import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from '../components/Shared/PageBanner.js';
+import { PageBanner } from './shared/PageBanner.js';
 import { getCartItems, getCartTotal } from '../utils/cart.js';
 import { getAuthState } from '../utils/auth.js';
 import { ROUTES } from '../utils/navigation.js';

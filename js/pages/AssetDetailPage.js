@@ -4,12 +4,12 @@
  */
 
 import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from '../components/Shared/PageBanner.js';
-import { AuctionRegistrationModal } from '../components/Shared/AuctionRegistrationModal.js';
+import { PageBanner } from './shared/PageBanner.js';
+import { AuctionRegistrationModal } from './shared/AuctionRegistrationModal.js';
 import { isRegisteredForAuction } from '../utils/auctionRegistration.js';
 import { getAuthState } from '../utils/auth.js';
 import toast from '../utils/toast.js';
-import { showLightbox } from '../components/Shared/Lightbox.js';
+import { showLightbox } from './shared/Lightbox.js';
 
 /**
  * Asset Detail Page Component

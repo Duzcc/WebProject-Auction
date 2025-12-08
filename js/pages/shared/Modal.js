@@ -1,19 +1,36 @@
 /**
  * Modal Component
- * Reusable modal system with backdrop and animations
+ * Hệ thống modal có thể tái sử dụng với backdrop và animations
+ * 
+ * Tính năng:
+ * - Tạo modal động với title, content, và buttons tùy chỉnh
+ * - Hỗ trợ nhiều kích thước: small, medium, large, full
+ * - Đóng modal bằng: click backdrop, ESC key, hoặc nút close
+ * - Animations mượt mà khi mở/đóng
+ * - Ngăn scroll body khi modal mở
  */
 
 /**
- * Creates and shows a modal
- * @param {Object} options - Modal options
- * @param {string} options.title - Modal title
- * @param {string|HTMLElement} options.content - Modal content
- * @param {Array} options.buttons - Array of button configs
- * @param {boolean} options.closeOnBackdrop - Close on backdrop click (default: true)
- * @param {boolean} options.closeOnEsc - Close on ESC key (default: true)
- * @param {string} options.size - Modal size: 'small', 'medium', 'large', 'full' (default: 'medium')
- * @param {Function} options.onClose - Callback when modal closes
- * @returns {HTMLElement} Modal element
+ * Tạo và hiển thị modal
+ * @param {Object} options - Các tùy chọn cấu hình modal
+ * @param {string} options.title - Tiêu đề modal
+ * @param {string|HTMLElement} options.content - Nội dung modal (HTML string hoặc element)
+ * @param {Array} options.buttons - Mảng các cấu hình button [{text, variant, onClick, closeOnClick}]
+ * @param {boolean} options.closeOnBackdrop - Đóng modal khi click vào backdrop (mặc định: true)
+ * @param {boolean} options.closeOnEsc - Đóng modal khi nhấn ESC (mặc định: true)
+ * @param {string} options.size - Kích thước modal: 'small', 'medium', 'large', 'full' (mặc định: 'medium')
+ * @param {Function} options.onClose - Callback được gọi khi modal đóng
+ * @returns {HTMLElement} Modal element đã được thêm vào DOM
+ * 
+ * Cách sử dụng:
+ * showModal({
+ *   title: 'Xác nhận',
+ *   content: '<p>Bạn có chắc chắn?</p>',
+ *   buttons: [
+ *     { text: 'Hủy', variant: 'secondary' },
+ *     { text: 'Xác nhận', variant: 'primary', onClick: () => console.log('Confirmed') }
+ *   ]
+ * });
  */
 export function showModal({
     title = '',
@@ -24,10 +41,10 @@ export function showModal({
     size = 'medium',
     onClose = null
 } = {}) {
-    // Prevent body scroll
+    // Ngăn scroll body khi modal mở để focus vào modal
     document.body.style.overflow = 'hidden';
 
-    // Size classes
+    // Định nghĩa các class kích thước modal
     const sizeClasses = {
         small: 'max-w-md',
         medium: 'max-w-2xl',
@@ -67,7 +84,8 @@ export function showModal({
     const footer = document.createElement('div');
     footer.className = 'modal-footer flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50';
 
-    // Add buttons
+    // Thêm buttons vào footer
+    // Nếu không có button nào được cung cấp, tạo button "Đóng" mặc định
     if (buttons.length === 0) {
         buttons = [{
             text: 'Đóng',
@@ -76,6 +94,7 @@ export function showModal({
         }];
     }
 
+    // Tạo từng button với styling và event handler tương ứng
     buttons.forEach(btn => {
         const button = document.createElement('button');
         const variants = {
@@ -136,7 +155,8 @@ export function showModal({
         document.addEventListener('keydown', escHandler);
     }
 
-    // Animate in
+    // Animation fade-in và scale-up khi hiển thị modal
+    // Sử dụng setTimeout để trigger CSS transition
     setTimeout(() => {
         modal.style.opacity = '1';
         modalContent.style.transform = 'scale(1)';
@@ -146,9 +166,16 @@ export function showModal({
 }
 
 /**
- * Close modal with animation
- * @param {HTMLElement} modal - Modal element
- * @param {Function} onClose - Callback function
+ * Đóng modal với animation
+ * @param {HTMLElement} modal - Modal element cần đóng
+ * @param {Function} onClose - Callback function được gọi sau khi modal đóng
+ * 
+ * Quy trình:
+ * 1. Trigger animation fade-out và scale-down
+ * 2. Đợi animation hoàn tất (300ms)
+ * 3. Remove modal khỏi DOM
+ * 4. Khôi phục scroll của body
+ * 5. Gọi callback onClose nếu có
  */
 function closeModal(modal, onClose) {
     const modalContent = modal.querySelector('.modal-content');
@@ -167,7 +194,8 @@ function closeModal(modal, onClose) {
 }
 
 /**
- * Close active modal
+ * Đóng modal đang active (có id="active-modal")
+ * Helper function để đóng modal từ bên ngoài component
  */
 export function closeActiveModal() {
     const modal = document.getElementById('active-modal');
@@ -177,14 +205,25 @@ export function closeActiveModal() {
 }
 
 /**
- * Confirmation modal
- * @param {Object} options - Confirmation options
- * @param {string} options.title - Modal title
- * @param {string} options.message - Confirmation message
- * @param {string} options.confirmText - Confirm button text (default: 'Xác nhận')
- * @param {string} options.cancelText - Cancel button text (default: 'Hủy')
- * @param {Function} options.onConfirm - Callback when confirmed
- * @param {Function} options.onCancel - Callback when cancelled
+ * Hiển thị modal xác nhận (confirmation modal)
+ * Helper function để tạo modal xác nhận với 2 button: Hủy và Xác nhận
+ * 
+ * @param {Object} options - Các tùy chọn
+ * @param {string} options.title - Tiêu đề modal (mặc định: 'Xác nhận')
+ * @param {string} options.message - Nội dung thông báo xác nhận
+ * @param {string} options.confirmText - Text của nút xác nhận (mặc định: 'Xác nhận')
+ * @param {string} options.cancelText - Text của nút hủy (mặc định: 'Hủy')
+ * @param {Function} options.onConfirm - Callback khi người dùng xác nhận
+ * @param {Function} options.onCancel - Callback khi người dùng hủy
+ * @returns {HTMLElement} Modal element
+ * 
+ * Ví dụ:
+ * showConfirmModal({
+ *   title: 'Xóa dữ liệu',
+ *   message: 'Bạn có chắc muốn xóa không?',
+ *   onConfirm: () => deleteData(),
+ *   onCancel: () => console.log('Cancelled')
+ * });
  */
 export function showConfirmModal({
     title = 'Xác nhận',

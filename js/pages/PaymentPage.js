@@ -1,7 +1,7 @@
 import { createElement, createFromHTML } from '../utils/dom.js';
 import { createPayment, uploadPaymentProof, getPaymentForAuction, downloadInvoice, PAYMENT_METHODS } from '../utils/payment.js';
 import { generateVietQR, getBankInfo, formatTransferDescription, copyToClipboard } from '../utils/qrCode.js';
-import { CountdownTimer } from '../components/Shared/CountdownTimer.js';
+import { CountdownTimer } from './shared/CountdownTimer.js';
 import { getAuthState } from '../utils/auth.js';
 import toast from '../utils/toast.js';
 

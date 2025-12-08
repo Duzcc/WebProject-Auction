@@ -1,5 +1,5 @@
 import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from '../components/Shared/PageBanner.js';
+import { PageBanner } from './shared/PageBanner.js';
 
 /**
  * AssetList Page

@@ -1,9 +1,15 @@
 /**
  * Navigation Helper
- * Centralized routing and navigation management
+ * Quản lý routing và điều hướng tập trung cho ứng dụng
+ * 
+ * Module này cung cấp:
+ * - Constants cho tất cả routes trong app
+ * - Helper functions để navigate giữa các trang
+ * - Quản lý navigation state qua sessionStorage
+ * - Utilities để kiểm tra route hiện tại
  */
 
-// Route constants
+// Constants định nghĩa tất cả các routes trong ứng dụng
 export const ROUTES = {
     HOME: '#/',
     CARS: '#/cars',
@@ -23,21 +29,27 @@ export const ROUTES = {
 };
 
 /**
- * Navigate to a route
- * @param {string} route - Route constant from ROUTES
- * @param {Object} options - Navigation options
- * @param {boolean} options.replace - Replace history instead of push
- * @param {Object} options.state - State to store in session
+ * Điều hướng đến một route
+ * @param {string} route - Route constant từ ROUTES (ví dụ: ROUTES.HOME, ROUTES.CARS)
+ * @param {Object} options - Tùy chọn điều hướng
+ * @param {boolean} options.replace - Thay thế history thay vì push (mặc định: false)
+ * @param {Object} options.state - State cần lưu trong session để sử dụng ở trang đích
+ * 
+ * Ví dụ:
+ * navigateTo(ROUTES.CARS); // Chuyển đến trang cars
+ * navigateTo(ROUTES.PROFILE, { state: { userId: 123 } }); // Chuyển đến profile với state
+ * navigateTo(ROUTES.LOGIN, { replace: true }); // Thay thế history
  */
 export function navigateTo(route, options = {}) {
     const { replace = false, state = null } = options;
 
-    // Store state if provided
+    // Lưu state vào sessionStorage nếu được cung cấp
+    // State này có thể được lấy ra ở trang đích bằng getNavigationState()
     if (state) {
         sessionStorage.setItem('navigationState', JSON.stringify(state));
     }
 
-    // Navigate
+    // Thực hiện điều hướng
     if (replace) {
         window.location.replace(route);
     } else {
@@ -46,8 +58,11 @@ export function navigateTo(route, options = {}) {
 }
 
 /**
- * Get navigation state from session
- * @returns {Object|null} Stored state
+ * Lấy navigation state từ sessionStorage
+ * @returns {Object|null} State đã lưu, hoặc null nếu không có
+ * 
+ * Lưu ý: Hàm này tự động xóa state sau khi lấy ra (read-once pattern)
+ * để tránh state cũ bị sử dụng lại khi navigate nhiều lần
  */
 export function getNavigationState() {
     const state = sessionStorage.getItem('navigationState');
@@ -59,24 +74,27 @@ export function getNavigationState() {
 }
 
 /**
- * Go back in history
+ * Quay lại trang trước trong history
+ * Wrapper cho window.history.back()
  */
 export function goBack() {
     window.history.back();
 }
 
 /**
- * Get current route
- * @returns {string} Current hash
+ * Lấy route hiện tại
+ * @returns {string} Hash hiện tại trong URL (ví dụ: '#/cars'), hoặc HOME nếu không có hash
  */
 export function getCurrentRoute() {
     return window.location.hash || ROUTES.HOME;
 }
 
 /**
- * Check if current route matches
- * @param {string} route - Route to check
- * @returns {boolean} Match status
+ * Kiểm tra xem route hiện tại có khớp với route được cung cấp không
+ * @param {string} route - Route cần kiểm tra (ví dụ: ROUTES.CARS)
+ * @returns {boolean} true nếu route hiện tại khớp, false nếu không
+ * 
+ * Sử dụng để highlight active menu item hoặc conditional rendering
  */
 export function isCurrentRoute(route) {
     return getCurrentRoute() === route;

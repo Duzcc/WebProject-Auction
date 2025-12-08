@@ -1,5 +1,5 @@
 import { createElement } from '../utils/dom.js';
-import { DepositModal } from '../components/Shared/DepositModal.js';
+import { DepositModal } from './shared/DepositModal.js';
 import { getDepositStatus, hasVerifiedDeposit } from '../utils/deposit.js';
 
 /**

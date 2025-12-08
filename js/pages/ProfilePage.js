@@ -6,7 +6,7 @@
 import { getUserProfile, updateUserProfile, uploadAvatar, getUserSettings, updateUserSettings } from '../utils/userProfile.js';
 import { getAuthState } from '../utils/auth.js';
 import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from '../components/Shared/ProfileSidebar.js';
+import { ProfileSidebar } from './shared/ProfileSidebar.js';
 import toast from '../utils/toast.js';
 
 export function ProfilePage() {

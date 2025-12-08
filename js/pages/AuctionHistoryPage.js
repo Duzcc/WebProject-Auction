@@ -4,7 +4,7 @@
  */
 
 import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from '../components/Shared/ProfileSidebar.js';
+import { ProfileSidebar } from './shared/ProfileSidebar.js';
 import { getUserDeposits } from '../utils/deposit.js';
 import { getUserBids } from '../utils/bidding.js';
 

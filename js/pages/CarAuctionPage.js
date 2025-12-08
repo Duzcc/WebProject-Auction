@@ -1,7 +1,7 @@
 import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from '../components/Shared/PageBanner.js';
-import { AuctionRegistrationModal } from '../components/Shared/AuctionRegistrationModal.js';
-import { PlateDetailModal } from '../components/Shared/PlateDetailModal.js';
+import { PageBanner } from './shared/PageBanner.js';
+import { AuctionRegistrationModal } from './shared/AuctionRegistrationModal.js';
+import { PlateDetailModal } from './shared/PlateDetailModal.js';
 import { calculateDeposit, parseAuctionDate } from '../utils/plateHelpers.js';
 
 /**
@@ -62,19 +62,19 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     const plateDetailModal = PlateDetailModal();
     document.body.appendChild(plateDetailModal.element);
 
-    // Constants
+    // Constants - Province with license plate codes
     const vietnameseProvinces = [
-        "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh",
-        "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước", "Bình Thuận", "Cà Mau",
-        "Cao Bằng", "Thành phố Cần Thơ", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên",
-        "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Thành phố Hà Nội",
-        "Hà Tĩnh", "Hải Dương", "Thành phố Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên",
-        "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn",
-        "Lào Cai", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận",
-        "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh",
-        "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên",
-        "Thanh Hóa", "Thành phố Hồ Chí Minh", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang",
-        "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
+        "An Giang-67", "Bà Rịa - Vũng Tàu-72", "Bắc Giang-98", "Bắc Kạn-97", "Bạc Liêu-95", "Bắc Ninh-99",
+        "Bến Tre-71", "Bình Định-77", "Bình Dương-61", "Bình Phước-93", "Bình Thuận-86", "Cà Mau-69",
+        "Cao Bằng-11", "Thành phố Cần Thơ-65", "Thành phố Đà Nẵng-43", "Đắk Lắk-47", "Đắk Nông-48", "Điện Biên-27",
+        "Đồng Nai-60", "Đồng Tháp-66", "Gia Lai-81", "Hà Giang-23", "Hà Nam-90", "Thành phố Hà Nội-29/30/31/32/33/40",
+        "Hà Tĩnh-38", "Hải Dương-34", "Thành phố Hải Phòng-15/16", "Hậu Giang-95", "Hòa Bình-28", "Hưng Yên-89",
+        "Khánh Hòa-79", "Kiên Giang-68", "Kon Tum-82", "Lai Châu-25", "Lâm Đồng-49", "Lạng Sơn-12",
+        "Lào Cai-24", "Long An-62", "Nam Định-18", "Nghệ An-37", "Ninh Bình-35", "Ninh Thuận-85",
+        "Phú Thọ-19", "Phú Yên-78", "Quảng Bình-73", "Quảng Nam-92", "Quảng Ngãi-76", "Quảng Ninh-14",
+        "Quảng Trị-74", "Sóc Trăng-83", "Sơn La-26", "Tây Ninh-70", "Thái Bình-17", "Thái Nguyên-20",
+        "Thanh Hóa-36", "Thành phố Hồ Chí Minh-50/51/52/53/54/55/56/57/58/59", "Thừa Thiên Huế-75", "Tiền Giang-63", "Trà Vinh-84", "Tuyên Quang-22",
+        "Vĩnh Long-64", "Vĩnh Phúc-88", "Yên Bái-21"
     ];
 
     const availableTypes = ["Ngũ quý", "Sảnh tiến", "Tứ quý", "Tam hoa", "Thần tài", "Lộc phát", "Ông địa", "Số gánh", "Lặp đôi"];
@@ -215,7 +215,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
     function createPlateColorDropdown() {
         const html = `
-            <div class="relative">
+            <div class="relative z-10">
                 <select class="w-full border border-gray-300 rounded-[28px] py-4 px-5 appearance-none text-gray-700 text-base focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors">
                     <option>Chọn màu biển</option>
                     <option>Biển trắng</option>
@@ -228,7 +228,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
     function createProvinceDropdown() {
         const html = `
-            <div class="relative">
+            <div class="relative z-10">
                 <select id="province-select" class="w-full border border-gray-300 rounded-[28px] py-4 px-5 appearance-none text-gray-700 text-base focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors">
                     <option value="">Chọn tỉnh, thành phố</option>
                     ${vietnameseProvinces.map(p => `<option value="${p}"${state.selectedProvince === p ? ' selected' : ''}>${p}</option>`).join('')}
@@ -463,7 +463,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
         // Result count
         const resultCount = createElement('div', { className: 'flex justify-between items-center mb-4' });
-        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
+        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm', id: 'result-count-text' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
         tableArea.appendChild(resultCount);
 
         // Table
@@ -496,9 +496,20 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 return false;
             }
 
-            // Province filter
-            if (state.selectedProvince && item.province !== state.selectedProvince) {
-                return false;
+            // Province filter - Check plate number prefix against province codes
+            if (state.selectedProvince) {
+                // Extract codes from format "Name-15/16" or "Name-29/30/31/32/33/40"
+                const codes = state.selectedProvince.split('-')[1];
+                if (codes) {
+                    // Split multiple codes by '/'
+                    const provinceCodes = codes.split('/');
+                    // Extract plate prefix (first 2 digits before the letter)
+                    const platePrefix = item.plateNumber.match(/^(\d+)/)?.[1];
+                    // Check if plate prefix matches any of the province codes
+                    if (!platePrefix || !provinceCodes.includes(platePrefix)) {
+                        return false;
+                    }
+                }
             }
 
             // Type filter
@@ -742,7 +753,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const { data, totalItems, startIndex, endIndex } = paginationInfo;
 
         // Update result count
-        const resultCountEl = container.querySelector('.text-gray-500');
+        const resultCountEl = container.querySelector('#result-count-text');
         if (resultCountEl) {
             resultCountEl.textContent = `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`;
         }

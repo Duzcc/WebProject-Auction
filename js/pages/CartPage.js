@@ -5,7 +5,7 @@
 
 import { getCartItems, removeFromCart, subscribeToCart } from '../utils/cart.js';
 import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from '../components/Shared/ProfileSidebar.js';
+import { ProfileSidebar } from './shared/ProfileSidebar.js';
 
 export function CartPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });

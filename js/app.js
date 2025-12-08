@@ -2,6 +2,7 @@ import { Header } from './components/Header.js';
 import { Footer } from './components/Footer.js';
 import { FloatingActions } from './components/FloatingActions.js';
 import { HomePage } from './pages/HomePage.js';
+import { NewsPage } from './pages/NewsPage.js';
 import { AboutPage } from './pages/AboutPage.js';
 import { AssetListPage } from './pages/AssetListPage.js';
 import { AssetDetailPage } from './pages/AssetDetailPage.js';
@@ -24,7 +25,7 @@ import { DocumentsPage } from './pages/DocumentsPage.js';
 import { render, createElement } from './utils/dom.js';
 import { subscribeToAuth } from './utils/auth.js';
 import { initTheme } from './utils/theme.js';
-import { initBackToTop } from './components/Shared/BackToTop.js';
+import { initBackToTop } from './pages/shared/BackToTop.js';
 import { initUserProfile } from './utils/userProfile.js';
 import {
     newsData,
@@ -117,6 +118,9 @@ function renderApp() {
             break;
 
         case 'news':
+            render(NewsPage(), main);
+            break;
+
         case 'notifications':
             render(NotificationArchivePage({ notifData }), main);
             break;

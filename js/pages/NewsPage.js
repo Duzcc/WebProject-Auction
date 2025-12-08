@@ -1,10 +1,51 @@
-import { createElement, createFromHTML } from '../../utils/dom.js';
+/**
+ * NewsPage - Trang tin tức và thông báo
+ * Displays news and notifications with tabs and pagination
+ */
+
+import { createElement, createFromHTML, initIcons } from '../utils/dom.js';
+import { newsData, notifData } from '../data/constants.js';
+
+// =============================
+// INTERNAL COMPONENTS
+// =============================
 
 /**
- * NewsSection Component
- * Displays news and notifications with tab navigation
+ * PageBanner Component - Banner for page headers
  */
-export function NewsSection({ newsData = [], notifData = [] }) {
+function PageBanner({ title, subtitle, backgroundImage }) {
+    const html = `
+        <div class="relative bg-gradient-to-br from-blue-800 via-blue-700 to-blue-900 text-white py-16 md:py-24 overflow-hidden">
+            <!-- Background Image Overlay -->
+            ${backgroundImage ? `
+                <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('${backgroundImage}');"></div>
+            ` : ''}
+            
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent"></div>
+            
+            <!-- Content -->
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-2xl">
+                    ${subtitle ? `<p class="text-blue-200 text-sm md:text-base font-semibold uppercase tracking-wider mb-2">${subtitle}</p>` : ''}
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4">${title}</h1>
+                    <div class="w-24 h-1 bg-blue-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
+        </div>
+    `;
+
+    return createFromHTML(html);
+}
+
+/**
+ * NewsSection Component - News and notifications with tabs
+ */
+function NewsSection({ newsData = [], notifData = [] }) {
     let activeTab = 'news';
     const container = createElement('div', { className: 'py-16 bg-white' });
 
@@ -130,5 +171,30 @@ export function NewsSection({ newsData = [], notifData = [] }) {
     }
 
     render();
+    return container;
+}
+
+// =============================
+// MAIN PAGE EXPORT
+// =============================
+
+export function NewsPage() {
+    const container = createElement('div', { className: 'bg-white min-h-[70vh] pb-16' });
+
+    // Add banner
+    container.appendChild(PageBanner({
+        title: 'Tin tức & Thông báo',
+        subtitle: 'Cập nhật thông tin',
+        backgroundImage: '/images/banners/news_banner.png'
+    }));
+
+    // Add news section
+    container.appendChild(NewsSection({ newsData, notifData }));
+
+    // Initialize Lucide icons
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+
     return container;
 }

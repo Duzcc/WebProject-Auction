@@ -49,7 +49,14 @@ export function LoginPage({ onLoginSuccess }) {
 }
 
 /**
- * Create Sign Up Form
+ * Tạo form đăng ký (Sign Up)
+ * @returns {HTMLElement} Form container với input fields và validation
+ * 
+ * Form bao gồm:
+ * - Input: Họ tên, Email, Mật khẩu
+ * - Social login buttons
+ * - Real-time validation khi blur
+ * - Password visibility toggle
  */
 function createSignUpForm() {
     const formContainer = createElement('div', {
@@ -164,7 +171,16 @@ function createSignUpForm() {
 }
 
 /**
- * Create Sign In Form
+ * Tạo form đăng nhập (Sign In)
+ * @param {Function} onLoginSuccess - Callback được gọi khi đăng nhập thành công
+ * @returns {HTMLElement} Form container với login functionality
+ * 
+ * Form bao gồm:
+ * - Input: Email, Mật khẩu
+ * - Remember me checkbox
+ * - Forgot password link
+ * - Real-time validation
+ * - Password visibility toggle
  */
 function createSignInForm(onLoginSuccess) {
     const formContainer = createElement('div', {
@@ -287,7 +303,14 @@ function createSignInForm(onLoginSuccess) {
 }
 
 /**
- * Create social login icons
+ * Tạo các nút đăng nhập qua mạng xã hội
+ * @returns {HTMLElement} Container chứa các icon social media
+ * 
+ * Hiển thị các nút:
+ * - Google
+ * - Facebook  
+ * - GitHub
+ * - LinkedIn
  */
 function createSocialIcons() {
     const container = createElement('div', {
@@ -315,7 +338,13 @@ function createSocialIcons() {
 }
 
 /**
- * Create toggle panel
+ * Tạo panel chuyển đổi giữa Sign In và Sign Up
+ * @returns {HTMLElement} Toggle panel với animation
+ * 
+ * Panel bao gồm:
+ * - Left panel: Hiển thị khi đang ở chế độ Sign Up, có nút chuyển sang Sign In
+ * - Right panel: Hiển thị khi đang ở chế độ Sign In, có nút chuyển sang Sign Up
+ * - Gradient background với animation mượt mà
  */
 function createTogglePanel() {
     const toggleContainer = createElement('div', {
@@ -353,7 +382,13 @@ function createTogglePanel() {
 }
 
 /**
- * Setup event listeners for toggle buttons
+ * Thiết lập event listeners cho các nút chuyển đổi form
+ * @param {HTMLElement} container - Main container element
+ * 
+ * Xử lý:
+ * - Nút "Đăng Ký": Thêm class 'active' để hiển thị form đăng ký
+ * - Nút "Đăng Nhập": Xóa class 'active' để hiển thị form đăng nhập
+ * - Khởi tạo Lucide icons sau khi render
  */
 function setupEventListeners(container) {
     const registerBtn = container.querySelector('#register');
@@ -376,7 +411,13 @@ function setupEventListeners(container) {
 }
 
 /**
- * Toggle password visibility
+ * Chuyển đổi hiển thị/ẩn mật khẩu
+ * @param {HTMLInputElement} input - Input field chứa mật khẩu
+ * @param {HTMLButtonElement} button - Nút toggle với icon
+ * 
+ * Chuyển đổi:
+ * - type="password" <-> type="text"
+ * - Icon eye <-> eye-off
  */
 function togglePasswordVisibility(input, button) {
     if (input.type === 'password') {
@@ -393,7 +434,17 @@ function togglePasswordVisibility(input, button) {
 }
 
 /**
- * Handle sign up form submission
+ * Xử lý submit form đăng ký
+ * @param {Event} e - Submit event
+ * @param {HTMLFormElement} form - Form element
+ * @param {HTMLButtonElement} submitBtn - Nút submit
+ * 
+ * Quy trình:
+ * 1. Validate tất cả input fields
+ * 2. Hiển thị loading state
+ * 3. Gọi API đăng ký (hiện tại đang mock)
+ * 4. Chuyển sang form đăng nhập nếu thành công
+ * 5. Reset form và khôi phục trạng thái nút
  */
 async function handleSignUpSubmit(e, form, submitBtn) {
     e.preventDefault();
@@ -446,7 +497,18 @@ async function handleSignUpSubmit(e, form, submitBtn) {
 }
 
 /**
- * Handle sign in form submission
+ * Xử lý submit form đăng nhập
+ * @param {Event} e - Submit event
+ * @param {HTMLFormElement} form - Form element
+ * @param {HTMLButtonElement} submitBtn - Nút submit
+ * @param {Function} onLoginSuccess - Callback khi đăng nhập thành công
+ * 
+ * Quy trình:
+ * 1. Validate email và password
+ * 2. Hiển thị loading state
+ * 3. Gọi API đăng nhập (hiện tại đang mock)
+ * 4. Lưu session vào localStorage
+ * 5. Gọi callback onLoginSuccess để chuyển trang
  */
 async function handleSignInSubmit(e, form, submitBtn, onLoginSuccess) {
     e.preventDefault();
