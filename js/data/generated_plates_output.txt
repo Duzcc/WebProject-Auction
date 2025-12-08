@@ -1,0 +1,93 @@
+Generating 250 car plates...
+Generating 250 motorbike plates...
+
+=== CAR PLATES (first 5) ===
+[
+  {
+    "id": 1,
+    "plateNumber": "64T - 345.67",
+    "startPrice": "148.973.818 đ",
+    "province": "Tỉnh Hà Nam",
+    "type": "Sảnh tiến",
+    "plateColor": "white"
+  },
+  {
+    "id": 2,
+    "plateNumber": "69L - 999.9",
+    "startPrice": "136.394.632 đ",
+    "province": "Tỉnh Điện Biên",
+    "type": "Tứ quý",
+    "plateColor": "white"
+  },
+  {
+    "id": 3,
+    "plateNumber": "14S - 753.00",
+    "startPrice": "401.715.621 đ",
+    "province": "Tỉnh Hà Nam",
+    "type": "Tam hoa",
+    "plateColor": "white"
+  },
+  {
+    "id": 4,
+    "plateNumber": "70B - 456.78",
+    "startPrice": "125.942.662 đ",
+    "province": "Tỉnh Lào Cai",
+    "type": "Sảnh tiến",
+    "plateColor": "yellow"
+  },
+  {
+    "id": 5,
+    "plateNumber": "16D - 333.3",
+    "startPrice": "65.853.394 đ",
+    "province": "Tỉnh Tiền Giang",
+    "type": "Tứ quý",
+    "plateColor": "yellow"
+  }
+]
+
+=== MOTORBIKE PLATES (first 5) ===
+[
+  {
+    "id": 1,
+    "plateNumber": "25AA - 111.1",
+    "startPrice": "21.611.481 đ",
+    "province": "Tỉnh Lai Châu",
+    "type": "Tứ quý",
+    "plateColor": "white"
+  },
+  {
+    "id": 2,
+    "plateNumber": "65AL - 555.5",
+    "startPrice": "17.387.354 đ",
+    "province": "Tỉnh Hà Nam",
+    "type": "Tứ quý",
+    "plateColor": "yellow"
+  },
+  {
+    "id": 3,
+    "plateNumber": "15AP - 444.44",
+    "startPrice": "280.004.137 đ",
+    "province": "Tỉnh Thái Bình",
+    "type": "Ngũ quý",
+    "plateColor": "white"
+  },
+  {
+    "id": 4,
+    "plateNumber": "50AX - 999.9",
+    "startPrice": "25.638.045 đ",
+    "province": "Tỉnh Nam Định",
+    "type": "Tứ quý",
+    "plateColor": "white"
+  },
+  {
+    "id": 5,
+    "plateNumber": "43AG - 168.68",
+    "startPrice": "34.771.013 đ",
+    "province": "Tỉnh Hưng Yên",
+    "type": "Lộc phát",
+    "plateColor": "white"
+  }
+]
+
+✅ Generated 250 car plates (175 white, 75 yellow)
+✅ Generated 250 motorbike plates (177 white, 73 yellow)

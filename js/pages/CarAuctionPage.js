@@ -17,12 +17,17 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         selectedTypes: [],
         selectedYears: [],
         selectedAvoids: [],
+        selectedPlateColors: [], // NEW: Plate color filter
         startDate: '',
         endDate: '',
+        // Pagination state
+        currentPage: 1,
+        itemsPerPage: 20,
         openSections: {
             type: true,
             year: true,
-            avoid: true
+            avoid: true,
+            plateColor: true // NEW
         }
     };
 
@@ -173,9 +178,10 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         }
 
         // Accordions
-        sidebar.appendChild(createAccordion('type', 'Loại biển', availableTypes, state.selectedTypes));
+        sidebar.appendChild(createAccordion('type', 'Loại biển số', availableTypes, state.selectedTypes));
         sidebar.appendChild(createAccordion('year', 'Năm sinh', availableYears, state.selectedYears));
         sidebar.appendChild(createAccordion('avoid', 'Tránh số', availableAvoids, state.selectedAvoids));
+        sidebar.appendChild(createAccordion('plateColor', 'Loại biển', ['Biển trắng', 'Biển vàng'], state.selectedPlateColors));
 
         return sidebar;
     }
@@ -326,16 +332,138 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         return element;
     }
 
+    function createPagination() {
+        const paginationInfo = getPaginatedData();
+        const { totalPages, currentPage } = paginationInfo;
+
+        const paginationWrapper = createElement('div', { className: 'flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 p-4 bg-gray-50 rounded-b-lg border border-t-0 border-gray-200' });
+
+        // Items per page selector
+        const itemsPerPageWrapper = createElement('div', { className: 'flex items-center gap-2' });
+        itemsPerPageWrapper.appendChild(createElement('span', { className: 'text-sm text-gray-600' }, 'Hiển thị:'));
+
+
+        // Create select element directly for better event handling
+        const select = createElement('select', {
+            id: 'items-per-page',
+            className: 'border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 cursor-pointer'
+        });
+
+        [10, 20, 50].forEach(value => {
+            const option = createElement('option', { value: value.toString() }, value.toString());
+            if (state.itemsPerPage === value) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+        });
+
+        select.addEventListener('change', (e) => {
+            console.log('Pagination select changed!', e.target.value);
+            state.itemsPerPage = parseInt(e.target.value);
+            state.currentPage = 1;
+            console.log('Calling render with new itemsPerPage:', state.itemsPerPage);
+            render();
+        });
+
+        itemsPerPageWrapper.appendChild(select);
+        itemsPerPageWrapper.appendChild(createElement('span', { className: 'text-sm text-gray-600' }, 'mục/trang'));
+
+        // Page navigation
+        const pageNav = createElement('div', { className: 'flex items-center gap-2' });
+
+        // Previous button
+        const prevBtn = createElement('button', {
+            className: `px-3 py-1.5 rounded ${currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'} text-sm font-medium`
+        }, '← Trước');
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                state.currentPage--;
+                render();
+            }
+        });
+        pageNav.appendChild(prevBtn);
+
+        // Page numbers
+        const pageNumbers = createElement('div', { className: 'flex gap-1' });
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // First page + ellipsis
+        if (startPage > 1) {
+            const firstPage = createPageButton(1, currentPage);
+            pageNumbers.appendChild(firstPage);
+            if (startPage > 2) {
+                pageNumbers.appendChild(createElement('span', { className: 'px-2 py-1 text-gray-500' }, '...'));
+            }
+        }
+
+        // Visible page range
+        for (let i = startPage; i <= endPage; i++) {
+            pageNumbers.appendChild(createPageButton(i, currentPage));
+        }
+
+        // Ellipsis + last page
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                pageNumbers.appendChild(createElement('span', { className: 'px-2 py-1 text-gray-500' }, '...'));
+            }
+            const lastPage = createPageButton(totalPages, currentPage);
+            pageNumbers.appendChild(lastPage);
+        }
+
+        pageNav.appendChild(pageNumbers);
+
+        // Next button
+        const nextBtn = createElement('button', {
+            className: `px-3 py-1.5 rounded ${currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'} text-sm font-medium`
+        }, 'Sau →');
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                state.currentPage++;
+                render();
+            }
+        });
+        pageNav.appendChild(nextBtn);
+
+        paginationWrapper.appendChild(itemsPerPageWrapper);
+        paginationWrapper.appendChild(pageNav);
+
+        return paginationWrapper;
+    }
+
+    function createPageButton(pageNum, currentPage) {
+        const isActive = pageNum === currentPage;
+        const btn = createElement('button', {
+            className: `px-3 py-1 rounded text-sm font-medium ${isActive ? 'bg-blue-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'}`
+        }, pageNum.toString());
+
+        if (!isActive) {
+            btn.addEventListener('click', () => {
+                state.currentPage = pageNum;
+                render();
+            });
+        }
+
+        return btn;
+    }
+
     function createTableArea() {
         const tableArea = createElement('div', { className: 'w-full lg:w-3/4' });
 
-        // Get filtered data
-        const filteredData = getFilteredData();
+        // Get paginated data
+        const paginationInfo = getPaginatedData();
+        const { data, totalItems, startIndex, endIndex } = paginationInfo;
 
         // Result count
         const resultCount = createElement('div', { className: 'flex justify-between items-center mb-4' });
-        const displayCount = state.activeTab === 'announced' ? '115.256' : (state.activeTab === 'official' ? '80.000' : '99.882');
-        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm' }, `Hiển thị ${filteredData.length} / ${displayCount} kết quả`));
+        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
         tableArea.appendChild(resultCount);
 
         // Table
@@ -343,7 +471,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const table = createElement('table', { className: 'w-full text-sm text-left' });
 
         table.appendChild(createTableHeader());
-        table.appendChild(createTableBody(filteredData));
+        table.appendChild(createTableBody(data));
 
         tableWrapper.appendChild(table);
         tableArea.appendChild(tableWrapper);
@@ -406,6 +534,18 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 if (includesAvoid) return false;
             }
 
+            // NEW: Plate color filter
+            if (state.selectedPlateColors.length > 0 && item.plateColor) {
+                const colorMapping = {
+                    'Biển trắng': 'white',
+                    'Biển vàng': 'yellow'
+                };
+                const selectedColors = state.selectedPlateColors.map(c => colorMapping[c]);
+                if (!selectedColors.includes(item.plateColor)) {
+                    return false;
+                }
+            }
+
             // Date filter (for official/results)
             if ((state.activeTab === 'official' || state.activeTab === 'results') && (state.startDate || state.endDate)) {
                 const auctionTimeString = item.auctionTime?.split(' ')[1];
@@ -431,6 +571,34 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
             return true;
         });
+    }
+
+    // NEW: Get paginated data
+    function getPaginatedData() {
+        const filtered = getFilteredData();
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+
+        // Ensure currentPage is valid
+        if (state.currentPage > totalPages && totalPages > 0) {
+            state.currentPage = totalPages;
+        }
+        if (state.currentPage < 1) {
+            state.currentPage = 1;
+        }
+
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        const paginatedData = filtered.slice(startIndex, endIndex);
+
+        return {
+            data: paginatedData,
+            totalItems,
+            totalPages,
+            currentPage: state.currentPage,
+            startIndex: startIndex + 1,
+            endIndex: Math.min(endIndex, totalItems)
+        };
     }
 
     function createTableHeader() {
@@ -564,65 +732,39 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         return tbody;
     }
 
-    function createPagination() {
-        const html = `
-            <div class="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-blue-600 font-bold text-sm">Xem</span>
-                    <div class="relative">
-                        <select class="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none appearance-none pr-8 bg-white text-blue-600 font-bold cursor-pointer">
-                            <option>50</option>
-                            <option>20</option>
-                            <option>10</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" style="width: 14px; height: 14px;"></i>
-                    </div>
-                </div>
-                <div class="flex gap-1.5">
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-400 hover:bg-gray-200 transition-colors">
-                        <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
-                    </button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-blue-600 text-white font-bold text-sm shadow-sm">1</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">2</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">3</button>
-                    <span class="w-9 h-9 flex items-center justify-center text-gray-400 pb-2">...</span>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">2000</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 hover:text-blue-600 transition-colors">
-                        <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
-                    </button>
-                </div>
-            </div>
-        `;
-        return createFromHTML(html);
-    }
-
     // Update only table without full re-render (for real-time search)
     function updateTableOnly() {
         const tableWrapper = container.querySelector('.overflow-x-auto');
-        if (!tableWrapper) return;
+        // Reset to page 1 when filters change
+        state.currentPage = 1;
 
-        const table = tableWrapper.querySelector('table');
-        if (!table) return;
-
-        // Get filtered data
-        const filteredData = getFilteredData();
+        const paginationInfo = getPaginatedData();
+        const { data, totalItems, startIndex, endIndex } = paginationInfo;
 
         // Update result count
-        const resultCountEl = container.querySelector('.text-gray-500.text-sm');
+        const resultCountEl = container.querySelector('.text-gray-500');
         if (resultCountEl) {
-            const displayCount = state.activeTab === 'announced' ? '115.256' : (state.activeTab === 'official' ? '80.000' : '99.882');
-            resultCountEl.textContent = `Hiển thị ${filteredData.length} / ${displayCount} kết quả`;
+            resultCountEl.textContent = `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`;
         }
 
-        // Re-create table body
-        const oldTbody = table.querySelector('tbody');
-        const newTbody = createTableBody(filteredData);
-
-        if (oldTbody) {
-            table.replaceChild(newTbody, oldTbody);
+        // Update table body
+        const table = container.querySelector('table');
+        if (table) {
+            const oldTbody = table.querySelector('tbody');
+            const newTbody = createTableBody(data);
+            if (oldTbody) {
+                table.replaceChild(newTbody, oldTbody);
+            }
         }
 
-        // Re-initialize Lucide icons
+        // Update pagination
+        const oldPagination = container.querySelector('.flex.flex-col.sm\\:flex-row');
+        if (oldPagination) {
+            const newPagination = createPagination();
+            oldPagination.parentNode.replaceChild(newPagination, oldPagination);
+        }
+
+        // Reinitialize icons
         if (window.lucide) {
             window.lucide.createIcons();
         }

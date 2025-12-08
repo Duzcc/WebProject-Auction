@@ -35,7 +35,10 @@ import {
     auctionResultsData,
     motorbikePlates,
     officialMotorbikePlates,
-    motorbikeAuctionResults
+    motorbikeAuctionResults,
+    // Expanded data with plate colors
+    expandedCarPlates,
+    expandedMotorbikePlates
 } from './data/constants.js';
 
 const root = document.getElementById('root');
@@ -119,11 +122,11 @@ function renderApp() {
             break;
 
         case 'cars':
-            render(CarAuctionPage({ carPlates, officialCarPlates, auctionResultsData }), main);
+            render(CarAuctionPage({ carPlates: expandedCarPlates, officialCarPlates, auctionResultsData }), main);
             break;
 
         case 'motorbikes':
-            render(MotorbikeAuctionPage({ motorbikePlates, officialMotorbikePlates, motorbikeAuctionResults }), main);
+            render(MotorbikeAuctionPage({ motorbikePlates: expandedMotorbikePlates, officialMotorbikePlates, motorbikeAuctionResults }), main);
             break;
 
         case 'cart':
