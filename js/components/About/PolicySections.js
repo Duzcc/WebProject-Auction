@@ -12,7 +12,7 @@ export function PolicySections() {
                     <!-- Policy Card 1 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Chính sách bảo mật</h3>
-                        <a href="#" class="text-[#be1e2d] hover:underline transition-colors">
+                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
                             Chính sách bảo mật
                         </a>
                     </div>
@@ -20,7 +20,7 @@ export function PolicySections() {
                     <!-- Policy Card 2 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Điều khoản sử dụng</h3>
-                        <a href="#" class="text-[#be1e2d] hover:underline transition-colors">
+                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
                             Điều khoản sử dụng
                         </a>
                     </div>
@@ -28,7 +28,7 @@ export function PolicySections() {
                     <!-- Policy Card 3 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Quy chế hoạt động</h3>
-                        <a href="#" class="text-[#be1e2d] hover:underline transition-colors">
+                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
                             Quy chế hoạt động
                         </a>
                     </div>
@@ -36,7 +36,7 @@ export function PolicySections() {
 
                 <div class="border-t border-gray-300 pt-6 mt-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">Hướng dẫn đấu giá</h2>
-                    <p class="text-center text-[#be1e2d] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
+                    <p class="text-center text-[#2563EB] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
                 </div>
             </div>
         </div>

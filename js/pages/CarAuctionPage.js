@@ -1,5 +1,8 @@
 import { createElement, createFromHTML } from '../utils/dom.js';
 import { PageBanner } from '../components/Shared/PageBanner.js';
+import { AuctionRegistrationModal } from '../components/Shared/AuctionRegistrationModal.js';
+import { PlateDetailModal } from '../components/Shared/PlateDetailModal.js';
+import { calculateDeposit, parseAuctionDate } from '../utils/plateHelpers.js';
 
 /**
  * CarAuctionPage
@@ -23,7 +26,36 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         }
     };
 
-    const container = createElement('div', { id: 'cars', className: 'bg-white border-b border-gray-100' });
+    const container = createElement('div', { id: 'cars', className: 'bg-gray-50' });
+
+    // Banner Header
+    const banner = createElement('div', {
+        className: 'relative h-80 bg-cover bg-center overflow-hidden'
+    });
+    banner.style.backgroundImage = 'url("images/banners/car_auction.png")';
+    banner.innerHTML = `
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+        <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">
+                Đấu giá biển số xe ô tô
+            </h1>
+            <p class="text-xl text-white/90 max-w-2xl" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5)">
+                Tham gia đấu giá biển số đẹp cho xe ô tô với quy trình minh bạch và chuyên nghiệp
+            </p>
+        </div>
+    `;
+    container.appendChild(banner);
+
+    // Main content wrapper
+    const contentWrapper = createElement('div', { className: 'bg-white border-b border-gray-100' });
+
+    // Create registration modal instance (append to body, not container)
+    const registrationModal = AuctionRegistrationModal();
+    document.body.appendChild(registrationModal.element);
+
+    // Create plate detail modal instance
+    const plateDetailModal = PlateDetailModal();
+    document.body.appendChild(plateDetailModal.element);
 
     // Constants
     const vietnameseProvinces = [
@@ -44,15 +76,32 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     const availableYears = ["196x", "197x", "198x", "199x", "200x"];
     const availableAvoids = ["Tránh 4", "Tránh 7", "Tránh 49", "Tránh 53", "Tránh 13"];
 
+    // Render function
     function render() {
         container.innerHTML = '';
 
-        // Banner
-        container.appendChild(PageBanner({
-            title: 'Đấu giá biển số xe ô tô',
-            backgroundImage: 'https://picsum.photos/seed/car_banner/1920/200'
-        }));
+        // Re-add Banner Header every render
+        const banner = createElement('div', {
+            className: 'relative h-80 bg-cover bg-center overflow-hidden'
+        });
+        banner.style.backgroundImage = 'url("images/banners/car_auction.png")';
+        banner.innerHTML = `
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+            <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">
+                    Đấu giá biển số xe ô tô
+                </h1>
+                <p class="text-xl text-white/90 max-w-2xl" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5)">
+                    Tham gia đấu giá biển số đẹp cho xe ô tô với quy trình minh bạch và chuyên nghiệp
+                </p>
+            </div>
+        `;
+        container.appendChild(banner);
 
+        // Content wrapper
+        const contentWrapper = createElement('div', { className: 'bg-white border-b border-gray-100' });
+
+        // Create inner container for content
         const innerContainer = createElement('div', { className: 'container mx-auto px-4 py-10' });
 
         // Title
@@ -72,7 +121,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         mainContent.appendChild(createTableArea());
 
         innerContainer.appendChild(mainContent);
-        container.appendChild(innerContainer);
+        contentWrapper.appendChild(innerContainer);
+        container.appendChild(contentWrapper);
 
         // Initialize Lucide icons
         if (window.lucide) {
@@ -92,8 +142,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         tabs.forEach(tab => {
             const isActive = state.activeTab === tab.id;
             const className = isActive
-                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-[#be1e2d] text-white'
-                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-[#be1e2d] hover:bg-gray-50';
+                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-blue-600 text-white'
+                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50';
 
             const button = createElement('button', { className }, tab.label);
             button.addEventListener('click', () => {
@@ -107,10 +157,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     }
 
     function createFilters() {
-        const sidebar = createElement('div', { className: 'w-full lg:w-1/4 flex-shrink-0 space-y-4' });
-
-        const filterTitle = createElement('h3', { className: 'font-medium text-gray-500 mb-2' }, 'Lọc kết quả');
-        sidebar.appendChild(filterTitle);
+        const sidebar = createElement('div', { className: 'w-full lg:w-1/4 flex-shrink-0 space-y-5' });
 
         // Search input
         sidebar.appendChild(createSearchInput());
@@ -139,48 +186,54 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 <input 
                     type="text" 
                     placeholder="Nhập để tìm kiếm biển số xe" 
-                    value="${state.searchTerm}"
-                    class="w-full border border-gray-300 rounded-lg py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-[#be1e2d] focus:ring-1 focus:ring-[#be1e2d]"
+                    class="w-full border border-gray-300 rounded-[28px] py-4 pl-12 pr-4 text-base text-gray-700 placeholder:text-gray-400 focus:outline-none focus:border-gray-400 focus:ring-0"
                     id="search-input"
                 />
-                <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#be1e2d]" style="width: 18px; height: 18px;"></i>
+                <i data-lucide="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-red-600" style="width: 20px; height: 20px;"></i>
             </div>
         `;
         const element = createFromHTML(html);
-        element.querySelector('#search-input').addEventListener('input', (e) => {
+        const input = element.querySelector('#search-input');
+
+        // Preserve search term
+        input.value = state.searchTerm;
+
+        // Real-time search
+        input.addEventListener('input', (e) => {
             state.searchTerm = e.target.value;
-            render();
+            updateTableOnly();
         });
+
         return element;
     }
 
     function createPlateColorDropdown() {
         const html = `
             <div class="relative">
-                <select class="w-full border border-gray-300 rounded-lg py-2.5 px-4 appearance-none text-gray-500 text-sm focus:outline-none focus:border-[#be1e2d] bg-white cursor-pointer hover:border-gray-400 transition-colors">
+                <select class="w-full border border-gray-300 rounded-[28px] py-4 px-5 appearance-none text-gray-700 text-base focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors">
                     <option>Chọn màu biển</option>
                     <option>Biển trắng</option>
                 </select>
-                <i data-lucide="chevron-down" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" style="width: 16px; height: 16px;"></i>
+                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
             </div>
-        `;
+    `;
         return createFromHTML(html);
     }
 
     function createProvinceDropdown() {
         const html = `
             <div class="relative">
-                <select id="province-select" class="w-full border border-gray-300 rounded-lg py-2.5 px-4 appearance-none text-gray-500 text-sm focus:outline-none focus:border-[#be1e2d] bg-white cursor-pointer hover:border-gray-400 transition-colors">
+                <select id="province-select" class="w-full border border-gray-300 rounded-[28px] py-4 px-5 appearance-none text-gray-700 text-base focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors">
                     <option value="">Chọn tỉnh, thành phố</option>
                     ${vietnameseProvinces.map(p => `<option value="${p}"${state.selectedProvince === p ? ' selected' : ''}>${p}</option>`).join('')}
                 </select>
-                <i data-lucide="chevron-down" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" style="width: 16px; height: 16px;"></i>
+                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
             </div>
         `;
         const element = createFromHTML(html);
         element.querySelector('#province-select').addEventListener('change', (e) => {
             state.selectedProvince = e.target.value;
-            render();
+            updateTableOnly();
         });
         return element;
     }
@@ -194,15 +247,15 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                     value="${state[stateKey]}"
                     onfocus="this.type='date'"
                     onblur="if(!this.value)this.type='text'"
-                    class="w-full border border-gray-300 rounded-lg py-2.5 pl-4 pr-10 text-sm focus:outline-none focus:border-[#be1e2d] bg-white cursor-pointer hover:border-gray-400 transition-colors date-input-${stateKey}"
+                    class="w-full border border-gray-300 rounded-[28px] py-4 pl-5 pr-12 text-base text-gray-700 focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors date-input-${stateKey}"
                 />
-                <i data-lucide="calendar" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" style="width: 18px; height: 18px;"></i>
+                <i data-lucide="calendar" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
             </div>
-        `;
+    `;
         const element = createFromHTML(html);
         element.querySelector(`.date-input-${stateKey}`).addEventListener('change', (e) => {
             state[stateKey] = e.target.value;
-            render();
+            updateTableOnly(); // Changed from render()
         });
         return element;
     }
@@ -210,16 +263,18 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     function createAccordion(section, title, options, selectedOptions) {
         const isOpen = state.openSections[section];
 
-        const accordion = createElement('div', { className: 'bg-red-50/50 rounded-lg border border-red-50 p-1' });
+        // VPA Official Style: Pink background with dark red text
+        const accordion = createElement('div', { className: 'rounded-[16px] bg-rose-50 overflow-hidden' });
 
+        // Header with pink background and dark red text
         const button = createElement('button', {
-            className: 'w-full flex items-center justify-between p-3 bg-red-50 rounded-lg text-[#be1e2d] font-bold text-sm hover:bg-red-100 transition-colors'
+            className: 'w-full flex items-center justify-between px-5 py-4 text-red-900 text-base font-bold hover:bg-rose-100 transition-colors'
         });
 
         const buttonText = createElement('span', {}, title);
         const iconHtml = isOpen
-            ? '<i data-lucide="chevron-up" style="width: 18px; height: 18px;"></i>'
-            : '<i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>';
+            ? '<i data-lucide="chevron-up" style="width: 14px; height: 14px;"></i>'
+            : '<i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>';
         const icon = createFromHTML(iconHtml);
 
         button.appendChild(buttonText);
@@ -231,8 +286,9 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
         accordion.appendChild(button);
 
+        // Checkbox list with proper spacing
         if (isOpen) {
-            const content = createElement('div', { className: 'p-3 bg-white mt-1 rounded-md border border-gray-100 pl-4' });
+            const content = createElement('div', { className: 'px-5 pb-5 pt-2 space-y-3' });
 
             options.forEach(option => {
                 const checkbox = createCheckbox(option, selectedOptions.includes(option), (checked) => {
@@ -242,7 +298,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                         const index = selectedOptions.indexOf(option);
                         if (index > -1) selectedOptions.splice(index, 1);
                     }
-                    render();
+                    updateTableOnly();
                 });
                 content.appendChild(checkbox);
             });
@@ -254,19 +310,15 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     }
 
     function createCheckbox(label, checked, onChange) {
+        // VPA Official Style: Clear checkbox with readable text
         const html = `
-            <label class="flex items-center gap-3 py-1.5 cursor-pointer hover:bg-gray-50 rounded px-1 -mx-1">
-                <div class="relative flex items-center">
-                    <input 
-                        type="checkbox" 
-                        ${checked ? 'checked' : ''}
-                        class="peer h-4 w-4 cursor-pointer appearance-none rounded border border-gray-300 shadow-sm checked:border-[#be1e2d] checked:bg-[#be1e2d]"
-                    />
-                    <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                        <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <span class="text-gray-600 text-[15px]">${label}</span>
+            <label class="flex items-center gap-3 cursor-pointer text-base text-gray-900 hover:text-gray-700">
+                <input 
+                    type="checkbox" 
+                    ${checked ? 'checked' : ''}
+                    class="w-[18px] h-[18px] cursor-pointer rounded border-gray-300 text-red-600 focus:ring-red-500"
+                />
+                <span>${label}</span>
             </label>
         `;
         const element = createFromHTML(html);
@@ -426,15 +478,15 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const tbody = createElement('tbody', { className: 'divide-y divide-gray-100' });
 
         data.forEach((item, index) => {
-            const tr = createElement('tr', { className: 'hover:bg-red-50 transition-colors group' });
+            const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
 
             if (state.activeTab === 'results') {
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-yellow-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-[#be1e2d]">
+                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
+                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-blue-600 cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
@@ -447,26 +499,63 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
             } else {
                 const plateBgClass = state.activeTab === 'official'
                     ? 'bg-[#eecc48] border-[#eecc48] text-gray-900'
-                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-[#be1e2d]';
+                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-blue-600';
 
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-yellow-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap ${plateBgClass}">
+                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
+                            <span class="font-bold border px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
                     </td>
                     <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
-                    <td class="px-6 py-4 text-gray-700 whitespace-nowrap">${item.province}</td>
-                    <td class="px-6 py-4 text-gray-700 whitespace-nowrap">${item.type}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
                     ${state.activeTab === 'official' ? `<td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>` : ''}
                     <td class="px-6 py-4">
-                        <a href="#" class="text-[#be1e2d] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
+                        <a href="#" class="text-blue-600 font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
                     </td>
                 `;
+            }
+
+            // Add click handler for plate number
+            const plateNumber = tr.querySelector('[data-plate-number]');
+            if (plateNumber) {
+                plateNumber.addEventListener('click', () => {
+                    plateDetailModal.open({
+                        ...item,
+                        onRegister: () => {
+                            // Open registration modal
+                            registrationModal.open({
+                                auctionId: `car-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
+                                auctionName: `Biển số ${item.plateNumber}`,
+                                auctionType: 'Biển số xe ô tô',
+                                depositAmount: calculateDeposit(item.startPrice),
+                                auctionDate: parseAuctionDate(item.auctionTime)
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Add event listener for registration link
+            const registerLink = tr.querySelector('a[href="#"]');
+            if (registerLink && state.activeTab !== 'results') {
+                registerLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Open registration modal with plate data
+                    registrationModal.open({
+                        auctionId: `car-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
+                        auctionName: `Biển số ${item.plateNumber}`,
+                        auctionType: 'Biển số xe ô tô',
+                        depositAmount: calculateDeposit(item.startPrice),
+                        auctionDate: parseAuctionDate(item.auctionTime)
+                    });
+                });
             }
 
             tbody.appendChild(tr);
@@ -479,9 +568,9 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const html = `
             <div class="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
                 <div class="flex items-center gap-2">
-                    <span class="text-[#be1e2d] font-bold text-sm">Xem</span>
+                    <span class="text-blue-600 font-bold text-sm">Xem</span>
                     <div class="relative">
-                        <select class="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none appearance-none pr-8 bg-white text-[#be1e2d] font-bold cursor-pointer">
+                        <select class="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none appearance-none pr-8 bg-white text-blue-600 font-bold cursor-pointer">
                             <option>50</option>
                             <option>20</option>
                             <option>10</option>
@@ -493,18 +582,50 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                     <button class="w-9 h-9 flex items-center justify-center rounded bg-gray-100 text-gray-400 hover:bg-gray-200 transition-colors">
                         <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
                     </button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-[#be1e2d] text-white font-bold text-sm shadow-sm">1</button>
+                    <button class="w-9 h-9 flex items-center justify-center rounded bg-blue-600 text-white font-bold text-sm shadow-sm">1</button>
                     <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">2</button>
                     <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">3</button>
                     <span class="w-9 h-9 flex items-center justify-center text-gray-400 pb-2">...</span>
                     <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 font-medium text-sm transition-colors">2000</button>
-                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 hover:text-[#be1e2d] transition-colors">
+                    <button class="w-9 h-9 flex items-center justify-center rounded bg-white border border-gray-100 hover:bg-gray-50 text-gray-600 hover:text-blue-600 transition-colors">
                         <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
                     </button>
                 </div>
             </div>
         `;
         return createFromHTML(html);
+    }
+
+    // Update only table without full re-render (for real-time search)
+    function updateTableOnly() {
+        const tableWrapper = container.querySelector('.overflow-x-auto');
+        if (!tableWrapper) return;
+
+        const table = tableWrapper.querySelector('table');
+        if (!table) return;
+
+        // Get filtered data
+        const filteredData = getFilteredData();
+
+        // Update result count
+        const resultCountEl = container.querySelector('.text-gray-500.text-sm');
+        if (resultCountEl) {
+            const displayCount = state.activeTab === 'announced' ? '115.256' : (state.activeTab === 'official' ? '80.000' : '99.882');
+            resultCountEl.textContent = `Hiển thị ${filteredData.length} / ${displayCount} kết quả`;
+        }
+
+        // Re-create table body
+        const oldTbody = table.querySelector('tbody');
+        const newTbody = createTableBody(filteredData);
+
+        if (oldTbody) {
+            table.replaceChild(newTbody, oldTbody);
+        }
+
+        // Re-initialize Lucide icons
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
     }
 
     // Initial render

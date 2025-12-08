@@ -108,7 +108,7 @@ function createPageButton({ label, page, onPageChange, scrollToTop, isActive = f
     const button = document.createElement('button');
 
     const baseClasses = 'px-4 py-2 rounded-lg font-medium transition-all duration-200';
-    const activeClasses = 'bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white shadow-md';
+    const activeClasses = 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white shadow-md';
     const inactiveClasses = 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600';
 
     button.className = `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;

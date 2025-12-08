@@ -37,7 +37,7 @@ export function SearchBar({
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = placeholder;
-    input.className = 'w-full border border-gray-300 dark:border-gray-600 rounded-lg py-2.5 pl-10 pr-10 text-sm focus:outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 dark:bg-gray-800 dark:text-white transition-all';
+    input.className = 'w-full border border-gray-300 dark:border-gray-600 rounded-lg py-2.5 pl-10 pr-10 text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 dark:bg-gray-800 dark:text-white transition-all';
 
     // Search icon
     const searchIcon = document.createElement('i');
@@ -55,9 +55,10 @@ export function SearchBar({
     inputWrapper.appendChild(clearBtn);
     container.appendChild(inputWrapper);
 
-    // Suggestions dropdown
+    // Suggestions dropdown with animation
     const dropdown = document.createElement('div');
-    dropdown.className = 'search-dropdown absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 max-h-64 overflow-y-auto z-50 hidden';
+    dropdown.className = 'search-dropdown absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 max-h-64 overflow-y-auto z-50 hidden animate-scale-in';
+    dropdown.style.transformOrigin = 'top';
     container.appendChild(dropdown);
 
     // Initialize Lucide icons
@@ -132,9 +133,13 @@ export function SearchBar({
 }
 
 /**
- * Show suggestions in dropdown
+ * Show suggestions in dropdown with highlighting
+ * @param {HTMLElement} dropdown - The dropdown element
+ * @param {Array<string>} suggestions - Array of suggestion strings
+ * @param {Function} onSuggestionClick - Callback for suggestion click
+ * @param {string} [searchTerm=''] - The current search term to highlight
  */
-function showSuggestions(dropdown, suggestions, onSuggestionClick) {
+function showSuggestions(dropdown, suggestions, onSuggestionClick, searchTerm = '') {
     if (suggestions.length === 0) {
         dropdown.classList.add('hidden');
         return;
@@ -145,10 +150,18 @@ function showSuggestions(dropdown, suggestions, onSuggestionClick) {
 
     suggestions.forEach(suggestion => {
         const item = document.createElement('button');
-        item.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 transition-colors';
+        item.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 flex items-center gap-3 transition-colors';
+
+        // Highlight matching text
+        let highlighted = suggestion;
+        if (searchTerm) {
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            highlighted = suggestion.replace(regex, '<mark class="bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-100 font-semibold">$1</mark>');
+        }
+
         item.innerHTML = `
             <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
-            <span>${suggestion}</span>
+            <span>${highlighted}</span>
         `;
 
         item.addEventListener('click', () => {
@@ -186,7 +199,7 @@ function showSearchHistory(dropdown, onSuggestionClick) {
     header.className = 'px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 flex items-center justify-between border-b border-gray-200 dark:border-gray-700';
     header.innerHTML = `
         <span>Tìm kiếm gần đây</span>
-        <button class="clear-history text-[#be1e2d] hover:underline">Xóa</button>
+        <button class="clear-history text-[#2563EB] hover:underline">Xóa</button>
     `;
     dropdown.appendChild(header);
 

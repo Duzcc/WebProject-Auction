@@ -88,7 +88,7 @@ export function showError(inputElement, message) {
     clearError(inputElement);
     
     // Add error styling to input
-    inputElement.classList.add('border-red-500', 'border-2');
+    inputElement.classList.add('border-blue-500', 'border-2');
     inputElement.classList.remove('border-gray-200');
     
     // Create error message element
@@ -106,7 +106,7 @@ export function showError(inputElement, message) {
  */
 export function clearError(inputElement) {
     // Remove error styling
-    inputElement.classList.remove('border-red-500', 'border-2');
+    inputElement.classList.remove('border-blue-500', 'border-2');
     inputElement.classList.add('border-gray-200');
     
     // Remove error message if exists

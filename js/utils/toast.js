@@ -15,12 +15,12 @@ const TOAST_TYPES = {
     },
     error: {
         icon: 'x-circle',
-        bgColor: 'bg-red-500',
+        bgColor: 'bg-blue-500',
         textColor: 'text-white'
     },
     warning: {
         icon: 'alert-triangle',
-        bgColor: 'bg-yellow-500',
+        bgColor: 'bg-blue-500',
         textColor: 'text-white'
     },
     info: {

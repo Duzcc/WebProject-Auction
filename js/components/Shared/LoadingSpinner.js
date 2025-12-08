@@ -24,14 +24,14 @@ export function LoadingSpinner({ size = 'medium', overlay = false, text = '' } =
         container.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] backdrop-blur-sm';
         container.innerHTML = `
             <div class="bg-white rounded-lg p-8 flex flex-col items-center gap-4 shadow-2xl">
-                <div class="spinner ${sizeClasses[size]} border-gray-200 border-t-[#be1e2d] rounded-full animate-spin"></div>
+                <div class="spinner ${sizeClasses[size]} border-gray-200 border-t-[#2563EB] rounded-full animate-spin"></div>
                 ${text ? `<p class="text-gray-700 font-medium">${text}</p>` : ''}
             </div>
         `;
     } else {
         container.className = 'flex items-center justify-center gap-3';
         container.innerHTML = `
-            <div class="spinner ${sizeClasses[size]} border-gray-200 border-t-[#be1e2d] rounded-full animate-spin"></div>
+            <div class="spinner ${sizeClasses[size]} border-gray-200 border-t-[#2563EB] rounded-full animate-spin"></div>
             ${text ? `<span class="text-gray-700">${text}</span>` : ''}
         `;
     }

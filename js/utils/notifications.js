@@ -211,10 +211,10 @@ export function getNotificationIcon(type) {
 export function getNotificationColor(type) {
     const colors = {
         [NOTIFICATION_TYPES.BID_PLACED]: 'text-blue-600',
-        [NOTIFICATION_TYPES.OUTBID]: 'text-yellow-600',
+        [NOTIFICATION_TYPES.OUTBID]: 'text-blue-600',
         [NOTIFICATION_TYPES.AUCTION_WON]: 'text-green-600',
         [NOTIFICATION_TYPES.AUCTION_LOST]: 'text-red-600',
-        [NOTIFICATION_TYPES.PAYMENT]: 'text-purple-600',
+        [NOTIFICATION_TYPES.PAYMENT]: 'text-blue-600',
         [NOTIFICATION_TYPES.REGISTRATION]: 'text-green-600',
         [NOTIFICATION_TYPES.SYSTEM]: 'text-gray-600'
     };

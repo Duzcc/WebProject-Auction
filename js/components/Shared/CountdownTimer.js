@@ -1,112 +1,177 @@
-/**
- * Countdown Timer Component
- * Displays countdown timer for auction items
- */
+import { createElement } from '../../utils/dom.js';
 
 /**
- * Creates a countdown timer element
- * @param {Object} options - Configuration options
- * @param {Date|string} options.endTime - End time (Date object or ISO string)
- * @param {Function} options.onComplete - Callback when timer reaches zero
- * @param {boolean} options.showDays - Show days (default: true)
+ * Enhanced CountdownTimer Component
+ * Displays countdown with warning states and auto-refresh
+ * @param {Object} options
+ * @param {string} options.endTime - End time in ISO format or Date string
+ * @param {Function} options.onExpire - Callback when timer expires
+ * @param {boolean} options.autoRefresh - Auto refresh page on expiry (default: false)
  * @param {string} options.className - Additional CSS classes
- * @returns {HTMLElement} Countdown timer element
  */
-export function CountdownTimer({
-    endTime,
-    onComplete = null,
-    showDays = true,
-    className = ''
-} = {}) {
-    const container = document.createElement('div');
-    container.className = `countdown-timer ${className}`;
+export function CountdownTimer({ endTime, onExpire, autoRefresh = false, className = '' }) {
+    const container = createElement('div', {
+        className: `countdown-timer inline-flex items-center gap-2 ${className}`
+    });
 
-    const endDate = typeof endTime === 'string' ? new Date(endTime) : endTime;
     let intervalId = null;
+    let hasExpired = false;
 
-    const updateTimer = () => {
-        const now = new Date();
-        const diff = endDate - now;
+    function getTimeRemaining() {
+        const end = new Date(endTime).getTime();
+        const now = Date.now();
+        const remaining = end - now;
 
-        if (diff <= 0) {
-            // Timer expired
-            container.innerHTML = `
-                <div class="flex items-center gap-2 text-red-600 font-bold">
-                    <i data-lucide="clock" class="w-4 h-4"></i>
-                    <span>Đã kết thúc</span>
-                </div>
-            `;
-
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-
-            if (onComplete) {
-                onComplete();
-            }
-
-            // Re-initialize Lucide icons
-            if (window.lucide) {
-                window.lucide.createIcons();
-            }
-
-            return;
+        if (remaining <= 0) {
+            return { total: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
         }
 
-        // Calculate time units
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        return {
+            total: remaining,
+            days: Math.floor(remaining / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((remaining / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((remaining / 1000 / 60) % 60),
+            seconds: Math.floor((remaining / 1000) % 60)
+        };
+    }
 
-        // Determine color based on time remaining
-        let colorClass = 'text-gray-700 dark:text-gray-300';
-        if (diff < 3600000) { // Less than 1 hour
-            colorClass = 'text-red-600 dark:text-red-400';
-        } else if (diff < 86400000) { // Less than 1 day
-            colorClass = 'text-yellow-600 dark:text-yellow-400';
+    function getWarningState(totalMs) {
+        const totalMinutes = totalMs / (1000 * 60);
+
+        if (totalMs <= 0) return 'expired';
+        if (totalMinutes < 1) return 'critical'; // < 1 minute - red
+        if (totalMinutes < 10) return 'urgent'; // < 10 minutes - orange
+        if (totalMinutes < 60) return 'warning'; // < 1 hour - yellow
+        return 'normal'; // > 1 hour - green
+    }
+
+    function getStateStyles(state) {
+        const styles = {
+            expired: {
+                bg: 'bg-gray-100',
+                text: 'text-gray-600',
+                icon: 'clock-off',
+                pulse: false
+            },
+            critical: {
+                bg: 'bg-red-50',
+                text: 'text-red-700',
+                icon: 'alarm-clock',
+                pulse: true
+            },
+            urgent: {
+                bg: 'bg-orange-50',
+                text: 'text-orange-700',
+                icon: 'clock',
+                pulse: true
+            },
+            warning: {
+                bg: 'bg-blue-50',
+                text: 'text-blue-700',
+                icon: 'clock',
+                pulse: false
+            },
+            normal: {
+                bg: 'bg-blue-50',
+                text: 'text-blue-700',
+                icon: 'clock',
+                pulse: false
+            }
+        };
+        return styles[state] || styles.normal;
+    }
+
+    function formatTime(time) {
+        const { days, hours, minutes, seconds, total } = time;
+
+        if (total <= 0) {
+            return 'Đã kết thúc';
         }
 
-        // Build timer HTML
-        let timerHTML = `<div class="flex items-center gap-2 ${colorClass} font-mono font-semibold">`;
-        timerHTML += '<i data-lucide="clock" class="w-4 h-4"></i>';
+        const parts = [];
+        if (days > 0) parts.push(`${days} ngày`);
+        if (hours > 0 || days > 0) parts.push(`${hours}h`);
+        if (minutes > 0 || hours > 0 || days > 0) parts.push(`${minutes}m`);
+        parts.push(`${seconds}s`);
 
-        if (showDays && days > 0) {
-            timerHTML += `<span>${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
-        } else {
-            timerHTML += `<span>${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
-        }
+        return parts.join(' ');
+    }
 
-        timerHTML += '</div>';
-        container.innerHTML = timerHTML;
+    function update() {
+        const time = getTimeRemaining();
+        const state = getWarningState(time.total);
+        const styles = getStateStyles(state);
+        const timeString = formatTime(time);
+
+        const pulseClass = styles.pulse ? 'animate-pulse' : '';
+
+        container.innerHTML = `
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg ${styles.bg} ${pulseClass} transition-all">
+                <i data-lucide="${styles.icon}" class="w-4 h-4 ${styles.text}"></i>
+                <span class="text-sm font-semibold ${styles.text}">${timeString}</span>
+            </div>
+        `;
 
         // Re-initialize Lucide icons
         if (window.lucide) {
             window.lucide.createIcons();
         }
-    };
 
-    // Initial update
-    updateTimer();
+        // Handle expiry
+        if (time.total <= 0 && !hasExpired) {
+            hasExpired = true;
+            handleExpiry();
+        }
+    }
 
-    // Update every second
-    intervalId = setInterval(updateTimer, 1000);
+    function handleExpiry() {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
 
-    // Store interval ID for cleanup
-    container.dataset.intervalId = intervalId;
+        if (onExpire) {
+            onExpire();
+        }
+
+        if (autoRefresh) {
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+    }
+
+    function start() {
+        update(); // Initial update
+        intervalId = setInterval(update, 1000); // Update every second
+    }
+
+    function stop() {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    }
+
+    // Auto-start
+    start();
+
+    // Cleanup on element removal
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.removedNodes.forEach((node) => {
+                if (node === container || node.contains(container)) {
+                    stop();
+                }
+            });
+        });
+    });
+
+    if (container.parentNode) {
+        observer.observe(container.parentNode, { childList: true });
+    }
 
     return container;
-}
-
-/**
- * Stop countdown timer
- * @param {HTMLElement} timer - Timer element
- */
-export function stopCountdown(timer) {
-    const intervalId = timer.dataset.intervalId;
-    if (intervalId) {
-        clearInterval(parseInt(intervalId));
-    }
 }
 
 export default CountdownTimer;

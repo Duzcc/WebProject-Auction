@@ -42,7 +42,7 @@ export function NotificationCenter() {
         dropdown.innerHTML = `
             <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
                 <h3 class="font-bold text-gray-900 dark:text-white">Thông Báo</h3>
-                ${notifications.length > 0 ? '<button id="mark-all-read" class="text-sm text-[#be1e2d] hover:underline">Đánh dấu đã đọc</button>' : ''}
+                ${notifications.length > 0 ? '<button id="mark-all-read" class="text-sm text-[#2563EB] hover:underline">Đánh dấu đã đọc</button>' : ''}
             </div>
             <div class="max-h-96 overflow-y-auto">
                 ${notifications.length === 0 ? `
@@ -63,7 +63,7 @@ export function NotificationCenter() {
                                 <p class="text-sm text-gray-600 dark:text-gray-400">${notif.message}</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">${formatTime(notif.createdAt)}</p>
                             </div>
-                            ${!notif.read ? '<div class="w-2 h-2 bg-[#be1e2d] rounded-full flex-shrink-0"></div>' : ''}
+                            ${!notif.read ? '<div class="w-2 h-2 bg-[#2563EB] rounded-full flex-shrink-0"></div>' : ''}
                         </div>
                     </div>
                 `).join('')}

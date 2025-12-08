@@ -8,7 +8,7 @@ import { login } from '../utils/auth.js';
  */
 export function LoginPage({ onLoginSuccess }) {
     const container = createElement('div', {
-        className: 'min-h-screen w-full bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 flex items-center justify-center p-4 overflow-hidden relative'
+        className: 'min-h-screen w-full bg-gradient-to-br from-blue-100 via-blue-50 to-blue-100 flex items-center justify-center p-4 overflow-hidden relative'
     });
 
     // Add animated background elements
@@ -16,9 +16,9 @@ export function LoginPage({ onLoginSuccess }) {
         className: 'absolute inset-0 overflow-hidden pointer-events-none'
     });
     bgDecoration.innerHTML = `
-        <div class="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div class="absolute top-40 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
     `;
     container.appendChild(bgDecoration);
 
@@ -62,7 +62,7 @@ function createSignUpForm() {
 
     // Title
     const title = createElement('h1', {
-        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#be1e2d] to-[#8b1818] bg-clip-text text-transparent'
+        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] bg-clip-text text-transparent'
     });
     title.textContent = 'Tạo Tài Khoản';
     form.appendChild(title);
@@ -83,7 +83,7 @@ function createSignUpForm() {
         type: 'text',
         placeholder: 'Họ và tên',
         id: 'signup-name',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all'
     });
     form.appendChild(nameInput);
 
@@ -92,7 +92,7 @@ function createSignUpForm() {
         type: 'email',
         placeholder: 'Email',
         id: 'signup-email',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all'
     });
     form.appendChild(emailInput);
 
@@ -105,7 +105,7 @@ function createSignUpForm() {
         type: 'password',
         placeholder: 'Mật khẩu',
         id: 'signup-password',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 transition-all pr-10'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all pr-10'
     });
     passwordContainer.appendChild(passwordInput);
 
@@ -120,10 +120,10 @@ function createSignUpForm() {
 
     form.appendChild(passwordContainer);
 
-    // Submit button
+    // Submit button with ripple effect
     const submitBtn = createElement('button', {
         type: 'submit',
-        className: 'bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+        className: 'bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed btn-ripple'
     });
     submitBtn.textContent = 'Đăng Ký';
     form.appendChild(submitBtn);
@@ -177,7 +177,7 @@ function createSignInForm(onLoginSuccess) {
 
     // Title
     const title = createElement('h1', {
-        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#be1e2d] to-[#8b1818] bg-clip-text text-transparent'
+        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] bg-clip-text text-transparent'
     });
     title.textContent = 'Đăng Nhập';
     form.appendChild(title);
@@ -198,7 +198,7 @@ function createSignInForm(onLoginSuccess) {
         type: 'email',
         placeholder: 'Email',
         id: 'signin-email',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all'
     });
     form.appendChild(emailInput);
 
@@ -211,7 +211,7 @@ function createSignInForm(onLoginSuccess) {
         type: 'password',
         placeholder: 'Mật khẩu',
         id: 'signin-password',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#be1e2d] focus:ring-2 focus:ring-red-200 transition-all pr-10'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all pr-10'
     });
     passwordContainer.appendChild(passwordInput);
 
@@ -232,7 +232,7 @@ function createSignInForm(onLoginSuccess) {
     });
 
     const rememberMe = createElement('label', {
-        className: 'flex items-center text-xs text-gray-600 cursor-pointer hover:text-[#be1e2d] transition-colors'
+        className: 'flex items-center text-xs text-gray-600 cursor-pointer hover:text-[#2563EB] transition-colors'
     });
     const checkbox = createElement('input', {
         type: 'checkbox',
@@ -245,17 +245,17 @@ function createSignInForm(onLoginSuccess) {
 
     const forgotPassword = createElement('a', {
         href: '#',
-        className: 'text-xs text-gray-600 hover:text-[#be1e2d] transition-colors'
+        className: 'text-xs text-gray-600 hover:text-[#2563EB] transition-colors'
     });
     forgotPassword.textContent = 'Quên mật khẩu?';
     optionsContainer.appendChild(forgotPassword);
 
     form.appendChild(optionsContainer);
 
-    // Submit button
+    // Submit button with ripple effect
     const submitBtn = createElement('button', {
         type: 'submit',
-        className: 'bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+        className: 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed btn-ripple'
     });
     submitBtn.textContent = 'Đăng Nhập';
     form.appendChild(submitBtn);
@@ -304,7 +304,7 @@ function createSocialIcons() {
     socials.forEach(social => {
         const link = createElement('a', {
             href: '#',
-            className: 'border border-gray-300 rounded-lg w-10 h-10 flex items-center justify-center hover:border-[#be1e2d] hover:text-[#be1e2d] hover:scale-110 transition-all duration-300',
+            className: 'border border-gray-300 rounded-lg w-10 h-10 flex items-center justify-center hover:border-[#2563EB] hover:text-[#2563EB] hover:scale-110 transition-all duration-300',
             'aria-label': `Login with ${social.label}`
         });
         link.innerHTML = `<i class="fab ${social.icon}"></i>`;
@@ -323,7 +323,7 @@ function createTogglePanel() {
     });
 
     const toggle = createElement('div', {
-        className: 'toggle bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white relative left-[-100%] h-full w-[200%] transition-all duration-700 ease-in-out'
+        className: 'toggle bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white relative left-[-100%] h-full w-[200%] transition-all duration-700 ease-in-out'
     });
 
     // Left panel (shown when sign up is active)
@@ -333,7 +333,7 @@ function createTogglePanel() {
     leftPanel.innerHTML = `
         <h1 class="text-3xl font-bold mb-4">Chào Mừng Trở Lại!</h1>
         <p class="text-sm mb-6 opacity-90">Đăng nhập để tiếp tục sử dụng các tính năng của chúng tôi</p>
-        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#be1e2d] transition-all duration-300" id="login">Đăng Nhập</button>
+        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#2563EB] transition-all duration-300" id="login">Đăng Nhập</button>
     `;
     toggle.appendChild(leftPanel);
 
@@ -344,7 +344,7 @@ function createTogglePanel() {
     rightPanel.innerHTML = `
         <h1 class="text-3xl font-bold mb-4">Xin Chào!</h1>
         <p class="text-sm mb-6 opacity-90">Đăng ký tài khoản để sử dụng đầy đủ các tính năng</p>
-        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#be1e2d] transition-all duration-300" id="register">Đăng Ký</button>
+        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#2563EB] transition-all duration-300" id="register">Đăng Ký</button>
     `;
     toggle.appendChild(rightPanel);
 

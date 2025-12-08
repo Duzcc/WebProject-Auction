@@ -14,19 +14,19 @@ export function VpaStats() {
                     
                     <!-- Stat 1 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#be1e2d]">1.000 tỷ+</p>
+                        <p class="text-5xl font-black text-[#2563EB]">1.000 tỷ+</p>
                         <p class="text-gray-600">Giá trị tài sản đã đấu giá</p>
                     </div>
 
                     <!-- Stat 2 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#be1e2d]">500.000+</p>
+                        <p class="text-5xl font-black text-[#2563EB]">500.000+</p>
                         <p class="text-gray-600">Biển số công bố đấu giá</p>
                     </div>
                     
                     <!-- Stat 3 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#be1e2d]">17.000+</p>
+                        <p class="text-5xl font-black text-[#2563EB]">17.000+</p>
                         <p class="text-gray-600">Cuộc đấu giá đã diễn ra</p>
                     </div>
                 </div>

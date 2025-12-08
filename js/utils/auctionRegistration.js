@@ -25,7 +25,8 @@ export function registerForAuction(auctionData) {
         return false;
     }
 
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
 
     // Check if already registered
     const alreadyRegistered = registrations.some(
@@ -52,7 +53,7 @@ export function registerForAuction(auctionData) {
     };
 
     registrations.push(registration);
-    auctionStore.set('registrations', registrations);
+    auctionStore.set({ registrations });
 
     toast.success('Đăng ký đấu giá thành công!');
     return true;
@@ -64,11 +65,12 @@ export function registerForAuction(auctionData) {
  * @returns {boolean} Success status
  */
 export function cancelRegistration(registrationId) {
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     const filtered = registrations.filter(reg => reg.id !== registrationId);
 
     if (filtered.length < registrations.length) {
-        auctionStore.set('registrations', filtered);
+        auctionStore.set({ registrations: filtered });
         toast.info('Đã hủy đăng ký đấu giá');
         return true;
     }
@@ -88,7 +90,8 @@ export function isRegisteredForAuction(auctionId) {
         return false;
     }
 
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     return registrations.some(
         reg => reg.auctionId === auctionId && reg.userId === authState.user.email
     );
@@ -106,7 +109,8 @@ export function getUserRegistrations(status = null) {
         return [];
     }
 
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     let userRegs = registrations.filter(reg => reg.userId === authState.user.email);
 
     if (status) {
@@ -122,7 +126,8 @@ export function getUserRegistrations(status = null) {
  * @returns {Object|null} Registration
  */
 export function getRegistration(registrationId) {
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     return registrations.find(reg => reg.id === registrationId) || null;
 }
 
@@ -132,13 +137,14 @@ export function getRegistration(registrationId) {
  * @param {string} status - New status
  */
 export function updateRegistrationStatus(registrationId, status) {
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     const registration = registrations.find(reg => reg.id === registrationId);
 
     if (registration) {
         registration.status = status;
         registration.updatedAt = new Date().toISOString();
-        auctionStore.set('registrations', [...registrations]);
+        auctionStore.set({ registrations: [...registrations] });
     }
 }
 
@@ -147,13 +153,14 @@ export function updateRegistrationStatus(registrationId, status) {
  * @param {string} registrationId - Registration ID
  */
 export function markDepositPaid(registrationId) {
-    const registrations = auctionStore.get('registrations') || [];
+    const state = auctionStore.get();
+    const registrations = state.registrations || [];
     const registration = registrations.find(reg => reg.id === registrationId);
 
     if (registration) {
         registration.depositPaid = true;
         registration.depositPaidAt = new Date().toISOString();
-        auctionStore.set('registrations', [...registrations]);
+        auctionStore.set({ registrations: [...registrations] });
         toast.success('Đã xác nhận thanh toán tiền đặt cọc');
     }
 }

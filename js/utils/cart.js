@@ -17,7 +17,14 @@ import toast from './toast.js';
  * @param {number} quantity - Quantity to add (default: 1)
  */
 export function addToCart(item, quantity = 1) {
-    const items = cartStore.get('items') || [];
+    const state = cartStore.get();
+    let items = state.items || [];
+
+    // Ensure items is an array
+    if (!Array.isArray(items)) {
+        console.warn('Cart items is not an array, resetting to empty array:', items);
+        items = [];
+    }
 
     // Check if item already exists
     const existingIndex = items.findIndex(i => i.id === item.id && i.type === item.type);
@@ -36,7 +43,7 @@ export function addToCart(item, quantity = 1) {
         toast.success(`Đã thêm "${item.name}" vào giỏ hàng`);
     }
 
-    cartStore.setState({
+    cartStore.set({
         items,
         total: calculateTotal(items)
     });
@@ -48,10 +55,11 @@ export function addToCart(item, quantity = 1) {
  * @param {string} type - Item type
  */
 export function removeFromCart(id, type) {
-    const items = cartStore.get('items') || [];
+    const state = cartStore.get();
+    const items = state.items || [];
     const filtered = items.filter(item => !(item.id === id && item.type === type));
 
-    cartStore.setState({
+    cartStore.set({
         items: filtered,
         total: calculateTotal(filtered)
     });
@@ -66,7 +74,8 @@ export function removeFromCart(id, type) {
  * @param {number} quantity - New quantity
  */
 export function updateQuantity(id, type, quantity) {
-    const items = cartStore.get('items') || [];
+    const state = cartStore.get();
+    const items = state.items || [];
     const item = items.find(i => i.id === id && i.type === type);
 
     if (item) {
@@ -74,7 +83,7 @@ export function updateQuantity(id, type, quantity) {
             removeFromCart(id, type);
         } else {
             item.quantity = quantity;
-            cartStore.setState({
+            cartStore.set({
                 items: [...items],
                 total: calculateTotal(items)
             });
@@ -86,7 +95,7 @@ export function updateQuantity(id, type, quantity) {
  * Clear cart
  */
 export function clearCart() {
-    cartStore.setState({
+    cartStore.set({
         items: [],
         total: 0
     });
@@ -98,7 +107,8 @@ export function clearCart() {
  * @returns {Array} Cart items
  */
 export function getCartItems() {
-    return cartStore.get('items') || [];
+    const state = cartStore.get();
+    return state.items || [];
 }
 
 /**
@@ -106,21 +116,29 @@ export function getCartItems() {
  * @returns {number} Total price
  */
 export function getCartTotal() {
-    return cartStore.get('total') || 0;
+    const state = cartStore.get();
+    return state.total || 0;
 }
 
 /**
  * Get cart item count
+ * @param {Array} items - Optional items array, if not provided, gets from store
  * @returns {number} Total number of items
  */
-export const getCartCount = (items) => { // <--- ĐÃ THÊM TỪ KHÓA EXPORT Ở ĐÂY
-    // Đảm bảo items là một mảng trước khi gọi reduce.
-    if (!Array.isArray(items)) {
-        items = [];
+export const getCartCount = (items) => {
+    // If items not provided, get from store
+    if (!items) {
+        const state = cartStore.get();
+        items = state.items || [];
     }
-    
-    // Đã sửa 'item.qty' thành 'item.quantity' để khớp với logic giỏ hàng
-    return items.reduce((count, item) => count + item.quantity, 0); 
+
+    // Ensure items is an array
+    if (!Array.isArray(items)) {
+        return 0;
+    }
+
+    // Sum up quantities
+    return items.reduce((count, item) => count + (item.quantity || 1), 0);
 }
 
 /**
@@ -162,7 +180,7 @@ export function subscribeToCart(callback) {
  */
 export function createAddToCartButton(item, onAdd = null) {
     const button = document.createElement('button');
-    button.className = 'add-to-cart-btn bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2';
+    button.className = 'add-to-cart-btn bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2';
 
     const updateButton = () => {
         const inCart = isInCart(item.id, item.type);

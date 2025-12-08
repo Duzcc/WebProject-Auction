@@ -16,7 +16,7 @@ export function initBackToTop(showAfter = 300) {
 
     // Create button
     backToTopButton = document.createElement('button');
-    backToTopButton.className = 'back-to-top fixed bottom-6 right-6 bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white p-4 rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none';
+    backToTopButton.className = 'back-to-top fixed bottom-6 right-6 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white p-4 rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none';
     backToTopButton.innerHTML = '<i data-lucide="arrow-up" class="w-6 h-6"></i>';
     backToTopButton.title = 'Về đầu trang';
     backToTopButton.setAttribute('aria-label', 'Scroll to top');

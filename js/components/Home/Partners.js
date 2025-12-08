@@ -6,7 +6,7 @@ import { createFromHTML } from '../../utils/dom.js';
  */
 export function Partners() {
     const html = `
-        <div class="py-12 bg-pink-50">
+        <div class="py-12 bg-blue-50">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-gray-900 mb-10">Đối tác</h2>
                 
@@ -20,10 +20,10 @@ export function Partners() {
                         <!-- Mock Logos -->
                         <div class="h-12 flex items-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100">
                             <span class="text-2xl font-black text-green-600 tracking-tighter">BIDV</span>
-                            <span class="text-yellow-500 ml-1">✦</span>
+                            <span class="text-blue-500 ml-1">✦</span>
                         </div>
                         
-                        <div class="h-16 w-16 bg-[#be1e2d] rounded flex items-center justify-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100 text-white font-bold">
+                        <div class="h-16 w-16 bg-[#2563EB] rounded flex items-center justify-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100 text-white font-bold">
                             AGRIBANK
                         </div>
 
@@ -40,7 +40,7 @@ export function Partners() {
                         </div>
                     </div>
 
-                    <button class="absolute right-0 md:right-4 w-10 h-10 rounded-full bg-[#be1e2d] flex items-center justify-center text-white hover:bg-red-700 shadow-md hidden md:flex">
+                    <button class="absolute right-0 md:right-4 w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white hover:bg-blue-700 shadow-md hidden md:flex">
                         <i data-lucide="chevron-right" style="width: 24px; height: 24px;"></i>
                     </button>
                 </div>

@@ -18,7 +18,7 @@ export function Header({ activePage, onNavigate }) {
     let userMenuOpen = false;
 
     const navClass = (page) =>
-        `cursor-pointer transition-colors ${activePage === page ? 'text-[#be1e2d] font-bold' : 'hover:text-[#be1e2d]'}`;
+        `cursor-pointer transition-colors ${activePage === page ? 'text-blue-600 font-bold' : 'hover:text-blue-600'}`;
 
     const handleNavClick = (page) => {
         onNavigate(page);
@@ -73,14 +73,14 @@ export function Header({ activePage, onNavigate }) {
     const html = `
         <header class="w-full">
             <!-- Top Bar with Ticker -->
-            <div class="bg-[#8b1818] text-white text-xs py-2 px-4 flex justify-between items-center">
+            <div class="bg-[#1E40AF] text-white text-xs py-2 px-4 flex justify-between items-center">
                 <div class="overflow-hidden w-full max-w-4xl whitespace-nowrap">
                     <div class="inline-block animate-marquee pl-4">
                         33.33, 68AA-888.88, 49AA-888.88, 47AD-444.44, 74H-024.68, 22H-024.68, 29E-444.40, 29E-433.33, 29E-444.47, 29E-411.11.
                     </div>
                 </div>
-                <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-white text-[#8b1818] px-3 py-1 rounded-full">
-                    <i data-lucide="phone" class="w-3.5 h-3.5" fill="#8b1818"></i>
+                <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-white text-[#1E40AF] px-3 py-1 rounded-full">
+                    <i data-lucide="phone" class="w-3.5 h-3.5" fill="#1E40AF"></i>
                     <span>1900.0555.15</span>
                 </div>
             </div>
@@ -90,21 +90,18 @@ export function Header({ activePage, onNavigate }) {
                 <div class="container mx-auto px-4 py-3 flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center gap-2 cursor-pointer" id="logo">
-                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-red-600 rounded-md flex items-center justify-center transform rotate-45">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-red-600 rounded-md flex items-center justify-center transform rotate-45">
                             <div class="w-6 h-6 bg-white transform -rotate-45" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"></div>
                         </div>
-                        <span class="text-3xl font-bold text-[#be1e2d]">VPA</span>
+                        <span class="text-3xl font-bold text-blue-600">VPA</span>
                     </div>
 
                     <!-- Nav Links - Desktop -->
-                    <nav class="hidden lg:flex items-center gap-4 xl:gap-6 font-medium text-gray-700 text-[13px] xl:text-[14px]">
+                    <nav class="hidden lg:flex items-center gap-6 xl:gap-8 font-semibold text-gray-700">
                         <span class="${navClass('home')}" data-page="home">Trang chủ</span>
-                        <span class="${navClass('cars')}" data-page="cars">Đấu giá xe ô tô</span>
-                        <span class="${navClass('motorbikes')}" data-page="motorbikes">Đấu giá xe máy</span>
-                        <span class="${navClass('assets')}" data-page="assets">Đấu giá tài sản</span>
-                        <span class="${navClass('news')}" data-page="news">Tin tức</span>
-                        <span class="${navClass('notifications')}" data-page="notifications">Kế hoạch</span>
-                        <span class="${navClass('about')}" data-page="about">Giới thiệu</span>
+                        <span class="${navClass('cars')}" data-page="cars">Xe ô tô</span>
+                        <span class="${navClass('motorbikes')}" data-page="motorbikes">Xe máy</span>
+                        <span class="${navClass('assets')}" data-page="assets">Tài sản khác</span>
                     </nav>
 
                     <!-- Search Bar & User Actions -->
@@ -112,9 +109,9 @@ export function Header({ activePage, onNavigate }) {
                         <input
                             type="text"
                             placeholder="Tìm biển số"
-                            class="border border-gray-300 rounded-full py-1.5 pl-9 pr-4 text-sm focus:outline-none focus:border-[#be1e2d] w-48 lg:w-64"
+                            class="border border-gray-300 rounded-full py-1.5 pl-9 pr-4 text-sm focus:outline-none focus:border-[#2563EB] w-48 lg:w-64"
                         />
-                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4"></i>
                         
                         <!-- Dark Mode Toggle -->
                         <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode">
@@ -127,26 +124,26 @@ export function Header({ activePage, onNavigate }) {
                             
                             <!-- Cart Icon with Badge -->
                             <button class="cart-btn relative p-2.5 hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-full transition-all duration-300 group">
-                                <i data-lucide="shopping-cart" class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-[#be1e2d] transition-colors duration-300"></i>
-                                <span id="cart-badge" class="absolute -top-1 -right-1 bg-gradient-to-br from-red-500 to-red-700 text-white text-xs font-bold rounded-full w-5 h-5 items-center justify-center hidden shadow-lg animate-pulse">0</span>
+                                <i data-lucide="shopping-cart" class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 transition-colors duration-300"></i>
+                                <span id="cart-badge" class="pointer-events-none absolute -top-1 -right-1 bg-gradient-to-br from-red-500 to-red-700 text-white text-xs font-bold rounded-full w-5 h-5 items-center justify-center hidden shadow-lg animate-pulse">0</span>
                             </button>
 
                             <!-- User Menu -->
                             <div class="relative">
                                 <button id="user-menu-toggle" class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-full transition-all duration-300 group border border-transparent hover:border-gray-200 dark:hover:border-gray-600">
                                     <img src="${authState.user.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(authState.user.fullName || authState.user.email)}" 
-                                         alt="User" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-600 group-hover:ring-[#be1e2d] transition-all duration-300 shadow-md">
+                                         alt="User" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-600 group-hover:ring-[#2563EB] transition-all duration-300 shadow-md">
                                     <div class="hidden md:flex flex-col items-start max-w-[120px]">
                                         <span class="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">${authState.user.name}</span>
                                         <span class="text-xs text-gray-500 dark:text-gray-400">Tài khoản</span>
                                     </div>
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-[#be1e2d] transition-all duration-300 group-hover:rotate-180"></i>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 transition-all duration-300 group-hover:rotate-180"></i>
                                 </button>
                                 
                                 <!-- Dropdown Menu -->
                                 <div id="user-menu" class="absolute right-0 mt-3 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden transform origin-top-right transition-all duration-300 ease-out" style="display: none;">
                                     <!-- User Info Header -->
-                                    <div class="px-5 py-4 bg-gradient-to-br from-[#be1e2d] to-[#8b1818] text-white">
+                                    <div class="px-5 py-4 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
                                         <div class="flex items-center gap-3">
                                             <img src="${authState.user.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(authState.user.fullName || authState.user.email)}" 
                                                  alt="User" class="w-12 h-12 rounded-full object-cover ring-2 ring-white/50 shadow-lg">
@@ -165,18 +162,18 @@ export function Header({ activePage, onNavigate }) {
                                             </div>
                                             <div class="flex-1">
                                                 <span class="font-medium">Thông tin tài khoản</span>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Xem và chỉnh sửa hồ sơ</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-300">Xem và chỉnh sửa hồ sơ</p>
                                             </div>
                                             <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
                                         </button>
                                         
-                                        <button data-page="dashboard" class="w-full px-5 py-3 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-colors duration-200">
-                                                <i data-lucide="gavel" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                                        <button data-page="auction-history" class="w-full px-5 py-3 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 flex items-center gap-3 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors duration-200">
+                                                <i data-lucide="gavel" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
                                             </div>
                                             <div class="flex-1">
                                                 <span class="font-medium">Lịch sử đấu giá</span>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Các phiên đã tham gia</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-300">Xem hoạt động đấu giá</p>
                                             </div>
                                             <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
                                         </button>
@@ -187,7 +184,7 @@ export function Header({ activePage, onNavigate }) {
                                             </div>
                                             <div class="flex-1">
                                                 <span class="font-medium">Cài đặt</span>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">Tùy chỉnh tài khoản</p>
+                                                <p class="text-xs text-gray-600 dark:text-gray-300">Tùy chỉnh tài khoản</p>
                                             </div>
                                             <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
                                         </button>
@@ -195,8 +192,8 @@ export function Header({ activePage, onNavigate }) {
                                     
                                     <!-- Logout Section -->
                                     <div class="border-t border-gray-100 dark:border-gray-700 p-2">
-                                        <button id="logout-btn" class="w-full px-5 py-3 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-red-50 dark:bg-red-900/30 flex items-center justify-center group-hover:bg-red-100 dark:group-hover:bg-red-900/50 transition-colors duration-200">
+                                        <button id="logout-btn" class="w-full px-5 py-3 text-left text-sm text-red-600 dark:text-red-400 hover:bg-blue-50 dark:hover:bg-red-900/20 rounded-lg flex items-center gap-3 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-red-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-red-900/50 transition-colors duration-200">
                                                 <i data-lucide="log-out" class="w-4 h-4"></i>
                                             </div>
                                             <span class="font-medium">Đăng xuất</span>
@@ -208,7 +205,7 @@ export function Header({ activePage, onNavigate }) {
                             <!-- Login Button -->
                             <button 
                                 id="login-btn"
-                                class="bg-gradient-to-r from-[#be1e2d] to-[#8b1818] text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                                class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
                             >
                                 <i data-lucide="user" class="w-4 h-4"></i>
                                 <span>Đăng nhập</span>
@@ -225,16 +222,13 @@ export function Header({ activePage, onNavigate }) {
                 </div>
 
                 <!-- Mobile Menu -->
-                <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-100 absolute w-full left-0 z-50 shadow-lg" style="display: none;">
-                    <div class="flex flex-col p-4 space-y-4 font-medium text-gray-700">
-                        <span class="${navClass('home')}" data-page="home">Trang chủ</span>
-                        <span class="${navClass('cars')}" data-page="cars">Đấu giá biển số xe ô tô</span>
-                        <span class="${navClass('motorbikes')}" data-page="motorbikes">Đấu giá biển số xe máy</span>
-                        <span class="${navClass('assets')}" data-page="assets">Đấu giá tài sản</span>
-                        <span class="${navClass('news')}" data-page="news">Tin tức</span>
-                        <span class="${navClass('notifications')}" data-page="notifications">Kế hoạch</span>
-                        <span class="${navClass('about')}" data-page="about">Giới thiệu</span>
-                    </div>
+                <div id="mobile-menu" class="lg:hidden border-t border-gray-200 bg-white shadow-lg" style="display: none;">
+                    <nav class="px-4 py-6 space-y-3">
+                        <div class="${navClass('home')} block py-3 font-semibold border-b border-gray-100" data-page="home">Trang chủ</div>
+                        <div class="${navClass('cars')} block py-3 font-semibold border-b border-gray-100" data-page="cars">Xe ô tô</div>
+                        <div class="${navClass('motorbikes')} block py-3 font-semibold border-b border-gray-100" data-page="motorbikes">Xe máy</div>
+                        <div class="${navClass('assets')} block py-3 font-semibold border-b border-gray-100" data-page="assets">Tài sản khác</div>
+                    </nav>
                 </div>
             </div>
         </header>
@@ -336,11 +330,13 @@ export function Header({ activePage, onNavigate }) {
         updateCartBadge();
         subscribeToCart(updateCartBadge);
 
-        // Cart button click
+        // Cart button click - use onNavigate for proper routing
         const cartBtn = header.querySelector('.cart-btn');
         if (cartBtn) {
-            cartBtn.addEventListener('click', () => {
-                window.location.hash = '#/cart';
+            cartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleNavClick('cart');
             });
         }
     }

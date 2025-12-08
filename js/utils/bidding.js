@@ -33,7 +33,8 @@ export function placeBid(bidData) {
         return false;
     }
 
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
 
     // Create bid
     const bid = {
@@ -64,7 +65,7 @@ export function placeBid(bidData) {
     });
 
     bids.push(bid);
-    auctionStore.set('bids', bids);
+    auctionStore.set({ bids });
 
     toast.success('Đặt giá thành công!');
 
@@ -86,7 +87,8 @@ export function placeBid(bidData) {
  * @returns {Array} Bid history
  */
 export function getBidHistory(auctionId) {
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
     return bids
         .filter(bid => bid.auctionId === auctionId)
         .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -114,7 +116,8 @@ export function getUserBids(status = null) {
         return [];
     }
 
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
     let userBids = bids.filter(bid => bid.userId === authState.user.email);
 
     if (status) {
@@ -136,7 +139,8 @@ export function hasActiveBid(auctionId) {
         return false;
     }
 
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
     return bids.some(
         bid => bid.auctionId === auctionId &&
             bid.userId === authState.user.email &&
@@ -156,7 +160,8 @@ export function getUserActiveBid(auctionId) {
         return null;
     }
 
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
     return bids.find(
         bid => bid.auctionId === auctionId &&
             bid.userId === authState.user.email &&
@@ -169,7 +174,8 @@ export function getUserActiveBid(auctionId) {
  * @param {string} auctionId - Auction ID
  */
 export function markAuctionWon(auctionId) {
-    const bids = auctionStore.get('bids') || [];
+    const state = auctionStore.get();
+    const bids = state.bids || [];
     const highestBid = getCurrentHighestBid(auctionId);
 
     if (highestBid) {
@@ -192,7 +198,7 @@ export function markAuctionWon(auctionId) {
             }
         });
 
-        auctionStore.set('bids', bids);
+        auctionStore.set({ bids });
     }
 }
 
