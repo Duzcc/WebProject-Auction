@@ -1,6 +1,6 @@
-import { createElement } from '../utils/dom.js';
-import { validateEmail, validatePassword, validateName, showError, clearError, validateForm } from '../utils/validation.js';
-import { login } from '../utils/auth.js';
+import { createElement } from '../../utils/dom.js';
+import { validateEmail, validatePassword, validateName, showError, clearError, validateForm } from '../../utils/validation.js';
+import { login } from '../../utils/auth.js';
 
 /**
  * LoginPage Component

@@ -1,5 +1,5 @@
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from './shared/PageBanner.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
+import { PageBanner } from '../shared/PageBanner.js';
 
 /**
  * NotificationArchivePage

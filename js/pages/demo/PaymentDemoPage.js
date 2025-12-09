@@ -1,5 +1,5 @@
-import { createElement } from '../utils/dom.js';
-import { PaymentPage } from './PaymentPage.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
+import { PaymentPage } from '../payment/PaymentPage.js';
 
 /**
  * Payment Demo Page

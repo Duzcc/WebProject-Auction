@@ -1,6 +1,6 @@
-import { createElement } from '../utils/dom.js';
-import { DepositModal } from './shared/DepositModal.js';
-import { getDepositStatus, hasVerifiedDeposit } from '../utils/deposit.js';
+import { createElement } from '../../utils/dom.js';
+import { DepositModal } from '../shared/DepositModal.js';
+import { getDepositStatus, hasVerifiedDeposit } from '../../utils/deposit.js';
 
 /**
  * Deposit Demo Page

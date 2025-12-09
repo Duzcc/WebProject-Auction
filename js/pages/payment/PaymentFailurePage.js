@@ -3,8 +3,8 @@
  * Display error message when payment fails
  */
 
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { ROUTES } from '../utils/navigation.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
+import { ROUTES } from '../../utils/navigation.js';
 
 export function PaymentFailurePage() {
     const container = createElement('div', { className: 'bg-gradient-to-br from-red-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen flex items-center justify-center px-4 py-12' });

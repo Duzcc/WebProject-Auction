@@ -3,10 +3,10 @@
  * Display success message after payment completion with confetti celebration
  */
 
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { ROUTES } from '../utils/navigation.js';
-import { clearCart } from '../utils/cart.js';
-import { successConfetti } from '../utils/confetti.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
+import { ROUTES } from '../../utils/navigation.js';
+import { clearCart } from '../../utils/cart.js';
+import { successConfetti } from '../../utils/confetti.js';
 
 export function PaymentSuccessPage() {
     // Clear cart and order data immediately

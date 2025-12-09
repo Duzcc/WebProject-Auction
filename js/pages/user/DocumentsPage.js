@@ -3,8 +3,8 @@
  * Display user's documents
  */
 
-import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from './shared/ProfileSidebar.js';
+import { createElement } from '../../utils/dom.js';
+import { ProfileSidebar } from '../shared/ProfileSidebar.js';
 
 export function DocumentsPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });

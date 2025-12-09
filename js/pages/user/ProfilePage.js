@@ -3,11 +3,11 @@
  * User account information with sidebar navigation
  */
 
-import { getUserProfile, updateUserProfile, uploadAvatar, getUserSettings, updateUserSettings } from '../utils/userProfile.js';
-import { getAuthState } from '../utils/auth.js';
-import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from './shared/ProfileSidebar.js';
-import toast from '../utils/toast.js';
+import { getUserProfile, updateUserProfile, uploadAvatar, getUserSettings, updateUserSettings } from '../../utils/userProfile.js';
+import { getAuthState } from '../../utils/auth.js';
+import { createElement } from '../../utils/dom.js';
+import { ProfileSidebar } from '../shared/ProfileSidebar.js';
+import toast from '../../utils/toast.js';
 
 export function ProfilePage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });

@@ -3,8 +3,8 @@
  * Display plates waiting for auction
  */
 
-import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from './shared/ProfileSidebar.js';
+import { createElement } from '../../utils/dom.js';
+import { ProfileSidebar } from '../shared/ProfileSidebar.js';
 
 export function PendingPlatesPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });

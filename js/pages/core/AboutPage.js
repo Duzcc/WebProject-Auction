@@ -3,7 +3,7 @@
  * All About components integrated inline for optimized code structure
  */
 
-import { createElement, createFromHTML } from '../utils/dom.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
 
 // =============================
 // INTERNAL COMPONENTS

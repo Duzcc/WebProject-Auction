@@ -1,27 +1,38 @@
 import { Header } from './components/Header.js';
 import { Footer } from './components/Footer.js';
 import { FloatingActions } from './components/FloatingActions.js';
-import { HomePage } from './pages/HomePage.js';
-import { NewsPage } from './pages/NewsPage.js';
-import { AboutPage } from './pages/AboutPage.js';
-import { AssetListPage } from './pages/AssetListPage.js';
-import { AssetDetailPage } from './pages/AssetDetailPage.js';
-import { NotificationArchivePage } from './pages/NotificationArchivePage.js';
-import { CarAuctionPage } from './pages/CarAuctionPage.js';
-import { MotorbikeAuctionPage } from './pages/MotorbikeAuctionPage.js';
-import { LoginPage } from './pages/LoginPage.js';
-import { CartPage } from './pages/CartPage.js';
-import { CheckoutPage } from './pages/CheckoutPage.js';
-import { AuctionHistoryPage } from './pages/AuctionHistoryPage.js';
-import { ProfilePage } from './pages/ProfilePage.js';
-import { Phase1DemoPage } from './pages/Phase1DemoPage.js';
-import { DepositDemoPage } from './pages/DepositDemoPage.js';
-import { PaymentPage } from './pages/PaymentPage.js';
-import { PaymentSuccessPage } from './pages/PaymentSuccessPage.js';
-import { PaymentFailurePage } from './pages/PaymentFailurePage.js';
-import { PaymentDemoPage } from './pages/PaymentDemoPage.js';
-import { PendingPlatesPage } from './pages/PendingPlatesPage.js';
-import { DocumentsPage } from './pages/DocumentsPage.js';
+
+// Core pages
+import { HomePage } from './pages/core/HomePage.js';
+import { AboutPage } from './pages/core/AboutPage.js';
+import { NewsPage } from './pages/core/NewsPage.js';
+
+// Auction pages
+import { CarAuctionPage } from './pages/auction/cars/CarAuctionPage.js';
+import { MotorbikeAuctionPage } from './pages/auction/motorbikes/MotorbikeAuctionPage.js';
+import { AssetListPage } from './pages/auction/assets/AssetListPage.js';
+import { AssetDetailPage } from './pages/auction/assets/AssetDetailPage.js';
+import { AuctionHistoryPage } from './pages/auction/AuctionHistoryPage.js';
+import { PendingPlatesPage } from './pages/auction/PendingPlatesPage.js';
+
+// Payment pages
+import { CartPage } from './pages/payment/CartPage.js';
+import { CheckoutPage } from './pages/payment/CheckoutPage.js';
+import { PaymentPage } from './pages/payment/PaymentPage.js';
+import { PaymentSuccessPage } from './pages/payment/PaymentSuccessPage.js';
+import { PaymentFailurePage } from './pages/payment/PaymentFailurePage.js';
+
+// User pages
+import { LoginPage } from './pages/user/LoginPage.js';
+import { ProfilePage } from './pages/user/ProfilePage.js';
+import { DocumentsPage } from './pages/user/DocumentsPage.js';
+
+// Demo pages
+import { Phase1DemoPage } from './pages/demo/Phase1DemoPage.js';
+import { DepositDemoPage } from './pages/demo/DepositDemoPage.js';
+import { PaymentDemoPage } from './pages/demo/PaymentDemoPage.js';
+import { NotificationArchivePage } from './pages/demo/NotificationArchivePage.js';
+
 import { render, createElement } from './utils/dom.js';
 import { subscribeToAuth } from './utils/auth.js';
 import { initTheme } from './utils/theme.js';

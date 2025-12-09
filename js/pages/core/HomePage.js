@@ -4,8 +4,8 @@
  * All components integrated inline for optimized code structure
  */
 
-import { createElement, createFromHTML, initIcons } from '../utils/dom.js';
-import { AuctionRegistrationModal } from './shared/AuctionRegistrationModal.js';
+import { createElement, createFromHTML, initIcons } from '../../utils/dom.js';
+import { AuctionRegistrationModal } from '../shared/AuctionRegistrationModal.js';
 
 // =============================
 // INTERNAL COMPONENTS

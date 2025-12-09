@@ -3,12 +3,12 @@
  * Multi-step checkout with progress indicator and glassmorphism design
  */
 
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from './shared/PageBanner.js';
-import { getCartItems, getCartTotal } from '../utils/cart.js';
-import { getAuthState } from '../utils/auth.js';
-import { ROUTES } from '../utils/navigation.js';
-import toast from '../utils/toast.js';
+import { createElement, createFromHTML } from '../../utils/dom.js';
+import { PageBanner } from '../shared/PageBanner.js';
+import { getCartItems, getCartTotal } from '../../utils/cart.js';
+import { getAuthState } from '../../utils/auth.js';
+import { ROUTES } from '../../utils/navigation.js';
+import toast from '../../utils/toast.js';
 
 export function CheckoutPage() {
     const authState = getAuthState();

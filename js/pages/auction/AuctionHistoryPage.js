@@ -3,10 +3,10 @@
  * Display user's auction history with date filters
  */
 
-import { createElement } from '../utils/dom.js';
-import { ProfileSidebar } from './shared/ProfileSidebar.js';
-import { getUserDeposits } from '../utils/deposit.js';
-import { getUserBids } from '../utils/bidding.js';
+import { createElement } from '../../utils/dom.js';
+import { ProfileSidebar } from '../shared/ProfileSidebar.js';
+import { getUserDeposits } from '../../utils/deposit.js';
+import { getUserBids } from '../../utils/bidding.js';
 
 export function AuctionHistoryPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });

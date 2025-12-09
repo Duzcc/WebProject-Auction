@@ -3,8 +3,8 @@
  * Displays news and notifications with tabs and pagination
  */
 
-import { createElement, createFromHTML, initIcons } from '../utils/dom.js';
-import { newsData, notifData } from '../data/constants.js';
+import { createElement, createFromHTML, initIcons } from '../../utils/dom.js';
+import { newsData, notifData } from '../../data/constants.js';
 
 // =============================
 // INTERNAL COMPONENTS

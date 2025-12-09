@@ -1,14 +1,14 @@
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from './shared/PageBanner.js';
-import { AuctionRegistrationModal } from './shared/AuctionRegistrationModal.js';
-import { PlateDetailModal } from './shared/PlateDetailModal.js';
-import { calculateDeposit, parseAuctionDate } from '../utils/plateHelpers.js';
+import { createElement, createFromHTML } from '../../../utils/dom.js';
+import { PageBanner } from '../../shared/PageBanner.js';
+import { AuctionRegistrationModal } from '../../shared/AuctionRegistrationModal.js';
+import { PlateDetailModal } from '../../shared/PlateDetailModal.js';
+import { calculateDeposit, parseAuctionDate } from '../../../utils/plateHelpers.js';
 
 /**
- * CarAuctionPage
- * Complex auction page for car license plates with multiple tabs and filters
+ * MotorbikeAuctionPage
+ * Complex auction page for motorbike license plates with multiple tabs and filters
  */
-export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auctionResultsData = [] }) {
+export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePlates = [], motorbikeAuctionResults = [] }) {
     // State
     const state = {
         activeTab: 'announced',
@@ -31,28 +31,25 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         }
     };
 
-    const container = createElement('div', { id: 'cars', className: 'bg-gray-50' });
+    const container = createElement('div', { id: 'motorbikes', className: 'bg-gray-50' });
 
     // Banner Header
     const banner = createElement('div', {
         className: 'relative h-80 bg-cover bg-center overflow-hidden'
     });
-    banner.style.backgroundImage = 'url("images/banners/car_auction.png")';
+    banner.style.backgroundImage = 'url("images/banners/motorbike_auction.png")';
     banner.innerHTML = `
         <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
             <h1 class="text-5xl md:text-6xl font-bold text-white mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">
-                Đấu giá biển số xe ô tô
+                Đấu giá biển số xe máy
             </h1>
             <p class="text-xl text-white/90 max-w-2xl" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5)">
-                Tham gia đấu giá biển số đẹp cho xe ô tô với quy trình minh bạch và chuyên nghiệp
+                Tham gia đấu giá biển số đẹp cho xe máy với quy trình minh bạch và chuyên nghiệp
             </p>
         </div>
     `;
     container.appendChild(banner);
-
-    // Main content wrapper
-    const contentWrapper = createElement('div', { className: 'bg-white border-b border-gray-100' });
 
     // Create registration modal instance (append to body, not container)
     const registrationModal = AuctionRegistrationModal();
@@ -81,7 +78,6 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     const availableYears = ["196x", "197x", "198x", "199x", "200x"];
     const availableAvoids = ["Tránh 4", "Tránh 7", "Tránh 49", "Tránh 53", "Tránh 13"];
 
-    // Render function
     function render() {
         container.innerHTML = '';
 
@@ -89,15 +85,15 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const banner = createElement('div', {
             className: 'relative h-80 bg-cover bg-center overflow-hidden'
         });
-        banner.style.backgroundImage = 'url("images/banners/car_auction.png")';
+        banner.style.backgroundImage = 'url("images/banners/motorbike_auction.png")';
         banner.innerHTML = `
             <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
             <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
                 <h1 class="text-5xl md:text-6xl font-bold text-white mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">
-                    Đấu giá biển số xe ô tô
+                    Đấu giá biển số xe máy
                 </h1>
                 <p class="text-xl text-white/90 max-w-2xl" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5)">
-                    Tham gia đấu giá biển số đẹp cho xe ô tô với quy trình minh bạch và chuyên nghiệp
+                    Tham gia đấu giá biển số đẹp cho xe máy với quy trình minh bạch và chuyên nghiệp
                 </p>
             </div>
         `;
@@ -147,8 +143,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         tabs.forEach(tab => {
             const isActive = state.activeTab === tab.id;
             const className = isActive
-                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-blue-600 text-white'
-                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50';
+                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-[#2563EB] text-white'
+                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-[#2563EB] hover:bg-gray-50';
 
             const button = createElement('button', { className }, tab.label);
             button.addEventListener('click', () => {
@@ -178,7 +174,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         }
 
         // Accordions
-        sidebar.appendChild(createAccordion('type', 'Loại biển số', availableTypes, state.selectedTypes));
+        sidebar.appendChild(createAccordion('type', 'Loại biển', availableTypes, state.selectedTypes));
         sidebar.appendChild(createAccordion('year', 'Năm sinh', availableYears, state.selectedYears));
         sidebar.appendChild(createAccordion('avoid', 'Tránh số', availableAvoids, state.selectedAvoids));
         sidebar.appendChild(createAccordion('plateColor', 'Loại biển', ['Biển trắng', 'Biển vàng'], state.selectedPlateColors));
@@ -222,7 +218,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 </select>
                 <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
             </div>
-    `;
+        `;
         return createFromHTML(html);
     }
 
@@ -257,11 +253,11 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 />
                 <i data-lucide="calendar" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
             </div>
-    `;
+        `;
         const element = createFromHTML(html);
         element.querySelector(`.date-input-${stateKey}`).addEventListener('change', (e) => {
             state[stateKey] = e.target.value;
-            updateTableOnly(); // Changed from render()
+            updateTableOnly();
         });
         return element;
     }
@@ -332,6 +328,294 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         return element;
     }
 
+    function createTableArea() {
+        const tableArea = createElement('div', { className: 'w-full lg:w-3/4' });
+
+        // Get paginated data
+        const paginationInfo = getPaginatedData();
+        const { data, totalItems, startIndex, endIndex } = paginationInfo;
+
+        // Result count
+        const resultCount = createElement('div', { className: 'flex justify-between items-center mb-4' });
+        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm', id: 'result-count-text' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
+        tableArea.appendChild(resultCount);
+
+        // Table
+        const tableWrapper = createElement('div', { className: 'overflow-x-auto rounded-t-lg border border-gray-200' });
+        const table = createElement('table', { className: 'w-full text-sm text-left' });
+
+        table.appendChild(createTableHeader());
+        table.appendChild(createTableBody(data));
+
+        tableWrapper.appendChild(table);
+        tableArea.appendChild(tableWrapper);
+
+        // Pagination
+        tableArea.appendChild(createPagination());
+
+        return tableArea;
+    }
+
+    function getFilteredData() {
+        let sourceData = [];
+        if (state.activeTab === 'announced') sourceData = motorbikePlates;
+        else if (state.activeTab === 'official') sourceData = officialMotorbikePlates;
+        else if (state.activeTab === 'results') sourceData = motorbikeAuctionResults;
+
+        return sourceData.filter(item => {
+            const plateNumber = item.plateNumber.toLowerCase();
+
+            // Search filter
+            if (state.searchTerm && !plateNumber.includes(state.searchTerm.toLowerCase())) {
+                return false;
+            }
+
+            // Province filter - Check plate number prefix against province codes
+            if (state.selectedProvince) {
+                // Extract codes from format "Name-15/16" or "Name-29/30/31/32/33/40"
+                const codes = state.selectedProvince.split('-')[1];
+                if (codes) {
+                    // Split multiple codes by '/'
+                    const provinceCodes = codes.split('/');
+                    // Extract plate prefix (first 2 digits before the letter)
+                    const platePrefix = item.plateNumber.match(/^(\d+)/)?.[1];
+                    // Check if plate prefix matches any of the province codes
+                    if (!platePrefix || !provinceCodes.includes(platePrefix)) {
+                        return false;
+                    }
+                }
+            }
+
+            // Type filter
+            if (state.selectedTypes.length > 0 && item.type && !state.selectedTypes.includes(item.type)) {
+                return false;
+            }
+
+            // Year filter (last 2 digits)
+            if (state.selectedYears.length > 0) {
+                const lastFourDigits = plateNumber.slice(-4).replace('.', '');
+                if (lastFourDigits.length === 4) {
+                    const lastTwoDigits = parseInt(lastFourDigits.slice(-2));
+                    const matchesYear = state.selectedYears.some(yearLabel => {
+                        const prefix = yearLabel.match(/\d{3}/)?.[0];
+                        if (!prefix) return false;
+                        if (yearLabel.includes('200x')) {
+                            return lastTwoDigits >= 0 && lastTwoDigits <= 9;
+                        } else {
+                            const startYear = parseInt(prefix.slice(1) + '0');
+                            const endYear = parseInt(prefix.slice(1) + '9');
+                            return lastTwoDigits >= startYear && lastTwoDigits <= endYear;
+                        }
+                    });
+                    if (!matchesYear) return false;
+                }
+            }
+
+            // Avoid filter
+            if (state.selectedAvoids.length > 0) {
+                const plateDigits = plateNumber.replace(/[^0-9]/g, '');
+                const avoids = state.selectedAvoids.map(a => a.split(' ')[1]);
+                const includesAvoid = avoids.some(avoid => plateDigits.includes(avoid));
+                if (includesAvoid) return false;
+            }
+
+            // Plate color filter
+            if (state.selectedPlateColors.length > 0 && item.plateColor) {
+                const colorMapping = {
+                    'Biển trắng': 'white',
+                    'Biển vàng': 'yellow'
+                };
+                const selectedColors = state.selectedPlateColors.map(c => colorMapping[c]);
+                if (!selectedColors.includes(item.plateColor)) {
+                    return false;
+                }
+            }
+
+            // Date filter (for official/results)
+            if ((state.activeTab === 'official' || state.activeTab === 'results') && (state.startDate || state.endDate)) {
+                const auctionTimeString = item.auctionTime?.split(' ')[1];
+                if (auctionTimeString) {
+                    const [day, month, year] = auctionTimeString.split('/').map(Number);
+                    const itemTime = new Date(Date.UTC(year, month - 1, day)).getTime();
+
+                    if (state.startDate) {
+                        const [sYear, sMonth, sDay] = state.startDate.split('-').map(Number);
+                        const startTime = new Date(Date.UTC(sYear, sMonth - 1, sDay)).getTime();
+                        if (itemTime < startTime) return false;
+                    }
+
+                    if (state.endDate) {
+                        const [eYear, eMonth, eDay] = state.endDate.split('-').map(Number);
+                        const endTime = new Date(Date.UTC(eYear, eMonth - 1, eDay)).getTime();
+                        if (itemTime > endTime) return false;
+                    }
+                } else if (state.startDate || state.endDate) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+    }
+
+    // NEW: Get paginated data
+    function getPaginatedData() {
+        const filtered = getFilteredData();
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+
+        if (state.currentPage > totalPages && totalPages > 0) {
+            state.currentPage = totalPages;
+        }
+        if (state.currentPage < 1) {
+            state.currentPage = 1;
+        }
+
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        const paginatedData = filtered.slice(startIndex, endIndex);
+
+        return {
+            data: paginatedData,
+            totalItems,
+            totalPages,
+            currentPage: state.currentPage,
+            startIndex: startIndex + 1,
+            endIndex: Math.min(endIndex, totalItems)
+        };
+    }
+
+    function createTableHeader() {
+        const thead = createElement('thead', { className: 'bg-[#e5e5e5] text-gray-900 font-bold' });
+        const tr = createElement('tr');
+
+        if (state.activeTab === 'results') {
+            tr.innerHTML = `
+                <th class="px-6 py-4 w-16 text-center">STT</th>
+                <th class="px-6 py-4">Biển số</th>
+                <th class="px-6 py-4">Giá trúng đấu giá</th>
+                <th class="px-6 py-4">Tỉnh, Thành phố</th>
+                <th class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center gap-1">
+                        Thời gian đấu giá
+                        <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
+                    </div>
+                </th>
+                <th class="px-6 py-4">Lựa chọn</th>
+            `;
+        } else {
+            tr.innerHTML = `
+                <th class="px-6 py-4 w-16 text-center">STT</th>
+                <th class="px-6 py-4">Biển số</th>
+                <th class="px-6 py-4">Giá khởi điểm</th>
+                <th class="px-6 py-4">Tỉnh, Thành phố</th>
+                <th class="px-6 py-4">Loại biển</th>
+                ${state.activeTab === 'official' ? `
+                    <th class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center gap-1">
+                            Thời gian đấu giá
+                            <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
+                        </div>
+                    </th>
+                ` : ''}
+                <th class="px-6 py-4">Lựa chọn</th>
+            `;
+        }
+
+        thead.appendChild(tr);
+        return thead;
+    }
+
+    function createTableBody(data) {
+        const tbody = createElement('tbody', { className: 'divide-y divide-gray-100' });
+
+        data.forEach((item, index) => {
+            const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
+
+            if (state.activeTab === 'results') {
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
+                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-[#2563EB] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
+                                ${item.plateNumber}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>
+                    <td class="px-6 py-4"></td>
+                `;
+            } else {
+                const plateBgClass = state.activeTab === 'official'
+                    ? 'bg-[#eecc48] border-[#eecc48] text-gray-900'
+                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-[#2563EB]';
+
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
+                            <span class="font-bold border px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
+                                ${item.plateNumber}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
+                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
+                    ${state.activeTab === 'official' ? `<td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>` : ''}
+                    <td class="px-6 py-4">
+                        <a href="#" class="text-[#2563EB] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
+                    </td>
+                `;
+            }
+
+            // Add event listener for registration link
+            const registerLink = tr.querySelector('a[href="#"]');
+            if (registerLink && state.activeTab !== 'results') {
+                registerLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Open registration modal with plate data
+                    registrationModal.open({
+                        auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
+                        auctionName: `Biển số ${item.plateNumber}`,
+                        auctionType: 'Biển số xe máy',
+                        depositAmount: calculateDeposit(item.startPrice),
+                        auctionDate: parseAuctionDate(item.auctionTime)
+                    });
+                });
+            }
+
+            // Add click handler for plate number
+            const plateNumber = tr.querySelector('[data-plate-number]');
+            if (plateNumber) {
+                plateNumber.addEventListener('click', () => {
+                    plateDetailModal.open({
+                        ...item,
+                        onRegister: () => {
+                            // Open registration modal
+                            registrationModal.open({
+                                auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
+                                auctionName: `Biển số ${item.plateNumber}`,
+                                auctionType: 'Biển số xe máy',
+                                depositAmount: calculateDeposit(item.startPrice),
+                                auctionDate: parseAuctionDate(item.auctionTime)
+                            });
+                        }
+                    });
+                });
+            }
+
+            tbody.appendChild(tr);
+        });
+
+        return tbody;
+    }
+
     function createPagination() {
         const paginationInfo = getPaginatedData();
         const { totalPages, currentPage } = paginationInfo;
@@ -342,10 +626,9 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         const itemsPerPageWrapper = createElement('div', { className: 'flex items-center gap-2' });
         itemsPerPageWrapper.appendChild(createElement('span', { className: 'text-sm text-gray-600' }, 'Hiển thị:'));
 
-
         // Create select element directly for better event handling
         const select = createElement('select', {
-            id: 'items-per-page',
+            id: 'items-per-page-moto',
             className: 'border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 cursor-pointer'
         });
 
@@ -358,10 +641,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         });
 
         select.addEventListener('change', (e) => {
-            console.log('Pagination select changed!', e.target.value);
             state.itemsPerPage = parseInt(e.target.value);
             state.currentPage = 1;
-            console.log('Calling render with new itemsPerPage:', state.itemsPerPage);
             render();
         });
 
@@ -454,298 +735,10 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         return btn;
     }
 
-    function createTableArea() {
-        const tableArea = createElement('div', { className: 'w-full lg:w-3/4' });
-
-        // Get paginated data
-        const paginationInfo = getPaginatedData();
-        const { data, totalItems, startIndex, endIndex } = paginationInfo;
-
-        // Result count
-        const resultCount = createElement('div', { className: 'flex justify-between items-center mb-4' });
-        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm', id: 'result-count-text' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
-        tableArea.appendChild(resultCount);
-
-        // Table
-        const tableWrapper = createElement('div', { className: 'overflow-x-auto rounded-t-lg border border-gray-200' });
-        const table = createElement('table', { className: 'w-full text-sm text-left' });
-
-        table.appendChild(createTableHeader());
-        table.appendChild(createTableBody(data));
-
-        tableWrapper.appendChild(table);
-        tableArea.appendChild(tableWrapper);
-
-        // Pagination
-        tableArea.appendChild(createPagination());
-
-        return tableArea;
-    }
-
-    function getFilteredData() {
-        let sourceData = [];
-        if (state.activeTab === 'announced') sourceData = carPlates;
-        else if (state.activeTab === 'official') sourceData = officialCarPlates;
-        else if (state.activeTab === 'results') sourceData = auctionResultsData;
-
-        return sourceData.filter(item => {
-            const plateNumber = item.plateNumber.toLowerCase();
-
-            // Search filter
-            if (state.searchTerm && !plateNumber.includes(state.searchTerm.toLowerCase())) {
-                return false;
-            }
-
-            // Province filter - Check plate number prefix against province codes
-            if (state.selectedProvince) {
-                // Extract codes from format "Name-15/16" or "Name-29/30/31/32/33/40"
-                const codes = state.selectedProvince.split('-')[1];
-                if (codes) {
-                    // Split multiple codes by '/'
-                    const provinceCodes = codes.split('/');
-                    // Extract plate prefix (first 2 digits before the letter)
-                    const platePrefix = item.plateNumber.match(/^(\d+)/)?.[1];
-                    // Check if plate prefix matches any of the province codes
-                    if (!platePrefix || !provinceCodes.includes(platePrefix)) {
-                        return false;
-                    }
-                }
-            }
-
-            // Type filter
-            if (state.selectedTypes.length > 0 && item.type && !state.selectedTypes.includes(item.type)) {
-                return false;
-            }
-
-            // Year filter (last 2 digits)
-            if (state.selectedYears.length > 0) {
-                const lastFourDigits = plateNumber.slice(-4).replace('.', '');
-                if (lastFourDigits.length === 4) {
-                    const lastTwoDigits = parseInt(lastFourDigits.slice(-2));
-                    const matchesYear = state.selectedYears.some(yearLabel => {
-                        const prefix = yearLabel.match(/\d{3}/)?.[0];
-                        if (!prefix) return false;
-                        if (yearLabel.includes('200x')) {
-                            return lastTwoDigits >= 0 && lastTwoDigits <= 9;
-                        } else {
-                            const startYear = parseInt(prefix.slice(1) + '0');
-                            const endYear = parseInt(prefix.slice(1) + '9');
-                            return lastTwoDigits >= startYear && lastTwoDigits <= endYear;
-                        }
-                    });
-                    if (!matchesYear) return false;
-                }
-            }
-
-            // Avoid filter
-            if (state.selectedAvoids.length > 0) {
-                const plateDigits = plateNumber.replace(/[^0-9]/g, '');
-                const avoids = state.selectedAvoids.map(a => a.split(' ')[1]);
-                const includesAvoid = avoids.some(avoid => plateDigits.includes(avoid));
-                if (includesAvoid) return false;
-            }
-
-            // NEW: Plate color filter
-            if (state.selectedPlateColors.length > 0 && item.plateColor) {
-                const colorMapping = {
-                    'Biển trắng': 'white',
-                    'Biển vàng': 'yellow'
-                };
-                const selectedColors = state.selectedPlateColors.map(c => colorMapping[c]);
-                if (!selectedColors.includes(item.plateColor)) {
-                    return false;
-                }
-            }
-
-            // Date filter (for official/results)
-            if ((state.activeTab === 'official' || state.activeTab === 'results') && (state.startDate || state.endDate)) {
-                const auctionTimeString = item.auctionTime?.split(' ')[1];
-                if (auctionTimeString) {
-                    const [day, month, year] = auctionTimeString.split('/').map(Number);
-                    const itemTime = new Date(Date.UTC(year, month - 1, day)).getTime();
-
-                    if (state.startDate) {
-                        const [sYear, sMonth, sDay] = state.startDate.split('-').map(Number);
-                        const startTime = new Date(Date.UTC(sYear, sMonth - 1, sDay)).getTime();
-                        if (itemTime < startTime) return false;
-                    }
-
-                    if (state.endDate) {
-                        const [eYear, eMonth, eDay] = state.endDate.split('-').map(Number);
-                        const endTime = new Date(Date.UTC(eYear, eMonth - 1, eDay)).getTime();
-                        if (itemTime > endTime) return false;
-                    }
-                } else if (state.startDate || state.endDate) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-    }
-
-    // NEW: Get paginated data
-    function getPaginatedData() {
-        const filtered = getFilteredData();
-        const totalItems = filtered.length;
-        const totalPages = Math.ceil(totalItems / state.itemsPerPage);
-
-        // Ensure currentPage is valid
-        if (state.currentPage > totalPages && totalPages > 0) {
-            state.currentPage = totalPages;
-        }
-        if (state.currentPage < 1) {
-            state.currentPage = 1;
-        }
-
-        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
-        const endIndex = startIndex + state.itemsPerPage;
-        const paginatedData = filtered.slice(startIndex, endIndex);
-
-        return {
-            data: paginatedData,
-            totalItems,
-            totalPages,
-            currentPage: state.currentPage,
-            startIndex: startIndex + 1,
-            endIndex: Math.min(endIndex, totalItems)
-        };
-    }
-
-    function createTableHeader() {
-        const thead = createElement('thead', { className: 'bg-[#e5e5e5] text-gray-900 font-bold' });
-        const tr = createElement('tr');
-
-        if (state.activeTab === 'results') {
-            tr.innerHTML = `
-                <th class="px-6 py-4 w-16 text-center">STT</th>
-                <th class="px-6 py-4">Biển số</th>
-                <th class="px-6 py-4">Giá trúng đấu giá</th>
-                <th class="px-6 py-4">Tỉnh, Thành phố</th>
-                <th class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center gap-1">
-                        Thời gian đấu giá
-                        <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
-                    </div>
-                </th>
-                <th class="px-6 py-4">Lựa chọn</th>
-            `;
-        } else {
-            tr.innerHTML = `
-                <th class="px-6 py-4 w-16 text-center">STT</th>
-                <th class="px-6 py-4">Biển số</th>
-                <th class="px-6 py-4">Giá khởi điểm</th>
-                <th class="px-6 py-4">Tỉnh, Thành phố</th>
-                <th class="px-6 py-4">Loại biển</th>
-                ${state.activeTab === 'official' ? `
-                    <th class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center gap-1">
-                            Thời gian đấu giá
-                            <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
-                        </div>
-                    </th>
-                ` : ''}
-                <th class="px-6 py-4">Lựa chọn</th>
-            `;
-        }
-
-        thead.appendChild(tr);
-        return thead;
-    }
-
-    function createTableBody(data) {
-        const tbody = createElement('tbody', { className: 'divide-y divide-gray-100' });
-
-        data.forEach((item, index) => {
-            const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
-
-            if (state.activeTab === 'results') {
-                tr.innerHTML = `
-                    <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-blue-600 cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
-                                ${item.plateNumber}
-                            </span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
-                    <td class="px-6 py-4 text-gray-700 whitespace-nowrap">${item.province}</td>
-                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>
-                    <td class="px-6 py-4"></td>
-                `;
-            } else {
-                const plateBgClass = state.activeTab === 'official'
-                    ? 'bg-[#eecc48] border-[#eecc48] text-gray-900'
-                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-blue-600';
-
-                tr.innerHTML = `
-                    <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
-                                ${item.plateNumber}
-                            </span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
-                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
-                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
-                    ${state.activeTab === 'official' ? `<td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>` : ''}
-                    <td class="px-6 py-4">
-                        <a href="#" class="text-blue-600 font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
-                    </td>
-                `;
-            }
-
-            // Add click handler for plate number
-            const plateNumber = tr.querySelector('[data-plate-number]');
-            if (plateNumber) {
-                plateNumber.addEventListener('click', () => {
-                    plateDetailModal.open({
-                        ...item,
-                        onRegister: () => {
-                            // Open registration modal
-                            registrationModal.open({
-                                auctionId: `car-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
-                                auctionName: `Biển số ${item.plateNumber}`,
-                                auctionType: 'Biển số xe ô tô',
-                                depositAmount: calculateDeposit(item.startPrice),
-                                auctionDate: parseAuctionDate(item.auctionTime)
-                            });
-                        }
-                    });
-                });
-            }
-
-            // Add event listener for registration link
-            const registerLink = tr.querySelector('a[href="#"]');
-            if (registerLink && state.activeTab !== 'results') {
-                registerLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    // Open registration modal with plate data
-                    registrationModal.open({
-                        auctionId: `car-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
-                        auctionName: `Biển số ${item.plateNumber}`,
-                        auctionType: 'Biển số xe ô tô',
-                        depositAmount: calculateDeposit(item.startPrice),
-                        auctionDate: parseAuctionDate(item.auctionTime)
-                    });
-                });
-            }
-
-            tbody.appendChild(tr);
-        });
-
-        return tbody;
-    }
-
     // Update only table without full re-render (for real-time search)
     function updateTableOnly() {
         const tableWrapper = container.querySelector('.overflow-x-auto');
+
         // Reset to page 1 when filters change
         state.currentPage = 1;
 
@@ -775,7 +768,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
             oldPagination.parentNode.replaceChild(newPagination, oldPagination);
         }
 
-        // Reinitialize icons
+        // Re-initialize Lucide icons
         if (window.lucide) {
             window.lucide.createIcons();
         }

@@ -3,13 +3,13 @@
  * Displays comprehensive asset information with registration functionality
  */
 
-import { createElement, createFromHTML } from '../utils/dom.js';
-import { PageBanner } from './shared/PageBanner.js';
-import { AuctionRegistrationModal } from './shared/AuctionRegistrationModal.js';
-import { isRegisteredForAuction } from '../utils/auctionRegistration.js';
-import { getAuthState } from '../utils/auth.js';
-import toast from '../utils/toast.js';
-import { showLightbox } from './shared/Lightbox.js';
+import { createElement, createFromHTML } from '../../../utils/dom.js';
+import { PageBanner } from '../../shared/PageBanner.js';
+import { AuctionRegistrationModal } from '../../shared/AuctionRegistrationModal.js';
+import { isRegisteredForAuction } from '../../../utils/auctionRegistration.js';
+import { getAuthState } from '../../../utils/auth.js';
+import toast from '../../../utils/toast.js';
+import { showLightbox } from '../../shared/Lightbox.js';
 
 /**
  * Asset Detail Page Component
