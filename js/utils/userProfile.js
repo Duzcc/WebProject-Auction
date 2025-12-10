@@ -1,53 +1,132 @@
 /**
  * User Profile Management
- * Manages user profile data and settings
+ * Manages user profile data stored per-user in localStorage
  */
 
-import { userStore } from './state.js';
 import { getAuthState } from './auth.js';
+
+/**
+ * Get all users from localStorage
+ * @returns {Array} Array of users
+ */
+function getAllUsers() {
+    try {
+        const users = localStorage.getItem('vpa_users');
+        return users ? JSON.parse(users) : [];
+    } catch (error) {
+        console.error('Error getting users:', error);
+        return [];
+    }
+}
+
+/**
+ * Save users to localStorage
+ * @param {Array} users - Users array
+ */
+function saveAllUsers(users) {
+    try {
+        localStorage.setItem('vpa_users', JSON.stringify(users));
+    } catch (error) {
+        console.error('Error saving users:', error);
+    }
+}
+
+/**
+ * Get current user from vpa_users
+ * @returns {Object|null} User object
+ */
+function getCurrentUser() {
+    const authState = getAuthState();
+    if (!authState.isAuthenticated || !authState.user?.id) {
+        return null;
+    }
+
+    const users = getAllUsers();
+    return users.find(u => u.id === authState.user.id) || null;
+}
+
+/**
+ * Update current user in vpa_users
+ * @param {Object} updates - Updates to apply
+ */
+function updateCurrentUser(updates) {
+    const authState = getAuthState();
+    if (!authState.isAuthenticated || !authState.user?.id) {
+        console.error('No authenticated user');
+        return;
+    }
+
+    const users = getAllUsers();
+    const userIndex = users.findIndex(u => u.id === authState.user.id);
+
+    if (userIndex !== -1) {
+        users[userIndex] = {
+            ...users[userIndex],
+            ...updates
+        };
+        saveAllUsers(users);
+    }
+}
 
 /**
  * Get user profile
  * @returns {Object|null} User profile
  */
 export function getUserProfile() {
-    return userStore.get('profile');
+    const user = getCurrentUser();
+    if (!user) return null;
+
+    return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        fullName: user.fullName || user.name,
+        phone: user.phone || '',
+        address: user.address || '',
+        city: user.city || '',
+        avatar: user.avatar || null,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt || user.createdAt
+    };
 }
 
 /**
  * Update user profile
  * @param {Object} updates - Profile updates
+ * @returns {boolean} Success status
  */
 export function updateUserProfile(updates) {
-    const currentProfile = getUserProfile() || {};
-    const authState = getAuthState();
+    try {
+        const authState = getAuthState();
+        if (!authState.isAuthenticated) {
+            throw new Error('User not authenticated');
+        }
 
-    userStore.set('profile', {
-        ...currentProfile,
-        ...updates,
-        email: authState.user?.email || currentProfile.email,
-        updatedAt: new Date().toISOString()
-    });
+        // Update user in vpa_users
+        updateCurrentUser({
+            fullName: updates.fullName || updates.name,
+            name: updates.fullName || updates.name, // Keep name in sync
+            phone: updates.phone,
+            address: updates.address,
+            city: updates.city,
+            avatar: updates.avatar,
+            updatedAt: new Date().toISOString()
+        });
+
+        console.log('✅ Profile updated successfully');
+        return true;
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        return false;
+    }
 }
 
 /**
- * Initialize user profile from auth
+ * Initialize user profile (no longer needed - data comes from vpa_users)
  */
 export function initUserProfile() {
-    const authState = getAuthState();
-
-    if (authState.isAuthenticated && !getUserProfile()) {
-        userStore.set('profile', {
-            email: authState.user.email,
-            fullName: authState.user.fullName || '',
-            phone: '',
-            address: '',
-            city: '',
-            avatar: authState.user.avatar || null,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        });
-    }
+    // Profile is created during registration
+    // No need to init separately
 }
 
 /**
@@ -84,11 +163,12 @@ export function uploadAvatar(file) {
 }
 
 /**
- * Get user settings
+ * Get user settings (placeholder - can be added to user object later)
  * @returns {Object} User settings
  */
 export function getUserSettings() {
-    return userStore.get('settings') || {
+    const user = getCurrentUser();
+    return user?.settings || {
         notifications: true,
         emailUpdates: true,
         language: 'vi'
@@ -101,9 +181,11 @@ export function getUserSettings() {
  */
 export function updateUserSettings(updates) {
     const currentSettings = getUserSettings();
-    userStore.set('settings', {
-        ...currentSettings,
-        ...updates
+    updateCurrentUser({
+        settings: {
+            ...currentSettings,
+            ...updates
+        }
     });
 }
 
@@ -113,19 +195,18 @@ export function updateUserSettings(updates) {
  */
 export function getUserActivity() {
     // This would come from auction history, bids, etc.
-    // For now, return empty array
     return [];
 }
 
 /**
- * Subscribe to profile changes
+ * Subscribe to profile changes (simplified - no reactive state)
  * @param {Function} callback - Callback function
  * @returns {Function} Unsubscribe function
  */
 export function subscribeToProfile(callback) {
-    return userStore.subscribe((state) => {
-        callback(state.profile);
-    });
+    // For now, return empty unsubscribe
+    // In future, can implement proper event system
+    return () => { };
 }
 
 export default {

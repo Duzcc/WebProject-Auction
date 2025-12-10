@@ -30,8 +30,29 @@ export function CheckoutPage() {
 
     const mainContent = createElement('div', { className: 'container mx-auto px-4 py-8 md:py-12' });
 
-    const items = getCartItems();
-    const total = getCartTotal();
+    // CRITICAL FIX: Read from sessionStorage (selected items from CartPage)
+    // instead of getting ALL cart items  
+    let items = [];
+    let total = 0;
+
+    try {
+        const orderDataStr = sessionStorage.getItem('currentOrder');
+        if (orderDataStr) {
+            const orderData = JSON.parse(orderDataStr);
+            items = orderData.items || [];
+            total = orderData.total || 0;
+            console.log('📦 Loaded order from sessionStorage:', items.length, 'items');
+        } else {
+            // Fallback: if no sessionStorage, redirect back to cart
+            console.warn('⚠️ No order data in sessionStorage, redirecting to cart');
+            window.location.hash = ROUTES.CART;
+            return createElement('div');
+        }
+    } catch (error) {
+        console.error('❌ Error loading order data:', error);
+        window.location.hash = ROUTES.CART;
+        return createElement('div');
+    }
 
     // Empty cart state
     if (items.length === 0) {
@@ -98,6 +119,13 @@ export function CheckoutPage() {
     const leftColumn = createElement('div', { className: 'lg:col-span-2 space-y-6' });
 
     // User Info Card with Glassmorphism
+    // Get user info from cart items (registration includes full user data)
+    const firstItem = items[0];
+    const userName = firstItem?.fullName || authState.user.fullName || authState.user.email;
+    const userEmail = firstItem?.email || authState.user.email;
+    const userAddress = firstItem?.fullAddress || firstItem?.address || 'Chưa cập nhật địa chỉ';
+    const userPhone = firstItem?.phone || 'Chưa cập nhật';
+
     const userCard = createElement('div', {
         className: 'bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 md:p-8'
     });
@@ -112,13 +140,25 @@ export function CheckoutPage() {
             <div class="space-y-2">
                 <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Họ và tên</label>
                 <div class="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
-                    <p class="font-bold text-gray-900 dark:text-white">${authState.user.fullName || authState.user.email}</p>
+                    <p class="font-bold text-gray-900 dark:text-white">${userName}</p>
                 </div>
             </div>
             <div class="space-y-2">
                 <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Email</label>
                 <div class="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
-                    <p class="font-bold text-gray-900 dark:text-white">${authState.user.email}</p>
+                    <p class="font-bold text-gray-900 dark:text-white">${userEmail}</p>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Số điện thoại</label>
+                <div class="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <p class="font-bold text-gray-900 dark:text-white">${userPhone}</p>
+                </div>
+            </div>
+            <div class="space-y-2 md:col-span-2">
+                <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Địa chỉ</label>
+                <div class="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <p class="font-bold text-gray-900 dark:text-white">${userAddress}</p>
                 </div>
             </div>
         </div>

@@ -95,7 +95,28 @@ export function PaymentFailurePage() {
         </div>
     `);
 
-    container.appendChild(failureContent);
+    // Event listeners
+    const retryBtn = card.querySelector('#retry-payment-btn');
+    const backBtn = card.querySelector('#back-to-cart-btn');
+
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            // If order data exists, go back to checkout, else go to cart
+            if (orderData && Object.keys(orderData).length > 0) {
+                window.location.hash = '#/checkout';
+            } else {
+                window.location.hash = '#/cart';
+            }
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            window.location.hash = '#/cart';
+        });
+    }
+
+    container.appendChild(card);
 
     // Initialize Lucide icons
     if (window.lucide) {

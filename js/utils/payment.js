@@ -40,6 +40,8 @@ const PAYMENT_DEADLINE_DAYS = 15;
  * @returns {Object} Payment record
  */
 export function createPayment({ auctionId, itemName, winningBid, method }) {
+    console.log('💰 createPayment called with:', { auctionId, itemName, winningBid, method });
+
     const authState = getAuthState();
 
     if (!authState.isAuthenticated) {
@@ -47,7 +49,14 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
         return null;
     }
 
-    const payments = auctionStore.get('payments') || [];
+    let payments = auctionStore.get().payments;
+    console.log('📚 Current payments in store:', payments);
+
+    // Ensure payments is an array
+    if (!payments || !Array.isArray(payments)) {
+        console.warn('Payments store not initialized, creating empty array');
+        payments = [];
+    }
 
     // Check if payment already exists
     const existingPayment = payments.find(
@@ -55,6 +64,7 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
     );
 
     if (existingPayment) {
+        console.log('♻️ Returning existing payment:', existingPayment);
         return existingPayment;
     }
 
@@ -63,11 +73,23 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
     const depositAmount = deposit?.amount || 0;
     const remainingAmount = winningBid - depositAmount;
 
+    // Get user's full name from profile
+    let userName = authState.user.name;
+    try {
+        const users = JSON.parse(localStorage.getItem('vpa_users') || '[]');
+        const currentUser = users.find(u => u.id === authState.user.id);
+        if (currentUser && currentUser.fullName) {
+            userName = currentUser.fullName;
+        }
+    } catch (error) {
+        console.error('Error getting user name:', error);
+    }
+
     const payment = {
         id: `pay_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         auctionId,
         userId: authState.user.email,
-        userName: authState.user.fullName || authState.user.email,
+        userName: userName,
         itemName,
         winningBid,
         depositAmount,
@@ -82,8 +104,11 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
         transactionRef: null
     };
 
+    console.log('➕ Adding new payment:', payment);
     payments.push(payment);
-    auctionStore.set('payments', [...payments]);
+    auctionStore.set({ payments: [...payments] });
+
+    console.log('💾 Payments after save:', auctionStore.get().payments);
 
     // Create notification
     createNotification({
@@ -94,6 +119,7 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
         data: { paymentId: payment.id, auctionId }
     });
 
+    console.log('✅ Payment created successfully');
     return payment;
 }
 
@@ -105,7 +131,7 @@ export function createPayment({ auctionId, itemName, winningBid, method }) {
  * @returns {boolean} Success status
  */
 export function uploadPaymentProof(paymentId, proofData, transactionRef = '') {
-    const payments = auctionStore.get('payments') || [];
+    const payments = auctionStore.get().payments || [];
     const payment = payments.find(p => p.id === paymentId);
 
     if (!payment) {
@@ -123,7 +149,7 @@ export function uploadPaymentProof(paymentId, proofData, transactionRef = '') {
     payment.status = PAYMENT_STATUS.PROCESSING;
     payment.proofUploadedAt = new Date().toISOString();
 
-    auctionStore.set('payments', [...payments]);
+    auctionStore.set({ payments: [...payments] });
 
     toast.success('Đã tải lên minh chứng thanh toán');
 
@@ -150,7 +176,7 @@ export function uploadPaymentProof(paymentId, proofData, transactionRef = '') {
  * @returns {boolean} Success status
  */
 export function verifyPayment(paymentId) {
-    const payments = auctionStore.get('payments') || [];
+    const payments = auctionStore.get().payments || [];
     const payment = payments.find(p => p.id === paymentId);
 
     if (!payment) return false;
@@ -158,7 +184,7 @@ export function verifyPayment(paymentId) {
     payment.status = PAYMENT_STATUS.COMPLETED;
     payment.completedAt = new Date().toISOString();
 
-    auctionStore.set('payments', [...payments]);
+    auctionStore.set({ payments: [...payments] });
 
     toast.success('🎉 Thanh toán thành công!');
 
@@ -180,7 +206,7 @@ export function verifyPayment(paymentId) {
  * @returns {Object|null} Payment record
  */
 export function getPayment(paymentId) {
-    const payments = auctionStore.get('payments') || [];
+    const payments = auctionStore.get().payments || [];
     return payments.find(p => p.id === paymentId) || null;
 }
 
@@ -196,7 +222,7 @@ export function getPaymentForAuction(auctionId, userId = null) {
 
     if (!targetUserId) return null;
 
-    const payments = auctionStore.get('payments') || [];
+    const payments = auctionStore.get().payments || [];
     return payments.find(p => p.auctionId === auctionId && p.userId === targetUserId) || null;
 }
 
@@ -210,7 +236,17 @@ export function getUserPayments(status = null) {
 
     if (!authState.isAuthenticated) return [];
 
-    const payments = auctionStore.get('payments') || [];
+    let payments = auctionStore.get().payments;
+
+    // Ensure payments is an array
+    if (!Array.isArray(payments)) {
+        console.warn('Payments is not an array:', payments);
+        console.warn('🔧 Resetting payments to empty array');
+        // Reset to empty array
+        auctionStore.set({ payments: [] });
+        return [];
+    }
+
     let userPayments = payments.filter(p => p.userId === authState.user.email);
 
     if (status) {
@@ -260,7 +296,7 @@ export function generateInvoice(paymentId) {
 }
 
 /**
- * Download invoice as text
+ * Download invoice as PDF
  * @param {string} paymentId - Payment ID
  */
 export function downloadInvoice(paymentId) {
@@ -268,6 +304,28 @@ export function downloadInvoice(paymentId) {
 
     if (!invoice) return;
 
+    // Dynamically import PDF generator
+    import('./pdfInvoice.js').then(({ downloadPDFInvoice }) => {
+        const success = downloadPDFInvoice(invoice);
+
+        if (success) {
+            toast.success('Đã tải hóa đơn PDF');
+        } else {
+            // Fallback to text invoice if PDF generation fails
+            downloadTextInvoice(invoice);
+        }
+    }).catch(error => {
+        console.error('Failed to load PDF generator:', error);
+        // Fallback to text invoice
+        downloadTextInvoice(invoice);
+    });
+}
+
+/**
+ * Download invoice as text (fallback)
+ * @param {Object} invoice - Invoice data
+ */
+function downloadTextInvoice(invoice) {
     const invoiceText = `
 ╔════════════════════════════════════════════════════════════╗
 ║              HÓA ĐƠN THANH TOÁN ĐẤU GIÁ                   ║
@@ -319,6 +377,56 @@ Cảm ơn quý khách đã sử dụng dịch vụ!
 }
 
 /**
+ * Request refund for completed payment
+ * @param {string} paymentId - Payment ID
+ * @returns {boolean} Success status
+ */
+export function refundPayment(paymentId) {
+    const authState = getAuthState();
+    const payments = auctionStore.get().payments || [];
+    const payment = payments.find(p => p.id === paymentId);
+
+    if (!payment) {
+        toast.error('Không tìm thấy thanh toán');
+        return false;
+    }
+
+    if (payment.userId !== authState.user?.email) {
+        toast.error('Bạn không có quyền hoàn tiền đơn hàng này');
+        return false;
+    }
+
+    if (payment.status !== PAYMENT_STATUS.COMPLETED) {
+        toast.error('Chỉ có thể hoàn tiền cho đơn hàng đã thanh toán');
+        return false;
+    }
+
+    if (payment.status === PAYMENT_STATUS.REFUNDED) {
+        toast.info('Đơn hàng đã được hoàn tiền');
+        return false;
+    }
+
+    // Mark as refunded
+    payment.status = PAYMENT_STATUS.REFUNDED;
+    payment.refundedAt = new Date().toISOString();
+
+    auctionStore.set({ payments: [...payments] });
+
+    toast.success('Yêu cầu hoàn tiền đã được gửi. Tiền sẽ được chuyển về trong 3-5 ngày làm việc');
+
+    // Create notification
+    createNotification({
+        userId: payment.userId,
+        type: 'payment_refunded',
+        title: 'Hoàn tiền thành công',
+        message: `Đã hoàn ${payment.remainingAmount.toLocaleString('vi-VN')} VNĐ cho đơn hàng ${payment.itemName}`,
+        data: { paymentId, auctionId: payment.auctionId }
+    });
+
+    return true;
+}
+
+/**
  * Subscribe to payment changes
  * @param {Function} callback - Callback function
  * @returns {Function} Unsubscribe function
@@ -340,5 +448,6 @@ export default {
     getUserPayments,
     generateInvoice,
     downloadInvoice,
+    refundPayment,
     subscribeToPayments
 };

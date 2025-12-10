@@ -3,7 +3,7 @@
  * Dropdown notification center for header
  */
 
-import { getUserNotifications, getUnreadCount, markAsRead, markAllAsRead, subscribeToNotifications, getNotificationIcon, getNotificationColor } from '../utils/notifications.js';
+import { getUserNotifications, getUnreadCount, markAsRead, markAllAsRead, deleteNotification, subscribeToNotifications, getNotificationIcon, getNotificationColor } from '../utils/notifications.js';
 import { createElement } from '../utils/dom.js';
 
 export function NotificationCenter() {
@@ -51,7 +51,7 @@ export function NotificationCenter() {
                         <p class="text-gray-600 dark:text-gray-400">Không có thông báo mới</p>
                     </div>
                 ` : notifications.map(notif => `
-                    <div class="notification-item p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${notif.read ? 'opacity-60' : ''}" data-id="${notif.id}">
+                    <div class="notification-item p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${notif.read ? 'opacity-60' : ''} relative group" data-id="${notif.id}">
                         <div class="flex gap-3">
                             <div class="flex-shrink-0">
                                 <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
@@ -64,6 +64,9 @@ export function NotificationCenter() {
                                 <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">${formatTime(notif.createdAt)}</p>
                             </div>
                             ${!notif.read ? '<div class="w-2 h-2 bg-[#2563EB] rounded-full flex-shrink-0"></div>' : ''}
+                            <button class="delete-notification absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded" data-notif-id="${notif.id}" title="Xóa thông báo">
+                                <i data-lucide="x" class="w-4 h-4 text-gray-400 hover:text-red-600"></i>
+                            </button>
                         </div>
                     </div>
                 `).join('')}
@@ -78,6 +81,16 @@ export function NotificationCenter() {
                 markAllAsRead();
             });
         }
+
+        // Delete notification handlers
+        dropdown.querySelectorAll('.delete-notification').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const notifId = btn.dataset.notifId;
+                deleteNotification(notifId);
+                renderDropdown(); // Re-render to show update
+            });
+        });
 
         // Individual notification click
         dropdown.querySelectorAll('.notification-item').forEach(item => {

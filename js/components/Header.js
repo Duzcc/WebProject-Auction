@@ -157,47 +157,47 @@ export function Header({ activePage, onNavigate }) {
                                     
                                     <!-- Menu Items -->
                                     <div class="py-2">
-                                        <button data-page="profile" class="w-full px-5 py-3 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors duration-200">
-                                                <i data-lucide="user" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                                        <button data-page="profile" class="w-full px-5 py-3.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3.5 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="user" class="w-4.5 h-4.5 text-blue-600 dark:text-blue-400"></i>
                                             </div>
                                             <div class="flex-1">
-                                                <span class="font-medium">Thông tin tài khoản</span>
-                                                <p class="text-xs text-gray-600 dark:text-gray-300">Xem và chỉnh sửa hồ sơ</p>
+                                                <span class="font-semibold text-gray-900 dark:text-white">Thông tin tài khoản</span>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Xem và chỉnh sửa hồ sơ</p>
                                             </div>
-                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
+                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform duration-200"></i>
                                         </button>
                                         
-                                        <button data-page="auction-history" class="w-full px-5 py-3 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors duration-200">
-                                                <i data-lucide="gavel" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                                        <button data-page="auction-history" class="w-full px-5 py-3.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3.5 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="gavel" class="w-4.5 h-4.5 text-blue-600 dark:text-blue-400"></i>
                                             </div>
                                             <div class="flex-1">
-                                                <span class="font-medium">Lịch sử đấu giá</span>
-                                                <p class="text-xs text-gray-600 dark:text-gray-300">Xem hoạt động đấu giá</p>
+                                                <span class="font-semibold text-gray-900 dark:text-white">Lịch sử đấu giá</span>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Xem hoạt động đấu giá</p>
                                             </div>
-                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
+                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform duration-200"></i>
                                         </button>
                                         
-                                        <button class="w-full px-5 py-3 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-green-50 dark:bg-green-900/30 flex items-center justify-center group-hover:bg-green-100 dark:group-hover:bg-green-900/50 transition-colors duration-200">
-                                                <i data-lucide="settings" class="w-4 h-4 text-green-600 dark:text-green-400"></i>
+                                        <button class="w-full px-5 py-3.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3.5 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-xl bg-green-50 dark:bg-green-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="settings" class="w-4.5 h-4.5 text-green-600 dark:text-green-400"></i>
                                             </div>
                                             <div class="flex-1">
-                                                <span class="font-medium">Cài đặt</span>
-                                                <p class="text-xs text-gray-600 dark:text-gray-300">Tùy chỉnh tài khoản</p>
+                                                <span class="font-semibold text-gray-900 dark:text-white">Cài đặt</span>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Tùy chỉnh tài khoản</p>
                                             </div>
-                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-200"></i>
+                                            <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform duration-200"></i>
                                         </button>
                                     </div>
                                     
                                     <!-- Logout Section -->
-                                    <div class="border-t border-gray-100 dark:border-gray-700 p-2">
-                                        <button id="logout-btn" class="w-full px-5 py-3 text-left text-sm text-red-600 dark:text-red-400 hover:bg-blue-50 dark:hover:bg-red-900/20 rounded-lg flex items-center gap-3 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-red-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-red-900/50 transition-colors duration-200">
-                                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                                    <div class="border-t border-gray-200 dark:border-gray-700 p-2">
+                                        <button id="logout-btn" class="w-full px-5 py-3.5 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl flex items-center gap-3.5 transition-all duration-200 group">
+                                            <div class="w-9 h-9 rounded-xl bg-red-50 dark:bg-red-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="log-out" class="w-4.5 h-4.5 text-red-600 dark:text-red-400"></i>
                                             </div>
-                                            <span class="font-medium">Đăng xuất</span>
+                                            <span class="font-semibold">Đăng xuất</span>
                                         </button>
                                     </div>
                                 </div>

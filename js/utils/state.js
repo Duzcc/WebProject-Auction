@@ -97,6 +97,8 @@ export const cartStore = createPersistentState('vpa-cart', {
 export const auctionStore = createPersistentState('vpa-auctions', {
     registrations: [],
     bids: [],
+    deposits: [],
+    payments: [],
     history: []
 });
 

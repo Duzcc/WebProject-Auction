@@ -153,14 +153,15 @@ export function verifyDeposit(depositId) {
  * @param {string} userId - User ID (optional, uses current user if not provided)
  * @returns {Object|null} Deposit record or null
  */
-export function getDepositStatus(auctionId, userId = null) {
-    const authState = getAuthState();
-    const targetUserId = userId || authState.user?.email;
+export function getDepositStatus(auctionId) {
+    let deposits = auctionStore.get('deposits');
 
-    if (!targetUserId) return null;
+    // Ensure deposits is an array
+    if (!deposits || !Array.isArray(deposits)) {
+        return null;
+    }
 
-    const deposits = auctionStore.get('deposits') || [];
-    return deposits.find(d => d.auctionId === auctionId && d.userId === targetUserId) || null;
+    return deposits.find(d => d.auctionId === auctionId) || null;
 }
 
 /**

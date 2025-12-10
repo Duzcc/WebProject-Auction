@@ -222,6 +222,60 @@ export function getNotificationColor(type) {
     return colors[type] || 'text-gray-600';
 }
 
+/**
+ * Sync notifications from cart items
+ * Creates notifications for unpaid and paid items
+ */
+export function syncCartNotifications() {
+    const authState = getAuthState();
+    if (!authState.isAuthenticated) {
+        return;
+    }
+
+    try {
+        const cart = localStorage.getItem('vpa-cart');
+        if (!cart) return;
+
+        const cartData = JSON.parse(cart);
+        const items = cartData.items || [];
+
+        // Clear old cart notifications
+        const state = notificationStore.get();
+        const notifications = state.items || [];
+        const nonCartNotifs = notifications.filter(n =>
+            n.type !== NOTIFICATION_TYPES.PAYMENT ||
+            n.userId !== authState.user.email
+        );
+
+        // Create notifications for unpaid items
+        const unpaidItems = items.filter(i => !i.paid);
+        unpaidItems.forEach(item => {
+            createNotification({
+                userId: authState.user.email,
+                type: NOTIFICATION_TYPES.PAYMENT,
+                title: 'Yêu cầu thanh toán',
+                message: `Vui lòng thanh toán cho ${item.name}`,
+                data: { itemId: item.id, amount: item.depositAmount }
+            });
+        });
+
+        // Create notifications for paid items (last 5 only)
+        const paidItems = items.filter(i => i.paid).slice(0, 5);
+        paidItems.forEach(item => {
+            createNotification({
+                userId: authState.user.email,
+                type: NOTIFICATION_TYPES.REGISTRATION,
+                title: 'Thanh toán thành công',
+                message: `Đã thanh toán cho ${item.name}`,
+                data: { itemId: item.id, paidAt: item.paidAt }
+            });
+        });
+
+    } catch (error) {
+        console.error('Error syncing cart notifications:', error);
+    }
+}
+
 export default {
     NOTIFICATION_TYPES,
     createNotification,
@@ -233,5 +287,6 @@ export default {
     clearAllNotifications,
     subscribeToNotifications,
     getNotificationIcon,
-    getNotificationColor
+    getNotificationColor,
+    syncCartNotifications
 };

@@ -1,5 +1,6 @@
 import { createElement, createFromHTML } from '../../utils/dom.js';
 import { DepositModal } from './DepositModal.js';
+import { getProvinces, getDistricts, getWards } from '../../data/vietnamAddress.js';
 
 /**
  * AuctionRegistrationModal Component
@@ -190,23 +191,72 @@ export function AuctionRegistrationModal() {
                 </div>
             </div>
 
-            <!-- Address -->
+            <!-- Address Section -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                     Địa chỉ <span class="text-red-500">*</span>
                 </label>
-                <div class="relative">
-                    <i data-lucide="map-pin" class="absolute left-3 top-3 w-5 h-5 text-gray-400"></i>
-                    <textarea 
-                        id="address"
-                        name="address"
+                
+                <!-- Province -->
+                <div class="relative mb-3">
+                    <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="province"
+                        name="province"
                         required
-                        rows="3"
-                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
-                        placeholder="Nhập địa chỉ đầy đủ"
-                    ></textarea>
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white"
+                    >
+                        <option value="">Chọn Tỉnh/Thành phố</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
                 </div>
-                <p class="text-red-500 text-sm mt-1 hidden error-message" id="address-error"></p>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="province-error"></p>
+                
+                <!-- District -->
+                <div class="relative mb-3">
+                    <i data-lucide="map" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="district"
+                        name="district"
+                        required
+                        disabled
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    >
+                        <option value="">Chọn Quận/Huyện</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                </div>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="district-error"></p>
+                
+                <!-- Ward -->
+                <div class="relative mb-3">
+                    <i data-lucide="home" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="ward"
+                        name="ward"
+                        required
+                        disabled
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    >
+                        <option value="">Chọn Phường/Xã</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                </div>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="ward-error"></p>
+                
+                <!-- Specific Address -->
+                <div class="relative">
+                    <i data-lucide="navigation" class="absolute left-3 top-3 w-5 h-5 text-gray-400"></i>
+                    <input 
+                        type="text"
+                        id="specificAddress"
+                        name="specificAddress"
+                        required
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                        placeholder="Số nhà, tên đường (VD: 123 Nguyễn Trãi)"
+                    />
+                </div>
+                <p class="text-red-500 text-sm mt-1 hidden error-message" id="specificAddress-error"></p>
             </div>
         ` : `
             <!-- Organization Name -->
@@ -326,23 +376,72 @@ export function AuctionRegistrationModal() {
                 </div>
             </div>
 
-            <!-- Company Address -->
+            <!-- Company Address Section -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
                     Địa chỉ công ty <span class="text-red-500">*</span>
                 </label>
-                <div class="relative">
-                    <i data-lucide="map-pin" class="absolute left-3 top-3 w-5 h-5 text-gray-400"></i>
-                    <textarea 
-                        id="address"
-                        name="address"
+                
+                <!-- Province -->
+                <div class="relative mb-3">
+                    <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="province"
+                        name="province"
                         required
-                        rows="3"
-                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
-                        placeholder="Nhập địa chỉ công ty"
-                    ></textarea>
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white"
+                    >
+                        <option value="">Chọn Tỉnh/Thành phố</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
                 </div>
-                <p class="text-red-500 text-sm mt-1 hidden error-message" id="address-error"></p>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="province-error"></p>
+                
+                <!-- District -->
+                <div class="relative mb-3">
+                    <i data-lucide="map" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="district"
+                        name="district"
+                        required
+                        disabled
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    >
+                        <option value="">Chọn Quận/Huyện</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                </div>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="district-error"></p>
+                
+                <!-- Ward -->
+                <div class="relative mb-3">
+                    <i data-lucide="home" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <select 
+                        id="ward"
+                        name="ward"
+                        required
+                        disabled
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    >
+                        <option value="">Chọn Phường/Xã</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                </div>
+                <p class="text-red-500 text-sm mt-1 mb-3 hidden error-message" id="ward-error"></p>
+                
+                <!-- Specific Address -->
+                <div class="relative">
+                    <i data-lucide="navigation" class="absolute left-3 top-3 w-5 h-5 text-gray-400"></i>
+                    <input 
+                        type="text"
+                        id="specificAddress"
+                        name="specificAddress"
+                        required
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                        placeholder="Số nhà, tên đường (VD: 123 Trần Hưng Đạo)"
+                    />
+                </div>
+                <p class="text-red-500 text-sm mt-1 hidden error-message" id="specificAddress-error"></p>
             </div>
         `;
 
@@ -447,6 +546,79 @@ export function AuctionRegistrationModal() {
         const form = modalWrapper.querySelector('#registration-form');
         form?.addEventListener('submit', handleSubmit);
 
+        // =============== CASCADE ADDRESS DROPDOWNS ===============
+        const provinceSelect = modalWrapper.querySelector('#province');
+        const districtSelect = modalWrapper.querySelector('#district');
+        const wardSelect = modalWrapper.querySelector('#ward');
+
+        // Populate provinces
+        if (provinceSelect) {
+            const provinces = getProvinces();
+            provinces.forEach(province => {
+                const option = document.createElement('option');
+                option.value = province;
+                option.textContent = province;
+                provinceSelect.appendChild(option);
+            });
+
+            // Province change handler
+            provinceSelect.addEventListener('change', (e) => {
+                const selectedProvince = e.target.value;
+
+                // Reset district and ward
+                districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                districtSelect.disabled = true;
+                wardSelect.disabled = true;
+
+                if (selectedProvince) {
+                    // Populate districts
+                    const districts = getDistricts(selectedProvince);
+                    districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        districtSelect.appendChild(option);
+                    });
+                    districtSelect.disabled = false;
+                }
+
+                // Re-initialize icons after DOM changes
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            });
+        }
+
+        // District change handler
+        if (districtSelect) {
+            districtSelect.addEventListener('change', (e) => {
+                const selectedProvince = provinceSelect.value;
+                const selectedDistrict = e.target.value;
+
+                // Reset ward
+                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                wardSelect.disabled = true;
+
+                if (selectedProvince && selectedDistrict) {
+                    // Populate wards
+                    const wards = getWards(selectedProvince, selectedDistrict);
+                    wards.forEach(ward => {
+                        const option = document.createElement('option');
+                        option.value = ward;
+                        option.textContent = ward;
+                        wardSelect.appendChild(option);
+                    });
+                    wardSelect.disabled = false;
+                }
+
+                // Re-initialize icons
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            });
+        }
+
         // Auto-focus first input
         const firstInput = modalWrapper.querySelector('input[type="text"], input[type="email"], input[type="tel"]');
         firstInput?.focus();
@@ -503,9 +675,9 @@ export function AuctionRegistrationModal() {
         }
 
         // Common validations
-        // Validate phone
+        // Validate phone (Vietnam format: starts with 03, 05, 07, 08, 09 followed by 8 digits)
         if (!data.phone || !/^(0[3|5|7|8|9])+([0-9]{8})$/.test(data.phone)) {
-            showError('phone', 'Số điện thoại không hợp lệ');
+            showError('phone', 'Số điện thoại không hợp lệ (VD: 0901234567)');
             hasErrors = true;
         }
 
@@ -515,9 +687,24 @@ export function AuctionRegistrationModal() {
             hasErrors = true;
         }
 
-        // Validate address
-        if (!data.address || data.address.trim().length < 10) {
-            showError('address', 'Địa chỉ phải có ít nhất 10 ký tự');
+        // Validate address (NEW: cascade dropdowns)
+        if (!data.province || data.province === '') {
+            showError('province', 'Vui lòng chọn Tỉnh/Thành phố');
+            hasErrors = true;
+        }
+
+        if (!data.district || data.district === '') {
+            showError('district', 'Vui lòng chọn Quận/Huyện');
+            hasErrors = true;
+        }
+
+        if (!data.ward || data.ward === '') {
+            showError('ward', 'Vui lòng chọn Phường/Xã');
+            hasErrors = true;
+        }
+
+        if (!data.specificAddress || data.specificAddress.trim().length < 5) {
+            showError('specificAddress', 'Địa chỉ cụ thể phải có ít nhất 5 ký tự');
             hasErrors = true;
         }
 
@@ -531,6 +718,12 @@ export function AuctionRegistrationModal() {
             return;
         }
 
+        // Combine full address from cascade fields
+        const fullAddress = `${data.specificAddress}, ${data.ward}, ${data.district}, ${data.province}`;
+
+        // Add combined address to data
+        data.fullAddress = fullAddress;
+
         // Success - log data and show success message
         console.log('Registration data:', { userType, ...data });
 
@@ -542,16 +735,33 @@ export function AuctionRegistrationModal() {
                     id: `reg_${currentAuctionItem.auctionId || Date.now()}`,
                     type: 'registration',
                     auctionId: currentAuctionItem.auctionId,
+                    plateNumber: currentAuctionItem.plateNumber || currentAuctionItem.auctionName, // CRITICAL: Add plateNumber
                     name: currentAuctionItem.auctionName,
                     price: currentAuctionItem.depositAmount,
                     depositAmount: currentAuctionItem.depositAmount,
                     image: '/images/auction-placeholder.jpg',
                     quantity: 1,
                     status: 'pending',
+                    paid: false, // CRITICAL: Mark as unpaid
                     auctionDate: currentAuctionItem.auctionDate,
-                    registeredAt: new Date().toISOString()
+                    auctionSession: currentAuctionItem.session || 'Đăng ký',
+                    registeredAt: new Date().toISOString(),
+                    // CRITICAL: Include full user registration data
+                    fullName: data.fullName || data.companyName,
+                    email: data.email,
+                    phone: data.phone,
+                    idCard: data.idCard,
+                    taxCode: data.taxCode,
+                    // Address fields from cascade dropdowns
+                    province: data.province,
+                    district: data.district,
+                    ward: data.ward,
+                    specificAddress: data.specificAddress,
+                    fullAddress: data.fullAddress, // Combined address
+                    userType: userType // 'individual' or 'organization'
                 };
 
+                console.log('📝 Creating registration item:', registrationItem);
                 addToCart(registrationItem, 1);
             });
         }

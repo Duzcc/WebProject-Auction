@@ -26,6 +26,8 @@ export function addToCart(item, quantity = 1) {
         items = [];
     }
 
+    console.log('🛒 addToCart called:', { item, quantity, currentItems: items.length });
+
     // Check if item already exists
     const existingIndex = items.findIndex(i => i.id === item.id && i.type === item.type);
 
@@ -47,6 +49,18 @@ export function addToCart(item, quantity = 1) {
         items,
         total: calculateTotal(items)
     });
+
+    console.log('✅ Cart updated:', { totalItems: items.length, total: calculateTotal(items) });
+
+    // Force update header cart badge
+    try {
+        const event = new CustomEvent('cart-updated', {
+            detail: { count: items.filter(i => !i.paid).length }
+        });
+        window.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error dispatching cart update event:', error);
+    }
 }
 
 /**
@@ -103,6 +117,60 @@ export function clearCart() {
 }
 
 /**
+ * Mark items as paid
+ * @param {Array} itemIds - Array of item IDs to mark as paid
+ */
+export function markItemsAsPaid(itemIds) {
+    console.log('🏷️ markItemsAsPaid called with IDs:', itemIds);
+
+    const state = cartStore.get();
+    const items = state.items || [];
+
+    console.log('🛒 Current cart items:', items);
+
+    let updatedCount = 0;
+    items.forEach(item => {
+        if (itemIds.includes(item.id)) {
+            item.paid = true;
+            item.paidAt = new Date().toISOString();
+            updatedCount++;
+            console.log(`✓ Marked as paid: ${item.name || item.id}`);
+        }
+    });
+
+    console.log(`📊 Updated ${updatedCount} items as paid`);
+
+    const updatedState = {
+        items: [...items],
+        total: state.total
+    };
+
+    // Update via cartStore
+    cartStore.set(updatedState);
+
+    // CRITICAL: Force synchronous write to localStorage to prevent race conditions
+    // This ensures data is persisted before any redirect happens
+    try {
+        localStorage.setItem('vpa-cart', JSON.stringify(updatedState));
+        console.log('💾 FORCED localStorage write for cart');
+    } catch (error) {
+        console.error('❌ Failed to force write cart to localStorage:', error);
+    }
+
+    console.log('💾 Cart after marking paid:', cartStore.get());
+
+    // Verify persistence
+    try {
+        const verifyCart = JSON.parse(localStorage.getItem('vpa-cart'));
+        const paidCount = (verifyCart.items || []).filter(i => i.paid === true).length;
+        console.log(`✅ VERIFIED: ${paidCount} items marked as paid in localStorage`);
+    } catch (error) {
+        console.error('❌ Failed to verify cart in localStorage:', error);
+    }
+}
+
+
+/**
  * Get cart items
  * @returns {Array} Cart items
  */
@@ -121,11 +189,26 @@ export function getCartTotal() {
 }
 
 /**
- * Get cart item count
- * @param {Array} items - Optional items array, if not provided, gets from store
- * @returns {number} Total number of items
+ * Get cart count (ONLY unpaid items)
+ * @returns {number} Cart count
  */
-export const getCartCount = (items) => {
+export function getCartCount() {
+    const currentCart = cartStore.get();
+    if (!currentCart || !currentCart.items) {
+        return 0;
+    }
+
+    // Only count UNPAID items
+    const unpaidItems = currentCart.items.filter(item => !item.paid);
+    return unpaidItems.length;
+}
+
+/**
+ * Get total item quantity (sum of all quantities, including paid items)
+ * @param {Array} items - Optional items array, if not provided, gets from store
+ * @returns {number} Total quantity of all items
+ */
+export const getTotalItemQuantity = (items) => {
     // If items not provided, get from store
     if (!items) {
         const state = cartStore.get();
@@ -221,6 +304,7 @@ export default {
     removeFromCart,
     updateQuantity,
     clearCart,
+    markItemsAsPaid,
     getCartItems,
     getCartTotal,
     getCartCount,

@@ -5,13 +5,44 @@
 
 import { createElement, createFromHTML } from '../../utils/dom.js';
 import { ROUTES } from '../../utils/navigation.js';
-import { clearCart } from '../../utils/cart.js';
 import { successConfetti } from '../../utils/confetti.js';
+import toast from '../../utils/toast.js';
 
 export function PaymentSuccessPage() {
+    // Get transaction data from sessionStorage before clearing
+    const orderData = sessionStorage.getItem('currentOrder');
+    const transactionDetails = orderData ? JSON.parse(orderData) : null;
+
     // Clear cart and order data immediately
-    clearCart();
+    // clearCart();
     sessionStorage.removeItem('currentOrder');
+
+    // AC 4.1: Show success toast notification with transaction details
+    setTimeout(() => {
+        const transactionId = `ABC-${Date.now().toString().slice(-8)}`;
+        const itemNames = transactionDetails?.items
+            ?.map(item => item.plateNumber || item.name)
+            ?.filter(Boolean)
+            ?.join(', ') || '';
+
+        if (itemNames) {
+            toast.success(
+                `🎉 Thanh toán thành công! Biển số ${itemNames} đã được lưu vào Lịch sử đấu giá và tab Đã thanh toán.`,
+                { duration: 5000 }
+            );
+        } else {
+            toast.success(
+                '🎉 Thanh toán thành công! Đơn hàng đã được lưu vào Lịch sử đấu giá và tab Đã thanh toán.',
+                { duration: 5000 }
+            );
+        }
+
+        // Log email confirmation (AC 4.2 - mock implementation)
+        console.log('📧 Sending payment confirmation email...');
+        console.log(`   To: ${transactionDetails?.userEmail || 'user@example.com'}`);
+        console.log(`   Invoice ID: INV-${transactionId}`);
+        console.log(`   Invoice attachment: INV-${transactionId}.pdf`);
+    }, 500);
 
     // Trigger confetti celebration
     setTimeout(() => {

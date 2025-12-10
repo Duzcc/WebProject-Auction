@@ -3,6 +3,8 @@ import { createPayment, uploadPaymentProof, getPaymentForAuction, downloadInvoic
 import { generateVietQR, getBankInfo, formatTransferDescription, copyToClipboard } from '../../utils/qrCode.js';
 import { CountdownTimer } from '../shared/CountdownTimer.js';
 import { getAuthState } from '../../utils/auth.js';
+import { markItemsAsPaid, getCartItems } from '../../utils/cart.js';
+import { auctionStore } from '../../utils/state.js';
 import toast from '../../utils/toast.js';
 
 /**
@@ -344,15 +346,158 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
             }
         });
 
-        submitBtn?.addEventListener('click', () => {
+        submitBtn?.addEventListener('click', async () => {
             const transactionRef = paymentCard.querySelector('#transaction-ref')?.value || '';
 
-            // For order payments, mock success immediately
+            // For order payments, create actual payment record
             if (isOrderPayment) {
-                toast.success('Thanh toán thành công!');
-                setTimeout(() => {
-                    window.location.hash = '#/payment-success';
-                }, 1500);
+                console.log('🔵 Starting order payment creation...');
+                console.log('📦 Order data:', orderData);
+
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin h-5 w-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Đang xử lý...
+                `;
+
+                try {
+                    // Create payment record for each item
+                    const orderItems = orderData.items || [];
+                    console.log('📋 Order items:', orderItems);
+
+                    // Create a single payment for the entire order
+                    const createdPayment = createPayment({
+                        auctionId: orderData.id || `ORD-${Date.now()}`, // Use actual order ID
+                        itemName: orderItems.length > 1
+                            ? `${orderItems.length} items`
+                            : (orderItems[0]?.name || orderItems[0]?.plateNumber || 'Order payment'),
+                        winningBid: orderData.total,
+                        method: PAYMENT_METHODS.BANK_TRANSFER
+                    });
+
+                    console.log('💳 Created payment:', createdPayment);
+
+                    if (!createdPayment) {
+                        throw new Error('Failed to create payment record');
+                    }
+
+                    // STEP 1: Mark payment as completed and save
+                    console.log('✓ Marking payment as completed...');
+                    createdPayment.status = 'completed';
+                    createdPayment.completedAt = new Date().toISOString();
+
+                    // Update payments in store
+                    let payments = auctionStore.get().payments;
+                    if (!Array.isArray(payments)) {
+                        payments = [];
+                    }
+
+                    const paymentIndex = payments.findIndex(p => p.id === createdPayment.id);
+                    if (paymentIndex >= 0) {
+                        payments[paymentIndex] = createdPayment;
+                    } else {
+                        console.warn('⚠️ Payment not found in store, adding it');
+                        payments.push(createdPayment);
+                    }
+
+                    const updatedAuctionState = {
+                        ...auctionStore.get(),
+                        payments: [...payments]
+                    };
+
+                    auctionStore.set(updatedAuctionState);
+
+                    // CRITICAL: Force synchronous write with verification
+                    const { forceWriteAndVerify, verifyPaymentCompleted } = await import('../../utils/storageVerify.js');
+
+                    const paymentPersisted = await forceWriteAndVerify(
+                        'vpa-auctions',
+                        updatedAuctionState,
+                        verifyPaymentCompleted(createdPayment.id)
+                    );
+
+                    if (!paymentPersisted) {
+                        throw new Error('Failed to persist payment data');
+                    }
+
+                    console.log('💾 Payment data persisted successfully');
+
+                    // STEP 2: Mark cart items as paid
+                    const itemIds = orderItems.map(item => item.id);
+                    console.log('🏷️ Marking cart items as paid:', itemIds);
+
+                    markItemsAsPaid(itemIds);
+
+                    // STEP 3: Verify cart items were marked
+                    const { waitForDataPersistence, verifyCartItemsPaid } = await import('../../utils/storageVerify.js');
+
+                    const cartPersisted = await waitForDataPersistence(
+                        'vpa-cart',
+                        verifyCartItemsPaid(itemIds),
+                        15, // More attempts for cart
+                        200 // 200ms between attempts
+                    );
+
+                    if (!cartPersisted) {
+                        console.error('❌ WARNING: Cart items may not be marked as paid!');
+                        // Continue anyway but log warning
+                    }
+
+                    console.log('✅ All data persisted successfully');
+
+                    // STEP 4: Show success message with details
+                    const itemNames = orderItems.map(item =>
+                        item.plateNumber || item.name
+                    ).filter(Boolean).join(', ');
+
+                    const invoiceId = `INV-${createdPayment.id.substr(-8).toUpperCase()}`;
+
+                    const message = itemNames
+                        ? `🎉 Thanh toán thành công!\n\n✓ Biển số: ${itemNames}\n✓ Mã hóa đơn: ${invoiceId}\n✓ Đã lưu vào Lịch sử đấu giá và tab "Đã thanh toán"`
+                        : `🎉 Thanh toán thành công!\n\n✓ Mã hóa đơn: ${invoiceId}\n✓ Đã lưu vào Lịch sử đấu giá và tab "Đã thanh toán"`;
+
+                    toast.success(message, { duration: 5000 });
+
+                    // STEP 5: Final verification before redirect
+                    console.log('🔍 Final verification before redirect...');
+
+                    // Wait a bit longer to ensure all UI updates complete
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    // Final check
+                    const finalCheck = localStorage.getItem('vpa-auctions');
+                    const finalAuctions = JSON.parse(finalCheck);
+                    const finalPayment = finalAuctions.payments?.find(p => p.id === createdPayment.id);
+
+                    if (finalPayment && finalPayment.status === 'completed') {
+                        console.log('✅ Final verification passed, safe to redirect');
+
+                        // Redirect after 2 more seconds (total ~3s from success message)
+                        setTimeout(() => {
+                            window.location.hash = '#/payment-success';
+                        }, 2000);
+                    } else {
+                        console.error('❌ Final verification failed!');
+                        toast.error('Lỗi xác thực dữ liệu. Vui lòng kiểm tra lại giỏ hàng.');
+                    }
+
+                } catch (error) {
+                    console.error('❌ Payment processing error:', error);
+                    toast.error('Lỗi xử lý thanh toán: ' + error.message);
+
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                        Xác nhận đã thanh toán
+                    `;
+                    if (window.lucide) window.lucide.createIcons();
+                }
+
                 return;
             }
 

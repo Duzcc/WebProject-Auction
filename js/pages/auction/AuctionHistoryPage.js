@@ -7,6 +7,8 @@ import { createElement } from '../../utils/dom.js';
 import { ProfileSidebar } from '../shared/ProfileSidebar.js';
 import { getUserDeposits } from '../../utils/deposit.js';
 import { getUserBids } from '../../utils/bidding.js';
+import { getUserPayments, downloadInvoice } from '../../utils/payment.js';
+import showInvoiceModal from '../../components/InvoiceModal.js';
 
 export function AuctionHistoryPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });
@@ -99,27 +101,55 @@ export function AuctionHistoryPage() {
         // Content section
         const content = createElement('div', { className: 'p-8' });
 
-        // Get real data from deposit and bidding systems
+        // Get real data from deposit, bidding, and payment systems
         const deposits = getUserDeposits();
         const bids = getUserBids();
+        const payments = getUserPayments();
 
-        // Combine all history
+        // Combine all history with enhanced status for winning bids
         const allHistory = [
             ...deposits.map(d => ({
                 id: d.id,
                 plateNumber: d.itemName || 'N/A',
                 type: 'Đăng ký',
+                session: d.session || new Date(d.createdAt).toLocaleDateString('vi-VN'),
                 date: d.createdAt,
                 amount: d.amount,
-                status: d.status
+                status: d.status,
+                itemType: 'deposit'
             })),
-            ...bids.map(b => ({
-                id: b.id,
-                plateNumber: b.itemName || 'N/A',
-                type: 'Đặt giá',
-                date: b.timestamp,
-                amount: b.amount,
-                status: b.isWinning ? 'winning' : 'outbid'
+            ...bids.map(b => {
+                // Check if this winning bid has a payment
+                const hasPayment = payments.some(p =>
+                    p.auctionId === b.auctionId && p.status === 'completed'
+                );
+
+                return {
+                    id: b.id,
+                    auctionId: b.auctionId,
+                    plateNumber: b.itemName || 'N/A',
+                    type: b.isWinning ? 'Trúng thầu' : 'Đặt giá',
+                    session: b.session || new Date(b.timestamp).toLocaleDateString('vi-VN'),
+                    date: b.timestamp,
+                    amount: b.amount,
+                    status: b.isWinning
+                        ? (hasPayment ? 'won_paid' : 'won_unpaid')
+                        : 'outbid',
+                    itemType: 'bid'
+                };
+            }),
+            ...payments.map(p => ({
+                id: p.id,
+                auctionId: p.auctionId,
+                plateNumber: p.itemName || 'N/A',
+                type: 'Biển số',
+                session: p.completedAt
+                    ? new Date(p.completedAt).toLocaleDateString('vi-VN')
+                    : 'Đang xử lý',
+                date: p.createdAt,
+                amount: p.remainingAmount,
+                status: p.status, // 'pending', 'processing', 'completed'
+                itemType: 'payment'
             }))
         ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -200,7 +230,8 @@ export function AuctionHistoryPage() {
                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Biển số</th>
                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Phiên đấu</th>
                 <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Ngày đấu giá</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Biển bán đấu giá</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Trạng thái</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Thao tác</th>
             </tr>
         `;
         table.appendChild(thead);
@@ -213,18 +244,75 @@ export function AuctionHistoryPage() {
 
             const date = new Date(item.date).toLocaleDateString('vi-VN');
 
-            // Status badge
+            // Enhanced status badges
             let statusBadge = '';
-            if (item.status === 'verified') {
+
+            // Check for winning + paid status (AC 3.1, 3.2)
+            if (item.status === 'won_paid') {
+                statusBadge = '<span class="px-3 py-1 bg-green-50 text-green-700 border border-green-200 rounded-full text-xs font-semibold">✓ Đã Trúng & Đã Thanh toán</span>';
+                // Check for winning + unpaid status (AC 3.3)
+            } else if (item.status === 'won_unpaid') {
+                statusBadge = '<span class="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-semibold animate-pulse">⏳ Đã Trúng, Chờ Thanh toán</span>';
+            } else if (item.status === 'verified' || item.status === 'completed') {
                 statusBadge = '<span class="px-3 py-1 bg-green-50 text-green-700 border border-green-200 rounded-full text-xs font-semibold">Đã xác nhận</span>';
             } else if (item.status === 'pending') {
                 statusBadge = '<span class="px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-200 rounded-full text-xs font-semibold">Chờ xác nhận</span>';
+            } else if (item.status === 'processing') {
+                statusBadge = '<span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-semibold">Đang xử lý</span>';
             } else if (item.status === 'winning') {
                 statusBadge = '<span class="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-semibold">Đang dẫn đầu</span>';
             } else if (item.status === 'outbid') {
                 statusBadge = '<span class="px-3 py-1 bg-gray-50 text-gray-600 border border-gray-200 rounded-full text-xs font-semibold">Bị vượt giá</span>';
             } else {
                 statusBadge = '<span class="px-3 py-1 bg-red-50 text-red-700 border border-red-200 rounded-full text-xs font-semibold">Đã từ chối</span>';
+            }
+
+            // Determine action button based on status
+            let actionButton = '-';
+
+            // Won and paid - show invoice detail button (AC 3.2)
+            if (item.status === 'won_paid') {
+                actionButton = `
+                    <button class="action-btn text-blue-600 hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                            data-action="view-invoice" 
+                            data-auction-id="${item.auctionId}">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        Xem chi tiết
+                    </button>
+                `;
+                // Won but not paid - show pay now button (AC 3.3)
+            } else if (item.status === 'won_unpaid') {
+                actionButton = `
+                    <button class="action-btn text-green-600 hover:text-green-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                            data-action="pay-now"
+                            data-auction-id="${item.auctionId}">
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                        Thanh toán ngay
+                    </button>
+                `;
+                // Payment record - show invoice (changed from 'Thanh toán' to 'Biển số')
+            } else if (item.itemType === 'payment') {
+                if (item.status === 'completed') {
+                    actionButton = `
+                        <button class="action-btn text-blue-600 hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                                data-action="view-invoice-direct" 
+                                data-id="${item.id}">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                            Xem chi tiết
+                        </button>
+                    `;
+                } else if (item.status === 'pending' || item.status === 'processing') {
+                    actionButton = `
+                        <button class="action-btn text-green-600 hover:text-green-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                                data-action="pay-now-direct"
+                                data-id="${item.id}">
+                            <i data-lucide="credit-card" class="w-4 h-4"></i>
+                            Thanh toán ngay
+                        </button>
+                    `;
+                }
+            } else if (item.type === 'Đăng ký' && item.status === 'verified') {
+                actionButton = '<span class="text-gray-500 text-sm">Đã xác nhận</span>';
             }
 
             tr.innerHTML = `
@@ -237,8 +325,9 @@ export function AuctionHistoryPage() {
                     </div>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-900">${item.type}</td>
-                <td class="px-6 py-4 text-sm text-gray-900">${date}</td>
+                <td class="px-6 py-4 text-sm text-gray-900">${item.session || date}</td>
                 <td class="px-6 py-4">${statusBadge}</td>
+                <td class="px-6 py-4">${actionButton}</td>
             `;
 
             tbody.appendChild(tr);
@@ -246,6 +335,34 @@ export function AuctionHistoryPage() {
 
         table.appendChild(tbody);
         tableContainer.appendChild(table);
+
+        // Add event listeners for action buttons
+        const actionBtns = tbody.querySelectorAll('.action-btn');
+        actionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+                const id = btn.dataset.id;
+                const auctionId = btn.dataset.auctionId;
+
+                if (action === 'view-invoice') {
+                    // Find payment by auction ID and show invoice modal
+                    const payments = getUserPayments();
+                    const payment = payments.find(p => p.auctionId === auctionId && p.status === 'completed');
+                    if (payment) {
+                        showInvoiceModal(payment.id);
+                    }
+                } else if (action === 'view-invoice-direct') {
+                    // Show invoice modal directly
+                    showInvoiceModal(id);
+                } else if (action === 'pay-now') {
+                    // Navigate to payment page with auction ID
+                    window.location.hash = `#/payment?auctionId=${auctionId}`;
+                } else if (action === 'pay-now-direct') {
+                    // Navigate to payment page with payment ID
+                    window.location.hash = `#/payment?paymentId=${id}`;
+                }
+            });
+        });
 
         // Initialize Lucide icons
         if (window.lucide) {
