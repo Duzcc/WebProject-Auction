@@ -114,36 +114,37 @@ function NewsSection({ newsData = [], notifData = [] }) {
     }
 
     function createNewsRow(item, isNewsTab) {
-        const categoryDisplay = isNewsTab && item.category ? `[${item.category}]` : '';
+        const categoryDisplay = item.category ? `<div class="text-sm text-gray-400 mb-2">${item.category}</div>` : '';
 
         const rowHtml = `
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-blue-200 pb-4 pt-4 group cursor-pointer hover:bg-blue-50/50 transition-colors">
-                <div class="flex items-start gap-3 w-full md:w-3/4">
-                    <i data-lucide="chevrons-right" class="text-[#2563EB] mt-1 flex-shrink-0" style="width: 20px; height: 20px;"></i>
-                    <h3 class="text-gray-800 font-medium text-base group-hover:text-[#2563EB] transition-colors">
-                        <span class="text-gray-500 font-normal text-sm mr-1">${categoryDisplay}</span>
+            <div class="news-row flex gap-6 items-start border-b border-blue-200 pb-6 pt-6 group cursor-pointer hover:bg-blue-50/50 transition-colors">
+                <img src="${item.image || '/images/news/default.jpg'}" alt="${item.title}" class="w-56 h-36 object-cover rounded-md flex-shrink-0" />
+
+                <div class="flex-1">
+                    <h3 class="text-gray-800 font-bold text-lg group-hover:text-[#2563EB] transition-colors">
                         ${item.title}
                     </h3>
+                    ${categoryDisplay}
+                    <p class="text-gray-600 mt-2">${item.excerpt || ''}</p>
                 </div>
-                <div class="flex items-center gap-4 mt-2 md:mt-0 md:w-1/4 md:justify-end">
-                    ${item.source ? `
-                        <span class="text-[#2563EB] border border-[#2563EB] bg-blue-50 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">
-                            ${isNewsTab ? item.source : 'Thông báo'}
-                        </span>
-                    ` : ''}
-                    <span class="text-gray-500 text-xs italic whitespace-nowrap">
-                        (Ngày đăng bài: ${item.date})
-                    </span>
-                </div>
+
+                <div class="flex-shrink-0 text-xs text-gray-400 ml-4 whitespace-nowrap">${item.date}</div>
             </div>
         `;
 
         const row = createFromHTML(rowHtml);
 
-        // Initialize Lucide icons
+        // Initialize Lucide icons (not required here but keep for consistency)
         if (window.lucide) {
             window.lucide.createIcons();
         }
+
+        // Click -> maybe navigate/open detail in future
+        row.addEventListener('click', () => {
+            // Placeholder: scroll to top or open page
+            // For now, just log
+            console.log('Open news item', item.id);
+        });
 
         return row;
     }
