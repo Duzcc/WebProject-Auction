@@ -5,7 +5,66 @@ import { CountdownTimer } from '../shared/CountdownTimer.js';
 import { getAuthState } from '../../utils/auth.js';
 import { markItemsAsPaid, getCartItems } from '../../utils/cart.js';
 import { auctionStore } from '../../utils/state.js';
+import { getPendingOrder, clearPendingOrder } from '../../utils/orderManager.js';
+import { errorTracker } from '../../utils/errorTracker.js';
 import toast from '../../utils/toast.js';
+
+/**
+ * Retry a function with exponential backoff
+ * @param {Function} fn - Async function to retry
+ * @param {number} maxRetries - Maximum number of retries
+ * @param {number} baseDelay - Base delay in ms
+ * @returns {Promise} Result of function
+ */
+async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            return await fn();
+        } catch (error) {
+            if (attempt === maxRetries) {
+                throw error;
+            }
+
+            const delay = Math.min(baseDelay * Math.pow(2, attempt - 1), 5000);
+            console.log(`⚠️ Attempt ${attempt} failed, retrying in ${delay}ms...`);
+
+            await new Promise(resolve => setTimeout(resolve, delay));
+        }
+    }
+}
+
+/**
+ * Show payment progress with steps
+ * @param {HTMLElement} button - Submit button element
+ * @param {number} step - Current step (1-5)
+ * @param {string} stepName - Name of current step
+ */
+function showPaymentProgress(button, step, stepName) {
+    const steps = [
+        'Tạo đơn thanh toán',
+        'Xác thực thông tin',
+        'Lưu dữ liệu',
+        'Cập nhật giỏ hàng',
+        'Hoàn tất'
+    ];
+
+    const progress = Math.round((step / steps.length) * 100);
+
+    button.innerHTML = `
+        <div class="flex items-center gap-3">
+            <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <div class="flex flex-col items-start">
+                <span class="text-sm font-semibold">${stepName}</span>
+                <div class="w-32 h-1 bg-white/30 rounded-full mt-1">
+                    <div class="h-full bg-white rounded-full transition-all duration-300" style="width: ${progress}%"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
 /**
  * Payment Page
@@ -33,11 +92,11 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
     let payment = null;
     let isOrderPayment = false;
 
-    // Handle checkout order payment - get order from session storage
+    // Handle checkout order payment - use orderManager for recovery
     if (!auctionId && !orderData) {
-        const sessionOrder = sessionStorage.getItem('currentOrder');
-        if (sessionOrder) {
-            orderData = JSON.parse(sessionOrder);
+        orderData = getPendingOrder();
+        if (orderData) {
+            console.log('📦 Loaded order for payment:', orderData.id);
         }
     }
 
@@ -354,30 +413,25 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                 console.log('🔵 Starting order payment creation...');
                 console.log('📦 Order data:', orderData);
 
-                // Disable button and show loading state
+                // Disable button and show progress
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = `
-                    <svg class="animate-spin h-5 w-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Đang xử lý...
-                `;
+                showPaymentProgress(submitBtn, 1, 'Tạo đơn thanh toán');
 
                 try {
-                    // Create payment record for each item
+                    // Step 1: Create payment record
                     const orderItems = orderData.items || [];
                     console.log('📋 Order items:', orderItems);
 
-                    // Create a single payment for the entire order
-                    const createdPayment = createPayment({
-                        auctionId: orderData.id || `ORD-${Date.now()}`, // Use actual order ID
-                        itemName: orderItems.length > 1
-                            ? `${orderItems.length} items`
-                            : (orderItems[0]?.name || orderItems[0]?.plateNumber || 'Order payment'),
-                        winningBid: orderData.total,
-                        method: PAYMENT_METHODS.BANK_TRANSFER
-                    });
+                    const createdPayment = await retryWithBackoff(async () => {
+                        return createPayment({
+                            auctionId: orderData.id || `ORD-${Date.now()}`,
+                            itemName: orderItems.length > 1
+                                ? `${orderItems.length} items`
+                                : (orderItems[0]?.name || orderItems[0]?.plateNumber || 'Order payment'),
+                            winningBid: orderData.total,
+                            method: PAYMENT_METHODS.BANK_TRANSFER
+                        });
+                    }, 3, 1000); // 3 retries with 1s base delay
 
                     console.log('💳 Created payment:', createdPayment);
 
@@ -385,8 +439,8 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                         throw new Error('Failed to create payment record');
                     }
 
-                    // STEP 1: Mark payment as completed and save
-                    console.log('✓ Marking payment as completed...');
+                    // Step 2: Validate payment
+                    showPaymentProgress(submitBtn, 2, 'Xác thực thông tin');
                     createdPayment.status = 'completed';
                     createdPayment.completedAt = new Date().toISOString();
 
@@ -411,6 +465,9 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
                     auctionStore.set(updatedAuctionState);
 
+                    // Step 3: Save data
+                    showPaymentProgress(submitBtn, 3, 'Lưu dữ liệu');
+
                     // CRITICAL: Force synchronous write with verification
                     const { forceWriteAndVerify, verifyPaymentCompleted } = await import('../../utils/storageVerify.js');
 
@@ -426,7 +483,9 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
                     console.log('💾 Payment data persisted successfully');
 
-                    // STEP 2: Mark cart items as paid
+                    // Step 4: Update cart
+                    showPaymentProgress(submitBtn, 4, 'Cập nhật giỏ hàng');
+
                     const itemIds = orderItems.map(item => item.id);
                     console.log('🏷️ Marking cart items as paid:', itemIds);
 
@@ -476,10 +535,22 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     if (finalPayment && finalPayment.status === 'completed') {
                         console.log('✅ Final verification passed, safe to redirect');
 
-                        // Redirect after 2 more seconds (total ~3s from success message)
-                        setTimeout(() => {
-                            window.location.hash = '#/payment-success';
-                        }, 2000);
+                        // Step 5: Complete
+                        showPaymentProgress(submitBtn, 5, 'Hoàn tất');
+
+                        toast.success('Thanh toán thành công!');
+
+                        // Clear pending order after successful payment
+                        if (orderData && orderData.id) {
+                            clearPendingOrder(orderData.id);
+                            console.log('🗑️ Cleared pending order:', orderData.id);
+                        }
+
+                        // Short delay to show completion
+                        await new Promise(resolve => setTimeout(resolve, 800));
+
+                        // Redirect to success page
+                        window.location.hash = '#/payment-success';
                     } else {
                         console.error('❌ Final verification failed!');
                         toast.error('Lỗi xác thực dữ liệu. Vui lòng kiểm tra lại giỏ hàng.');
@@ -487,13 +558,18 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
                 } catch (error) {
                     console.error('❌ Payment processing error:', error);
+                    errorTracker.logError('payment.submitOrderPayment', error, {
+                        orderId: orderData?.id,
+                        itemCount: orderData?.items?.length,
+                        total: orderData?.total
+                    });
                     toast.error('Lỗi xử lý thanh toán: ' + error.message);
 
-                    // Re-enable button
+                    // Re-enable button on error
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = `
-                        <i data-lucide="check-circle" class="w-5 h-5"></i>
-                        Xác nhận đã thanh toán
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 inline-block"></i>
+                        Xác nhận thanh toán
                     `;
                     if (window.lucide) window.lucide.createIcons();
                 }

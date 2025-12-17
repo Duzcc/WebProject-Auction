@@ -5,6 +5,9 @@
 
 // Toast container
 let toastContainer = null;
+let toastQueue = [];
+let activeToasts = [];
+const MAX_TOASTS = 3; // Maximum simultaneous toasts
 
 // Toast types with colors
 const TOAST_TYPES = {
@@ -15,12 +18,12 @@ const TOAST_TYPES = {
     },
     error: {
         icon: 'x-circle',
-        bgColor: 'bg-blue-500',
+        bgColor: 'bg-red-500',
         textColor: 'text-white'
     },
     warning: {
         icon: 'alert-triangle',
-        bgColor: 'bg-blue-500',
+        bgColor: 'bg-yellow-500',
         textColor: 'text-white'
     },
     info: {
@@ -43,7 +46,7 @@ function initToastContainer() {
 }
 
 /**
- * Show toast notification
+ * Show toast notification with queue support  
  * @param {Object} options - Toast options
  * @param {string} options.message - Toast message
  * @param {string} options.type - Toast type: 'success', 'error', 'warning', 'info'
@@ -56,6 +59,19 @@ export function showToast({
     duration = 3000,
     dismissible = true
 } = {}) {
+    // If queue is full, add to queue
+    if (activeToasts.length >= MAX_TOASTS) {
+        toastQueue.push({ message, type, duration, dismissible });
+        return null;
+    }
+
+    _displayToast({ message, type, duration, dismissible });
+}
+
+/**
+ * Display toast (internal function)
+ */
+function _displayToast({ message, type, duration, dismissible }) {
     initToastContainer();
 
     const toastConfig = TOAST_TYPES[type] || TOAST_TYPES.info;
@@ -69,6 +85,7 @@ export function showToast({
     `;
 
     toastContainer.appendChild(toast);
+    activeToasts.push(toast);
 
     // Initialize Lucide icons
     if (window.lucide) {
@@ -97,7 +114,7 @@ export function showToast({
 }
 
 /**
- * Remove toast with animation
+ * Remove toast with animation and process queue
  * @param {HTMLElement} toast - Toast element
  */
 function removeToast(toast) {
@@ -106,6 +123,18 @@ function removeToast(toast) {
 
     setTimeout(() => {
         toast.remove();
+
+        // Remove from active toasts
+        const index = activeToasts.indexOf(toast);
+        if (index > -1) {
+            activeToasts.splice(index, 1);
+        }
+
+        // Process queue if there are pending toasts
+        if (toastQueue.length > 0) {
+            const nextToast = toastQueue.shift();
+            _displayToast(nextToast);
+        }
 
         // Remove container if empty
         if (toastContainer && toastContainer.children.length === 0) {

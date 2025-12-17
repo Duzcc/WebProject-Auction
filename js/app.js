@@ -270,6 +270,14 @@ initTheme(); // Initialize theme system
 initBackToTop(); // Initialize back to top button
 initUserProfile(); // Initialize user profile
 
+// Cleanup expired orders on app startup
+import('./utils/orderManager.js').then(({ cleanupExpiredOrders }) => {
+    cleanupExpiredOrders();
+    console.log('✅ Order cleanup completed');
+}).catch(err => {
+    console.warn('⚠️ Could not cleanup expired orders:', err);
+});
+
 // Listen for hash changes
 window.addEventListener('hashchange', handleHashChange);
 console.log('✅ Hash change listener added');

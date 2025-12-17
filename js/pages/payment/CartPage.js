@@ -8,6 +8,8 @@ import { getUserPayments, downloadInvoice } from '../../utils/payment.js';
 import { createElement } from '../../utils/dom.js';
 import { ProfileSidebar } from '../shared/ProfileSidebar.js';
 import showInvoiceModal from '../../components/InvoiceModal.js';
+import { createPendingOrder } from '../../utils/orderManager.js';
+import showConfirmModal from '../../components/ConfirmModal.js';
 
 export function CartPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });
@@ -174,25 +176,10 @@ export function CartPage() {
                     return sum + amount;
                 }, 0);
 
-                // CRITICAL: Clear any old order data first
-                sessionStorage.removeItem('currentOrder');
+                // Use orderManager for robust order creation with backup
+                const orderData = createPendingOrder(selectedCartItems);
 
-                // Package cart items as order data (FRESH)
-                const orderData = {
-                    id: `ORD-${Date.now()}`,
-                    items: selectedCartItems.map(item => ({
-                        ...item,
-                        depositAmount: item.depositAmount || item.price || 0
-                    })),
-                    total,
-                    totalItems: selectedCartItems.length,
-                    createdAt: new Date().toISOString()
-                };
-
-                // Store in session for checkout page
-                sessionStorage.setItem('currentOrder', JSON.stringify(orderData));
-
-                console.log('✅ Created fresh order:', orderData.id, 'with', orderData.totalItems, 'items');
+                console.log('✅ Created order with backup:', orderData.id, 'with', orderData.items.length, 'items');
 
                 // Navigate to checkout
                 window.location.hash = '#/checkout';
@@ -420,11 +407,24 @@ export function CartPage() {
 
             // Event listener for action button
             const actionBtn = tr.querySelector('.action-btn');
-            actionBtn.addEventListener('click', () => {
+            actionBtn.addEventListener('click', async () => {
                 if (activeTab === 'unpaid') {
-                    // Remove item from cart
+                    // Show confirmation modal before delete
                     const itemName = item.name || item.plateNumber;
-                    removeFromCart(item.id, item.type); // FIX: Added type parameter
+                    const confirmed = await showConfirmModal({
+                        title: 'Xóa biển số?',
+                        message: `Bạn có chắc chắn muốn xóa "${itemName}" khỏi giỏ hàng?`,
+                        type: 'danger',
+                        confirmText: 'Xóa',
+                        cancelText: 'Hủy'
+                    });
+
+                    if (!confirmed) {
+                        return; // User cancelled
+                    }
+
+                    // Remove item from cart
+                    removeFromCart(item.id, item.type);
                     selectedItems.delete(item.id);
 
                     // Show success toast
@@ -432,7 +432,7 @@ export function CartPage() {
                         toast.success(`Đã xóa ${itemName} khỏi giỏ hàng`);
                     });
 
-                    // Force re-render after a short delay to ensure localStorage is updated
+                    // Force re-render
                     setTimeout(() => {
                         renderContent();
                     }, 100);

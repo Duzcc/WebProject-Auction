@@ -4,6 +4,9 @@
  */
 
 import { getAuthState } from './auth.js';
+import { validateProfileUpdate, sanitizeProfileInput, profileValidators, fieldNames } from './validation.js';
+import { errorTracker } from './errorTracker.js';
+import toast from './toast.js';
 
 /**
  * Get all users from localStorage
@@ -99,24 +102,41 @@ export function updateUserProfile(updates) {
     try {
         const authState = getAuthState();
         if (!authState.isAuthenticated) {
-            throw new Error('User not authenticated');
+            toast.error('User not authenticated');
+            return false;
+        }
+
+        // Sanitize inputs
+        const sanitized = sanitizeProfileInput(updates);
+
+        // Validate updates
+        const validation = validateProfileUpdate(sanitized);
+        if (!validation.valid) {
+            // Show first error
+            const firstError = Object.values(validation.errors)[0];
+            toast.error(firstError);
+            console.error('❌ Profile validation errors:', validation.errors);
+            return false;
         }
 
         // Update user in vpa_users
         updateCurrentUser({
-            fullName: updates.fullName || updates.name,
-            name: updates.fullName || updates.name, // Keep name in sync
-            phone: updates.phone,
-            address: updates.address,
-            city: updates.city,
-            avatar: updates.avatar,
+            fullName: sanitized.fullName || sanitized.name,
+            name: sanitized.fullName || sanitized.name, // Keep name in sync
+            phone: sanitized.phone,
+            address: sanitized.address,
+            city: sanitized.city,
+            avatar: sanitized.avatar,
             updatedAt: new Date().toISOString()
         });
 
         console.log('✅ Profile updated successfully');
+        toast.success('Cập nhật thông tin thành công');
         return true;
     } catch (error) {
         console.error('Error updating profile:', error);
+        errorTracker.logError('userProfile.updateUserProfile', error, { fields: Object.keys(updates) });
+        toast.error('Lỗi cập nhật thông tin');
         return false;
     }
 }
@@ -209,6 +229,76 @@ export function subscribeToProfile(callback) {
     return () => { };
 }
 
+/**
+ * Get profile completeness score
+ * @returns {Object} { score: 0-100, missing: Array, isComplete: boolean }
+ */
+export function getProfileCompleteness() {
+    const profile = getUserProfile();
+    if (!profile) {
+        return { score: 0, missing: [], isComplete: false };
+    }
+
+    const fields = {
+        fullName: { weight: 20, value: profile.fullName },
+        email: { weight: 20, value: profile.email },
+        phone: { weight: 20, value: profile.phone },
+        address: { weight: 20, value: profile.address },
+        city: { weight: 10, value: profile.city },
+        avatar: { weight: 10, value: profile.avatar }
+    };
+
+    let score = 0;
+    const missing = [];
+
+    Object.entries(fields).forEach(([key, config]) => {
+        if (config.value && String(config.value).trim() !== '') {
+            score += config.weight;
+        } else {
+            missing.push(key);
+        }
+    });
+
+    return {
+        score,
+        missing,
+        isComplete: score === 100
+    };
+}
+
+/**
+ * Validate user info for checkout
+ * @param {Object} user - User object (optional, will get current user if not provided)
+ * @returns {Object} { valid: boolean, missing: Array }
+ */
+export function validateUserInfoForCheckout(user = null) {
+    if (!user) {
+        user = getUserProfile();
+    }
+
+    if (!user) {
+        return {
+            valid: false,
+            missing: ['fullName', 'phone', 'address', 'city']
+        };
+    }
+
+    const requiredFields = ['fullName', 'phone', 'address', 'city'];
+    const missing = [];
+
+    requiredFields.forEach(field => {
+        const value = user[field];
+        if (!value || String(value).trim() === '') {
+            missing.push(field);
+        }
+    });
+
+    return {
+        valid: missing.length === 0,
+        missing
+    };
+}
+
 export default {
     getUserProfile,
     updateUserProfile,
@@ -217,5 +307,7 @@ export default {
     getUserSettings,
     updateUserSettings,
     getUserActivity,
-    subscribeToProfile
+    subscribeToProfile,
+    getProfileCompleteness,
+    validateUserInfoForCheckout
 };

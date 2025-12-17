@@ -7,7 +7,10 @@ import { createElement, createFromHTML } from '../../utils/dom.js';
 import { PageBanner } from '../shared/PageBanner.js';
 import { getCartItems, getCartTotal } from '../../utils/cart.js';
 import { getAuthState } from '../../utils/auth.js';
+import { getUserProfile, validateUserInfoForCheckout } from '../../utils/userProfile.js';
+import { fieldNames } from '../../utils/validation.js';
 import { ROUTES } from '../../utils/navigation.js';
+import { getPendingOrder, createPendingOrder } from '../../utils/orderManager.js';
 import toast from '../../utils/toast.js';
 
 export function CheckoutPage() {
@@ -30,26 +33,32 @@ export function CheckoutPage() {
 
     const mainContent = createElement('div', { className: 'container mx-auto px-4 py-8 md:py-12' });
 
-    // CRITICAL FIX: Read from sessionStorage (selected items from CartPage)
-    // instead of getting ALL cart items  
+    // Use orderManager for order recovery
     let items = [];
     let total = 0;
+    let orderRecovered = false;
 
     try {
-        const orderDataStr = sessionStorage.getItem('currentOrder');
-        if (orderDataStr) {
-            const orderData = JSON.parse(orderDataStr);
+        const orderData = getPendingOrder();
+        if (orderData) {
             items = orderData.items || [];
             total = orderData.total || 0;
-            console.log('📦 Loaded order from sessionStorage:', items.length, 'items');
+            orderRecovered = sessionStorage.getItem('currentOrder') === null; // Was recovered from localStorage
+            console.log('📦 Loaded order:', orderData.id, '- Items:', items.length);
+            if (orderRecovered) {
+                console.log('✅ Order recovered from localStorage backup');
+                toast.success('Đơn hàng đã được khôi phục', { duration: 3000 });
+            }
         } else {
-            // Fallback: if no sessionStorage, redirect back to cart
-            console.warn('⚠️ No order data in sessionStorage, redirecting to cart');
+            // Fallback: if no order, redirect back to cart
+            console.warn('⚠️ No order data found, redirecting to cart');
+            toast.error('Không tìm thấy đơn hàng. Vui lòng thử lại.');
             window.location.hash = ROUTES.CART;
             return createElement('div');
         }
     } catch (error) {
         console.error('❌ Error loading order data:', error);
+        toast.error('Lỗi tải dữ liệu đơn hàng');
         window.location.hash = ROUTES.CART;
         return createElement('div');
     }
@@ -117,6 +126,41 @@ export function CheckoutPage() {
 
     // Left Column - Order Details
     const leftColumn = createElement('div', { className: 'lg:col-span-2 space-y-6' });
+
+    // PROFILE VALIDATION CHECK
+    const currentUser = getUserProfile();
+    const profileValidation = validateUserInfoForCheckout(currentUser);
+    const isProfileComplete = profileValidation.valid;
+
+    // Show warning if profile is incomplete
+    if (!isProfileComplete) {
+        const warningCard = createElement('div', {
+            className: 'bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 rounded-lg shadow-md'
+        });
+        warningCard.innerHTML = `
+            <div class="flex items-start gap-3">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5"></i>
+                <div class="flex-1">
+                    <p class="text-sm font-bold text-yellow-800 dark:text-yellow-200 mb-2">
+                        ⚠️ Vui lòng cập nhật đầy đủ thông tin trước khi thanh toán
+                    </p>
+                    <p class="text-sm text-yellow-700 dark:text-yellow-300 mb-3">
+                        Thiếu: ${profileValidation.missing.map(f => fieldNames[f] || f).join(', ')}
+                    </p>
+                    <button 
+                        onclick="window.location.hash='${ROUTES.PROFILE}'"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-700 dark:hover:bg-yellow-600 text-white font-semibold rounded-lg transition-colors text-sm">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        Cập nhật thông tin
+                    </button>
+                </div>
+            </div>
+        `;
+        leftColumn.appendChild(warningCard);
+
+        // Initialize icons for the warning
+        if (window.lucide) window.lucide.createIcons();
+    }
 
     // User Info Card with Glassmorphism
     // Get user info from cart items (registration includes full user data)
@@ -326,11 +370,11 @@ export function CheckoutPage() {
             </div>
         </div>
         
-        <button id="proceed-payment" class="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 p-[2px] transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 mb-4">
+        <button id="proceed-payment" ${!isProfileComplete ? 'disabled' : ''} class="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 p-[2px] transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 mb-4 ${!isProfileComplete ? 'opacity-50 cursor-not-allowed' : ''}">
             <div class="relative bg-gradient-to-r from-blue-600 to-blue-500 rounded-[10px] py-4 px-6 transition-all duration-300 group-hover:from-blue-500 group-hover:to-blue-500">
                 <span class="relative z-10 flex items-center justify-center gap-3 text-white font-bold text-lg">
                     <i data-lucide="credit-card" class="w-6 h-6"></i>
-                    <span>Tiếp tục thanh toán</span>
+                    <span>${!isProfileComplete ? 'Vui lòng cập nhật thông tin' : 'Tiếp tục thanh toán'}</span>
                     <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
                 </span>
             </div>
@@ -358,6 +402,13 @@ export function CheckoutPage() {
 
     // Event listener for proceed button
     summaryCard.querySelector('#proceed-payment').addEventListener('click', () => {
+        // Check profile completeness before proceeding
+        if (!isProfileComplete) {
+            toast.error('Vui lòng cập nhật đầy đủ thông tin trước khi thanh toán');
+            window.location.hash = ROUTES.PROFILE;
+            return;
+        }
+
         const orderData = {
             items: items.map(item => ({
                 id: item.id,

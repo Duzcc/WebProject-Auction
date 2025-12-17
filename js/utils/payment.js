@@ -5,7 +5,7 @@
 
 import { auctionStore } from './state.js';
 import { getAuthState } from './auth.js';
-import { createNotification } from './notifications.js';
+import { createNotification, NOTIFICATION_TYPES } from './notifications.js';
 import { getDepositStatus } from './deposit.js';
 import toast from './toast.js';
 
@@ -188,12 +188,13 @@ export function verifyPayment(paymentId) {
 
     toast.success('🎉 Thanh toán thành công!');
 
-    // Create notification
+    // Create notification immediately for real-time update
+    const authState = getAuthState();
     createNotification({
         userId: payment.userId,
-        type: 'payment_completed',
-        title: 'Thanh toán hoàn tất',
-        message: `Bạn đã sở hữu "${payment.itemName}". Vui lòng liên hệ để nhận biển số`,
+        type: NOTIFICATION_TYPES.PAYMENT,
+        title: 'Thanh toán thành công',
+        message: `Đã thanh toán cho ${payment.itemName}`,
         data: { paymentId, auctionId: payment.auctionId }
     });
 
@@ -414,13 +415,13 @@ export function refundPayment(paymentId) {
 
     toast.success('Yêu cầu hoàn tiền đã được gửi. Tiền sẽ được chuyển về trong 3-5 ngày làm việc');
 
-    // Create notification
+    // Create notification immediately for real-time update
     createNotification({
         userId: payment.userId,
-        type: 'payment_refunded',
+        type: NOTIFICATION_TYPES.PAYMENT,
         title: 'Hoàn tiền thành công',
-        message: `Đã hoàn ${payment.remainingAmount.toLocaleString('vi-VN')} VNĐ cho đơn hàng ${payment.itemName}`,
-        data: { paymentId, auctionId: payment.auctionId }
+        message: `Đã hoàn ${payment.remainingAmount.toLocaleString('vi-VN')} VNĐ cho ${payment.itemName}`,
+        data: { paymentId, auctionId: payment.auctionId, refunded: true }
     });
 
     return true;

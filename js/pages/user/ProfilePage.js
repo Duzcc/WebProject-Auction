@@ -3,10 +3,11 @@
  * User account information with sidebar navigation
  */
 
-import { getUserProfile, updateUserProfile, uploadAvatar, getUserSettings, updateUserSettings } from '../../utils/userProfile.js';
+import { getUserProfile, updateUserProfile, uploadAvatar, getUserSettings, updateUserSettings, getProfileCompleteness } from '../../utils/userProfile.js';
 import { getAuthState } from '../../utils/auth.js';
 import { createElement } from '../../utils/dom.js';
 import { ProfileSidebar } from '../shared/ProfileSidebar.js';
+import createFormAutoSave from '../../utils/formAutoSave.js';
 import toast from '../../utils/toast.js';
 
 export function ProfilePage() {
@@ -48,11 +49,47 @@ export function ProfilePage() {
     // Main content area
     const mainContent = createElement('div', { className: 'flex-1' });
 
-    // Header section
+    // Header section with completeness indicator
+    const completeness = getProfileCompleteness();
+    const completenessColor = completeness.score < 50 ? 'red' : completeness.score < 80 ? 'yellow' : 'green';
+    const completenessText = completeness.isComplete ? 'Hoàn tất' : `${completeness.score}% hoàn thành`;
+
     const header = createElement('div', { className: 'bg-white border-b border-gray-200 px-8 py-6' });
     header.innerHTML = `
-        <h1 class="text-3xl font-bold text-gray-900">Thông tin tài khoản</h1>
-        <p class="text-gray-600 mt-1">Quản lý thông tin cá nhân và cài đặt tài khoản</p>
+        <div class="flex items-start justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Thông tin tài khoản</h1>
+                <p class="text-gray-600 mt-1">Quản lý thông tin cá nhân và cài đặt tài khoản</p>
+            </div>
+            <div class="flex flex-col items-end">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-sm font-medium text-gray-600">Độ hoàn thiện hồ sơ</span>
+                    <div class="relative w-16 h-16">
+                        <svg class="transform -rotate-90" width="64" height="64">
+                            <circle cx="32" cy="32" r="28" stroke="#e5e7eb" stroke-width="6" fill="none"/>
+                            <circle cx="32" cy="32" r="28" 
+                                stroke="${completenessColor === 'green' ? '#10b981' : completenessColor === 'yellow' ? '#f59e0b' : '#ef4444'}" 
+                                stroke-width="6" 
+                                fill="none"
+                                stroke-dasharray="${Math.round(2 * Math.PI * 28)}"
+                                stroke-dashoffset="${Math.round(2 * Math.PI * 28 * (1 - completeness.score / 100))}"
+                                stroke-linecap="round"
+                                class="transition-all duration-1000"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-sm font-bold text-gray-900">${completeness.score}%</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold 
+                    ${completeness.isComplete ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">
+                    ${completenessText}
+                </span>
+                ${!completeness.isComplete ? `
+                    <p class="text-xs text-gray-500 mt-2 text-right">Thiếu: ${completeness.missing.length} trường</p>
+                ` : ''}
+            </div>
+        </div>
     `;
     mainContent.appendChild(header);
 
@@ -89,28 +126,40 @@ export function ProfilePage() {
                 <form id="profile-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">Họ và tên</label>
-                            <input type="text" name="fullName" value="${profile.fullName || ''}" 
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-900 mb-2">Số điện thoại</label>
-                            <input type="tel" name="phone" value="${profile.phone || ''}" 
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                        </div>
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            Họ và tên <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="fullName" value="${profile.fullName || ''}" 
+                               class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                               placeholder="Nhập họ và tên đầy đủ">
                     </div>
-                    
                     <div>
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Địa chỉ</label>
-                        <input type="text" name="address" value="${profile.address || ''}" 
-                               class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                        <label class="block text-sm font-semibold text-gray-900 mb-2">
+                            Số điện thoại <span class="text-red-500">*</span>
+                        </label>
+                        <input type="tel" name="phone" value="${profile.phone || ''}" 
+                               class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                               placeholder="VD: 0912345678">
                     </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-900 mb-2">Thành phố</label>
-                        <input type="text" name="city" value="${profile.city || ''}" 
-                               class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
-                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-900 mb-2">
+                        Địa chỉ <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="address" value="${profile.address || ''}" 
+                           class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                           placeholder="Số nhà, tên đường, phường/xã">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-900 mb-2">
+                        Thành phố <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="city" value="${profile.city || ''}" 
+                           class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                           placeholder="VD: Hồ Chí Minh, Hà Nội">
+                </div>
                     
                     <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
                         <button type="button" id="cancel-btn" class="px-6 py-2.5 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors">
@@ -172,8 +221,39 @@ export function ProfilePage() {
         }
     });
 
-    // Form submit handler
+    // Profile form submission
     const form = content.querySelector('#profile-form');
+
+    // Initialize auto-save
+    const autoSave = createFormAutoSave(form, 'vpa-profile-draft', {
+        debounceMs: 1500,
+        onSave: () => {
+            // Show subtle save indicator
+            const saveIndicator = content.querySelector('#save-indicator');
+            if (saveIndicator) {
+                saveIndicator.textContent = '✓ Đã lưu bản nháp';
+                saveIndicator.className = 'text-xs text-green-600 mt-1';
+            }
+        },
+        onRestore: (data) => {
+            // Silent restore - no need for toast
+        }
+    });
+
+    // Try to restore draft on load
+    autoSave.restore();
+
+    // Add save indicator below submit button
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        const indicator = createElement('div', {
+            id: 'save-indicator',
+            className: 'text-xs text-gray-400 mt-1 text-center'
+        });
+        indicator.textContent = 'Tự động lưu khi thay đổi';
+        submitBtn.parentElement.appendChild(indicator);
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -185,19 +265,27 @@ export function ProfilePage() {
             city: formData.get('city')
         };
 
-        updateUserProfile(updates);
-        toast.success('Đã cập nhật thông tin cá nhân');
+        const success = updateUserProfile(updates);
+        if (success) {
+            // Clear draft after successful save
+            autoSave.clear();
+            const saveIndicator = content.querySelector('#save-indicator');
+            if (saveIndicator) {
+                saveIndicator.textContent = '✓ Đã lưu thành công';
+                saveIndicator.className = 'text-xs text-green-600 mt-1';
+            }
+        }
     });
 
     // Settings toggles
     content.querySelector('#notifications-toggle').addEventListener('change', (e) => {
         updateUserSettings({ notifications: e.target.checked });
-        toast.info('Đã cập nhật cài đặt');
+        // Silent update - no toast needed
     });
 
     content.querySelector('#email-toggle').addEventListener('change', (e) => {
         updateUserSettings({ emailUpdates: e.target.checked });
-        toast.info('Đã cập nhật cài đặt');
+        // Silent update - no toast needed
     });
 
     // Initialize Lucide icons

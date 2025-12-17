@@ -5,6 +5,8 @@
 
 import { cartStore } from './state.js';
 import toast from './toast.js';
+import { validateCartItem } from './validation.js';
+import { errorTracker } from './errorTracker.js';
 
 /**
  * Add item to cart
@@ -15,51 +17,77 @@ import toast from './toast.js';
  * @param {string} item.image - Item image URL
  * @param {string} item.type - Item type (car, motorbike, asset)
  * @param {number} quantity - Quantity to add (default: 1)
+ * @returns {boolean} True if successful, false otherwise
  */
 export function addToCart(item, quantity = 1) {
-    const state = cartStore.get();
-    let items = state.items || [];
-
-    // Ensure items is an array
-    if (!Array.isArray(items)) {
-        console.warn('Cart items is not an array, resetting to empty array:', items);
-        items = [];
-    }
-
-    console.log('🛒 addToCart called:', { item, quantity, currentItems: items.length });
-
-    // Check if item already exists
-    const existingIndex = items.findIndex(i => i.id === item.id && i.type === item.type);
-
-    if (existingIndex >= 0) {
-        // Update quantity
-        items[existingIndex].quantity += quantity;
-        toast.info(`Đã cập nhật số lượng trong giỏ hàng`);
-    } else {
-        // Add new item
-        items.push({
-            ...item,
-            quantity,
-            addedAt: new Date().toISOString()
-        });
-        toast.success(`Đã thêm "${item.name}" vào giỏ hàng`);
-    }
-
-    cartStore.set({
-        items,
-        total: calculateTotal(items)
-    });
-
-    console.log('✅ Cart updated:', { totalItems: items.length, total: calculateTotal(items) });
-
-    // Force update header cart badge
     try {
-        const event = new CustomEvent('cart-updated', {
-            detail: { count: items.filter(i => !i.paid).length }
+        // Validate item before adding
+        const validation = validateCartItem(item, quantity);
+        if (!validation.valid) {
+            toast.error(validation.error);
+            console.error('❌ Cart validation failed:', validation.error);
+            return false;
+        }
+
+        const state = cartStore.get();
+        let items = state.items || [];
+
+        // Ensure items is an array
+        if (!Array.isArray(items)) {
+            console.warn('Cart items is not an array, resetting to empty array:', items);
+            items = [];
+        }
+
+        console.log('🛒 addToCart called:', { item, quantity, currentItems: items.length });
+
+        // Check if item already exists
+        const existingIndex = items.findIndex(i => i.id === item.id && i.type === item.type);
+
+        if (existingIndex >= 0) {
+            // Update quantity
+            const newQuantity = items[existingIndex].quantity + quantity;
+
+            // Validate new quantity
+            if (newQuantity > 99) {
+                toast.error('Số lượng tối đa là 99');
+                return false;
+            }
+
+            items[existingIndex].quantity = newQuantity;
+            // Silent update - no toast spam
+        } else {
+            // Add new item
+            items.push({
+                ...item,
+                quantity,
+                addedAt: new Date().toISOString()
+            });
+            toast.success(`Đã thêm "${item.name}" vào giỏ hàng`);
+        }
+
+        cartStore.set({
+            items,
+            total: calculateTotal(items)
         });
-        window.dispatchEvent(event);
+
+        console.log('✅ Cart updated:', { totalItems: items.length, total: calculateTotal(items) });
+
+        // Force update header cart badge
+        try {
+            const event = new CustomEvent('cart-updated', {
+                detail: { count: items.filter(i => !i.paid).length }
+            });
+            window.dispatchEvent(event);
+        } catch (error) {
+            console.error('Error dispatching cart update event:', error);
+        }
+
+        return true;
     } catch (error) {
-        console.error('Error dispatching cart update event:', error);
+        console.error('❌ Error adding to cart:', error);
+        errorTracker.logError('cart.addToCart', error, { item: item?.id, quantity });
+        toast.error('Không thể thêm vào giỏ hàng');
+        return false;
     }
 }
 
@@ -171,12 +199,37 @@ export function markItemsAsPaid(itemIds) {
 
 
 /**
- * Get cart items
+ * Get all cart items (filtered for expired items)
  * @returns {Array} Cart items
  */
 export function getCartItems() {
     const state = cartStore.get();
-    return state.items || [];
+    let items = state.items || [];
+
+    // Filter out expired items
+    const now = new Date();
+    const validItems = items.filter(item => {
+        // Only remove UNPAID registration items that are past registration deadline
+        // Do NOT remove if user already paid (they registered successfully)
+        if (item.type === 'registration' && !item.paid && item.registrationDeadline) {
+            const deadline = new Date(item.registrationDeadline);
+            return deadline > now; // Keep if deadline is in future
+        }
+        return true; // Keep all other items (paid, non-registration, etc.)
+    });
+
+    // If items were filtered out, update store
+    if (validItems.length < items.length) {
+        const removedCount = items.length - validItems.length;
+        cartStore.set({
+            items: validItems,
+            total: calculateTotal(validItems)
+        });
+        console.log(`🧹 Cleaned up ${removedCount} expired registration items`);
+        // Silent cleanup - no toast spam
+    }
+
+    return validItems;
 }
 
 /**
