@@ -6,6 +6,7 @@ import { FloatingActions } from './components/FloatingActions.js';
 import { HomePage } from './pages/core/HomePage.js';
 import { AboutPage } from './pages/core/AboutPage.js';
 import { NewsPage } from './pages/core/NewsPage.js';
+import { NewsDetailPage } from './pages/core/NewsDetailPage.js';
 
 // Auction pages
 import { CarAuctionPage } from './pages/auction/cars/CarAuctionPage.js';
@@ -129,7 +130,25 @@ function renderApp() {
             break;
 
         case 'news':
-            render(NewsPage(), main);
+            render(NewsPage({
+                onNavigate: (page, params) => {
+                    currentPage = page;
+                    currentParams = params || null;
+                    renderApp();
+                    window.scrollTo(0, 0);
+                }
+            }), main);
+            break;
+
+        case 'news-detail':
+            // params: news id
+            const newsId = currentParams;
+            render(NewsDetailPage({ id: newsId, onNavigate: (page) => {
+                currentPage = page;
+                currentParams = null;
+                renderApp();
+                window.scrollTo(0, 0);
+            }}), main);
             break;
 
         case 'notifications':

@@ -45,7 +45,7 @@ function PageBanner({ title, subtitle, backgroundImage }) {
 /**
  * NewsSection Component - News and notifications with tabs
  */
-function NewsSection({ newsData = [], notifData = [] }) {
+function NewsSection({ newsData = [], notifData = [], onNavigate } = {}) {
     let activeTab = 'news';
     const container = createElement('div', { className: 'py-16 bg-white' });
 
@@ -101,7 +101,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
         const listContainer = createElement('div', { className: 'space-y-0 pb-4' });
 
         currentData.forEach(item => {
-            const newsRow = createNewsRow(item, activeTab === 'news');
+            const newsRow = createNewsRow(item, activeTab === 'news', onNavigate);
             listContainer.appendChild(newsRow);
         });
 
@@ -113,7 +113,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
         container.appendChild(innerContainer);
     }
 
-    function createNewsRow(item, isNewsTab) {
+    function createNewsRow(item, isNewsTab, onNavigate) {
         const categoryDisplay = item.category ? `<div class="text-sm text-gray-400 mb-2">${item.category}</div>` : '';
 
         const rowHtml = `
@@ -141,9 +141,12 @@ function NewsSection({ newsData = [], notifData = [] }) {
 
         // Click -> maybe navigate/open detail in future
         row.addEventListener('click', () => {
-            // Placeholder: scroll to top or open page
-            // For now, just log
-            console.log('Open news item', item.id);
+            if (typeof onNavigate === 'function') {
+                onNavigate('news-detail', item.id);
+            } else {
+                // Fallback: log
+                console.log('Open news item', item.id);
+            }
         });
 
         return row;
@@ -179,7 +182,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
 // MAIN PAGE EXPORT
 // =============================
 
-export function NewsPage() {
+export function NewsPage({ onNavigate } = {}) {
     const container = createElement('div', { className: 'bg-white min-h-[70vh] pb-16' });
 
     // Add banner
@@ -190,7 +193,7 @@ export function NewsPage() {
     }));
 
     // Add news section
-    container.appendChild(NewsSection({ newsData, notifData }));
+    container.appendChild(NewsSection({ newsData, notifData, onNavigate }));
 
     // Initialize Lucide icons
     if (window.lucide) {
