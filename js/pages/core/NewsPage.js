@@ -79,7 +79,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
 
         tabNav.appendChild(newsTab);
         tabNav.appendChild(notifTab);
-        innerContainer.appendChild(tabNav);
+        innerContainer.appendChild(tabNav); 
 
         // Main Content Title
         const currentData = activeTab === 'news' ? newsData : notifData;
@@ -108,7 +108,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
         innerContainer.appendChild(listContainer);
 
         // Pagination
-        innerContainer.appendChild(createPagination(totalPages, 1));
+        //innerContainer.appendChild(createPagination(totalPages, 1)); ẩn ô số 1,2
 
         container.appendChild(innerContainer);
     }
