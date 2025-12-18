@@ -45,14 +45,14 @@ function PageBanner({ title, subtitle, backgroundImage }) {
 /**
  * NewsSection Component - News and notifications with tabs
  */
-function NewsSection({ newsData = [], notifData = [], onNavigate } = {}) {
-    let activeTab = 'news';
+function NewsSection({ newsData = [], notifData = [], initialTab, onNavigate } = {}) {
+    let activeTab = initialTab || 'news';
     const container = createElement('div', { className: 'py-16 bg-white' });
 
     function render() {
         container.innerHTML = '';
 
-        const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
+            const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
 
         // Tab Navigation
         const tabNav = createElement('div', { className: 'flex gap-1 mb-6 border-b border-gray-200' });
@@ -142,10 +142,13 @@ function NewsSection({ newsData = [], notifData = [], onNavigate } = {}) {
         // Click -> maybe navigate/open detail in future
         row.addEventListener('click', () => {
             if (typeof onNavigate === 'function') {
-                onNavigate('news-detail', item.id);
+                if (isNewsTab) {
+                    onNavigate('news-detail', item.id);
+                } else {
+                    onNavigate('notif-detail', item.id);
+                }
             } else {
-                // Fallback: log
-                console.log('Open news item', item.id);
+                console.log('Open item', item.id);
             }
         });
 
@@ -182,7 +185,7 @@ function NewsSection({ newsData = [], notifData = [], onNavigate } = {}) {
 // MAIN PAGE EXPORT
 // =============================
 
-export function NewsPage({ onNavigate } = {}) {
+export function NewsPage({ onNavigate, initialTab } = {}) {
     const container = createElement('div', { className: 'bg-white min-h-[70vh] pb-16' });
 
     // Add banner
@@ -193,7 +196,7 @@ export function NewsPage({ onNavigate } = {}) {
     }));
 
     // Add news section
-    container.appendChild(NewsSection({ newsData, notifData, onNavigate }));
+    container.appendChild(NewsSection({ newsData, notifData, initialTab, onNavigate }));
 
     // Initialize Lucide icons
     if (window.lucide) {

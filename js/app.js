@@ -7,6 +7,7 @@ import { HomePage } from './pages/core/HomePage.js';
 import { AboutPage } from './pages/core/AboutPage.js';
 import { NewsPage } from './pages/core/NewsPage.js';
 import { NewsDetailPage } from './pages/core/NewsDetailPage.js';
+import { NotificationDetailPage } from './pages/core/NotificationDetailPage.js';
 
 // Auction pages
 import { CarAuctionPage } from './pages/auction/cars/CarAuctionPage.js';
@@ -136,7 +137,8 @@ function renderApp() {
                     currentParams = params || null;
                     renderApp();
                     window.scrollTo(0, 0);
-                }
+                },
+                initialTab: currentParams && currentParams.initialTab ? currentParams.initialTab : undefined
             }), main);
             break;
 
@@ -144,6 +146,16 @@ function renderApp() {
             // params: news id
             const newsId = currentParams;
             render(NewsDetailPage({ id: newsId, onNavigate: (page) => {
+                currentPage = page;
+                currentParams = null;
+                renderApp();
+                window.scrollTo(0, 0);
+            }}), main);
+            break;
+
+        case 'notif-detail':
+            const notifId = currentParams;
+            render(NotificationDetailPage({ id: notifId, onNavigate: (page) => {
                 currentPage = page;
                 currentParams = null;
                 renderApp();
