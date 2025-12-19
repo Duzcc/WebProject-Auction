@@ -46,8 +46,8 @@ export function AuctionRegistrationModal() {
                 <!-- Step Indicator -->
                 <div class="flex items-center gap-2 mb-8">
                     <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
-                        <span class="text-sm font-medium text-blue-600">Chọn loại tài khoản</span>
+                        <div class="w-8 h-8 rounded-full bg-[#AA8C3C] text-white flex items-center justify-center font-bold text-sm">1</div>
+                        <span class="text-sm font-medium text-[#AA8C3C]">Chọn loại tài khoản</span>
                     </div>
                     <div class="flex-1 h-0.5 bg-gray-200"></div>
                     <div class="flex items-center gap-2">
@@ -64,7 +64,7 @@ export function AuctionRegistrationModal() {
                         <button id="select-individual" class="group relative p-6 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition-all duration-300">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-16 h-16 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center mb-4 transition-colors">
-                                    <i data-lucide="user" class="w-8 h-8 text-blue-600"></i>
+                                    <i data-lucide="user" class="w-8 h-8 text-[#AA8C3C]"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-900 mb-2">Cá nhân</h3>
                                 <p class="text-sm text-gray-600">Đăng ký với tư cách cá nhân</p>
@@ -75,7 +75,7 @@ export function AuctionRegistrationModal() {
                         <button id="select-organization" class="group relative p-6 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition-all duration-300">
                             <div class="flex flex-col items-center text-center">
                                 <div class="w-16 h-16 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center mb-4 transition-colors">
-                                    <i data-lucide="building-2" class="w-8 h-8 text-blue-600"></i>
+                                    <i data-lucide="building-2" class="w-8 h-8 text-[#AA8C3C]"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-900 mb-2">Tổ chức</h3>
                                 <p class="text-sm text-gray-600">Đăng ký với tư cách tổ chức/công ty</p>
@@ -463,22 +463,22 @@ export function AuctionRegistrationModal() {
                 <!-- Step Indicator -->
                 <div class="flex items-center gap-2 mb-8">
                     <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+                        <div class="w-8 h-8 rounded-full bg-[#AA8C3C] text-white flex items-center justify-center font-bold text-sm">
                             <i data-lucide="check" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-sm font-medium text-blue-600">Chọn loại tài khoản</span>
+                        <span class="text-sm font-medium text-[#AA8C3C]">Chọn loại tài khoản</span>
                     </div>
-                    <div class="flex-1 h-0.5 bg-blue-600"></div>
+                    <div class="flex-1 h-0.5 bg-[#AA8C3C]"></div>
                     <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</div>
-                        <span class="text-sm font-medium text-blue-600">Thông tin đăng ký</span>
+                        <div class="w-8 h-8 rounded-full bg-[#AA8C3C] text-white flex items-center justify-center font-bold text-sm">2</div>
+                        <span class="text-sm font-medium text-[#AA8C3C]">Thông tin đăng ký</span>
                     </div>
                 </div>
 
                 <!-- User Type Badge -->
                 <div class="mb-6 flex items-center gap-2">
-                    <i data-lucide="${userType === 'individual' ? 'user' : 'building-2'}" class="w-5 h-5 text-blue-600"></i>
-                    <span class="text-sm font-medium text-gray-700">Đăng ký với tư cách: <span class="text-blue-600 font-bold">${userType === 'individual' ? 'Cá nhân' : 'Tổ chức'}</span></span>
+                    <i data-lucide="${userType === 'individual' ? 'user' : 'building-2'}" class="w-5 h-5 text-[#AA8C3C]"></i>
+                    <span class="text-sm font-medium text-gray-700">Đăng ký với tư cách: <span class="text-[#AA8C3C] font-bold">${userType === 'individual' ? 'Cá nhân' : 'Tổ chức'}</span></span>
                 </div>
 
                 <!-- Form -->
@@ -493,10 +493,10 @@ export function AuctionRegistrationModal() {
                                 id="terms"
                                 name="terms"
                                 required
-                                class="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                class="mt-1 w-5 h-5 text-[#AA8C3C] border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                             />
                             <span class="text-sm text-gray-700">
-                                Tôi đồng ý với <a href="#" class="text-blue-600 hover:underline font-medium">điều khoản và điều kiện</a> của VPA và cam kết cung cấp thông tin chính xác.
+                                Tôi đồng ý với <a href="#" class="text-[#AA8C3C] hover:underline font-medium">điều khoản và điều kiện</a> của VPA và cam kết cung cấp thông tin chính xác.
                             </span>
                         </label>
                         <p class="text-red-500 text-sm mt-1 hidden error-message" id="terms-error"></p>
@@ -514,7 +514,7 @@ export function AuctionRegistrationModal() {
                         <button 
                             type="submit"
                             id="submit-btn"
-                            class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105 flex items-center justify-center gap-2"
+                            class="flex-1 px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg transform transition hover:scale-105 flex items-center justify-center gap-2"
                         >
                             <span>Hoàn tất đăng ký</span>
                             <i data-lucide="check-circle" class="w-5 h-5"></i>
@@ -776,7 +776,7 @@ export function AuctionRegistrationModal() {
 
         // Show simple success message
         const toast = createFromHTML(`
-            <div class="fixed top-4 right-4 z-[60] bg-blue-600 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 animate-slide-in-right">
+            <div class="fixed top-4 right-4 z-[60] bg-[#AA8C3C] text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 animate-slide-in-right">
                 <i data-lucide="check-circle" class="w-6 h-6"></i>
                 <div>
                     <p class="font-bold">Đăng ký thành công!</p>

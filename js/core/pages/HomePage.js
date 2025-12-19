@@ -16,19 +16,19 @@ import { AuctionRegistrationModal } from '../../features/auction-shared/componen
  */
 function Hero({ registrationModal }) {
     const html = `
-        <div class="relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 overflow-hidden">
+        <div class="relative w-full h-[500px] md:h-[600px] bg-gradient-to-br from-[#8B7530] via-[#AA8C3C] to-[#7A6328] overflow-hidden">
             <!-- Background decoration -->
             <div class="absolute inset-0 bg-[url('https://picsum.photos/seed/bgpattern/1920/1080')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
             
             <!-- Animated gradient orbs -->
             <div class="absolute top-0 right-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-            <div class="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute top-0 left-0 w-96 h-96 bg-[#C9A961] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
             <div class="absolute bottom-0 left-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
             
             <div class="container mx-auto px-4 h-full flex flex-col md:flex-row items-center relative z-10">
                 <!-- Left Content -->
                 <div class="w-full md:w-1/2 text-white pt-10 md:pt-0">
-                    <div class="inline-block bg-white text-blue-600 px-4 py-1 rounded-full text-sm font-semibold mb-6 shadow-lg border-2 border-blue-200 backdrop-blur-sm">
+                    <div class="inline-block bg-white text-[#AA8C3C] px-4 py-1 rounded-full text-sm font-semibold mb-6 shadow-lg border-2 border-blue-200 backdrop-blur-sm">
                         🏆 Công ty Đấu giá Hợp danh Việt Nam
                     </div>
                     <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">
@@ -38,7 +38,7 @@ function Hero({ registrationModal }) {
                     <p class="text-lg md:text-xl text-blue-50 mb-8 max-w-lg">
                         Nền tảng đấu giá biển số uy tín, minh bạch và hiện đại nhất Việt Nam
                     </p>
-                    <button id="hero-register-btn" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 shadow-2xl transform transition hover:scale-105 hover:shadow-blue-500/50">
+                    <button id="hero-register-btn" class="bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-[#8B7530] hover:to-[#7A6328] text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 shadow-2xl transform transition hover:scale-105 hover:shadow-[#AA8C3C]/50">
                         Bắt đầu ngay <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -49,7 +49,7 @@ function Hero({ registrationModal }) {
                         <!-- Modern card design -->
                         <div class="bg-white/15 backdrop-blur-lg p-6 rounded-2xl border border-white/30 shadow-2xl transform hover:scale-105 transition duration-500">
                             <div class="flex flex-col items-center">
-                                <div class="bg-gradient-to-r from-blue-400 to-blue-400 text-blue-900 font-black text-xl md:text-2xl px-6 py-2 rounded-full mb-4 shadow-lg uppercase tracking-wide">
+                                <div class="bg-gradient-to-r from-[#AA8C3C] to-[#C9A961] text-[#1a1a1a] font-black text-xl md:text-2xl px-6 py-2 rounded-full mb-4 shadow-lg uppercase tracking-wide">
                                     ⚡ Đấu giá HOT
                                 </div>
                                 <span class="text-white font-black text-3xl md:text-4xl drop-shadow-lg uppercase text-center mb-6">Rinh ngay biển đẹp</span>
@@ -192,7 +192,7 @@ function Partners() {
                         <!-- Mock Logos -->
                         <div class="h-12 flex items-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100">
                             <span class="text-2xl font-black text-green-600 tracking-tighter">BIDV</span>
-                            <span class="text-blue-500 ml-1">✦</span>
+                            <span class="text-[#AA8C3C] ml-1">✦</span>
                         </div>
                         
                         <div class="h-16 w-16 rounded flex items-center justify-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100 text-white font-bold" style="background: #F59E0B;">
@@ -200,7 +200,7 @@ function Partners() {
                         </div>
 
                         <div class="h-12 flex items-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100">
-                            <span class="text-2xl font-black text-blue-600">VietinBank</span>
+                            <span class="text-2xl font-black text-[#AA8C3C]">VietinBank</span>
                         </div>
 
                         <div class="h-12 flex items-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100">
@@ -266,19 +266,19 @@ function VpaStats() {
                     
                     <!-- Stat 1 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">1.000 tỷ+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">1.000 tỷ+</p>
                         <p class="text-gray-600">Giá trị tài sản đã đấu giá</p>
                     </div>
 
                     <!-- Stat 2 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">500.000+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">500.000+</p>
                         <p class="text-gray-600">Biển số công bố đấu giá</p>
                     </div>
                     
                     <!-- Stat 3 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">17.000+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">17.000+</p>
                         <p class="text-gray-600">Cuộc đấu giá đã diễn ra</p>
                     </div>
                 </div>
@@ -300,7 +300,7 @@ function PolicySections() {
                     <!-- Policy Card 1 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Chính sách bảo mật</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Chính sách bảo mật
                         </a>
                     </div>
@@ -308,7 +308,7 @@ function PolicySections() {
                     <!-- Policy Card 2 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Điều khoản sử dụng</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Điều khoản sử dụng
                         </a>
                     </div>
@@ -316,7 +316,7 @@ function PolicySections() {
                     <!-- Policy Card 3 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Quy chế hoạt động</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Quy chế hoạt động
                         </a>
                     </div>
@@ -324,7 +324,7 @@ function PolicySections() {
 
                 <div class="border-t border-gray-300 pt-6 mt-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">Hướng dẫn đấu giá</h2>
-                    <p class="text-center text-[#2563EB] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
+                    <p class="text-center text-[#AA8C3C] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
                 </div>
             </div>
         </div>
@@ -350,7 +350,7 @@ export function HomePage({ onNavigate }) {
         <section class="relative flex items-center overflow-hidden" style="min-height: 80vh; background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #3D3D3D 100%);">
             <!-- Subtle gradient overlays -->
             <div class="absolute top-0 right-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-20" style="background: #F59E0B;"></div>
-            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-10" style="background: #2563EB;"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-10" style="background: #AA8C3C;"></div>
             
             <div class="container mx-auto px-4 py-12 md:py-16 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">

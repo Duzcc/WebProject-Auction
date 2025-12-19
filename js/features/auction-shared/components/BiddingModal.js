@@ -62,7 +62,7 @@ export function BiddingModal() {
         modalWrapper.innerHTML = `
             <div class="flex flex-col h-full max-h-[90vh]">
                 <!-- Header -->
-                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white">
                     <div class="flex items-center gap-3">
                         <i data-lucide="gavel" class="w-6 h-6"></i>
                         <h2 class="text-xl font-bold">Đấu giá ngay</h2>
@@ -79,7 +79,7 @@ export function BiddingModal() {
                         <div>
                             <div class="bg-gradient-to-br from-blue-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 p-6 rounded-xl mb-4">
                                 <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                                    <span class="px-4 py-2 bg-white dark:bg-gray-900 rounded-lg shadow-sm border-2 border-blue-200 dark:border-blue-700">
+                                    <span class="px-4 py-2 bg-white dark:bg-gray-900 rounded-lg shadow-sm border-2 border-blue-200 dark:border-[#8B7530]">
                                         ${currentItem.plateNumber}
                                     </span>
                                 </h3>
@@ -99,9 +99,9 @@ export function BiddingModal() {
                             </div>
 
                             <!-- Current Price -->
-                            <div class="bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-700 rounded-xl p-5 mb-4">
+                            <div class="bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-[#8B7530] rounded-xl p-5 mb-4">
                                 <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Giá hiện tại</div>
-                                <div class="text-3xl font-black text-blue-600 dark:text-blue-400">
+                                <div class="text-3xl font-black text-[#AA8C3C] dark:text-[#C9A961]">
                                     ${currentHighest.amount.toLocaleString('vi-VN')} VNĐ
                                 </div>
                                 ${currentHighest.userName ? `
@@ -123,18 +123,18 @@ export function BiddingModal() {
                             </h4>
                             <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
                                 ${bidHistory.length > 0 ? bidHistory.map((bid, index) => `
-                                    <div class="flex items-center justify-between p-3 rounded-lg ${index === 0 ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700' : 'bg-gray-50 dark:bg-gray-700/50'}">
+                                    <div class="flex items-center justify-between p-3 rounded-lg ${index === 0 ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-[#8B7530]' : 'bg-gray-50 dark:bg-gray-700/50'}">
                                         <div>
                                             <div class="font-semibold text-gray-900 dark:text-white text-sm">
                                                 ${bid.userName}
-                                                ${index === 0 ? '<span class="ml-2 text-xs px-2 py-0.5 bg-blue-600 text-white rounded">Cao nhất</span>' : ''}
+                                                ${index === 0 ? '<span class="ml-2 text-xs px-2 py-0.5 bg-[#AA8C3C] text-white rounded">Cao nhất</span>' : ''}
                                             </div>
                                             <div class="text-xs text-gray-500 dark:text-gray-400">
                                                 ${new Date(bid.timestamp).toLocaleString('vi-VN')}
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="font-bold text-blue-600 dark:text-blue-400">
+                                            <div class="font-bold text-[#AA8C3C] dark:text-[#C9A961]">
                                                 ${bid.amount.toLocaleString('vi-VN')}
                                             </div>
                                             <div class="text-xs text-gray-500">VNĐ</div>
@@ -162,7 +162,7 @@ export function BiddingModal() {
                                 </label>
                                 <div class="grid grid-cols-4 gap-2">
                                     ${quickBids.map(qb => `
-                                        <button class="quick-bid-btn px-4 py-2 border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 rounded-lg font-bold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500 transition-all"
+                                        <button class="quick-bid-btn px-4 py-2 border-2 border-[#AA8C3C] dark:border-[#8B7530] text-[#AA8C3C] dark:text-[#C9A961] rounded-lg font-bold hover:bg-[#AA8C3C] hover:text-white dark:hover:bg-[#8B7530] transition-all"
                                                 data-amount="${qb.value}">
                                             ${qb.label}
                                         </button>
@@ -181,11 +181,11 @@ export function BiddingModal() {
                                             type="text" 
                                             id="custom-bid-input"
                                             placeholder="${suggestedBid.toLocaleString('vi-VN')}"
-                                            class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 outline-none transition-all dark:bg-gray-800 dark:text-white"
+                                            class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-[#8B7530] dark:focus:border-[#C9A961] focus:ring-2 focus:ring-blue-200 dark:focus:ring-[#7A6328] outline-none transition-all dark:bg-gray-800 dark:text-white"
                                         />
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm font-medium">VNĐ</span>
                                     </div>
-                                    <button id="place-custom-bid-btn" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center gap-2">
+                                    <button id="place-custom-bid-btn" class="px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-[#8B7530] hover:to-[#7A6328] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center gap-2">
                                         <i data-lucide="zap" class="w-5 h-5"></i>
                                         Đặt giá
                                     </button>
@@ -197,18 +197,18 @@ export function BiddingModal() {
                         ` : `
                             <!-- No Deposit Warning -->
                             <div class="text-center py-6">
-                                <i data-lucide="alert-circle" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                                <i data-lucide="alert-circle" class="w-12 h-12 mx-auto mb-3 text-[#8B7530]"></i>
                                 <p class="text-gray-700 dark:text-gray-300 font-semibold mb-2">Bạn chưa đặt cọc</p>
                                 <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Vui lòng thanh toán đặt cọc để tham gia đấu giá</p>
                                 ${depositStatus && depositStatus.status === 'pending' ? `
-                                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
-                                        <p class="text-sm text-blue-800 dark:text-blue-300">
+                                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-[#7A6328] rounded-lg p-3 mb-4">
+                                        <p class="text-sm text-[#7A6328] dark:text-blue-300">
                                             <i data-lucide="clock" class="w-4 h-4 inline mr-1"></i>
                                             Đang chờ xác nhận thanh toán
                                         </p>
                                     </div>
                                 ` : ''}
-                                <button id="pay-deposit-btn" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105">
+                                <button id="pay-deposit-btn" class="px-6 py-3 bg-gradient-to-r from-[#8B7530] to-[#AA8C3C] hover:from-[#AA8C3C] hover:to-[#8B7530] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105">
                                     <i data-lucide="wallet" class="w-5 h-5 inline mr-2"></i>
                                     Thanh toán đặt cọc ngay
                                 </button>
@@ -218,7 +218,7 @@ export function BiddingModal() {
                         <div class="text-center py-6">
                             <i data-lucide="lock" class="w-12 h-12 mx-auto mb-3 text-gray-400"></i>
                             <p class="text-gray-600 dark:text-gray-400 mb-4">Vui lòng đăng nhập để đặt giá</p>
-                            <button id="login-btn" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105">
+                            <button id="login-btn" class="px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105">
                                 Đăng nhập ngay
                             </button>
                         </div>

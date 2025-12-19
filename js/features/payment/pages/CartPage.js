@@ -4,12 +4,13 @@
  */
 
 import { getCartItems, removeFromCart, subscribeToCart } from '../utils/cart.js';
-import { getUserPayments, downloadInvoice } from '../utils/payment.js';
+import { getUserPayments, downloadInvoice, refundPayment } from '../utils/payment.js';
 import { createElement } from '../../../shared/utils/dom.js';
 import { ProfileSidebar } from '../../../features/user/components/ProfileSidebar.js';
 import showInvoiceModal from '../components/InvoiceModal.js';
 import { createPendingOrder } from '../utils/orderManager.js';
 import showConfirmModal from '../components/ConfirmModal.js';
+import toast from '../../../shared/utils/toast.js';
 
 export function CartPage() {
     const container = createElement('div', { className: 'min-h-screen bg-gray-50' });
@@ -67,7 +68,7 @@ export function CartPage() {
                         id="cart-search"
                         placeholder="Biển số xe cần tìm"
                         value="${searchQuery}"
-                        class="w-64 pl-4 pr-10 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        class="w-64 pl-4 pr-10 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#8B7530] focus:ring-1 focus:ring-[#8B7530]"
                     />
                     <i data-lucide="search" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
                 </div>
@@ -75,9 +76,9 @@ export function CartPage() {
 
             <!-- Tabs with Badges -->
             <div class="flex gap-3 mb-8">
-                <button class="tab-btn group relative px-6 py-3.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'unpaid' ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" data-tab="unpaid">
+                <button class="tab-btn group relative px-6 py-3.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'unpaid' ? 'bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white shadow-lg shadow-blue-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" data-tab="unpaid">
                     <span>Chưa thanh toán</span>
-                    <span class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-bold ${activeTab === 'unpaid' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-700'}" id="unpaid-badge">0</span>
+                    <span class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-bold ${activeTab === 'unpaid' ? 'bg-white/20 text-white' : 'bg-blue-100 text-[#8B7530]'}" id="unpaid-badge">0</span>
                 </button>
                 <button class="tab-btn group relative px-6 py-3.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'paid' ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg shadow-green-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" data-tab="paid">
                     <span>Đã thanh toán</span>
@@ -143,16 +144,16 @@ export function CartPage() {
                         <div class="flex flex-col">
                             <span class="text-sm font-medium text-gray-600 mb-1">Tổng thanh toán</span>
                             <div class="flex items-baseline gap-2">
-                                <span id="checkout-total" class="text-4xl font-black text-blue-700">0 VNĐ</span>
+                                <span id="checkout-total" class="text-4xl font-black text-[#8B7530]">0 VNĐ</span>
                             </div>
                         </div>
                         <div class="flex items-center gap-2 px-3 py-1.5 bg-blue-200 rounded-full">
-                            <i data-lucide="shopping-cart" class="w-4 h-4 text-blue-700"></i>
-                            <span id="checkout-count" class="text-sm font-bold text-blue-700">0</span>
-                            <span class="text-xs text-blue-600">đơn</span>
+                            <i data-lucide="shopping-cart" class="w-4 h-4 text-[#8B7530]"></i>
+                            <span id="checkout-count" class="text-sm font-bold text-[#8B7530]">0</span>
+                            <span class="text-xs text-[#AA8C3C]">đơn</span>
                         </div>
                     </div>
-                    <button id="proceed-checkout-btn" class="group min-w-[280px] bg-gradient-to-r from-blue-600 via-blue-700 to-blue-600 hover:from-blue-700 hover:via-blue-800 hover:to-blue-700 text-white py-4 px-8 rounded-xl font-bold shadow-xl hover:shadow-2xl transform transition-all duration-300 flex items-center justify-center gap-3 opacity-50 cursor-not-allowed" disabled>
+                    <button id="proceed-checkout-btn" class="group min-w-[280px] bg-gradient-to-r from-[#AA8C3C] via-[#8B7530] to-[#AA8C3C] hover:from-[#8B7530] hover:via-[#7A6328] hover:to-[#8B7530] text-white py-4 px-8 rounded-xl font-bold shadow-xl hover:shadow-2xl transform transition-all duration-300 flex items-center justify-center gap-3 opacity-50 cursor-not-allowed" disabled>
                         <i data-lucide="credit-card" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                         <span>Tiến hành thanh toán</span>
                         <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
@@ -339,7 +340,7 @@ export function CartPage() {
         const thead = createElement('thead', { className: 'bg-gradient-to-r from-gray-50 to-gray-100' });
         thead.innerHTML = `
             <tr>
-                ${activeTab === 'unpaid' ? '<th class="px-3 py-3 text-left w-12"><input type="checkbox" id="select-all-checkbox" class="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"></th>' : ''}
+                ${activeTab === 'unpaid' ? '<th class="px-3 py-3 text-left w-12"><input type="checkbox" id="select-all-checkbox" class="w-4 h-4 text-[#AA8C3C] rounded focus:ring-2 focus:ring-[#8B7530]"></th>' : ''}
                 <th class="px-3 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider w-24">Mã đơn</th>
                 <th class="px-3 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider w-32">Biển số</th>
                 <th class="px-3 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider w-24">Loại</th>
@@ -373,7 +374,7 @@ export function CartPage() {
 
             // Add checkbox column for unpaid items
             const checkboxColumn = activeTab === 'unpaid'
-                ? `<td class="px-3 py-3">\n                     <input type="checkbox" \n                            class="item-checkbox w-4 h-4 text-blue-600 rounded" \n                            data-item-id="${item.id}" \n                            ${selectedItems.has(item.id) ? 'checked' : ''}>\n                   </td>`
+                ? `<td class="px-3 py-3">\n                     <input type="checkbox" \n                            class="item-checkbox w-4 h-4 text-[#AA8C3C] rounded" \n                            data-item-id="${item.id}" \n                            ${selectedItems.has(item.id) ? 'checked' : ''}>\n                   </td>`
                 : '';
 
             tr.innerHTML = `
@@ -397,7 +398,7 @@ export function CartPage() {
                             <span>Hoàn tiền</span>
                         </button>
                     ` : `
-                        <button class="action-btn group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800 font-semibold text-xs transition-all duration-200" data-item-id="${item.id}" data-item-type="${item.type}">
+                        <button class="action-btn group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#8B7530] hover:text-[#7A6328] font-semibold text-xs transition-all duration-200" data-item-id="${item.id}" data-item-type="${item.type}">
                             <i data-lucide="eye" class="w-3.5 h-3.5 group-hover:scale-110 transition-transform"></i>
                             <span>Xem</span>
                         </button>
@@ -437,30 +438,46 @@ export function CartPage() {
                         renderContent();
                     }, 100);
                 } else if (activeTab === 'paid' && item.paymentData) {
-                    // Request refund for paid item
-                    import('../../utils/payment.js').then(({ refundPayment }) => {
-                        const success = refundPayment(item.paymentData.id);
-                        if (success) {
-                            // Also update cart item status to refunded
-                            const cartItems = getCartItems();
-                            const cartItem = cartItems.find(ci => ci.id === item.id);
-                            if (cartItem) {
-                                cartItem.status = 'refunded';
-                                cartItem.refundedAt = new Date().toISOString();
+                    // Request refund for paid item - show confirmation first
+                    console.log('🔄 Refund button clicked for:', item.paymentData);
 
-                                // Save updated cart
-                                import('../../utils/cart.js').then(({ default: cartModule }) => {
-                                    const cart = JSON.parse(localStorage.getItem('vpa-cart') || '{"items":[]}');
-                                    cart.items = cartItems;
-                                    localStorage.setItem('vpa-cart', JSON.stringify(cart));
-                                });
-                            }
-
-                            setTimeout(() => {
-                                renderContent(); // Refresh to show in refunded tab
-                            }, 100);
-                        }
+                    const confirmed = await showConfirmModal({
+                        title: 'Xác nhận hoàn tiền',
+                        message: `Bạn có chắc chắn muốn hoàn tiền cho "${item.plateNumber}"?\n\nSố tiền: ${item.price.toLocaleString('vi-VN')} VNĐ\n\nTiền sẽ được hoàn trả trong 3-5 ngày làm việc.`,
+                        type: 'warning',
+                        confirmText: 'Hoàn tiền',
+                        cancelText: 'Hủy'
                     });
+
+                    if (!confirmed) {
+                        console.log('❌ User cancelled refund');
+                        return;
+                    }
+
+                    console.log('✅ User confirmed, calling refundPayment...');
+                    const success = refundPayment(item.paymentData.id);
+
+                    if (success) {
+                        console.log('💰 Refund successful!');
+                        // Also update cart item status to refunded
+                        const cartItems = getCartItems();
+                        const cartItem = cartItems.find(ci => ci.id === item.id);
+                        if (cartItem) {
+                            cartItem.status = 'refunded';
+                            cartItem.refundedAt = new Date().toISOString();
+
+                            // Save updated cart
+                            const cart = JSON.parse(localStorage.getItem('vpa-cart') || '{"items":[]}');
+                            cart.items = cartItems;
+                            localStorage.setItem('vpa-cart', JSON.stringify(cart));
+                        }
+
+                        // Refresh view to show in refunded tab
+                        setTimeout(() => {
+                            console.log('🔄 Refreshing view...');
+                            renderContent();
+                        }, 100);
+                    }
                 } else {
                     // Show details or other action
                     alert('Xem chi tiết đơn hàng: ' + orderCode);

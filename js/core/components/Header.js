@@ -18,7 +18,7 @@ export function Header({ activePage, onNavigate }) {
     let userMenuOpen = false;
 
     const navClass = (page) =>
-        `cursor-pointer transition-colors ${activePage === page ? 'text-blue-600 font-bold' : 'hover:text-blue-600'}`;
+        `cursor-pointer transition-colors ${activePage === page ? 'text-[#AA8C3C] font-bold' : 'hover:text-[#AA8C3C]'}`;
 
     const handleNavClick = (page) => {
         onNavigate(page);
@@ -73,14 +73,14 @@ export function Header({ activePage, onNavigate }) {
     const html = `
         <header class="w-full">
             <!-- Top Bar with Ticker -->
-            <div class="bg-[#1E40AF] text-white text-xs py-2 px-4 flex justify-between items-center">
+            <div class="bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] text-white text-xs py-2 px-4 flex justify-between items-center border-b border-[#AA8C3C]/20">
                 <div class="overflow-hidden w-full max-w-4xl whitespace-nowrap">
                     <div class="inline-block animate-marquee pl-4">
                         33.33, 68AA-888.88, 49AA-888.88, 47AD-444.44, 74H-024.68, 22H-024.68, 29E-444.40, 29E-433.33, 29E-444.47, 29E-411.11.
                     </div>
                 </div>
-                <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-white text-[#1E40AF] px-3 py-1 rounded-full">
-                    <i data-lucide="phone" class="w-3.5 h-3.5" fill="#1E40AF"></i>
+                <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-[#1a1a1a] px-3 py-1 rounded-full shadow-lg">
+                    <i data-lucide="phone" class="w-3.5 h-3.5" fill="#1a1a1a"></i>
                     <span>1900.0555.15</span>
                 </div>
             </div>
@@ -90,10 +90,10 @@ export function Header({ activePage, onNavigate }) {
                 <div class="container mx-auto px-4 py-3 flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center gap-2 cursor-pointer" id="logo">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-red-600 rounded-md flex items-center justify-center transform rotate-45">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#AA8C3C] to-[#8B7530] rounded-md flex items-center justify-center transform rotate-45 shadow-md">
                             <div class="w-6 h-6 bg-white transform -rotate-45" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"></div>
                         </div>
-                        <span class="text-3xl font-bold text-blue-600">VPA</span>
+                        <span class="text-3xl font-bold bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] bg-clip-text text-transparent">VPA</span>
                     </div>
 
                     <!-- Nav Links - Desktop -->
@@ -110,7 +110,7 @@ export function Header({ activePage, onNavigate }) {
                         <input
                             type="text"
                             placeholder="Tìm biển số"
-                            class="border border-gray-300 rounded-full py-1.5 pl-9 pr-4 text-sm focus:outline-none focus:border-[#2563EB] w-48 lg:w-64"
+                            class="border border-gray-300 rounded-full py-1.5 pl-9 pr-4 text-sm focus:outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-[#AA8C3C]/20 w-48 lg:w-64 transition-all duration-300"
                         />
                         <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-4 h-4"></i>
                         
@@ -125,26 +125,26 @@ export function Header({ activePage, onNavigate }) {
                             
                             <!-- Cart Icon with Badge -->
                             <button class="cart-btn relative p-2.5 hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-full transition-all duration-300 group">
-                                <i data-lucide="shopping-cart" class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 transition-colors duration-300"></i>
-                                <span id="cart-badge" class="pointer-events-none absolute -top-1 -right-1 bg-gradient-to-br from-red-500 to-red-700 text-white text-xs font-bold rounded-full w-5 h-5 items-center justify-center hidden shadow-lg animate-pulse">0</span>
+                                <i data-lucide="shopping-cart" class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-[#AA8C3C] transition-colors duration-300"></i>
+                                <span id="cart-badge" class="pointer-events-none absolute -top-1 -right-1 bg-gradient-to-br from-[#AA8C3C] to-[#8B7530] text-white text-xs font-bold rounded-full w-5 h-5 items-center justify-center hidden shadow-lg animate-pulse">0</span>
                             </button>
 
                             <!-- User Menu -->
                             <div class="relative">
-                                <button id="user-menu-toggle" class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-full transition-all duration-300 group border border-transparent hover:border-gray-200 dark:hover:border-gray-600">
+                                <button id="user-menu-toggle" class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-full transition-all duration-300 group border border-transparent hover:border-[#AA8C3C]/30 dark:hover:border-gray-600">
                                     <img src="${authState.user.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(authState.user.fullName || authState.user.email)}" 
-                                         alt="User" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-600 group-hover:ring-[#2563EB] transition-all duration-300 shadow-md">
+                                         alt="User" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-600 group-hover:ring-[#AA8C3C] transition-all duration-300 shadow-md">
                                     <div class="hidden md:flex flex-col items-start max-w-[120px]">
                                         <span class="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">${authState.user.name}</span>
                                         <span class="text-xs text-gray-500 dark:text-gray-400">Tài khoản</span>
                                     </div>
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 transition-all duration-300 group-hover:rotate-180"></i>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-[#AA8C3C] transition-all duration-300 group-hover:rotate-180"></i>
                                 </button>
                                 
                                 <!-- Dropdown Menu -->
                                 <div id="user-menu" class="absolute right-0 mt-3 w-72 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden transform origin-top-right transition-all duration-300 ease-out" style="display: none;">
                                     <!-- User Info Header -->
-                                    <div class="px-5 py-4 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+                                    <div class="px-5 py-4 bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] text-white border-b-2 border-[#AA8C3C]">
                                         <div class="flex items-center gap-3">
                                             <img src="${authState.user.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(authState.user.fullName || authState.user.email)}" 
                                                  alt="User" class="w-12 h-12 rounded-full object-cover ring-2 ring-white/50 shadow-lg">
@@ -158,8 +158,8 @@ export function Header({ activePage, onNavigate }) {
                                     <!-- Menu Items -->
                                     <div class="py-2">
                                         <button data-page="profile" class="w-full px-5 py-3.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3.5 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                                                <i data-lucide="user" class="w-4.5 h-4.5 text-blue-600 dark:text-blue-400"></i>
+                                            <div class="w-9 h-9 rounded-xl bg-[#AA8C3C]/10 dark:bg-[#AA8C3C]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="user" class="w-4.5 h-4.5 text-[#AA8C3C] dark:text-[#AA8C3C]"></i>
                                             </div>
                                             <div class="flex-1">
                                                 <span class="font-semibold text-gray-900 dark:text-white">Thông tin tài khoản</span>
@@ -169,8 +169,8 @@ export function Header({ activePage, onNavigate }) {
                                         </button>
                                         
                                         <button data-page="auction-history" class="w-full px-5 py-3.5 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-3.5 transition-all duration-200 group">
-                                            <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                                                <i data-lucide="gavel" class="w-4.5 h-4.5 text-blue-600 dark:text-blue-400"></i>
+                                            <div class="w-9 h-9 rounded-xl bg-[#AA8C3C]/10 dark:bg-[#AA8C3C]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <i data-lucide="gavel" class="w-4.5 h-4.5 text-[#AA8C3C] dark:text-[#AA8C3C]"></i>
                                             </div>
                                             <div class="flex-1">
                                                 <span class="font-semibold text-gray-900 dark:text-white">Lịch sử đấu giá</span>
@@ -206,7 +206,7 @@ export function Header({ activePage, onNavigate }) {
                             <!-- Login Button -->
                             <button 
                                 id="login-btn"
-                                class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                                class="bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white px-5 py-2 rounded-full text-sm font-semibold hover:shadow-xl hover:shadow-[#AA8C3C]/30 hover:scale-105 transition-all duration-300 flex items-center gap-2"
                             >
                                 <i data-lucide="user" class="w-4 h-4"></i>
                                 <span>Đăng nhập</span>

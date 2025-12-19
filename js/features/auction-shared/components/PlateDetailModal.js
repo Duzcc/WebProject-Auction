@@ -107,7 +107,7 @@ export function PlateDetailModal() {
                     <div class="grid grid-cols-3 gap-3">
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
                             <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Giá khởi điểm</div>
-                            <div class="text-lg font-bold text-blue-600 dark:text-blue-400">${plateData.startPrice}</div>
+                            <div class="text-lg font-bold text-[#AA8C3C] dark:text-blue-400">${plateData.startPrice}</div>
                         </div>
 
                         <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
@@ -137,10 +137,10 @@ export function PlateDetailModal() {
                                 <i data-lucide="info" class="w-3 h-3 inline mr-1"></i>
                                 Tiền đặt trước
                             </div>
-                            <div class="text-xl font-black text-blue-600 dark:text-blue-400">
+                            <div class="text-xl font-black text-[#AA8C3C] dark:text-blue-400">
                                 ${formatDepositDisplay(plateData.startPrice)}
                             </div>
-                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-0.5">
+                            <div class="text-xs text-[#AA8C3C] dark:text-blue-400 mt-0.5">
                                 (${DEPOSIT_PERCENTAGE}% giá khởi điểm)
                             </div>
                         </div>
@@ -159,11 +159,11 @@ export function PlateDetailModal() {
                     <!-- Register Button (for non-live auctions) -->
                     ${plateData.status !== 'live' ? `
                         <div class="flex gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                            <button class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2 btn-ripple" id="register-auction-btn">
+                            <button class="flex-1 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-blue-700 hover:to-blue-800 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2 btn-ripple" id="register-auction-btn">
                                 <i data-lucide="clipboard-check" class="w-5 h-5"></i>
                                 <span>Đăng ký đấu giá</span>
                             </button>
-                            <button class="px-6 border-2 border-blue-600 text-blue-600 dark:text-blue-400 py-4 rounded-lg font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition flex items-center justify-center gap-2">
+                            <button class="px-6 border-2 border-[#AA8C3C] text-[#AA8C3C] dark:text-blue-400 py-4 rounded-lg font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition flex items-center justify-center gap-2">
                                 <i data-lucide="share-2" class="w-5 h-5"></i>
                             </button>
                         </div>

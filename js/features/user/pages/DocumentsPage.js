@@ -173,7 +173,7 @@ export function DocumentsPage() {
                     </span>
                 </td>
                 <td class="px-6 py-4">
-                    <button class="download-btn text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors hover:underline">
+                    <button class="download-btn text-[#AA8C3C] hover:text-blue-800 font-semibold text-sm transition-colors hover:underline">
                         Tải về
                     </button>
                 </td>

@@ -147,8 +147,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         tabs.forEach(tab => {
             const isActive = state.activeTab === tab.id;
             const className = isActive
-                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-blue-600 text-white'
-                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-blue-600 hover:bg-gray-50';
+                ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors bg-[#AA8C3C] text-white'
+                : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors text-gray-500 hover:text-[#AA8C3C] hover:bg-gray-50';
 
             const button = createElement('button', { className }, tab.label);
             button.addEventListener('click', () => {
@@ -439,7 +439,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     function createPageButton(pageNum, currentPage) {
         const isActive = pageNum === currentPage;
         const btn = createElement('button', {
-            className: `px-3 py-1 rounded text-sm font-medium ${isActive ? 'bg-blue-600 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'}`
+            className: `px-3 py-1 rounded text-sm font-medium ${isActive ? 'bg-[#AA8C3C] text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'}`
         }, pageNum.toString());
 
         if (!isActive) {
@@ -660,7 +660,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
                             <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-blue-600 cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
+                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-[#AA8C3C] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
@@ -673,7 +673,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
             } else {
                 const plateBgClass = state.activeTab === 'official'
                     ? 'bg-[#eecc48] border-[#eecc48] text-gray-900'
-                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-blue-600';
+                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
 
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
@@ -690,7 +690,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
                     ${state.activeTab === 'official' ? `<td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>` : ''}
                     <td class="px-6 py-4">
-                        <a href="#" class="text-blue-600 font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
+                        <a href="#" class="text-[#AA8C3C] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
                     </td>
                 `;
             }

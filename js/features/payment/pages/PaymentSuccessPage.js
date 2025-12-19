@@ -55,7 +55,7 @@ export function PaymentSuccessPage() {
         <div class="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-12 text-center animate-scale-in">
             <!-- Success Icon Animation -->
             <div class="mb-8">
-                <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg animate-bounce-slow">
+                <div class="w-24 h-24 bg-gradient-to-br from-[#8B7530] to-[#AA8C3C] rounded-full flex items-center justify-center mx-auto shadow-lg animate-bounce-slow">
                     <i data-lucide="check" class="w-16 h-16 text-white stroke-[3]"></i>
                 </div>
             </div>
@@ -83,12 +83,12 @@ export function PaymentSuccessPage() {
             </div>
 
             <!-- Next Steps -->
-            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8 text-left">
+            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-[#7A6328] rounded-lg p-4 mb-8 text-left">
                 <h3 class="font-bold text-blue-900 dark:text-blue-100 mb-2 flex items-center gap-2">
                     <i data-lucide="info" class="w-5 h-5"></i>
                     Bước tiếp theo
                 </h3>
-                <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-2">
+                <ul class="text-sm text-[#7A6328] dark:text-blue-200 space-y-2">
                     <li class="flex gap-2">
                         <span>•</span>
                         <span>Chúng tôi sẽ xác nhận đơn hàng qua email</span>
@@ -108,14 +108,14 @@ export function PaymentSuccessPage() {
             <div class="flex flex-col sm:flex-row gap-4">
                 <button 
                     id="view-history-btn"
-                    class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2 btn-ripple"
+                    class="flex-1 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-[#8B7530] hover:to-[#7A6328] text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2 btn-ripple"
                 >
                     <i data-lucide="history" class="w-5 h-5"></i>
                     <span>Xem lịch sử đơn hàng</span>
                 </button>
                 <button 
                     id="continue-shopping-btn"
-                    class="flex-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 py-4 rounded-lg font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition flex items-center justify-center gap-2 btn-ripple"
+                    class="flex-1 border-2 border-[#AA8C3C] text-[#AA8C3C] dark:text-[#C9A961] py-4 rounded-lg font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition flex items-center justify-center gap-2 btn-ripple"
                 >
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span>Tiếp tục mua sắm</span>

@@ -118,7 +118,7 @@ function createPageButton({ label, page, onPageChange, scrollToTop, isActive = f
     // Classes cơ bản cho tất cả các nút
     const baseClasses = 'px-4 py-2 rounded-lg font-medium transition-all duration-200';
     // Classes cho nút trang đang được chọn (active)
-    const activeClasses = 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white shadow-md';
+    const activeClasses = 'bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white shadow-md';
     // Classes cho nút trang không được chọn (inactive) với hỗ trợ dark mode
     const inactiveClasses = 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600';
 

@@ -34,7 +34,7 @@ function PageBanner({ title, subtitle, backgroundImage }) {
 
             <!-- Decorative Elements -->
             <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#AA8C3C] rounded-full filter blur-3xl opacity-10"></div>
         </div>
     `;
 
@@ -78,19 +78,19 @@ function VpaStats() {
                     
                     <!-- Stat 1 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">1.000 tỷ+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">1.000 tỷ+</p>
                         <p class="text-gray-600">Giá trị tài sản đã đấu giá</p>
                     </div>
 
                     <!-- Stat 2 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">500.000+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">500.000+</p>
                         <p class="text-gray-600">Biển số công bố đấu giá</p>
                     </div>
                     
                     <!-- Stat 3 -->
                     <div class="flex flex-col items-center justify-center">
-                        <p class="text-5xl font-black text-[#2563EB]">17.000+</p>
+                        <p class="text-5xl font-black text-[#AA8C3C]">17.000+</p>
                         <p class="text-gray-600">Cuộc đấu giá đã diễn ra</p>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ function PolicySections() {
                     <!-- Policy Card 1 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Chính sách bảo mật</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Chính sách bảo mật
                         </a>
                     </div>
@@ -120,7 +120,7 @@ function PolicySections() {
                     <!-- Policy Card 2 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Điều khoản sử dụng</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Điều khoản sử dụng
                         </a>
                     </div>
@@ -128,7 +128,7 @@ function PolicySections() {
                     <!-- Policy Card 3 -->
                     <div class="p-4 md:p-6 border-b border-gray-300 md:border-r md:border-b-0 last:border-r-0">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Quy chế hoạt động</h3>
-                        <a href="#" class="text-[#2563EB] hover:underline transition-colors">
+                        <a href="#" class="text-[#AA8C3C] hover:underline transition-colors">
                             Quy chế hoạt động
                         </a>
                     </div>
@@ -136,7 +136,7 @@ function PolicySections() {
 
                 <div class="border-t border-gray-300 pt-6 mt-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">Hướng dẫn đấu giá</h2>
-                    <p class="text-center text-[#2563EB] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
+                    <p class="text-center text-[#AA8C3C] hover:underline cursor-pointer">Hướng dẫn đấu giá</p>
                 </div>
             </div>
         </div>

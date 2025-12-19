@@ -20,7 +20,7 @@ export function PageBanner({
 
     const gradientClass = backgroundImage
         ? ''
-        : 'bg-gradient-to-r from-blue-700 via-blue-600 to-blue-600';
+        : 'bg-gradient-to-r from-[#8B7530] via-[#AA8C3C] to-[#AA8C3C]';
 
     const html = `
         <div class="relative ${gradientClass} text-white overflow-hidden shadow-lg" style="${backgroundStyle}">
@@ -31,7 +31,7 @@ export function PageBanner({
             
             <!-- Gradient Accent (only if no custom image) -->
             ${!backgroundImage ? `
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-[#C9A961] rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
             ` : ''}
             
             <!-- Content -->

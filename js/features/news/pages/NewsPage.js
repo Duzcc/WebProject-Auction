@@ -35,7 +35,7 @@ function PageBanner({ title, subtitle, backgroundImage }) {
 
             <!-- Decorative Elements -->
             <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#AA8C3C] rounded-full filter blur-3xl opacity-10"></div>
         </div>
     `;
 
@@ -58,12 +58,12 @@ function NewsSection({ newsData = [], notifData = [] }) {
         const tabNav = createElement('div', { className: 'flex gap-1 mb-6 border-b border-gray-200' });
 
         const newsTabClass = activeTab === 'news'
-            ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 bg-[#2563EB] text-white border-[#2563EB]'
-            : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 text-gray-500 hover:text-[#2563EB] bg-white border-gray-200 hover:border-[#2563EB]';
+            ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 bg-[#AA8C3C] text-white border-[#AA8C3C]'
+            : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 text-gray-500 hover:text-[#AA8C3C] bg-white border-gray-200 hover:border-[#AA8C3C]';
 
         const notifTabClass = activeTab === 'notif'
-            ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 bg-[#2563EB] text-white border-[#2563EB]'
-            : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 text-gray-500 hover:text-[#2563EB] bg-white border-gray-200 hover:border-[#2563EB]';
+            ? 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 bg-[#AA8C3C] text-white border-[#AA8C3C]'
+            : 'px-6 py-3 font-bold text-sm rounded-t-lg transition-colors border-b-2 text-gray-500 hover:text-[#AA8C3C] bg-white border-gray-200 hover:border-[#AA8C3C]';
 
         const newsTab = createElement('button', { className: newsTabClass }, 'Tin tức');
         newsTab.addEventListener('click', () => {
@@ -87,7 +87,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
         const totalPages = activeTab === 'news' ? 60 : 30;
 
         const titleContainer = createElement('div', { className: 'w-full flex items-center' });
-        const titleBgClass = activeTab === 'news' ? 'bg-[#2563EB]' : 'bg-blue-800';
+        const titleBgClass = activeTab === 'news' ? 'bg-[#AA8C3C]' : 'bg-blue-800';
         const titleBox = createElement('div', {
             className: `inline-block px-6 py-3 font-bold text-lg text-white rounded-t-lg shadow-sm border-r-4 border-white ${titleBgClass}`
         }, titleText);
@@ -119,15 +119,15 @@ function NewsSection({ newsData = [], notifData = [] }) {
         const rowHtml = `
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-blue-200 pb-4 pt-4 group cursor-pointer hover:bg-blue-50/50 transition-colors">
                 <div class="flex items-start gap-3 w-full md:w-3/4">
-                    <i data-lucide="chevrons-right" class="text-[#2563EB] mt-1 flex-shrink-0" style="width: 20px; height: 20px;"></i>
-                    <h3 class="text-gray-800 font-medium text-base group-hover:text-[#2563EB] transition-colors">
+                    <i data-lucide="chevrons-right" class="text-[#AA8C3C] mt-1 flex-shrink-0" style="width: 20px; height: 20px;"></i>
+                    <h3 class="text-gray-800 font-medium text-base group-hover:text-[#AA8C3C] transition-colors">
                         <span class="text-gray-500 font-normal text-sm mr-1">${categoryDisplay}</span>
                         ${item.title}
                     </h3>
                 </div>
                 <div class="flex items-center gap-4 mt-2 md:mt-0 md:w-1/4 md:justify-end">
                     ${item.source ? `
-                        <span class="text-[#2563EB] border border-[#2563EB] bg-blue-50 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">
+                        <span class="text-[#AA8C3C] border border-[#AA8C3C] bg-blue-50 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">
                             ${isNewsTab ? item.source : 'Thông báo'}
                         </span>
                     ` : ''}
@@ -154,7 +154,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
                 <button class="w-8 h-8 flex items-center justify-center rounded bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 transition-colors">
                     &lt;
                 </button>
-                <button class="w-8 h-8 flex items-center justify-center rounded bg-[#2563EB] text-white font-bold text-sm shadow-sm">1</button>
+                <button class="w-8 h-8 flex items-center justify-center rounded bg-[#AA8C3C] text-white font-bold text-sm shadow-sm">1</button>
                 <button class="w-8 h-8 flex items-center justify-center rounded bg-white border border-gray-300 text-gray-600 font-medium text-sm transition-colors">2</button>
                 <button class="w-8 h-8 flex items-center justify-center rounded bg-white border border-gray-300 text-gray-600 font-medium text-sm transition-colors">3</button>
                 <span class="w-8 h-8 flex items-center justify-center text-gray-400 pb-2">...</span>

@@ -98,9 +98,9 @@ export function showModal({
     buttons.forEach(btn => {
         const button = document.createElement('button');
         const variants = {
-            primary: 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white hover:shadow-lg',
+            primary: 'bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white hover:shadow-lg',
             secondary: 'bg-gray-200 text-gray-700 hover:bg-gray-300',
-            danger: 'bg-red-600 text-white hover:bg-blue-700'
+            danger: 'bg-red-600 text-white hover:bg-[#8B7530]'
         };
 
         button.className = `px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ${variants[btn.variant] || variants.secondary}`;

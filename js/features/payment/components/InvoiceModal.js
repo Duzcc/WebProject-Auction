@@ -31,7 +31,7 @@ export function showInvoiceModal(paymentId) {
 
     // Modal Header
     const header = createElement('div', {
-        className: 'bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6 text-white'
+        className: 'bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] px-8 py-6 text-white'
     });
     header.innerHTML = `
         <div class="flex items-center justify-between">
@@ -91,7 +91,7 @@ export function showInvoiceModal(paymentId) {
                 ${invoice.items.map(item => `
                     <div class="flex items-center justify-between">
                         <span class="text-gray-700">${item.description}</span>
-                        <span class="font-semibold ${item.amount < 0 ? 'text-blue-600' : 'text-gray-900'}">
+                        <span class="font-semibold ${item.amount < 0 ? 'text-[#AA8C3C]' : 'text-gray-900'}">
                             ${item.amount.toLocaleString('vi-VN')} VNĐ
                         </span>
                     </div>
@@ -99,7 +99,7 @@ export function showInvoiceModal(paymentId) {
                 
                 <div class="pt-3 border-t-2 border-gray-300 flex items-center justify-between">
                     <span class="text-lg font-bold text-gray-900">Tổng thanh toán</span>
-                    <span class="text-2xl font-black text-blue-600">${invoice.total.toLocaleString('vi-VN')} VNĐ</span>
+                    <span class="text-2xl font-black text-[#AA8C3C]">${invoice.total.toLocaleString('vi-VN')} VNĐ</span>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@ export function showInvoiceModal(paymentId) {
         className: 'px-8 py-6 bg-gray-50 border-t border-gray-200 flex gap-3'
     });
     footer.innerHTML = `
-        <button id="download-pdf-btn" class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2">
+        <button id="download-pdf-btn" class="flex-1 px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2">
             <i data-lucide="download" class="w-5 h-5"></i>
             <span>Tải Hóa Đơn (PDF)</span>
         </button>

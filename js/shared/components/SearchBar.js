@@ -37,7 +37,7 @@ export function SearchBar({
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = placeholder;
-    input.className = 'w-full border border-gray-300 dark:border-gray-600 rounded-lg py-2.5 pl-10 pr-10 text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 dark:bg-gray-800 dark:text-white transition-all';
+    input.className = 'w-full border border-gray-300 dark:border-gray-600 rounded-lg py-2.5 pl-10 pr-10 text-sm focus:outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-red-200 dark:bg-gray-800 dark:text-white transition-all';
 
     // Search icon
     const searchIcon = document.createElement('i');
@@ -199,7 +199,7 @@ function showSearchHistory(dropdown, onSuggestionClick) {
     header.className = 'px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 flex items-center justify-between border-b border-gray-200 dark:border-gray-700';
     header.innerHTML = `
         <span>Tìm kiếm gần đây</span>
-        <button class="clear-history text-[#2563EB] hover:underline">Xóa</button>
+        <button class="clear-history text-[#AA8C3C] hover:underline">Xóa</button>
     `;
     dropdown.appendChild(header);
 

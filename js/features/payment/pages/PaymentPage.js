@@ -143,7 +143,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
     // Header
     const header = createElement('div', { className: 'mb-8' });
     header.innerHTML = `
-        <button onclick="history.back()" class="text-blue-600 hover:text-blue-700 font-semibold mb-4 flex items-center gap-2 transition-colors">
+        <button onclick="history.back()" class="text-[#AA8C3C] hover:text-[#8B7530] font-semibold mb-4 flex items-center gap-2 transition-colors">
             <i data-lucide="arrow-left" class="w-5 h-5"></i>
             Quay lại
         </button>
@@ -154,9 +154,9 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
     // Status badge
     const statusBadge = createElement('div', { className: 'mb-6' });
-    const statusClass = payment.status === 'completed' ? 'bg-blue-100 text-blue-700' :
-        payment.status === 'processing' ? 'bg-blue-100 text-blue-700' :
-            'bg-blue-100 text-blue-700';
+    const statusClass = payment.status === 'completed' ? 'bg-blue-100 text-[#8B7530]' :
+        payment.status === 'processing' ? 'bg-blue-100 text-[#8B7530]' :
+            'bg-blue-100 text-[#8B7530]';
     const statusText = payment.status === 'completed' ? '✓ Đã thanh toán' :
         payment.status === 'processing' ? '⏳ Đang xác nhận' :
             '⚠ Chưa thanh toán';
@@ -177,7 +177,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
     const summaryCard = createElement('div', { className: 'bg-white rounded-2xl shadow-lg p-8' });
     summaryCard.innerHTML = `
         <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-            <i data-lucide="file-text" class="w-7 h-7 text-blue-600"></i>
+            <i data-lucide="file-text" class="w-7 h-7 text-[#AA8C3C]"></i>
             Thông tin đơn hàng
         </h2>
         
@@ -185,7 +185,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
         <div class="bg-gradient-to-br from-blue-50 to-blue-50 p-6 rounded-xl mb-6">
             <div class="flex items-center justify-between mb-4">
                 <span class="text-sm font-semibold text-gray-600">Biển số đã trúng</span>
-                <span class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full">THẮNG</span>
+                <span class="px-3 py-1 bg-[#AA8C3C] text-white text-xs font-bold rounded-full">THẮNG</span>
             </div>
             <div class="text-4xl font-black text-gray-900 mb-2 flex items-center gap-3">
                 <span class="px-6 py-4 bg-white rounded-xl shadow-lg border-2 border-blue-300">
@@ -203,20 +203,20 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
             </div>
             <div class="flex justify-between items-center py-3 border-b border-gray-200">
                 <span class="text-gray-700">Đã đặt cọc</span>
-                <span class="font-bold text-blue-600">-${payment.depositAmount.toLocaleString('vi-VN')} VNĐ</span>
+                <span class="font-bold text-[#AA8C3C]">-${payment.depositAmount.toLocaleString('vi-VN')} VNĐ</span>
             </div>
             <div class="flex justify-between items-center py-4 bg-blue-50 -mx-8 px-8 rounded-lg">
                 <span class="text-lg font-bold text-gray-900">Còn phải trả</span>
-                <span class="text-3xl font-black text-blue-600">${payment.remainingAmount.toLocaleString('vi-VN')} VNĐ</span>
+                <span class="text-3xl font-black text-[#AA8C3C]">${payment.remainingAmount.toLocaleString('vi-VN')} VNĐ</span>
             </div>
         </div>
 
         <!-- Deadline -->
         <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <div class="flex items-start gap-3">
-                <i data-lucide="clock" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                <i data-lucide="clock" class="w-5 h-5 text-[#AA8C3C] flex-shrink-0 mt-0.5"></i>
                 <div class="flex-1">
-                    <p class="text-sm font-semibold text-blue-800 mb-2">Hạn thanh toán</p>
+                    <p class="text-sm font-semibold text-[#7A6328] mb-2">Hạn thanh toán</p>
                     <div id="payment-timer"></div>
                 </div>
             </div>
@@ -266,12 +266,12 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
         paymentCard.innerHTML = `
             <div class="text-center py-8">
                 <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="check-circle" class="w-12 h-12 text-blue-600"></i>
+                    <i data-lucide="check-circle" class="w-12 h-12 text-[#AA8C3C]"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 mb-2">Đã thanh toán!</h3>
                 <p class="text-gray-600 mb-6">Thanh toán của bạn đã được xác nhận</p>
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p class="text-sm text-blue-800">
+                    <p class="text-sm text-[#7A6328]">
                         <i data-lucide="info" class="w-4 h-4 inline-block mr-1"></i>
                         Vui lòng liên hệ để nhận biển số xe
                     </p>
@@ -290,7 +290,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
         paymentCard.innerHTML = `
             <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <i data-lucide="credit-card" class="w-6 h-6 text-blue-600"></i>
+                <i data-lucide="credit-card" class="w-6 h-6 text-[#AA8C3C]"></i>
                 Phương thức thanh toán
             </h3>
 
@@ -315,7 +315,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                         <div class="flex items-center gap-1">
                             <span class="font-mono font-bold text-sm">1034567890</span>
                             <button class="copy-btn p-1 hover:bg-white/50 rounded" data-copy="1034567890">
-                                <i data-lucide="copy" class="w-3 h-3 text-blue-600"></i>
+                                <i data-lucide="copy" class="w-3 h-3 text-[#AA8C3C]"></i>
                             </button>
                         </div>
                     </div>
@@ -326,9 +326,9 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     <div class="flex justify-between items-center pt-2 border-t">
                         <span class="text-xs text-gray-600">Số tiền:</span>
                         <div class="flex items-center gap-1">
-                            <span class="text-lg font-black text-blue-600">${payment.remainingAmount.toLocaleString('vi-VN')}</span>
+                            <span class="text-lg font-black text-[#AA8C3C]">${payment.remainingAmount.toLocaleString('vi-VN')}</span>
                             <button class="copy-btn p-1 hover:bg-white/50 rounded" data-copy="${payment.remainingAmount}">
-                                <i data-lucide="copy" class="w-3 h-3 text-blue-600"></i>
+                                <i data-lucide="copy" class="w-3 h-3 text-[#AA8C3C]"></i>
                             </button>
                         </div>
                     </div>
@@ -337,7 +337,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                         <div class="flex items-center gap-1">
                             <span class="font-mono font-bold text-xs text-right">${description}</span>
                             <button class="copy-btn p-1 hover:bg-white/50 rounded" data-copy="${description}">
-                                <i data-lucide="copy" class="w-3 h-3 text-blue-600"></i>
+                                <i data-lucide="copy" class="w-3 h-3 text-[#AA8C3C]"></i>
                             </button>
                         </div>
                     </div>
@@ -347,7 +347,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
             <!-- Upload Proof -->
             <div class="border-t pt-4">
                 <h4 class="font-bold text-gray-900 mb-3 text-sm flex items-center gap-2">
-                    <i data-lucide="upload" class="w-4 h-4 text-blue-600"></i>
+                    <i data-lucide="upload" class="w-4 h-4 text-[#AA8C3C]"></i>
                     Tải minh chứng
                 </h4>
                 <input 
@@ -358,7 +358,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                 />
                 <label 
                     for="payment-proof-upload"
-                    class="block cursor-pointer px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors text-center text-sm font-medium text-gray-700 hover:text-blue-600 mb-3"
+                    class="block cursor-pointer px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-[#8B7530] transition-colors text-center text-sm font-medium text-gray-700 hover:text-[#AA8C3C] mb-3"
                 >
                     <i data-lucide="image" class="w-5 h-5 inline-block mr-2"></i>
                     <span id="file-label">Chọn ảnh minh chứng</span>
@@ -372,7 +372,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                 <button 
                     id="submit-payment-btn"
                     ${!isOrderPayment ? 'disabled' : ''}
-                    class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+                    class="w-full px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-[#8B7530] hover:to-[#7A6328] text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                 >
                     <i data-lucide="check-circle" class="w-5 h-5"></i>
                     ${isOrderPayment ? 'Xác nhận đã thanh toán' : 'Xác nhận thanh toán'}

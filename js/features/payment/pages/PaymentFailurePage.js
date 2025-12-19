@@ -56,12 +56,12 @@ export function PaymentFailurePage() {
             </div>
 
             <!-- Support Info -->
-            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8 text-left">
+            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-[#7A6328] rounded-lg p-4 mb-8 text-left">
                 <h3 class="font-bold text-blue-900 dark:text-blue-100 mb-2 flex items-center gap-2">
                     <i data-lucide="phone" class="w-5 h-5"></i>
                     Cần hỗ trợ?
                 </h3>
-                <p class="text-sm text-blue-800 dark:text-blue-200">
+                <p class="text-sm text-[#7A6328] dark:text-blue-200">
                     Liên hệ hotline: <span class="font-bold">1900.0555.15</span> hoặc email: <span class="font-bold">support@vpa.vn</span>
                 </p>
             </div>
@@ -70,7 +70,7 @@ export function PaymentFailurePage() {
             <div class="flex flex-col sm:flex-row gap-4">
                 <button 
                     id="retry-payment-btn"
-                    class="flex-1 bg-gradient-to-r from-red-600 to-blue-600 hover:from-red-700 hover:to-blue-700 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2"
+                    class="flex-1 bg-gradient-to-r from-red-600 to-[#AA8C3C] hover:from-red-700 hover:to-[#8B7530] text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center justify-center gap-2"
                 >
                     <i data-lucide="rotate-cw" class="w-5 h-5"></i>
                     <span>Thử lại thanh toán</span>
@@ -87,7 +87,7 @@ export function PaymentFailurePage() {
             <!-- Contact Support -->
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Cần hỗ trợ?</p>
-                <button class="text-[#2563EB] hover:underline font-semibold flex items-center justify-center gap-2 mx-auto">
+                <button class="text-[#AA8C3C] hover:underline font-semibold flex items-center justify-center gap-2 mx-auto">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
                     <span>Liên hệ bộ phận hỗ trợ</span>
                 </button>

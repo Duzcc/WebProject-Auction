@@ -67,13 +67,13 @@ export function CountdownTimer({ endTime, onExpire, autoRefresh = false, classNa
             },
             warning: {
                 bg: 'bg-blue-50',
-                text: 'text-blue-700',
+                text: 'text-[#8B7530]',
                 icon: 'clock',
                 pulse: false
             },
             normal: {
                 bg: 'bg-blue-50',
-                text: 'text-blue-700',
+                text: 'text-[#8B7530]',
                 icon: 'clock',
                 pulse: false
             }

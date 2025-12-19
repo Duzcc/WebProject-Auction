@@ -271,7 +271,7 @@ export function AuctionHistoryPage() {
             // Won and paid - show invoice detail button (AC 3.2)
             if (item.status === 'won_paid') {
                 actionButton = `
-                    <button class="action-btn text-blue-600 hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                    <button class="action-btn text-[#AA8C3C] hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
                             data-action="view-invoice" 
                             data-auction-id="${item.auctionId}">
                         <i data-lucide="file-text" class="w-4 h-4"></i>
@@ -292,7 +292,7 @@ export function AuctionHistoryPage() {
             } else if (item.itemType === 'payment') {
                 if (item.status === 'completed') {
                     actionButton = `
-                        <button class="action-btn text-blue-600 hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
+                        <button class="action-btn text-[#AA8C3C] hover:text-blue-800 font-semibold text-sm hover:underline flex items-center gap-1"
                                 data-action="view-invoice-direct" 
                                 data-id="${item.id}">
                             <i data-lucide="file-text" class="w-4 h-4"></i>

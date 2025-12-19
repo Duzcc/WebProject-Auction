@@ -60,7 +60,7 @@ function createTogglePanel() {
     });
 
     const toggle = createElement('div', {
-        className: 'toggle bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white relative left-[-100%] h-full w-[200%] transition-all duration-700 ease-in-out'
+        className: 'toggle bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white relative left-[-100%] h-full w-[200%] transition-all duration-700 ease-in-out'
     });
 
     // Left panel (shown when sign up is active)
@@ -70,7 +70,7 @@ function createTogglePanel() {
     leftPanel.innerHTML = `
         <h1 class="text-3xl font-bold mb-4">Chào Mừng Trở Lại!</h1>
         <p class="text-sm mb-6 opacity-90">Đăng nhập để tiếp tục sử dụng các tính năng của chúng tôi</p>
-        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#2563EB] transition-all duration-300" id="login">Đăng Nhập</button>
+        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#AA8C3C] transition-all duration-300" id="login">Đăng Nhập</button>
     `;
     toggle.appendChild(leftPanel);
 
@@ -81,7 +81,7 @@ function createTogglePanel() {
     rightPanel.innerHTML = `
         <h1 class="text-3xl font-bold mb-4">Xin Chào!</h1>
         <p class="text-sm mb-6 opacity-90">Đăng ký tài khoản để sử dụng đầy đủ các tính năng</p>
-        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#2563EB] transition-all duration-300" id="register">Đăng Ký</button>
+        <button class="toggle-btn bg-transparent border-2 border-white text-white font-semibold py-2 px-10 rounded-lg uppercase text-xs tracking-wider hover:bg-white hover:text-[#AA8C3C] transition-all duration-300" id="register">Đăng Ký</button>
     `;
     toggle.appendChild(rightPanel);
 

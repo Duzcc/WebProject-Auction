@@ -312,7 +312,7 @@ export function subscribeToCart(callback) {
  */
 export function createAddToCartButton(item, onAdd = null) {
     const button = document.createElement('button');
-    button.className = 'add-to-cart-btn bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2';
+    button.className = 'add-to-cart-btn bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2';
 
     const updateButton = () => {
         const inCart = isInCart(item.id, item.type);

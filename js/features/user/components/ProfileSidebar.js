@@ -25,13 +25,13 @@ export function ProfileSidebar({ activePage = 'cart', onNavigate }) {
 
         const menuItem = createElement('button', {
             className: `w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${isActive
-                    ? 'bg-blue-50 border-l-4 border-blue-600 text-blue-900 font-semibold'
+                    ? 'bg-blue-50 border-l-4 border-[#AA8C3C] text-blue-900 font-semibold'
                     : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
                 }`
         });
 
         menuItem.innerHTML = `
-            <i data-lucide="${item.icon}" class="w-5 h-5 ${isActive ? 'text-blue-600' : 'text-gray-500'}"></i>
+            <i data-lucide="${item.icon}" class="w-5 h-5 ${isActive ? 'text-[#AA8C3C]' : 'text-gray-500'}"></i>
             <span>${item.label}</span>
         `;
 

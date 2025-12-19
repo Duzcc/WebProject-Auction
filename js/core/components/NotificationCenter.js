@@ -42,7 +42,7 @@ export function NotificationCenter() {
         dropdown.innerHTML = `
             <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
                 <h3 class="font-bold text-gray-900 dark:text-white">Thông Báo</h3>
-                ${notifications.length > 0 ? '<button id="mark-all-read" class="text-sm text-[#2563EB] hover:underline">Đánh dấu đã đọc</button>' : ''}
+                ${notifications.length > 0 ? '<button id="mark-all-read" class="text-sm text-[#AA8C3C] hover:underline">Đánh dấu đã đọc</button>' : ''}
             </div>
             <div class="max-h-96 overflow-y-auto">
                 ${notifications.length === 0 ? `
@@ -63,7 +63,7 @@ export function NotificationCenter() {
                                 <p class="text-sm text-gray-600 dark:text-gray-400">${notif.message}</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">${formatTime(notif.createdAt)}</p>
                             </div>
-                            ${!notif.read ? '<div class="w-2 h-2 bg-[#2563EB] rounded-full flex-shrink-0"></div>' : ''}
+                            ${!notif.read ? '<div class="w-2 h-2 bg-[#AA8C3C] rounded-full flex-shrink-0"></div>' : ''}
                             <button class="delete-notification absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded" data-notif-id="${notif.id}" title="Xóa thông báo">
                                 <i data-lucide="x" class="w-4 h-4 text-gray-400 hover:text-red-600"></i>
                             </button>
@@ -128,9 +128,13 @@ export function NotificationCenter() {
 
     // Subscribe to notification changes
     subscribeToNotifications(() => {
+        console.log('🔔 NotificationCenter: Subscription callback fired!');
         updateButton();
         if (isOpen) {
+            console.log('📋 Dropdown is open, re-rendering...');
             renderDropdown();
+        } else {
+            console.log('📋 Dropdown is closed, only updating button badge');
         }
     });
 

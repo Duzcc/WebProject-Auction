@@ -136,7 +136,7 @@ export function generatePaymentInstructions({
         <div class="space-y-4">
             <div class="bg-gradient-to-r from-blue-50 to-blue-50 p-4 rounded-lg">
                 <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <i data-lucide="landmark" class="w-5 h-5 text-blue-600"></i>
+                    <i data-lucide="landmark" class="w-5 h-5 text-[#AA8C3C]"></i>
                     Thông tin chuyển khoản
                 </h4>
                 <div class="space-y-2">
@@ -154,7 +154,7 @@ export function generatePaymentInstructions({
                     </div>
                     <div class="flex justify-between items-center pt-2 border-t border-blue-200">
                         <span class="text-gray-600 text-sm">Số tiền:</span>
-                        <span class="text-xl font-black text-blue-600">${amount.toLocaleString('vi-VN')} VNĐ</span>
+                        <span class="text-xl font-black text-[#AA8C3C]">${amount.toLocaleString('vi-VN')} VNĐ</span>
                     </div>
                     <div class="flex justify-between items-start pt-2">
                         <span class="text-gray-600 text-sm">Nội dung:</span>

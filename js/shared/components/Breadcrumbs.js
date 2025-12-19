@@ -30,14 +30,14 @@ export function Breadcrumbs(items = []) {
             // Clickable item
             if (item.onClick) {
                 const button = document.createElement('button');
-                button.className = 'hover:text-[#2563EB] transition-colors';
+                button.className = 'hover:text-[#AA8C3C] transition-colors';
                 button.textContent = item.label;
                 button.addEventListener('click', item.onClick);
                 li.appendChild(button);
             } else if (item.href) {
                 const link = document.createElement('a');
                 link.href = item.href;
-                link.className = 'hover:text-[#2563EB] transition-colors';
+                link.className = 'hover:text-[#AA8C3C] transition-colors';
                 link.textContent = item.label;
                 li.appendChild(link);
             } else {

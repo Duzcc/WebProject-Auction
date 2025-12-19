@@ -59,14 +59,14 @@ export function BiddingInterface({ auction }) {
                         </span>
                     `}
                 </div>
-                <p class="text-gray-600">Biển số: <span class="font-bold text-blue-600">${auction.plateNumber || auction.name}</span></p>
+                <p class="text-gray-600">Biển số: <span class="font-bold text-[#AA8C3C]">${auction.plateNumber || auction.name}</span></p>
             </div>
 
             <!-- Current Bid Display -->
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl mb-6">
                 <div class="text-center">
                     <p class="text-sm font-semibold text-gray-600 mb-2">Giá hiện tại</p>
-                    <div class="text-4xl font-black text-blue-600 mb-2">
+                    <div class="text-4xl font-black text-[#AA8C3C] mb-2">
                         ${currentBid.toLocaleString('vi-VN')} <span class="text-xl">VNĐ</span>
                     </div>
                     ${winningBid ? `
@@ -111,7 +111,7 @@ export function BiddingInterface({ auction }) {
                     <p class="text-sm text-gray-600 mb-4">Vui lòng đăng ký và đặt cọc trước khi tham gia</p>
                     <button 
                         id="register-auction-btn"
-                        class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors"
+                        class="px-6 py-2 bg-[#AA8C3C] text-white font-bold rounded-lg hover:bg-[#8B7530] transition-colors"
                     >
                         Đăng ký ngay
                     </button>
@@ -163,7 +163,7 @@ export function BiddingInterface({ auction }) {
                             </div>
                             <button
                                 id="place-custom-bid-btn"
-                                class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center gap-2"
+                                class="px-6 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 flex items-center gap-2"
                             >
                                 <i data-lucide="gavel" class="w-5 h-5"></i>
                                 Đặt giá

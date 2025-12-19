@@ -177,7 +177,7 @@ export function PendingPlatesPage() {
                     </span>
                 </td>
                 <td class="px-6 py-4">
-                    <button class="view-detail-btn text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors hover:underline">
+                    <button class="view-detail-btn text-[#AA8C3C] hover:text-blue-800 font-semibold text-sm transition-colors hover:underline">
                         Xem chi tiết
                     </button>
                 </td>

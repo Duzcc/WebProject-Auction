@@ -46,7 +46,7 @@ export function DepositModal() {
         modalWrapper.innerHTML = `
             <div class="flex flex-col h-full max-h-[90vh]">
                 <!-- Header -->
-                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white">
                     <div class="flex items-center gap-3">
                         <i data-lucide="wallet" class="w-6 h-6"></i>
                         <h2 class="text-xl font-bold">Đặt cọc đấu giá</h2>
@@ -84,7 +84,7 @@ export function DepositModal() {
                             <!-- Deposit Amount -->
                             <div class="bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-700 rounded-xl p-6">
                                 <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Số tiền đặt cọc</h3>
-                                <div class="text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">
+                                <div class="text-4xl font-black text-[#AA8C3C] dark:text-blue-400 mb-1">
                                     ${deposit.amount.toLocaleString('vi-VN')}
                                 </div>
                                 <div class="text-sm text-gray-500 dark:text-gray-400">VNĐ</div>
@@ -98,7 +98,7 @@ export function DepositModal() {
                             <!-- Deadline -->
                             <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                                 <div class="flex items-start gap-3">
-                                    <i data-lucide="clock" class="w-5 h-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5"></i>
+                                    <i data-lucide="clock" class="w-5 h-5 text-[#AA8C3C] dark:text-blue-500 flex-shrink-0 mt-0.5"></i>
                                     <div class="flex-1">
                                         <p class="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-2">Hạn thanh toán</p>
                                         <div class="timer-container"></div>
@@ -138,7 +138,7 @@ export function DepositModal() {
                             <!-- QR Code -->
                             <div class="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center">
                                 <h3 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-2">
-                                    <i data-lucide="qr-code" class="w-5 h-5 text-blue-600"></i>
+                                    <i data-lucide="qr-code" class="w-5 h-5 text-[#AA8C3C]"></i>
                                     Quét mã QR để thanh toán
                                 </h3>
                                 <div class="inline-block p-4 bg-white rounded-lg shadow-lg">
@@ -152,7 +152,7 @@ export function DepositModal() {
                             <!-- Bank Info -->
                             <div class="bg-gradient-to-r from-blue-50 to-blue-50 dark:from-gray-700 via-gray-800 p-6 rounded-xl">
                                 <h4 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                    <i data-lucide="landmark" class="w-5 h-5 text-blue-600"></i>
+                                    <i data-lucide="landmark" class="w-5 h-5 text-[#AA8C3C]"></i>
                                     Thông tin chuyển khoản
                                 </h4>
                                 <div class="space-y-3">
@@ -165,7 +165,7 @@ export function DepositModal() {
                                         <div class="flex items-center gap-2">
                                             <span class="font-mono font-bold text-gray-900 dark:text-white">1034567890</span>
                                             <button class="copy-btn p-1.5 hover:bg-white/50 dark:hover:bg-gray-700 rounded transition-colors" data-copy="1034567890" data-label="Số tài khoản">
-                                                <i data-lucide="copy" class="w-4 h-4 text-blue-600"></i>
+                                                <i data-lucide="copy" class="w-4 h-4 text-[#AA8C3C]"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -176,9 +176,9 @@ export function DepositModal() {
                                     <div class="flex justify-between items-center pt-3 border-t border-blue-200 dark:border-blue-800">
                                         <span class="text-sm text-gray-600 dark:text-gray-400">Số tiền:</span>
                                         <div class="flex items-center gap-2">
-                                            <span class="text-xl font-black text-blue-600 dark:text-blue-400">${deposit.amount.toLocaleString('vi-VN')}</span>
+                                            <span class="text-xl font-black text-[#AA8C3C] dark:text-blue-400">${deposit.amount.toLocaleString('vi-VN')}</span>
                                             <button class="copy-btn p-1.5 hover:bg-white/50 dark:hover:bg-gray-700 rounded transition-colors" data-copy="${deposit.amount}" data-label="Số tiền">
-                                                <i data-lucide="copy" class="w-4 h-4 text-blue-600"></i>
+                                                <i data-lucide="copy" class="w-4 h-4 text-[#AA8C3C]"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@ export function DepositModal() {
                                         <div class="flex items-center gap-2">
                                             <span class="font-mono font-bold text-gray-900 dark:text-white text-right">${description}</span>
                                             <button class="copy-btn p-1.5 hover:bg-white/50 dark:hover:bg-gray-700 rounded transition-colors" data-copy="${description}" data-label="Nội dung">
-                                                <i data-lucide="copy" class="w-4 h-4 text-blue-600"></i>
+                                                <i data-lucide="copy" class="w-4 h-4 text-[#AA8C3C]"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -209,7 +209,7 @@ export function DepositModal() {
                 <div class="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-900">
                     <div class="max-w-2xl mx-auto">
                         <h4 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            <i data-lucide="upload" class="w-5 h-5 text-blue-600"></i>
+                            <i data-lucide="upload" class="w-5 h-5 text-[#AA8C3C]"></i>
                             Tải lên minh chứng thanh toán
                         </h4>
                         
@@ -222,7 +222,7 @@ export function DepositModal() {
                             />
                             <label 
                                 for="proof-upload"
-                                class="flex-1 cursor-pointer px-6 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 transition-colors text-center font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-center gap-2"
+                                class="flex-1 cursor-pointer px-6 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 transition-colors text-center font-medium text-gray-700 dark:text-gray-300 hover:text-[#AA8C3C] dark:hover:text-blue-400 flex items-center justify-center gap-2"
                             >
                                 <i data-lucide="image" class="w-5 h-5"></i>
                                 <span id="file-label">Chọn ảnh minh chứng</span>
@@ -230,7 +230,7 @@ export function DepositModal() {
                             <button 
                                 id="submit-proof-btn"
                                 disabled
-                                class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
+                                class="px-8 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform transition hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
                             >
                                 <i data-lucide="check-circle" class="w-5 h-5"></i>
                                 Xác nhận

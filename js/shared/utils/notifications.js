@@ -29,6 +29,7 @@ export const NOTIFICATION_TYPES = {
  * @param {Object} data.data - Additional data
  */
 export function createNotification(data) {
+    console.log('🔔 Creating notification:', data);
     const state = notificationStore.get();
     const notifications = state.items || [];
 
@@ -52,6 +53,9 @@ export function createNotification(data) {
         items: trimmed,
         unreadCount: trimmed.filter(n => !n.read).length
     });
+
+    console.log('✅ Notification created, new count:', trimmed.filter(n => !n.read).length);
+    console.log('📡 Triggering subscribers...');
 }
 
 /**
@@ -210,11 +214,11 @@ export function getNotificationIcon(type) {
  */
 export function getNotificationColor(type) {
     const colors = {
-        [NOTIFICATION_TYPES.BID_PLACED]: 'text-blue-600',
-        [NOTIFICATION_TYPES.OUTBID]: 'text-blue-600',
+        [NOTIFICATION_TYPES.BID_PLACED]: 'text-[#AA8C3C]',
+        [NOTIFICATION_TYPES.OUTBID]: 'text-[#AA8C3C]',
         [NOTIFICATION_TYPES.AUCTION_WON]: 'text-green-600',
         [NOTIFICATION_TYPES.AUCTION_LOST]: 'text-red-600',
-        [NOTIFICATION_TYPES.PAYMENT]: 'text-blue-600',
+        [NOTIFICATION_TYPES.PAYMENT]: 'text-[#AA8C3C]',
         [NOTIFICATION_TYPES.REGISTRATION]: 'text-green-600',
         [NOTIFICATION_TYPES.SYSTEM]: 'text-gray-600'
     };

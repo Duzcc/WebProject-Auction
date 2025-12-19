@@ -37,10 +37,10 @@ export function AssetListPage({ assets = [], onNavigate }) {
     const searchBarHtml = `
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
             <div class="relative w-full md:w-1/2">
-                <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#2563EB]" style="width: 18px; height: 18px;"></i>
-                <input type="text" placeholder="Tìm kiếm tài sản" class="w-full border border-gray-300 rounded-lg py-2.5 pl-10 pr-4 focus:outline-none focus:border-[#2563EB] text-sm bg-white shadow-sm" />
+                <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#AA8C3C]" style="width: 18px; height: 18px;"></i>
+                <input type="text" placeholder="Tìm kiếm tài sản" class="w-full border border-gray-300 rounded-lg py-2.5 pl-10 pr-4 focus:outline-none focus:border-[#AA8C3C] text-sm bg-white shadow-sm" />
             </div>
-            <button class="bg-[#2563EB] text-white px-8 py-2.5 rounded-full font-bold text-sm shadow-md hover:bg-[#0d9488]">Xem thêm</button>
+            <button class="bg-[#AA8C3C] text-white px-8 py-2.5 rounded-full font-bold text-sm shadow-md hover:bg-[#0d9488]">Xem thêm</button>
         </div>
     `;
     const searchBar = createFromHTML(searchBarHtml);
@@ -62,7 +62,7 @@ export function AssetListPage({ assets = [], onNavigate }) {
     const paginationHtml = `
         <div class="flex justify-end mt-6">
             <div class="flex gap-1">
-                <button class="w-8 h-8 flex items-center justify-center rounded bg-[#2563EB] text-white font-bold text-sm">1</button>
+                <button class="w-8 h-8 flex items-center justify-center rounded bg-[#AA8C3C] text-white font-bold text-sm">1</button>
             </div>
         </div>
     `;
@@ -109,7 +109,7 @@ function createAssetCard(asset, onNavigate) {
                     </div>
                     <div>
                         <p class="text-xs text-gray-500">Giá khởi điểm</p>
-                        <p class="text-[#2563EB] font-bold text-base">${asset.startPrice}</p>
+                        <p class="text-[#AA8C3C] font-bold text-base">${asset.startPrice}</p>
                     </div>
                 </div>
 
@@ -130,7 +130,7 @@ function createAssetCard(asset, onNavigate) {
                     </div>
                 </div>
                 
-                <button class="view-details-btn w-full bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white px-4 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
+                <button class="view-details-btn w-full bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white px-4 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
                     <span>Xem chi tiết</span>
                 </button>

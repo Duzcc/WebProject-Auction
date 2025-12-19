@@ -75,7 +75,7 @@ export function ProfilePage() {
                         <div class="relative">
                             <img id="avatar-preview" src="${profile.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(authState.user?.fullName || authState.user?.email || 'User')}" 
                                  alt="Avatar" class="w-24 h-24 rounded-full object-cover border-4 border-gray-200">
-                            <label for="avatar-upload" class="absolute bottom-0 right-0 bg-blue-600 text-white p-2 rounded-full cursor-pointer hover:bg-blue-700 transition-colors">
+                            <label for="avatar-upload" class="absolute bottom-0 right-0 bg-[#AA8C3C] text-white p-2 rounded-full cursor-pointer hover:bg-[#8B7530] transition-colors">
                                 <i data-lucide="camera" class="w-4 h-4"></i>
                             </label>
                             <input type="file" id="avatar-upload" accept="image/*" class="hidden">
@@ -181,7 +181,7 @@ export function ProfilePage() {
                         <button type="button" id="cancel-btn" class="px-6 py-2.5 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors">
                             Hủy
                         </button>
-                        <button type="submit" class="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        <button type="submit" class="px-6 py-2.5 bg-[#AA8C3C] text-white rounded-lg font-semibold hover:bg-[#8B7530] transition-colors">
                             Lưu Thay Đổi
                         </button>
                     </div>
@@ -199,7 +199,7 @@ export function ProfilePage() {
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="notifications-toggle" ${settings.notifications ? 'checked' : ''} class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#AA8C3C]"></div>
                         </label>
                     </div>
                     
@@ -210,7 +210,7 @@ export function ProfilePage() {
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="email-toggle" ${settings.emailUpdates ? 'checked' : ''} class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#AA8C3C]"></div>
                         </label>
                     </div>
                 </div>

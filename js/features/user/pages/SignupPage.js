@@ -34,7 +34,7 @@ export function SignupPage({ onSignupSuccess }) {
 
     // Title
     const title = createElement('h1', {
-        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] bg-clip-text text-transparent'
+        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] bg-clip-text text-transparent'
     });
     title.textContent = 'Tạo Tài Khoản';
     form.appendChild(title);
@@ -55,7 +55,7 @@ export function SignupPage({ onSignupSuccess }) {
         type: 'text',
         placeholder: 'Họ và tên',
         id: 'signup-name',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-red-200 transition-all'
     });
     form.appendChild(nameInput);
 
@@ -64,7 +64,7 @@ export function SignupPage({ onSignupSuccess }) {
         type: 'email',
         placeholder: 'Email',
         id: 'signup-email',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-red-200 transition-all'
     });
     form.appendChild(emailInput);
 
@@ -77,7 +77,7 @@ export function SignupPage({ onSignupSuccess }) {
         type: 'password',
         placeholder: 'Mật khẩu',
         id: 'signup-password',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-red-200 transition-all pr-10'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-red-200 transition-all pr-10'
     });
     passwordContainer.appendChild(passwordInput);
 
@@ -104,7 +104,7 @@ export function SignupPage({ onSignupSuccess }) {
     const loginLink = createElement('p', {
         className: 'text-sm text-gray-600 mt-6'
     });
-    loginLink.innerHTML = `Đã có tài khoản? <a href="#login" class="text-[#2563EB] font-semibold hover:underline">Đăng nhập</a>`;
+    loginLink.innerHTML = `Đã có tài khoản? <a href="#login" class="text-[#AA8C3C] font-semibold hover:underline">Đăng nhập</a>`;
     form.appendChild(loginLink);
 
     // Form submit handler

@@ -33,7 +33,7 @@ export function EmptyState({
 
     if (action) {
         const button = document.createElement('button');
-        button.className = 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200';
+        button.className = 'bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200';
         button.textContent = action.text;
         button.addEventListener('click', action.onClick);
         container.appendChild(button);

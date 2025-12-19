@@ -73,7 +73,7 @@ export function CheckoutPage() {
                 </div>
                 <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-3">Giỏ hàng trống</h2>
                 <p class="text-gray-600 dark:text-gray-400 mb-8">Vui lòng thêm sản phẩm vào giỏ hàng trước khi thanh toán</p>
-                <button onclick="window.location.hash='${ROUTES.CARS}'" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <button onclick="window.location.hash='${ROUTES.CARS}'" class="px-8 py-3 bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-white font-bold rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300">
                     Khám phá đấu giá
                 </button>
             </div>
@@ -92,22 +92,22 @@ export function CheckoutPage() {
             <div class="flex items-center justify-between relative">
                 <!-- Progress Line -->
                 <div class="absolute left-0 top-1/2 w-full h-1 bg-gray-200 dark:bg-gray-700 -translate-y-1/2 -z-10"></div>
-                <div class="absolute left-0 top-1/2 h-1 bg-gradient-to-r from-blue-500 to-blue-500 -translate-y-1/2 -z-10 transition-all duration-500" style="width: 50%"></div>
+                <div class="absolute left-0 top-1/2 h-1 bg-gradient-to-r from-[#8B7530] to-[#8B7530] -translate-y-1/2 -z-10 transition-all duration-500" style="width: 50%"></div>
                 
                 <!-- Steps -->
                 <div class="flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg mb-2 relative">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#8B7530] to-[#8B7530] flex items-center justify-center shadow-lg mb-2 relative">
                         <i data-lucide="check" class="w-6 h-6 text-white stroke-[3]"></i>
-                        <div class="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-75"></div>
+                        <div class="absolute inset-0 rounded-full bg-[#C9A961] animate-ping opacity-75"></div>
                     </div>
-                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400">Giỏ hàng</span>
+                    <span class="text-sm font-bold text-[#AA8C3C] dark:text-[#C9A961]">Giỏ hàng</span>
                 </div>
                 
                 <div class="flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg mb-2 ring-4 ring-blue-100 dark:ring-blue-900/50">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#8B7530] to-[#8B7530] flex items-center justify-center shadow-lg mb-2 ring-4 ring-blue-100 dark:ring-blue-900/50">
                         <span class="text-white font-bold text-lg">2</span>
                     </div>
-                    <span class="text-sm font-bold text-blue-600 dark:text-blue-400">Xác nhận</span>
+                    <span class="text-sm font-bold text-[#AA8C3C] dark:text-[#C9A961]">Xác nhận</span>
                 </div>
                 
                 <div class="flex flex-col items-center">
@@ -175,7 +175,7 @@ export function CheckoutPage() {
     });
     userCard.innerHTML = `
         <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7530] to-[#AA8C3C] flex items-center justify-center shadow-lg">
                 <i data-lucide="user" class="w-6 h-6 text-white"></i>
             </div>
             <h2 class="text-2xl font-black text-gray-900 dark:text-white">Thông tin người mua</h2>
@@ -221,11 +221,11 @@ export function CheckoutPage() {
 
         const header = createElement('div', { className: 'flex items-center gap-3 mb-6' });
         header.innerHTML = `
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7530] to-[#8B7530] flex items-center justify-center shadow-lg">
                 <i data-lucide="gavel" class="w-6 h-6 text-white"></i>
             </div>
             <h2 class="text-2xl font-black text-gray-900 dark:text-white">Đăng ký đấu giá</h2>
-            <span class="ml-auto px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full font-bold text-sm">
+            <span class="ml-auto px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-[#8B7530] dark:text-blue-300 rounded-full font-bold text-sm">
                 ${registrations.length} mục
             </span>
         `;
@@ -234,12 +234,12 @@ export function CheckoutPage() {
         const regList = createElement('div', { className: 'space-y-4' });
         registrations.forEach((item, index) => {
             const regItem = createElement('div', {
-                className: 'flex items-start gap-4 p-4 md:p-5 bg-gradient-to-br from-blue-50/50 to-blue-50/50 dark:from-blue-900/20 dark:to-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/50'
+                className: 'flex items-start gap-4 p-4 md:p-5 bg-gradient-to-br from-blue-50/50 to-blue-50/50 dark:from-blue-900/20 dark:to-blue-900/20 rounded-xl border border-blue-200 dark:border-[#7A6328]/50'
             });
 
             regItem.innerHTML = `
                 <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-100 dark:from-blue-900/50 dark:to-blue-900/50 flex items-center justify-center flex-shrink-0 shadow-inner">
-                    <i data-lucide="award" class="w-8 h-8 text-blue-600 dark:text-blue-400"></i>
+                    <i data-lucide="award" class="w-8 h-8 text-[#AA8C3C] dark:text-[#C9A961]"></i>
                 </div>
                 <div class="flex-1 min-w-0">
                     <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">${item.name}</h3>
@@ -255,7 +255,7 @@ export function CheckoutPage() {
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">Tiền đặt cọc:</span>
-                        <span class="text-xl font-black bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
+                        <span class="text-xl font-black bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] bg-clip-text text-transparent">
                             ${item.depositAmount.toLocaleString('vi-VN')} đ
                         </span>
                     </div>
@@ -275,11 +275,11 @@ export function CheckoutPage() {
 
         const header = createElement('div', { className: 'flex items-center gap-3 mb-6' });
         header.innerHTML = `
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7530] to-[#AA8C3C] flex items-center justify-center shadow-lg">
                 <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>
             </div>
             <h2 class="text-2xl font-black text-gray-900 dark:text-white">Sản phẩm</h2>
-            <span class="ml-auto px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full font-bold text-sm">
+            <span class="ml-auto px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-[#8B7530] dark:text-blue-300 rounded-full font-bold text-sm">
                 ${regularItems.length} mục
             </span>
         `;
@@ -297,7 +297,7 @@ export function CheckoutPage() {
                 <div class="flex-1">
                     <h3 class="font-bold text-gray-900 dark:text-white mb-1">${item.name}</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Số lượng: ${item.quantity}</p>
-                    <p class="text-lg font-black bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                    <p class="text-lg font-black bg-gradient-to-r from-[#AA8C3C] to-[#7A6328] bg-clip-text text-transparent">
                         ${(item.price * item.quantity).toLocaleString('vi-VN')} đ
                     </p>
                 </div>
@@ -320,7 +320,7 @@ export function CheckoutPage() {
 
     summaryCard.innerHTML = `
         <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7530] to-[#8B7530] flex items-center justify-center shadow-lg">
                 <i data-lucide="receipt" class="w-6 h-6 text-white"></i>
             </div>
             <h2 class="text-2xl font-black text-gray-900 dark:text-white">Tổng đơn</h2>
@@ -347,10 +347,10 @@ export function CheckoutPage() {
             ` : ''}
         </div>
         
-        <div class="flex items-baseline justify-between mb-8 pb-6 border-b-2 border-blue-200 dark:border-blue-800">
+        <div class="flex items-baseline justify-between mb-8 pb-6 border-b-2 border-blue-200 dark:border-[#7A6328]">
             <span class="text-lg font-bold text-gray-700 dark:text-gray-300">Tổng cộng</span>
             <div class="text-right">
-                <div class="text-3xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 bg-clip-text text-transparent">
+                <div class="text-3xl font-black bg-gradient-to-r from-[#AA8C3C] via-[#8B7530] to-[#8B7530] bg-clip-text text-transparent">
                     ${total.toLocaleString('vi-VN')}
                 </div>
                 <div class="text-sm text-gray-500 dark:text-gray-400">VNĐ</div>
@@ -360,18 +360,18 @@ export function CheckoutPage() {
         <!-- Payment Method -->
         <div class="mb-6">
             <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 block">Phương thức thanh toán</label>
-            <div class="p-4 border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center gap-3">
-                <input type="radio" name="payment" checked class="w-5 h-5 text-blue-600 accent-blue-600">
+            <div class="p-4 border-2 border-[#8B7530] dark:border-[#AA8C3C] bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center gap-3">
+                <input type="radio" name="payment" checked class="w-5 h-5 text-[#AA8C3C] accent-[#AA8C3C]">
                 <div class="flex-1">
                     <p class="font-bold text-gray-900 dark:text-white">VietQR</p>
                     <p class="text-xs text-gray-600 dark:text-gray-400">Chuyển khoản qua QR code</p>
                 </div>
-                <i data-lucide="qr-code" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+                <i data-lucide="qr-code" class="w-6 h-6 text-[#AA8C3C] dark:text-[#C9A961]"></i>
             </div>
         </div>
         
-        <button id="proceed-payment" ${!isProfileComplete ? 'disabled' : ''} class="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 p-[2px] transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 mb-4 ${!isProfileComplete ? 'opacity-50 cursor-not-allowed' : ''}">
-            <div class="relative bg-gradient-to-r from-blue-600 to-blue-500 rounded-[10px] py-4 px-6 transition-all duration-300 group-hover:from-blue-500 group-hover:to-blue-500">
+        <button id="proceed-payment" ${!isProfileComplete ? 'disabled' : ''} class="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-[#AA8C3C] via-[#8B7530] to-[#8B7530] p-[2px] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8B7530]/50 hover:scale-105 mb-4 ${!isProfileComplete ? 'opacity-50 cursor-not-allowed' : ''}">
+            <div class="relative bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] rounded-[10px] py-4 px-6 transition-all duration-300 group-hover:from-[#8B7530] group-hover:to-[#8B7530]">
                 <span class="relative z-10 flex items-center justify-center gap-3 text-white font-bold text-lg">
                     <i data-lucide="credit-card" class="w-6 h-6"></i>
                     <span>${!isProfileComplete ? 'Vui lòng cập nhật thông tin' : 'Tiếp tục thanh toán'}</span>
@@ -389,11 +389,11 @@ export function CheckoutPage() {
         <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-center gap-4 text-xs text-gray-500 dark:text-gray-400">
                 <div class="flex items-center gap-1">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
+                    <i data-lucide="shield-check" class="w-4 h-4 text-[#AA8C3C]"></i>
                     <span>Bảo mật SSL</span>
                 </div>
                 <div class="flex items-center gap-1">
-                    <i data-lucide="lock" class="w-4 h-4 text-blue-600"></i>
+                    <i data-lucide="lock" class="w-4 h-4 text-[#AA8C3C]"></i>
                     <span>Mã hóa dữ liệu</span>
                 </div>
             </div>

@@ -17,7 +17,7 @@ export function createSignInForm(onLoginSuccess) {
 
     // Title
     const title = createElement('h1', {
-        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] bg-clip-text text-transparent'
+        className: 'text-3xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] bg-clip-text text-transparent'
     });
     title.textContent = 'Đăng Nhập';
     form.appendChild(title);
@@ -27,7 +27,7 @@ export function createSignInForm(onLoginSuccess) {
         type: 'email',
         placeholder: 'Email',
         id: 'signin-email',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-blue-200 transition-all'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 my-2 w-full text-sm outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-blue-200 transition-all'
     });
     form.appendChild(emailInput);
 
@@ -40,7 +40,7 @@ export function createSignInForm(onLoginSuccess) {
         type: 'password',
         placeholder: 'Mật khẩu',
         id: 'signin-password',
-        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-blue-200 transition-all pr-10'
+        className: 'bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 w-full text-sm outline-none focus:border-[#AA8C3C] focus:ring-2 focus:ring-blue-200 transition-all pr-10'
     });
     passwordContainer.appendChild(passwordInput);
 
@@ -61,7 +61,7 @@ export function createSignInForm(onLoginSuccess) {
     });
 
     const rememberMe = createElement('label', {
-        className: 'flex items-center text-xs text-gray-600 cursor-pointer hover:text-[#2563EB] transition-colors'
+        className: 'flex items-center text-xs text-gray-600 cursor-pointer hover:text-[#AA8C3C] transition-colors'
     });
     const checkbox = createElement('input', {
         type: 'checkbox',
@@ -74,7 +74,7 @@ export function createSignInForm(onLoginSuccess) {
 
     const forgotPassword = createElement('a', {
         href: '#',
-        className: 'text-xs text-gray-600 hover:text-[#2563EB] transition-colors'
+        className: 'text-xs text-gray-600 hover:text-[#AA8C3C] transition-colors'
     });
     forgotPassword.textContent = 'Quên mật khẩu?';
     optionsContainer.appendChild(forgotPassword);
@@ -84,7 +84,7 @@ export function createSignInForm(onLoginSuccess) {
     // Submit button
     const submitBtn = createElement('button', {
         type: 'submit',
-        className: 'bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed btn-ripple w-full'
+        className: 'bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white font-semibold py-3 px-12 rounded-lg mt-4 uppercase text-xs tracking-wider hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed btn-ripple w-full'
     });
     submitBtn.textContent = 'Đăng Nhập';
     form.appendChild(submitBtn);

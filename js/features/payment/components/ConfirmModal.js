@@ -32,7 +32,7 @@ export function showConfirmModal({
         const colors = {
             danger: 'bg-red-600 hover:bg-red-700',
             warning: 'bg-yellow-600 hover:bg-yellow-700',
-            info: 'bg-blue-600 hover:bg-blue-700'
+            info: 'bg-[#AA8C3C] hover:bg-[#8B7530]'
         };
         const confirmColor = colors[type] || colors.danger;
 
@@ -45,7 +45,7 @@ export function showConfirmModal({
             <div class="p-6">
                 <div class="flex items-start gap-4">
                     <div class="flex-shrink-0 w-12 h-12 rounded-full ${type === 'danger' ? 'bg-red-100 dark:bg-red-900/30' : type === 'warning' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-blue-100 dark:bg-blue-900/30'} flex items-center justify-center">
-                        <i data-lucide="${type === 'danger' ? 'alert-triangle' : type === 'warning' ? 'alert-circle' : 'info'}" class="w-6 h-6 ${type === 'danger' ? 'text-red-600 dark:text-red-400' : type === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 'text-blue-600 dark:text-blue-400'}"></i>
+                        <i data-lucide="${type === 'danger' ? 'alert-triangle' : type === 'warning' ? 'alert-circle' : 'info'}" class="w-6 h-6 ${type === 'danger' ? 'text-red-600 dark:text-red-400' : type === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 'text-[#AA8C3C] dark:text-blue-400'}"></i>
                     </div>
                     <div class="flex-1">
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">${title}</h3>

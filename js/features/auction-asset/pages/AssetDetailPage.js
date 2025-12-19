@@ -79,9 +79,9 @@ export function AssetDetailPage({ asset, onNavigate }) {
 function createBreadcrumb(asset, onNavigate) {
     const breadcrumb = createFromHTML(`
         <nav class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-            <a href="#" class="home-link hover:text-[#2563EB] transition-colors">Trang chủ</a>
+            <a href="#" class="home-link hover:text-[#AA8C3C] transition-colors">Trang chủ</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            <a href="#" class="assets-link hover:text-[#2563EB] transition-colors">Danh sách tài sản</a>
+            <a href="#" class="assets-link hover:text-[#AA8C3C] transition-colors">Danh sách tài sản</a>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
             <span class="text-gray-900 dark:text-white font-semibold">${asset.shortTitle || asset.title}</span>
         </nav>
@@ -129,7 +129,7 @@ function createImageGallery(asset) {
 
         images.slice(0, 4).forEach((img, index) => {
             const thumb = createElement('img', {
-                className: 'w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-75 transition-opacity border-2 border-transparent hover:border-[#2563EB]',
+                className: 'w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-75 transition-opacity border-2 border-transparent hover:border-[#AA8C3C]',
                 src: img,
                 alt: `${asset.title} - ${index + 1}`
             });
@@ -196,7 +196,7 @@ function createAuctionInfo(asset) {
             <div class="grid grid-cols-2 gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                        <i data-lucide="monitor" class="w-6 h-6 text-[#2563EB]"></i>
+                        <i data-lucide="monitor" class="w-6 h-6 text-[#AA8C3C]"></i>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Hình thức</p>
@@ -206,7 +206,7 @@ function createAuctionInfo(asset) {
                 
                 <div class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                        <i data-lucide="trending-up" class="w-6 h-6 text-blue-600"></i>
+                        <i data-lucide="trending-up" class="w-6 h-6 text-[#AA8C3C]"></i>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Bước giá</p>
@@ -216,7 +216,7 @@ function createAuctionInfo(asset) {
                 
                 <div class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                        <i data-lucide="users" class="w-6 h-6 text-blue-600"></i>
+                        <i data-lucide="users" class="w-6 h-6 text-[#AA8C3C]"></i>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Người tham gia</p>
@@ -249,7 +249,7 @@ function createRegistrationCard(asset) {
     const card = createFromHTML(`
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-4">
             <div class="border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
-                <h3 class="text-2xl font-bold text-[#2563EB] mb-2">${asset.startPrice}</h3>
+                <h3 class="text-2xl font-bold text-[#AA8C3C] mb-2">${asset.startPrice}</h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400">Giá khởi điểm</p>
             </div>
             
@@ -279,10 +279,10 @@ function createRegistrationCard(asset) {
                 </div>
                 
                 <div class="flex items-start gap-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                    <i data-lucide="wallet" class="w-5 h-5 text-[#2563EB] mt-0.5"></i>
+                    <i data-lucide="wallet" class="w-5 h-5 text-[#AA8C3C] mt-0.5"></i>
                     <div class="flex-1">
                         <p class="text-sm text-gray-600 dark:text-gray-400">Tiền đặt cọc</p>
-                        <p class="font-bold text-[#2563EB]">${asset.depositAmount.toLocaleString('vi-VN')} VNĐ</p>
+                        <p class="font-bold text-[#AA8C3C]">${asset.depositAmount.toLocaleString('vi-VN')} VNĐ</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">(${asset.depositPercent}% giá khởi điểm)</p>
                     </div>
                 </div>
@@ -309,7 +309,7 @@ function createRegistrationCard(asset) {
                     Xem đăng ký của tôi
                 </button>
             ` : `
-                <button class="register-btn w-full bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white font-bold py-3 rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
+                <button class="register-btn w-full bg-gradient-to-r from-[#AA8C3C] to-[#AA8C3C] text-white font-bold py-3 rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
                     <i data-lucide="file-plus" class="w-5 h-5"></i>
                     <span>Đăng ký tham gia đấu giá</span>
                 </button>
@@ -370,7 +370,7 @@ function createNotFoundPage(onNavigate) {
                 <i data-lucide="alert-triangle" class="w-24 h-24 text-gray-400 mx-auto mb-4"></i>
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">Không tìm thấy tài sản</h1>
                 <p class="text-gray-600 dark:text-gray-400 mb-6">Tài sản bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
-                <button class="back-btn bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#1E40AF] transition-colors">
+                <button class="back-btn bg-[#AA8C3C] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#AA8C3C] transition-colors">
                     Quay lại danh sách
                 </button>
             </div>
