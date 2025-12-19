@@ -567,25 +567,35 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         return thead;
     }
 
-    function createTableBody(data) {
+   function createTableBody(data) {
         const tbody = createElement('tbody', { className: 'divide-y divide-gray-100' });
 
         data.forEach((item, index) => {
             const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
+
+            // LOGIC QUAN TRỌNG: Kiểm tra trạng thái yêu thích để hiển thị ngôi sao vàng
+            // Thêm state.activeTab vào để đảm bảo check đúng tab như bên Car
+            const isFav = isFavorite(item.id || item.plateNumber, item.type || 'motorbike', state.activeTab);
+            
+            // Nếu đã thích: hiện sao vàng (fill-yellow-400)
+            // Nếu chưa thích: ẩn đi (opacity-0) nhưng vẫn giữ chỗ
+            const starClass = isFav 
+                ? 'text-blue-400 fill-yellow-400 cursor-pointer' 
+                : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0';
 
             if (state.activeTab === 'results') {
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center gap-3 justify-center">
-<i data-lucide="star" class="${isFavorite(item.id || item.plateNumber, item.type || 'motorbike', state.activeTab) ? 'text-blue-400 fill-yellow-400 cursor-pointer' : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0'}" style="width: 18px; height: 18px;"></i>
+                            <i data-lucide="star" class="${starClass}" style="width: 18px; height: 18px;"></i>
                             <span class="font-bold border border-gray-200 w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate bg-white text-gray-800 group-hover:border-[#AA8C3C] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
                     </td>
                     <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
-                    <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
+                    <td class="px-6 py-4 text-gray-700 whitespace-nowrap">${item.province}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>
                     <td class="px-6 py-4"></td>
                 `;
@@ -596,7 +606,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center gap-3 justify-center">
-                            <i data-lucide="star" class="${isFavorite(item.id || item.plateNumber, item.type || 'motorbike') ? 'text-blue-400 fill-yellow-400 cursor-pointer' : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0'}" style="width: 18px; height: 18px;"></i>
+                            <i data-lucide="star" class="${starClass}" style="width: 18px; height: 18px;"></i>
                             <span class="font-bold border w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
@@ -605,31 +615,13 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
-
                     <td class="px-6 py-4">
                         <a href="#" class="text-[#AA8C3C] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
                     </td>
                 `;
             }
 
-            // Add event listener for registration link
-            const registerLink = tr.querySelector('a[href="#"]');
-            if (registerLink && state.activeTab !== 'results') {
-                registerLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    // Open registration modal with plate data
-                    registrationModal.open({
-                        auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
-                        auctionName: `Biển số ${item.plateNumber}`,
-                        auctionType: 'Biển số xe máy',
-                        depositAmount: calculateDeposit(item.startPrice),
-                        auctionDate: parseAuctionDate(item.auctionTime)
-                    });
-                });
-            }
-
-            // Add click handler for plate number
+            // Xử lý sự kiện khi bấm vào biển số để mở Modal chi tiết
             const plateNumber = tr.querySelector('[data-plate-number]');
             if (plateNumber) {
                 plateNumber.addEventListener('click', () => {
@@ -638,7 +630,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                         type: item.type || 'motorbike',
                         scope: state.activeTab,
                         onRegister: () => {
-                            // Open registration modal
+                            // Mở modal đăng ký
                             registrationModal.open({
                                 auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
                                 auctionName: `Biển số ${item.plateNumber}`,
@@ -647,9 +639,25 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                                 auctionDate: parseAuctionDate(item.auctionTime)
                             });
                         },
+                        // LOGIC QUAN TRỌNG: Đẩy lên đầu danh sách khi thích
                         onFavorite: (isFav) => {
                             if (isFav) moveItemToTop(item);
                         }
+                    });
+                });
+            }
+
+            // Xử lý nút Đăng ký đấu giá
+            const registerLink = tr.querySelector('a[href="#"]');
+            if (registerLink && state.activeTab !== 'results') {
+                registerLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    registrationModal.open({
+                        auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
+                        auctionName: `Biển số ${item.plateNumber}`,
+                        auctionType: 'Biển số xe máy',
+                        depositAmount: calculateDeposit(item.startPrice),
+                        auctionDate: parseAuctionDate(item.auctionTime)
                     });
                 });
             }
