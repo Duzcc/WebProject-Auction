@@ -1,6 +1,6 @@
 // Import expanded license plate data
-import { expandedCarPlates } from './expandedCarPlates.js';
-import { expandedMotorbikePlates } from './expandedMotorbikePlates.js';
+import { expandedCarPlates } from '../features/auction-shared/data/expandedCarPlates.js';
+import { expandedMotorbikePlates } from '../features/auction-shared/data/expandedMotorbikePlates.js';
 
 const carPlates = [
   { id: 1, plateNumber: "30M - 666.66", startPrice: "500.000.000 đ", province: "Thành phố Hà Nội", type: "Ngũ quý" },
@@ -573,13 +573,14 @@ const assets = [
 
 const newsData = [
   // Tin tức (News - Tích hợp dữ liệu từ ảnh 08.12.43.jpg và 08.12.49.jpg)
-  { id: 1, 
+  {
+    id: 1,
     category: "Dân trí",
     title: "Biển số ô tô 99A-999.99 trúng đấu giá gần 28 tỷ đồng",
     date: "12:32 11/12/2025",
     source: "Tin tức",
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/801c3346-4529-480b-a002-d10522f5beda.png",
-    excerpt: "Ngày 11/11, trao đổi với phóng viên Dân trí, đại diện công ty đấu giá biển số ô tô cho biết sáng cùng ngày đơn vị này vừa phối hợp với Cục CSGT (Bộ Công an) tổ chức đấu giá loạt biển số ô tô. Đáng chú ý, biển số ô tô 99A-999.99 đã tìm được chủ nhân với số tiền trúng đấu giá lên tới gần 28 tỷ đồng.", 
+    excerpt: "Ngày 11/11, trao đổi với phóng viên Dân trí, đại diện công ty đấu giá biển số ô tô cho biết sáng cùng ngày đơn vị này vừa phối hợp với Cục CSGT (Bộ Công an) tổ chức đấu giá loạt biển số ô tô. Đáng chú ý, biển số ô tô 99A-999.99 đã tìm được chủ nhân với số tiền trúng đấu giá lên tới gần 28 tỷ đồng.",
     content: `
       <p><strong>Ngày 11/11/2025</strong> — Tại phiên đấu giá do Công ty Đấu giá hợp danh Việt Nam tổ chức phối hợp với Cục CSGT, biển số <em>99A-999.99</em> đã được bán với mức giá kỷ lục gần 28 tỷ đồng.
       </p>
@@ -607,7 +608,8 @@ const newsData = [
         <strong>Trần Thanh/ Báo Dân trí.</strong>
       </p>`
   },
-  { id: 2,
+  {
+    id: 2,
     category: "Báo tin tức",
     title: "Lần đầu tiên lô rượu ngoại 'khủng' lên sàn đấu giá với mức khởi điểm 3,7 tỷ đồng",
     date: "10:24 11/12/2025",
@@ -632,7 +634,8 @@ const newsData = [
         <strong>Trung Nguyên/Báo Tin tức và Dân tộc.</strong>
       </p>
     ` },
-  { id: 3,
+  {
+    id: 3,
     category: "Viện Kiểm Sát",
     title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến",
     date: "14:44 31/07/2025",
@@ -675,7 +678,8 @@ const newsData = [
         <strong>Nguyễn Ngọc Dương – Viện KSND khu vực 1.</strong>
       </p>
       ` },
-  { id: 4,
+  {
+    id: 4,
     category: "Dân trí",
     title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước",
     date: "18:26 16/05/2025",
@@ -736,13 +740,13 @@ const newsData = [
 
 const notifData = [
   // Thông báo (Notifications - Tích hợp dữ liệu từ ảnh 08.12.56.png và 08.13.02.jpg)
-  { id: 10, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:56 12/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2d7cffd4-75ef-4eea-8ce3-f94dc6f894bf.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá......", content: `Công ty Đấu giá hợp danh Việt Nam (Công ty VPA) trân trọng thông báo một phiên đấu giá sắp tới được tổ chức tại trụ sở NO2-T4.03. Phiên đấu giá gồm nhiều mặt hàng tang vật, hồ sơ chi tiết sẽ được đăng tải trên website. Khách hàng quan tâm vui lòng liên hệ hotline để biết thêm chi tiết.` },
-  { id: 11, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 19/12/2025", date: "16:57 11/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 19/12/2025 như sau....", content: `Công ty thông báo phiên đấu giá biển số xe ngày 19/12/2025 sẽ diễn ra trực tuyến. Thông tin chi tiết về danh mục biển số, thời gian bắt đầu và hướng dẫn tham gia sẽ được cập nhật trên trang thông báo.` },
-  { id: 12, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 18/12/2025", date: "08:55 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 18/12/2025 như sau...", content: `Phiên đấu giá ngày 18/12/2025 bao gồm các lô biển số xe do các cơ quan thanh lý. Mọi quy trình tham gia được thực hiện trực tuyến.`  },
-  { id: 13, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:20 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo về phiên đấu giá tài sản kèm theo các thông tin chi tiết, danh mục và hướng dẫn tham dự. Khách hàng tham gia vui lòng đọc kỹ thể lệ.`  },
-  { id: 14, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 17/12/2025", date: "08:48 10/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 17/12/2025 như sau:", content: `Phiên đấu giá ngày 17/12/2025 sẽ diễn ra theo lịch và hướng dẫn đã đăng tải. Vui lòng kiểm tra kỹ thông tin lô và quy định tham gia.` },
-  { id: 15, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:25 08/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/30fe8fa2-00c4-4fa4-a2ef-3fd5828c5230.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo các tài sản đưa ra bán, điều kiện và thể lệ tham gia.` },
-  { id: 16, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 16/12/2025", date: "16:42 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 16/12/2025 như sau...", content: `Thông tin chi tiết về phiên đấu giá ngày 16/12/2025 đã được cập nhật.`  },
+  { id: 10, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:56 12/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2d7cffd4-75ef-4eea-8ce3-f94dc6f894bf.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá......", content: `Công ty Đấu giá hợp danh Việt Nam (Công ty VPA) trân trọng thông báo một phiên đấu giá sắp tới được tổ chức tại trụ sở NO2-T4.03. Phiên đấu giá gồm nhiều mặt hàng tang vật, hồ sơ chi tiết sẽ được đăng tải trên website. Khách hàng quan tâm vui lòng liên hệ hotline để biết thêm chi tiết.` },
+  { id: 11, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 19/12/2025", date: "16:57 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 19/12/2025 như sau....", content: `Công ty thông báo phiên đấu giá biển số xe ngày 19/12/2025 sẽ diễn ra trực tuyến. Thông tin chi tiết về danh mục biển số, thời gian bắt đầu và hướng dẫn tham gia sẽ được cập nhật trên trang thông báo.` },
+  { id: 12, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 18/12/2025", date: "08:55 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 18/12/2025 như sau...", content: `Phiên đấu giá ngày 18/12/2025 bao gồm các lô biển số xe do các cơ quan thanh lý. Mọi quy trình tham gia được thực hiện trực tuyến.` },
+  { id: 13, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:20 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo về phiên đấu giá tài sản kèm theo các thông tin chi tiết, danh mục và hướng dẫn tham dự. Khách hàng tham gia vui lòng đọc kỹ thể lệ.` },
+  { id: 14, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 17/12/2025", date: "08:48 10/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 17/12/2025 như sau:", content: `Phiên đấu giá ngày 17/12/2025 sẽ diễn ra theo lịch và hướng dẫn đã đăng tải. Vui lòng kiểm tra kỹ thông tin lô và quy định tham gia.` },
+  { id: 15, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:25 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/30fe8fa2-00c4-4fa4-a2ef-3fd5828c5230.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo các tài sản đưa ra bán, điều kiện và thể lệ tham gia.` },
+  { id: 16, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 16/12/2025", date: "16:42 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 16/12/2025 như sau...", content: `Thông tin chi tiết về phiên đấu giá ngày 16/12/2025 đã được cập nhật.` },
   { id: 17, category: "", title: "CÔNG TY ĐẤU GIÁ HỢP DANH ĐẤU GIÁ VIỆT NAM THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "09:42 08/12/2024", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/531f2b9a-6022-481f-8a01-5caf6ef66b1e.jpg", excerpt: "", content: `` },
 ];
 
