@@ -335,7 +335,10 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         const paginationInfo = getPaginatedData();
         const { data, totalItems, startIndex, endIndex } = paginationInfo;
 
-        // Result count - removed for cleaner UI
+        // Result count
+        const resultCount = createElement('div', { className: 'flex justify-between items-center mb-4' });
+        resultCount.appendChild(createElement('span', { className: 'text-gray-500 text-sm', id: 'result-count-text' }, `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`));
+        tableArea.appendChild(resultCount);
 
         // Table
         const tableWrapper = createElement('div', { className: 'overflow-x-auto rounded-t-lg border border-gray-200' });
@@ -621,6 +624,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
 
         // Items per page selector
         const itemsPerPageWrapper = createElement('div', { className: 'flex items-center gap-2' });
+        itemsPerPageWrapper.appendChild(createElement('span', { className: 'text-sm text-gray-600' }, 'Hiển thị:'));
 
         // Create select element directly for better event handling
         const select = createElement('select', {
@@ -643,6 +647,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         });
 
         itemsPerPageWrapper.appendChild(select);
+        itemsPerPageWrapper.appendChild(createElement('span', { className: 'text-sm text-gray-600' }, 'mục/trang'));
 
         // Page navigation
         const pageNav = createElement('div', { className: 'flex items-center gap-2' });
@@ -740,7 +745,11 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         const paginationInfo = getPaginatedData();
         const { data, totalItems, startIndex, endIndex } = paginationInfo;
 
-        // Result count element removed - no update needed
+        // Update result count
+        const resultCountEl = container.querySelector('#result-count-text');
+        if (resultCountEl) {
+            resultCountEl.textContent = `Hiển thị ${startIndex}-${endIndex} / ${totalItems} kết quả`;
+        }
 
         // Update table body
         const table = container.querySelector('table');

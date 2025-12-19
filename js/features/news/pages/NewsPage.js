@@ -45,14 +45,14 @@ function PageBanner({ title, subtitle, backgroundImage }) {
 /**
  * NewsSection Component - News and notifications with tabs
  */
-function NewsSection({ newsData = [], notifData = [] }) {
-    let activeTab = 'news';
+function NewsSection({ newsData = [], notifData = [], initialTab, onNavigate } = {}) {
+    let activeTab = initialTab || 'news';
     const container = createElement('div', { className: 'py-16 bg-white' });
 
     function render() {
         container.innerHTML = '';
 
-        const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
+            const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
 
         // Tab Navigation
         const tabNav = createElement('div', { className: 'flex gap-1 mb-6 border-b border-gray-200' });
@@ -79,7 +79,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
 
         tabNav.appendChild(newsTab);
         tabNav.appendChild(notifTab);
-        innerContainer.appendChild(tabNav);
+        innerContainer.appendChild(tabNav); 
 
         // Main Content Title
         const currentData = activeTab === 'news' ? newsData : notifData;
@@ -101,49 +101,56 @@ function NewsSection({ newsData = [], notifData = [] }) {
         const listContainer = createElement('div', { className: 'space-y-0 pb-4' });
 
         currentData.forEach(item => {
-            const newsRow = createNewsRow(item, activeTab === 'news');
+            const newsRow = createNewsRow(item, activeTab === 'news', onNavigate);
             listContainer.appendChild(newsRow);
         });
 
         innerContainer.appendChild(listContainer);
 
         // Pagination
-        innerContainer.appendChild(createPagination(totalPages, 1));
+        //innerContainer.appendChild(createPagination(totalPages, 1)); ẩn ô số 1,2
 
         container.appendChild(innerContainer);
     }
 
-    function createNewsRow(item, isNewsTab) {
-        const categoryDisplay = isNewsTab && item.category ? `[${item.category}]` : '';
+    function createNewsRow(item, isNewsTab, onNavigate) {
+        const categoryDisplay = item.category ? `<div class="text-sm text-gray-400 mb-2">${item.category}</div>` : '';
 
         const rowHtml = `
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-blue-200 pb-4 pt-4 group cursor-pointer hover:bg-blue-50/50 transition-colors">
-                <div class="flex items-start gap-3 w-full md:w-3/4">
-                    <i data-lucide="chevrons-right" class="text-[#AA8C3C] mt-1 flex-shrink-0" style="width: 20px; height: 20px;"></i>
-                    <h3 class="text-gray-800 font-medium text-base group-hover:text-[#AA8C3C] transition-colors">
-                        <span class="text-gray-500 font-normal text-sm mr-1">${categoryDisplay}</span>
+            <div class="news-row flex gap-6 items-start border-b border-blue-200 pb-6 pt-6 group cursor-pointer hover:bg-blue-50/50 transition-colors">
+                <img src="${item.image || '/images/news/default.jpg'}" alt="${item.title}" class="w-56 h-36 object-cover rounded-md flex-shrink-0" />
+
+                <div class="flex-1">
+                    <h3 class="text-gray-800 font-bold text-lg group-hover:text-[#AA8C3C] transition-colors">
                         ${item.title}
                     </h3>
+                    ${categoryDisplay}
+                    <p class="text-gray-600 mt-2">${item.excerpt || ''}</p>
                 </div>
-                <div class="flex items-center gap-4 mt-2 md:mt-0 md:w-1/4 md:justify-end">
-                    ${item.source ? `
-                        <span class="text-[#AA8C3C] border border-[#AA8C3C] bg-blue-50 px-2 py-0.5 rounded-full text-xs font-bold whitespace-nowrap">
-                            ${isNewsTab ? item.source : 'Thông báo'}
-                        </span>
-                    ` : ''}
-                    <span class="text-gray-500 text-xs italic whitespace-nowrap">
-                        (Ngày đăng bài: ${item.date})
-                    </span>
-                </div>
+
+                <div class="flex-shrink-0 text-xs text-gray-400 ml-4 whitespace-nowrap">${item.date}</div>
             </div>
         `;
 
         const row = createFromHTML(rowHtml);
 
-        // Initialize Lucide icons
+        // Initialize Lucide icons (not required here but keep for consistency)
         if (window.lucide) {
             window.lucide.createIcons();
         }
+
+        // Click -> maybe navigate/open detail in future
+        row.addEventListener('click', () => {
+            if (typeof onNavigate === 'function') {
+                if (isNewsTab) {
+                    onNavigate('news-detail', item.id);
+                } else {
+                    onNavigate('notif-detail', item.id);
+                }
+            } else {
+                console.log('Open item', item.id);
+            }
+        });
 
         return row;
     }
@@ -178,7 +185,7 @@ function NewsSection({ newsData = [], notifData = [] }) {
 // MAIN PAGE EXPORT
 // =============================
 
-export function NewsPage() {
+export function NewsPage({ onNavigate, initialTab } = {}) {
     const container = createElement('div', { className: 'bg-white min-h-[70vh] pb-16' });
 
     // Add banner
@@ -189,7 +196,7 @@ export function NewsPage() {
     }));
 
     // Add news section
-    container.appendChild(NewsSection({ newsData, notifData }));
+    container.appendChild(NewsSection({ newsData, notifData, initialTab, onNavigate }));
 
     // Initialize Lucide icons
     if (window.lucide) {
