@@ -580,31 +580,32 @@ const newsData = [
     source: "Tin tức",
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/801c3346-4529-480b-a002-d10522f5beda.png",
     excerpt: "Ngày 11/11, trao đổi với phóng viên Dân trí, đại diện công ty đấu giá biển số ô tô cho biết sáng cùng ngày đơn vị này vừa phối hợp với Cục CSGT (Bộ Công an) tổ chức đấu giá loạt biển số ô tô. Đáng chú ý, biển số ô tô 99A-999.99 đã tìm được chủ nhân với số tiền trúng đấu giá lên tới gần 28 tỷ đồng.", 
-    content: `<p><strong>Ngày 11/11/2025</strong> — Tại phiên đấu giá do Công ty Đấu giá hợp danh Việt Nam tổ chức phối hợp với Cục CSGT, biển số <em>99A-999.99</em> đã được bán với mức giá kỷ lục gần 28 tỷ đồng.</p>
-    <p> Đại diện đơn vị tổ chức cho biết, phiên đấu giá thu hút nhiều nhà đầu tư và người sưu tập quan tâm. Quy trình đấu giá được thực hiện công khai, minh bạch với sự giám sát của cơ quan chức năng.
-    </p>
-    <figure class="my-4">
-      <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/3a8a0074-00c7-4740-b488-21b09c29a3ff.png" alt=""
-        style="display:block;margin:0 auto;width:100%;max-width:400px;height:400px;border-radius:6px;" />
-          <figcaption class="text-sm text-gray-500 mt-2 text-center">Ảnh: Biển số ô tô 99A-999.99 trúng đấu giá lên tới gần 28 tỷ đồng (Ảnh: Chụp màn hình).</figcaption>
-    </figure>
-    <p>Theo vị đại diện, đây là lần thứ 2 biển số ô tô 99A-999.99 này được đưa ra đấu giá, trước đó biển số này được đưa ra đấu giá lần 1 vào chiều 12/8 với số tiền trúng cao kỷ lục - hơn 21,8 tỷ đồng, tuy nhiên trong lần 1 người đấu giá đã bỏ cọc.
-      Các biển số ô tô có trúng đấu giá cao trong sáng nay gồm: 99A-999.99 giá trúng gần 28 tỷ đồng, 51N-234.56 giá trúng đấu giá 915 triệu đồng, 11A-234.56 giá trúng đấu giá 550 triệu đồng, 36B-111.11 giá trúng đấu giá 320 triệu đồng....
-    </p>
-    <figure class="my-4">
-      <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/f5762249-b36e-424a-b537-f0e93d558ca5.png" alt="Mô tả ảnh"
-       style="display:block;margin:0 auto;width:100%;max-width:600px;border-radius:6px;" 
-      />
-      <figcaption class="text-sm text-gray-500 mt-2 text-center">
-        Bên trong khu vực tổ chức đấu giá biển số (Ảnh: Cục CSGT).
-      </figcaption>
-    </figure>
-    <p>Cục CSGT cho biết, từ ngày 15/9/2023 đến ngày 20/10, tổng số biển đấu giá thành/niêm yết là 150.914 biển số, tương đương hơn 8.300 tỷ đồng. Trong đó, biển số ô tô đấu giá thành/niêm yết là 87.939 biển số, tương đương hơn 7.500 tỷ đồng, biển số xe máy đấu giá thành là 62.975 biển số, tương đương hơn 804 tỷ đồng.
-      Tổng số tiền mà lực lượng chức năng đã thu về tài khoản chuyên thu, để nộp ngân sách nhà nước là 8.100 tỷ đồng từ đấu giá biển số xe.
-    </p>
-    <p class="text-base text-black-1000">
-      <strong>Trần Thanh/ Báo Dân trí.</strong>
-    </p>`
+    content: 
+      `<p><strong>Ngày 11/11/2025</strong> — Tại phiên đấu giá do Công ty Đấu giá hợp danh Việt Nam tổ chức phối hợp với Cục CSGT, biển số <em>99A-999.99</em> đã được bán với mức giá kỷ lục gần 28 tỷ đồng.
+      </p>
+      <p> Đại diện đơn vị tổ chức cho biết, phiên đấu giá thu hút nhiều nhà đầu tư và người sưu tập quan tâm. Quy trình đấu giá được thực hiện công khai, minh bạch với sự giám sát của cơ quan chức năng.
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/3a8a0074-00c7-4740-b488-21b09c29a3ff.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:400px;height:400px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">Ảnh: Biển số ô tô 99A-999.99 trúng đấu giá lên tới gần 28 tỷ đồng (Ảnh: Chụp màn hình).</figcaption>
+      </figure>
+      <p>Theo vị đại diện, đây là lần thứ 2 biển số ô tô 99A-999.99 này được đưa ra đấu giá, trước đó biển số này được đưa ra đấu giá lần 1 vào chiều 12/8 với số tiền trúng cao kỷ lục - hơn 21,8 tỷ đồng, tuy nhiên trong lần 1 người đấu giá đã bỏ cọc.
+        Các biển số ô tô có trúng đấu giá cao trong sáng nay gồm: 99A-999.99 giá trúng gần 28 tỷ đồng, 51N-234.56 giá trúng đấu giá 915 triệu đồng, 11A-234.56 giá trúng đấu giá 550 triệu đồng, 36B-111.11 giá trúng đấu giá 320 triệu đồng....
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/f5762249-b36e-424a-b537-f0e93d558ca5.png" alt="Mô tả ảnh"
+        style="display:block;margin:0 auto;width:100%;max-width:600px;border-radius:6px;" />
+        <figcaption class="text-sm text-gray-500 mt-2 text-center">
+          Bên trong khu vực tổ chức đấu giá biển số (Ảnh: Cục CSGT).
+        </figcaption>
+      </figure>
+      <p>Cục CSGT cho biết, từ ngày 15/9/2023 đến ngày 20/10, tổng số biển đấu giá thành/niêm yết là 150.914 biển số, tương đương hơn 8.300 tỷ đồng. Trong đó, biển số ô tô đấu giá thành/niêm yết là 87.939 biển số, tương đương hơn 7.500 tỷ đồng, biển số xe máy đấu giá thành là 62.975 biển số, tương đương hơn 804 tỷ đồng.
+        Tổng số tiền mà lực lượng chức năng đã thu về tài khoản chuyên thu, để nộp ngân sách nhà nước là 8.100 tỷ đồng từ đấu giá biển số xe.
+      </p>
+      <p class="text-base text-black-1000">
+        <strong>Trần Thanh/ Báo Dân trí.</strong>
+      </p>`
  },
   { id: 2,
     category: "Báo tin tức",
@@ -613,7 +614,8 @@ const newsData = [
     source: "Tin tức",
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/a8b85c98-0360-4714-a780-aaf1d2c3221f.png",
     excerpt: " Chiều 2/12, đại diện Công ty Đấu giá hợp danh Việt Nam (VPA) cho biết, tài sản bao gồm 3.752 chai rượu sản xuất ở nước ngoài và được bảo quản trong kho, có danh mục chi tiết kèm theo, hình ảnh minh họa cho thấy nhiều dòng sản phẩm cao cấp.",
-    content: `Chiều 2/12, đại diện Công ty Đấu giá hợp danh Việt Nam (VPA) cho biết, tài sản bao gồm 3.752 chai rượu sản xuất ở nước ngoài và được bảo quản trong kho. Danh mục chi tiết cho biết nhiều nhãn hiệu cao cấp, lô hàng sẽ được bán theo lô; dự kiến sẽ có nhiều nhà sưu tập quan tâm. Đây là lần đầu tiên một lô rượu ngoại quy mô lớn được đưa lên sàn đấu giá công khai.` },
+    content: `Chiều 2/12, đại diện Công ty Đấu giá hợp danh Việt Nam (VPA) cho biết, tài sản bao gồm 3.752 chai rượu sản xuất ở nước ngoài và được bảo quản trong kho. Danh mục chi tiết cho biết nhiều nhãn hiệu cao cấp, lô hàng sẽ được bán theo lô; dự kiến sẽ có nhiều nhà sưu tập quan tâm. Đây là lần đầu tiên một lô rượu ngoại quy mô lớn được đưa lên sàn đấu giá công khai.
+    ` },
   { id: 3, category: "Viện Kiểm Sát", title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến", date: "14:44 31/07/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/5730c3f8-5d0b-45c9-9bc6-93a8af2ed52a.png", excerpt: " Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia, là chìa khóa thúc đẩy sự phát triển toàn diện của đất nước. Mục tiêu cơ bản của chuyển đổi số là việc ứng dụng công nghệ thông tin trong các hoạt động của mọi lĩnh vực.", content: `Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia. Việc tiến hành đấu giá tài sản bằng hình thức trực tuyến được cho là minh bạch và tiện lợi, tuy nhiên Viện KSND khu vực 1 đã tiến hành kiểm sát để đảm bảo quy trình đúng pháp luật, bảo vệ quyền lợi của người tham gia.` },
   { id: 4, category: "Dân trí", title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước", date: "18:26 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/bee3fded-0ff0-4448-ad53-5cea0ba77604.png", excerpt: "Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.", content: `Theo báo cáo của Cục CSGT, từ ngày 15/9/2023 đến 14/5 năm sau, tổng số tiền người trúng đấu giá biển số đã nộp vào ngân sách là 5.200 tỷ đồng. Điều này cho thấy hình thức đấu giá biển số đóng góp đáng kể vào nguồn thu của nhà nước.` },
   { id: 5, category: "XD OL", title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng", date: "17:57 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png", excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.", content: `Báo cáo cho biết, kể từ ngày bắt đầu một chuỗi đấu giá, tổng số tiền thu được từ người trúng đấu giá biển số đạt khoảng 830 tỷ đồng, thể hiện sự quan tâm của người dân tới biển số đẹp.` },
