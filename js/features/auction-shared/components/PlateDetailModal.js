@@ -6,6 +6,7 @@
 import { createElement, createFromHTML } from '../../../shared/utils/dom.js';
 import { BiddingInterface } from '../components/BiddingInterface.js';
 import { calculateDeposit as calcDepositUtil, DEPOSIT_PERCENTAGE } from '../utils/deposit.js';
+import { toggleFavorite, isFavorite, subscribeToFavorites } from '../../../shared/utils/favorites.js';
 
 export function PlateDetailModal() {
     let isOpen = false;
@@ -97,10 +98,8 @@ export function PlateDetailModal() {
                                 </div>
                             </div>
                         </div>
-                        <!-- Favorite button -->
-                        <button class="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
-                            <i data-lucide="star" class="w-6 h-6 text-yellow-400"></i>
-                        </button>
+                        <!-- Favorite button (dynamically rendered) -->
+                        <div id="fav-button-container" class="absolute top-4 right-4"></div>
                     </div>
 
                     <!-- Information Grid -->
@@ -180,6 +179,50 @@ export function PlateDetailModal() {
         // Re-initialize Lucide icons
         if (window.lucide) {
             window.lucide.createIcons();
+        }
+
+        // Favorite button: keep the star UI, update via favorites subscription, and notify opener to move item to top
+        try {
+            const favContainer = content.querySelector('#fav-button-container');
+            if (favContainer) {
+                const favItem = { id: plateData.id || plateData.plateNumber, type: plateData.type || 'car', data: plateData, scope: plateData.scope || null };
+                const favBtn = document.createElement('button');
+                favBtn.className = 'p-3 rounded-full bg-white shadow-lg hover:scale-110 transition-transform';
+
+                const updateFavIcon = () => {
+                    const fav = isFavorite(favItem.id, favItem.type, favItem.scope);
+                    favBtn.innerHTML = `<i data-lucide="star" class="w-6 h-6 ${fav ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}"></i>`;
+                    if (window.lucide) window.lucide.createIcons();
+                };
+
+                updateFavIcon();
+                const unsub = subscribeToFavorites(updateFavIcon);
+
+                favBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Toggle favorite (persistence handled by shared util)
+                    const newStatus = toggleFavorite(favItem, favItem.scope);
+
+                    // Small animation for feedback
+                    favBtn.classList.add('animate-scale-in');
+                    setTimeout(() => favBtn.classList.remove('animate-scale-in'), 400);
+
+                    // Notify parent/page so it can move the item to top if needed
+                    if (typeof plateData.onFavorite === 'function') {
+                        try { plateData.onFavorite(newStatus); } catch (err) { console.error('onFavorite callback error', err); }
+                    }
+                });
+
+                // Clean container and append
+                favContainer.innerHTML = '';
+                favContainer.appendChild(favBtn);
+
+                // Optional: return unsub when modal closed (not strictly required here)
+            }
+        } catch (err) {
+            console.error(err);
         }
 
         // Add BiddingInterface component if auction data is available

@@ -3,7 +3,7 @@
  * Manages user favorites with localStorage persistence
  */
 
-import { createState } from './state.js';
+import { createState } from '../../core/utils/state.js';
 
 const FAVORITES_KEY = 'vpa-favorites';
 
@@ -19,11 +19,13 @@ export function initFavorites() {
     try {
         const saved = localStorage.getItem(FAVORITES_KEY);
         if (saved) {
-            favoritesState.items = JSON.parse(saved);
+            favoritesState.set({ items: JSON.parse(saved) });
+        } else {
+            favoritesState.set({ items: [] });
         }
     } catch (error) {
         console.error('Error loading favorites:', error);
-        favoritesState.items = [];
+        favoritesState.set({ items: [] });
     }
 }
 
@@ -32,7 +34,8 @@ export function initFavorites() {
  */
 function saveFavorites() {
     try {
-        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesState.items));
+        const items = (favoritesState.get() && favoritesState.get().items) || [];
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
     } catch (error) {
         console.error('Error saving favorites:', error);
     }
@@ -45,15 +48,18 @@ function saveFavorites() {
  * @param {string} item.type - Item type (car, motorbike, asset)
  * @param {Object} item.data - Item data
  */
-export function addToFavorites(item) {
-    // Check if already exists
-    const exists = favoritesState.items.some(fav => fav.id === item.id && fav.type === item.type);
+export function addToFavorites(item, scope = null) {
+    // Read current items
+    const items = (favoritesState.get() && favoritesState.get().items) || [];
+    const exists = items.some(fav => fav.id === item.id && fav.type === item.type && fav.scope === scope);
 
     if (!exists) {
-        favoritesState.items = [...favoritesState.items, {
+        const newItems = [...items, {
             ...item,
+            scope: scope || null,
             addedAt: new Date().toISOString()
         }];
+        favoritesState.set({ items: newItems });
         saveFavorites();
         return true;
     }
@@ -66,10 +72,10 @@ export function addToFavorites(item) {
  * @param {string} id - Item ID
  * @param {string} type - Item type
  */
-export function removeFromFavorites(id, type) {
-    favoritesState.items = favoritesState.items.filter(
-        item => !(item.id === id && item.type === type)
-    );
+export function removeFromFavorites(id, type, scope = null) {
+    const items = (favoritesState.get() && favoritesState.get().items) || [];
+    const newItems = items.filter(item => !(item.id === id && item.type === type && item.scope === scope));
+    favoritesState.set({ items: newItems });
     saveFavorites();
 }
 
@@ -79,8 +85,9 @@ export function removeFromFavorites(id, type) {
  * @param {string} type - Item type
  * @returns {boolean} True if in favorites
  */
-export function isFavorite(id, type) {
-    return favoritesState.items.some(item => item.id === id && item.type === type);
+export function isFavorite(id, type, scope = null) {
+    const items = (favoritesState.get() && favoritesState.get().items) || [];
+    return items.some(item => item.id === id && item.type === type && item.scope === scope);
 }
 
 /**
@@ -88,12 +95,12 @@ export function isFavorite(id, type) {
  * @param {Object} item - Item to toggle
  * @returns {boolean} New favorite status
  */
-export function toggleFavorite(item) {
-    if (isFavorite(item.id, item.type)) {
-        removeFromFavorites(item.id, item.type);
+export function toggleFavorite(item, scope = null) {
+    if (isFavorite(item.id, item.type, scope)) {
+        removeFromFavorites(item.id, item.type, scope);
         return false;
     } else {
-        addToFavorites(item);
+        addToFavorites(item, scope);
         return true;
     }
 }
@@ -103,11 +110,16 @@ export function toggleFavorite(item) {
  * @param {string} type - Optional filter by type
  * @returns {Array} Favorites array
  */
-export function getFavorites(type = null) {
+export function getFavorites(type = null, scope = null) {
+    const items = (favoritesState.get() && favoritesState.get().items) || [];
+    let result = items;
     if (type) {
-        return favoritesState.items.filter(item => item.type === type);
+        result = result.filter(item => item.type === type);
     }
-    return favoritesState.items;
+    if (scope !== null) {
+        result = result.filter(item => item.scope === scope);
+    }
+    return result;
 }
 
 /**
@@ -115,15 +127,20 @@ export function getFavorites(type = null) {
  * @param {string} type - Optional filter by type
  * @returns {number} Count
  */
-export function getFavoritesCount(type = null) {
-    return getFavorites(type).length;
+export function getFavoritesCount(type = null, scope = null) {
+    return getFavorites(type, scope).length;
 }
 
 /**
  * Clear all favorites
  */
-export function clearFavorites() {
-    favoritesState.items = [];
+export function clearFavorites(scope = null) {
+    if (scope === null) {
+        favoritesState.set({ items: [] });
+    } else {
+        const items = (favoritesState.get() && favoritesState.get().items) || [];
+        favoritesState.set({ items: items.filter(i => i.scope !== scope) });
+    }
     saveFavorites();
 }
 
@@ -134,7 +151,7 @@ export function clearFavorites() {
  */
 export function subscribeToFavorites(callback) {
     return favoritesState.subscribe(() => {
-        callback(favoritesState.items);
+        callback((favoritesState.get() && favoritesState.get().items) || []);
     });
 }
 
@@ -144,13 +161,13 @@ export function subscribeToFavorites(callback) {
  * @param {Function} onToggle - Optional callback
  * @returns {HTMLElement} Favorite button
  */
-export function createFavoriteButton(item, onToggle = null) {
+export function createFavoriteButton(item, onToggle = null, scope = null) {
     const button = document.createElement('button');
     button.className = 'favorite-btn p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 group';
     button.title = 'Thêm vào yêu thích';
 
     const updateButton = () => {
-        const isFav = isFavorite(item.id, item.type);
+        const isFav = isFavorite(item.id, item.type, scope);
         const iconClass = isFav ? 'fill-red-500 text-red-500' : 'text-gray-400 group-hover:text-red-500';
 
         button.innerHTML = `<i data-lucide="heart" class="w-5 h-5 ${iconClass} transition-all duration-200"></i>`;
@@ -171,7 +188,7 @@ export function createFavoriteButton(item, onToggle = null) {
         e.preventDefault();
         e.stopPropagation();
 
-        const newStatus = toggleFavorite(item);
+        const newStatus = toggleFavorite(item, scope);
 
         // Add animation
         button.classList.add('animate-scale-in');

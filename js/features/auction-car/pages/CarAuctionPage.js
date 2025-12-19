@@ -3,6 +3,7 @@ import { PageBanner } from '../../../shared/components/PageBanner.js';
 import { AuctionRegistrationModal } from '../../auction-shared/components/AuctionRegistrationModal.js';
 import { PlateDetailModal } from '../../auction-shared/components/PlateDetailModal.js';
 import { calculateDeposit, parseAuctionDate } from '../../auction-shared/utils/plateHelpers.js';
+import { isFavorite, subscribeToFavorites, getFavorites } from '../../../shared/utils/favorites.js';
 
 /**
  * CarAuctionPage
@@ -61,6 +62,11 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     // Create plate detail modal instance
     const plateDetailModal = PlateDetailModal();
     document.body.appendChild(plateDetailModal.element);
+
+    // Re-render when favorites change (so starred items update in list)
+    subscribeToFavorites(() => {
+        render();
+    });
 
     // Constants - Province with license plate codes
     const vietnameseProvinces = [
@@ -269,12 +275,12 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
     function createAccordion(section, title, options, selectedOptions) {
         const isOpen = state.openSections[section];
 
-        // VPA Official Style: Header pink, content white
-        const accordion = createElement('div', { className: 'rounded-[16px] bg-white overflow-hidden border border-rose-50' });
+        // VPA Official Style: Header yellow, content white
+        const accordion = createElement('div', { className: 'rounded-[16px] bg-white overflow-hidden border border-amber-50' });
 
-        // Header with pink background and dark red text
+        // Header with yellow background and dark amber text
         const button = createElement('button', {
-            className: 'w-full flex items-center justify-between px-5 py-4 text-red-900 text-base font-bold bg-rose-50 hover:bg-rose-100 transition-colors'
+            className: 'w-full flex items-center justify-between px-5 py-4 text-amber-900 text-base font-bold bg-amber-50 hover:bg-amber-100 transition-colors'
         });
 
         const buttonText = createElement('span', {}, title);
@@ -294,7 +300,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
 
         // Checkbox list with proper spacing
         if (isOpen) {
-            const content = createElement('div', { className: 'px-5 pb-5 pt-2 space-y-3 bg-white border-t border-rose-100' });
+            const content = createElement('div', { className: 'px-5 pb-5 pt-2 space-y-3 bg-white border-t border-amber-100' });
 
             options.forEach(option => {
                 const checkbox = createCheckbox(option, selectedOptions.includes(option), (checked) => {
@@ -584,9 +590,40 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         });
     }
 
+    // Reorder filtered data to put favorites on top
+    function reorderWithFavorites(list) {
+        try {
+            const favs = getFavorites(null, state.activeTab);
+            if (!favs || favs.length === 0) return list;
+            const favMap = new Map();
+            favs.forEach(f => { favMap.set(f.id || f.plateNumber, f); });
+
+            const favList = [];
+            const otherList = [];
+
+            list.forEach(item => {
+                const key = item.id || item.plateNumber;
+                if (favMap.has(key)) favList.push(item);
+                else otherList.push(item);
+            });
+
+            // Sort favorites by addedAt descending (most recently favorited first)
+            favList.sort((a, b) => {
+                const aAdded = favMap.get(a.id || a.plateNumber)?.addedAt || '';
+                const bAdded = favMap.get(b.id || b.plateNumber)?.addedAt || '';
+                return bAdded.localeCompare(aAdded);
+            });
+
+            return [...favList, ...otherList];
+        } catch (err) {
+            console.error('Error ordering by favorites', err);
+            return list;
+        }
+    }
+
     // NEW: Get paginated data
     function getPaginatedData() {
-        const filtered = getFilteredData();
+        const filtered = reorderWithFavorites(getFilteredData());
         const totalItems = filtered.length;
         const totalPages = Math.ceil(totalItems / state.itemsPerPage);
 
@@ -612,6 +649,21 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         };
     }
 
+    // Move an item to top of its source array (called when item is favorited)
+    function moveItemToTop(item) {
+        const arrays = [carPlates, officialCarPlates, auctionResultsData];
+        for (const arr of arrays) {
+            const idx = arr.findIndex(a => (a.id && item.id && a.id === item.id) || a.plateNumber === item.plateNumber);
+            if (idx > -1) {
+                const [it] = arr.splice(idx, 1);
+                arr.unshift(it);
+                state.currentPage = 1;
+                render();
+                break;
+            }
+        }
+    }
+
     function createTableHeader() {
         const thead = createElement('thead', { className: 'bg-[#e5e5e5] text-gray-900 font-bold' });
         const tr = createElement('tr');
@@ -619,7 +671,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         if (state.activeTab === 'results') {
             tr.innerHTML = `
                 <th class="px-6 py-4 w-16 text-center">STT</th>
-                <th class="px-6 py-4">Biển số</th>
+                <th class="px-6 py-4 text-center">Biển số</th>
                 <th class="px-6 py-4">Giá trúng đấu giá</th>
                 <th class="px-6 py-4">Tỉnh, Thành phố</th>
                 <th class="px-6 py-4 whitespace-nowrap">
@@ -633,7 +685,7 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
         } else {
             tr.innerHTML = `
                 <th class="px-6 py-4 w-16 text-center">STT</th>
-                <th class="px-6 py-4">Biển số</th>
+                <th class="px-6 py-4 text-center">Biển số</th>
                 <th class="px-6 py-4">Giá khởi điểm</th>
                 <th class="px-6 py-4">Tỉnh, Thành phố</th>
                 <th class="px-6 py-4">Loại biển</th>
@@ -652,11 +704,12 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
             const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
 
             if (state.activeTab === 'results') {
+                const starClass = isFavorite(item.id || item.plateNumber, item.type || 'car', state.activeTab) ? 'text-blue-400 fill-yellow-400 cursor-pointer' : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0';
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
+                    <td class="px-6 py-4 text-center">
+                        <div class="flex items-center gap-3 justify-center">
+                            <i data-lucide="star" class="${starClass}" style="width: 18px; height: 18px;"></i>
                             <span class="font-bold border border-gray-200 w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate bg-white text-gray-800 group-hover:border-[#AA8C3C] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
@@ -669,12 +722,13 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 `;
             } else {
                 const plateBgClass = 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
+                const starClass = isFavorite(item.id || item.plateNumber, item.type || 'car', state.activeTab) ? 'text-blue-400 fill-yellow-400 cursor-pointer' : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0';
 
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
+                    <td class="px-6 py-4 text-center">
+                        <div class="flex items-center gap-3 justify-center">
+                            <i data-lucide="star" class="${starClass}" style="width: 18px; height: 18px;"></i>
                             <span class="font-bold border w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
@@ -695,6 +749,8 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                 plateNumber.addEventListener('click', () => {
                     plateDetailModal.open({
                         ...item,
+                        type: item.type || 'car',
+                        scope: state.activeTab,
                         onRegister: () => {
                             // Open registration modal
                             registrationModal.open({
@@ -704,6 +760,9 @@ export function CarAuctionPage({ carPlates = [], officialCarPlates = [], auction
                                 depositAmount: calculateDeposit(item.startPrice),
                                 auctionDate: parseAuctionDate(item.auctionTime)
                             });
+                        },
+                        onFavorite: (isFav) => {
+                            if (isFav) moveItemToTop(item);
                         }
                     });
                 });
