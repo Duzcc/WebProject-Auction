@@ -588,12 +588,16 @@ const newsData = [
 Các biển số ô tô có trúng đấu giá cao trong sáng nay gồm: 99A-999.99 giá trúng gần 28 tỷ đồng, 51N-234.56 giá trúng đấu giá 915 triệu đồng, 11A-234.56 giá trúng đấu giá 550 triệu đồng, 36B-111.11 giá trúng đấu giá 320 triệu đồng....</p>
 
 <figure class="my-4">
-  <img src="/images/news/new-image.jpg" alt="Mô tả ảnh"
+  <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/f5762249-b36e-424a-b537-f0e93d558ca5.png" alt="Mô tả ảnh"
        style="display:block;margin:0 auto;width:100%;max-width:600px;border-radius:6px;" />
-  <figcaption class="text-sm text-gray-500 mt-2 text-center">Ảnh: Mô tả (Nguồn)</figcaption>
+  <figcaption class="text-sm text-gray-500 mt-2 text-center">Bên trong khu vực tổ chức đấu giá biển số (Ảnh: Cục CSGT).</figcaption>
 </figure>
 
-<p>Thêm nội dung mô tả, phân tích hoặc trích dẫn liên quan tới ảnh ở đây.</p>`
+<p>Cục CSGT cho biết, từ ngày 15/9/2023 đến ngày 20/10, tổng số biển đấu giá thành/niêm yết là 150.914 biển số, tương đương hơn 8.300 tỷ đồng. Trong đó, biển số ô tô đấu giá thành/niêm yết là 87.939 biển số, tương đương hơn 7.500 tỷ đồng, biển số xe máy đấu giá thành là 62.975 biển số, tương đương hơn 804 tỷ đồng.
+
+Tổng số tiền mà lực lượng chức năng đã thu về tài khoản chuyên thu, để nộp ngân sách nhà nước là 8.100 tỷ đồng từ đấu giá biển số xe.
+</p>
+<p class="text-base text-black-1000"><strong>Trần Thanh/ Báo Dân trí.</strong></p>`
  },
   { id: 2, category: "Báo tin tức", title: "Lần đầu tiên lô rượu ngoại 'khủng' lên sàn đấu giá với mức khởi điểm 3,7 tỷ đồng", date: "10:24 11/12/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/a8b85c98-0360-4714-a780-aaf1d2c3221f.png", excerpt: " Chiều 2/12, đại diện Công ty Đấu giá hợp danh Việt Nam (VPA) cho biết, tài sản bao gồm 3.752 chai rượu sản xuất ở nước ngoài và được bảo quản trong kho, có danh mục chi tiết kèm theo, hình ảnh minh họa cho thấy nhiều dòng sản phẩm cao cấp.", content: `Chiều 2/12, đại diện Công ty Đấu giá hợp danh Việt Nam (VPA) cho biết, tài sản bao gồm 3.752 chai rượu sản xuất ở nước ngoài và được bảo quản trong kho. Danh mục chi tiết cho biết nhiều nhãn hiệu cao cấp, lô hàng sẽ được bán theo lô; dự kiến sẽ có nhiều nhà sưu tập quan tâm. Đây là lần đầu tiên một lô rượu ngoại quy mô lớn được đưa lên sàn đấu giá công khai.` },
   { id: 3, category: "Viện Kiểm Sát", title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến", date: "14:44 31/07/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/5730c3f8-5d0b-45c9-9bc6-93a8af2ed52a.png", excerpt: " Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia, là chìa khóa thúc đẩy sự phát triển toàn diện của đất nước. Mục tiêu cơ bản của chuyển đổi số là việc ứng dụng công nghệ thông tin trong các hoạt động của mọi lĩnh vực.", content: `Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia. Việc tiến hành đấu giá tài sản bằng hình thức trực tuyến được cho là minh bạch và tiện lợi, tuy nhiên Viện KSND khu vực 1 đã tiến hành kiểm sát để đảm bảo quy trình đúng pháp luật, bảo vệ quyền lợi của người tham gia.` },
