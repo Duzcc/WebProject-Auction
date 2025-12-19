@@ -280,6 +280,10 @@
 .animate-marquee {
     animation: marquee 20s linear infinite;
 }
+/*dan dong tin tuc*/
+.mb {
+    margin-bottom: 16px; /* có thể đổi 20px, 24px */
+}
 
 /* ============================================
    BASE STYLES - Enhanced Light Mode
