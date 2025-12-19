@@ -716,7 +716,7 @@ const newsData = [
           style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
             <figcaption class="text-sm text-gray-500 mt-2 text-center">
               Một biển số xe máy trúng đấu giá với số tiền hàng trăm triệu đồng (Ảnh: Chụp màn hình).
-            </figcaption>
+            </figcaption> 
       </figure>
       <p>Cũng theo C08, từ khi bắt đầu đấu giá biển số xe (từ ngày 15/9/2023 đến hết ngày 14/5), tổng số biển đã niêm yết lên sàn là hơn 3,5 triệu biển số; tổng số biển đấu giá thành là hơn 85.800 biển số; tổng giá trị tài sản đấu giá thành là hơn 6.000 tỷ đồng.</p>
       <br>
