@@ -81,7 +81,7 @@ export function Header({ activePage, onNavigate }) {
                 </div>
                 <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] text-[#1a1a1a] px-3 py-1 rounded-full shadow-lg">
                     <i data-lucide="phone" class="w-3.5 h-3.5" fill="#1a1a1a"></i>
-                    <span>1900.0555.15</span>
+                    <span>1900.8888.88</span>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@ export function Header({ activePage, onNavigate }) {
                         <div class="w-10 h-10 bg-gradient-to-br from-[#AA8C3C] to-[#8B7530] rounded-md flex items-center justify-center transform rotate-45 shadow-md">
                             <div class="w-6 h-6 bg-white transform -rotate-45" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"></div>
                         </div>
-                        <span class="text-3xl font-bold bg-gradient-to-r from-[#AA8C3C] to-[#8B7530] bg-clip-text text-transparent">VPA</span>
+                        <span class="text-3xl font-bold text-[#AA8C3C]">NPA</span>
                     </div>
 
                     <!-- Nav Links - Desktop -->
