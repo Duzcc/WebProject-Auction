@@ -1,6 +1,6 @@
 // Import expanded license plate data
-import { expandedCarPlates } from './expandedCarPlates.js';
-import { expandedMotorbikePlates } from './expandedMotorbikePlates.js';
+import { expandedCarPlates } from '../features/auction-shared/data/expandedCarPlates.js';
+import { expandedMotorbikePlates } from '../features/auction-shared/data/expandedMotorbikePlates.js';
 
 const carPlates = [
   { id: 1, plateNumber: "30M - 666.66", startPrice: "500.000.000 đ", province: "Thành phố Hà Nội", type: "Ngũ quý" },

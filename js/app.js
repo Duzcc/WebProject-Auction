@@ -1,43 +1,39 @@
-import { Header } from './components/Header.js';
-import { Footer } from './components/Footer.js';
-import { FloatingActions } from './components/FloatingActions.js';
+import { Header } from './core/components/Header.js';
+import { Footer } from './core/components/Footer.js';
+import { FloatingActions } from './shared/components/FloatingActions.js';
 
-// Core pages
-import { HomePage } from './pages/core/HomePage.js';
-import { AboutPage } from './pages/core/AboutPage.js';
-import { NewsPage } from './pages/core/NewsPage.js';
+// Trang chính
+import { HomePage } from './core/pages/HomePage.js';
+import { AboutPage } from './core/pages/AboutPage.js';
+import { NewsPage } from './features/news/pages/NewsPage.js';
 
-// Auction pages
-import { CarAuctionPage } from './pages/auction/cars/CarAuctionPage.js';
-import { MotorbikeAuctionPage } from './pages/auction/motorbikes/MotorbikeAuctionPage.js';
-import { AssetListPage } from './pages/auction/assets/AssetListPage.js';
-import { AssetDetailPage } from './pages/auction/assets/AssetDetailPage.js';
-import { AuctionHistoryPage } from './pages/auction/AuctionHistoryPage.js';
-import { PendingPlatesPage } from './pages/auction/PendingPlatesPage.js';
+// Trang đấu giá
+import { CarAuctionPage } from './features/auction-car/pages/CarAuctionPage.js';
+import { MotorbikeAuctionPage } from './features/auction-motorbike/pages/MotorbikeAuctionPage.js';
+import { AssetListPage } from './features/auction-asset/pages/AssetListPage.js';
+import { AssetDetailPage } from './features/auction-asset/pages/AssetDetailPage.js';
+import { AuctionHistoryPage } from './features/auction-shared/pages/AuctionHistoryPage.js';
+import { PendingPlatesPage } from './features/auction-shared/pages/PendingPlatesPage.js';
 
-// Payment pages
-import { CartPage } from './pages/payment/CartPage.js';
-import { CheckoutPage } from './pages/payment/CheckoutPage.js';
-import { PaymentPage } from './pages/payment/PaymentPage.js';
-import { PaymentSuccessPage } from './pages/payment/PaymentSuccessPage.js';
-import { PaymentFailurePage } from './pages/payment/PaymentFailurePage.js';
+// Trang thanh toán
+import { CartPage } from './features/payment/pages/CartPage.js';
+import { CheckoutPage } from './features/payment/pages/CheckoutPage.js';
+import { PaymentPage } from './features/payment/pages/PaymentPage.js';
+import { PaymentSuccessPage } from './features/payment/pages/PaymentSuccessPage.js';
+import { PaymentFailurePage } from './features/payment/pages/PaymentFailurePage.js';
 
-// User pages
-import { LoginPage } from './pages/user/LoginPage.js';
-import { ProfilePage } from './pages/user/ProfilePage.js';
-import { DocumentsPage } from './pages/user/DocumentsPage.js';
+// Trang người dùng
+import { LoginPage } from './features/user/pages/LoginPage.js';
+import { ProfilePage } from './features/user/pages/ProfilePage.js';
+import { DocumentsPage } from './features/user/pages/DocumentsPage.js';
 
-// Demo pages
-import { Phase1DemoPage } from './pages/demo/Phase1DemoPage.js';
-import { DepositDemoPage } from './pages/demo/DepositDemoPage.js';
-import { PaymentDemoPage } from './pages/demo/PaymentDemoPage.js';
-import { NotificationArchivePage } from './pages/demo/NotificationArchivePage.js';
 
-import { render, createElement } from './utils/dom.js';
-import { subscribeToAuth } from './utils/auth.js';
-import { initTheme } from './utils/theme.js';
-import { initBackToTop } from './pages/shared/BackToTop.js';
-import { initUserProfile } from './utils/userProfile.js';
+
+import { render, createElement } from './shared/utils/dom.js';
+import { subscribeToAuth } from './features/user/utils/auth.js';
+import { initTheme } from './core/utils/theme.js';
+import { initBackToTop } from './shared/components/BackToTop.js';
+import { initUserProfile } from './features/user/utils/userProfile.js';
 import {
     newsData,
     notifData,
@@ -48,27 +44,23 @@ import {
     motorbikePlates,
     officialMotorbikePlates,
     motorbikeAuctionResults,
-    // Expanded data with plate colors
     expandedCarPlates,
     expandedMotorbikePlates
 } from './data/constants.js';
 
 const root = document.getElementById('root');
 
-// Initial state
+// Trạng thái hiện tại của ứng dụng
 let currentPage = 'home';
-let currentParams = null; // Store current page parameters
+let currentParams = null;
 
-/**
- * Render the application
- */
+// Render ứng dụng
 function renderApp() {
-    // Clear root
     root.innerHTML = '';
 
     const appContainer = createElement('div', { className: 'flex flex-col min-h-screen' });
 
-    // Header (only show if not on login page)
+    // Header (không hiển thị ở trang login)
     if (currentPage !== 'login') {
         const header = Header({
             activePage: currentPage,
@@ -82,10 +74,9 @@ function renderApp() {
         appContainer.appendChild(header);
     }
 
-    // Main Content with page transition animation
+    // Nội dung chính
     const main = createElement('main', { className: 'flex-grow page-transition' });
 
-    // Route to different pages
     switch (currentPage) {
         case 'home':
             render(HomePage({
@@ -114,7 +105,6 @@ function renderApp() {
             break;
 
         case 'asset-detail':
-            // Find asset by ID
             const assetId = currentParams;
             const asset = assets.find(a => a.id === assetId);
             render(AssetDetailPage({
@@ -130,10 +120,6 @@ function renderApp() {
 
         case 'news':
             render(NewsPage(), main);
-            break;
-
-        case 'notifications':
-            render(NotificationArchivePage({ notifData }), main);
             break;
 
         case 'cars':
@@ -190,20 +176,7 @@ function renderApp() {
             }), main);
             break;
 
-        case 'phase1-demo':
-            render(Phase1DemoPage(), main);
-            break;
-
-        case 'deposit-demo':
-            render(DepositDemoPage(), main);
-            break;
-
-        case 'payment-demo':
-            render(PaymentDemoPage(), main);
-            break;
-
         case 'payment':
-            // Parse URL parameters
             const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
             const auctionId = urlParams.get('auction');
             const itemName = urlParams.get('item');
@@ -213,7 +186,6 @@ function renderApp() {
             break;
 
         default:
-            // Default to home
             render(HomePage({
                 onNavigate: (page) => {
                     currentPage = page;
@@ -225,7 +197,7 @@ function renderApp() {
 
     appContainer.appendChild(main);
 
-    // Footer and Floating Actions (only show if not on login page)
+    // Footer và Floating Actions (không hiển thị ở trang login)
     if (currentPage !== 'login') {
         appContainer.appendChild(Footer());
         appContainer.appendChild(FloatingActions());
@@ -233,22 +205,19 @@ function renderApp() {
 
     root.appendChild(appContainer);
 
-    // Initialize Lucide icons after render
+    // Khởi tạo icons
     if (window.lucide) {
         window.lucide.createIcons();
     }
 }
 
-// Handle hash changes for routing
+// Xử lý thay đổi URL để điều hướng trang
 function handleHashChange() {
-    const hash = window.location.hash.slice(1); // Remove #
+    const hash = window.location.hash.slice(1);
     console.log('🔀 Hash changed to:', hash);
 
     const [path, params] = hash.split('/').filter(Boolean);
-
     console.log('🔀 Parsed route:', { path, params });
-
-    // Handle different routes
     if (!path || path === '') {
         currentPage = 'home';
         currentParams = null;
@@ -265,29 +234,28 @@ function handleHashChange() {
     window.scrollTo(0, 0);
 }
 
-// Start the app
-initTheme(); // Initialize theme system
-initBackToTop(); // Initialize back to top button
-initUserProfile(); // Initialize user profile
+// Khởi động ứng dụng
+initTheme();
+initBackToTop();
+initUserProfile();
 
-// Cleanup expired orders on app startup
-import('./utils/orderManager.js').then(({ cleanupExpiredOrders }) => {
+// Dọn dẹp các đơn hàng hết hạn khi khởi động
+import('./features/payment/utils/orderManager.js').then(({ cleanupExpiredOrders }) => {
     cleanupExpiredOrders();
     console.log('✅ Order cleanup completed');
 }).catch(err => {
     console.warn('⚠️ Could not cleanup expired orders:', err);
 });
 
-// Listen for hash changes
+// Lắng nghe sự thay đổi URL
 window.addEventListener('hashchange', handleHashChange);
 console.log('✅ Hash change listener added');
 
-// Initial render
-handleHashChange(); // Handle initial hash
+// Render lần đầu
+handleHashChange();
 
-// Subscribe to auth state changes
+// Theo dõi thay đổi trạng thái đăng nhập
 subscribeToAuth(() => {
-    // Re-render the app when auth state changes
-    initUserProfile(); // Re-init profile on auth change
+    initUserProfile();
     renderApp();
 });
