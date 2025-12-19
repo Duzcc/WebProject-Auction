@@ -91,9 +91,6 @@ export function AuctionHistoryPage() {
                     />
                     <i data-lucide="search" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
                 </div>
-                <button id="search-btn" class="px-6 py-2.5 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors">
-                    Tìm kiếm
-                </button>
             </div>
         `;
         mainContent.appendChild(header);
@@ -174,21 +171,22 @@ export function AuctionHistoryPage() {
         mainContent.appendChild(content);
 
         // Add event listeners
-        const searchBtn = header.querySelector('#search-btn');
         const searchInput = header.querySelector('#history-search');
         const startDateInput = header.querySelector('#start-date');
         const endDateInput = header.querySelector('#end-date');
 
-        const performSearch = () => {
-            searchQuery = searchInput.value;
-            startDate = startDateInput.value;
-            endDate = endDateInput.value;
+        // Real-time search on input
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
             renderContent();
-        };
-
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
+        });
+        startDateInput.addEventListener('change', (e) => {
+            startDate = e.target.value;
+            renderContent();
+        });
+        endDateInput.addEventListener('change', (e) => {
+            endDate = e.target.value;
+            renderContent();
         });
 
         // Initialize Lucide icons

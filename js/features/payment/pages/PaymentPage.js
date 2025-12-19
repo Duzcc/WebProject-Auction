@@ -413,9 +413,17 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                 console.log('🔵 Starting order payment creation...');
                 console.log('📦 Order data:', orderData);
 
-                // Disable button and show progress
+                // Disable button
                 submitBtn.disabled = true;
-                showPaymentProgress(submitBtn, 1, 'Tạo đơn thanh toán');
+                submitBtn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Đang xử lý...</span>
+                    </div>
+                `;
 
                 try {
                     // Step 1: Create payment record
@@ -440,7 +448,6 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     }
 
                     // Step 2: Validate payment
-                    showPaymentProgress(submitBtn, 2, 'Xác thực thông tin');
                     createdPayment.status = 'completed';
                     createdPayment.completedAt = new Date().toISOString();
 
@@ -466,10 +473,9 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     auctionStore.set(updatedAuctionState);
 
                     // Step 3: Save data
-                    showPaymentProgress(submitBtn, 3, 'Lưu dữ liệu');
 
                     // CRITICAL: Force synchronous write with verification
-                    const { forceWriteAndVerify, verifyPaymentCompleted } = await import('../../utils/storageVerify.js');
+                    const { forceWriteAndVerify, verifyPaymentCompleted } = await import('../../../shared/utils/storageVerify.js');
 
                     const paymentPersisted = await forceWriteAndVerify(
                         'vpa-auctions',
@@ -484,7 +490,6 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     console.log('💾 Payment data persisted successfully');
 
                     // Step 4: Update cart
-                    showPaymentProgress(submitBtn, 4, 'Cập nhật giỏ hàng');
 
                     const itemIds = orderItems.map(item => item.id);
                     console.log('🏷️ Marking cart items as paid:', itemIds);
@@ -492,7 +497,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     markItemsAsPaid(itemIds);
 
                     // STEP 3: Verify cart items were marked
-                    const { waitForDataPersistence, verifyCartItemsPaid } = await import('../../utils/storageVerify.js');
+                    const { waitForDataPersistence, verifyCartItemsPaid } = await import('../../../shared/utils/storageVerify.js');
 
                     const cartPersisted = await waitForDataPersistence(
                         'vpa-cart',
@@ -508,18 +513,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
 
                     console.log('✅ All data persisted successfully');
 
-                    // STEP 4: Show success message with details
-                    const itemNames = orderItems.map(item =>
-                        item.plateNumber || item.name
-                    ).filter(Boolean).join(', ');
 
-                    const invoiceId = `INV-${createdPayment.id.substr(-8).toUpperCase()}`;
-
-                    const message = itemNames
-                        ? `🎉 Thanh toán thành công!\n\n✓ Biển số: ${itemNames}\n✓ Mã hóa đơn: ${invoiceId}\n✓ Đã lưu vào Lịch sử đấu giá và tab "Đã thanh toán"`
-                        : `🎉 Thanh toán thành công!\n\n✓ Mã hóa đơn: ${invoiceId}\n✓ Đã lưu vào Lịch sử đấu giá và tab "Đã thanh toán"`;
-
-                    toast.success(message, { duration: 5000 });
 
                     // STEP 5: Final verification before redirect
                     console.log('🔍 Final verification before redirect...');
@@ -535,10 +529,8 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                     if (finalPayment && finalPayment.status === 'completed') {
                         console.log('✅ Final verification passed, safe to redirect');
 
-                        // Step 5: Complete
-                        showPaymentProgress(submitBtn, 5, 'Hoàn tất');
-
-                        toast.success('Thanh toán thành công!');
+                        // Success! Show final toast
+                        toast.success('Thanh toán thành công', { duration: 3000 });
 
                         // Clear pending order after successful payment
                         if (orderData && orderData.id) {
@@ -553,7 +545,7 @@ export function PaymentPage({ auctionId, itemName, winningBid, orderData } = {})
                         window.location.hash = '#/payment-success';
                     } else {
                         console.error('❌ Final verification failed!');
-                        toast.error('Lỗi xác thực dữ liệu. Vui lòng kiểm tra lại giỏ hàng.');
+                        toast.error('Lỗi xác thực dữ liệu');
                     }
 
                 } catch (error) {

@@ -47,12 +47,12 @@ export function CheckoutPage() {
             console.log('📦 Loaded order:', orderData.id, '- Items:', items.length);
             if (orderRecovered) {
                 console.log('✅ Order recovered from localStorage backup');
-                toast.success('Đơn hàng đã được khôi phục', { duration: 3000 });
+                toast.success('Khôi phục đơn hàng', { duration: 3000 });
             }
         } else {
             // Fallback: if no order, redirect back to cart
             console.warn('⚠️ No order data found, redirecting to cart');
-            toast.error('Không tìm thấy đơn hàng. Vui lòng thử lại.');
+            toast.error('Không tìm thấy đơn hàng');
             window.location.hash = ROUTES.CART;
             return createElement('div');
         }
@@ -404,7 +404,7 @@ export function CheckoutPage() {
     summaryCard.querySelector('#proceed-payment').addEventListener('click', () => {
         // Check profile completeness before proceeding
         if (!isProfileComplete) {
-            toast.error('Vui lòng cập nhật đầy đủ thông tin trước khi thanh toán');
+            toast.error('Vui lòng cập nhật thông tin');
             window.location.hash = ROUTES.PROFILE;
             return;
         }

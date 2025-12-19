@@ -9,17 +9,17 @@ import { createNotification } from '../../../shared/utils/notifications.js';
 import toast from '../../../shared/utils/toast.js';
 
 // Deposit configuration
-const DEPOSIT_PERCENTAGE = 10; // 10% of start price
-const DEPOSIT_DEADLINE_HOURS = 24; // 24 hours to pay deposit after approval
+export const DEPOSIT_PERCENTAGE = 20; // 20% of start price (VPA standard)
+export const DEPOSIT_DEADLINE_HOURS = 24; // 24 hours to pay deposit after approval
 
 /**
  * Calculate deposit amount
  * @param {number} startPrice - Auction start price
- * @param {number} percentage - Deposit percentage (default 10%)
+ * @param {number} percentage - Deposit percentage (default 20%)
  * @returns {number} Deposit amount
  */
 export function calculateDeposit(startPrice, percentage = DEPOSIT_PERCENTAGE) {
-    return Math.floor(startPrice * (percentage / 100));
+    return Math.round(startPrice * (percentage / 100));
 }
 
 /**
@@ -133,7 +133,7 @@ export function verifyDeposit(depositId) {
 
     auctionStore.set('deposits', [...deposits]);
 
-    toast.success('Đặt cọc đã được xác nhận!');
+    toast.success('Đặt cọc đã được xác nhận');
 
     // Create notification
     createNotification({
@@ -222,7 +222,7 @@ export function refundDeposit(depositId) {
 
     auctionStore.set('deposits', [...deposits]);
 
-    toast.success('Đặt cọc đã được hoàn trả');
+    toast.success('Đăng ký đấu giá thành công');
 
     // Create notification
     createNotification({

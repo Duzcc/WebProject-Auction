@@ -624,7 +624,7 @@ export function AuctionRegistrationModal() {
         firstInput?.focus();
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         // Clear previous errors
@@ -729,8 +729,10 @@ export function AuctionRegistrationModal() {
 
         // Add registration to cart
         if (currentAuctionItem) {
-            // Import cart utilities dynamically
-            import('../../../payment/utils/cart.js').then(({ addToCart }) => {
+            try {
+                // Import cart utilities dynamically
+                const { addToCart } = await import('../../payment/utils/cart.js');
+
                 const registrationItem = {
                     id: `reg_${currentAuctionItem.auctionId || Date.now()}`,
                     type: 'registration',
@@ -763,7 +765,12 @@ export function AuctionRegistrationModal() {
 
                 console.log('📝 Creating registration item:', registrationItem);
                 addToCart(registrationItem, 1);
-            });
+                console.log('✅ Item added to cart successfully');
+            } catch (error) {
+                console.error('❌ Failed to add to cart:', error);
+                alert('Có lỗi khi thêm vào giỏ hàng. Vui lòng thử lại!');
+                return; // Stop execution if cart add fails
+            }
         }
 
 

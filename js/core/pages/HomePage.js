@@ -98,48 +98,56 @@ function Hero({ registrationModal }) {
  */
 function Services({ onNavigate }) {
     const html = `
-        <div class="bg-[#fff9e6] py-16">
-            <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center">
+        <div class="bg-white py-16 md:py-20">
+            <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
                 <!-- Left Text -->
-                <div class="lg:w-1/3 mb-10 lg:mb-0 pr-0 lg:pr-10">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Dịch vụ của chúng tôi</h2>
-                    <p class="text-gray-700 text-lg leading-relaxed">
-                        Công ty Đấu giá hợp danh Việt Nam (Vietnam Partnerships Auction) là tổ chức hoạt động chuyên nghiệp trong lĩnh vực đấu giá tài sản.
+                <div class="lg:w-1/3">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: var(--charcoal, #1A1A1A);">
+                        Dịch vụ của chúng tôi
+                    </h2>
+                    <p class="text-gray-600 text-base md:text-lg leading-relaxed">
+                        Công ty Đấu giá hợp danh Việt Nam (VPA) là tổ chức hoạt động chuyên nghiệp trong lĩnh vực đấu giá tài sản.
                     </p>
                 </div>
 
                 <!-- Right Cards -->
                 <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover-lift cursor-pointer group animate-fade-in stagger-1" id="service-cars">
-                        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+                    <!-- Card 1 - Cars -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer group" id="service-cars" style="box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
                             <i data-lucide="car" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Đấu giá biển số xe</h3>
-                        <p class="text-gray-600 text-sm">
-                            Cơ hội sở hữu biển số xe đẹp, hợp phong thủy. Quy trình đấu giá công khai, tuân thủ quy định pháp luật.
+                        <h3 class="text-xl font-bold mb-3 transition-colors" style="color: var(--charcoal, #1A1A1A);">
+                            Đấu giá biển số xe
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Cơ hội sở hữu biển số xe đẹp, hợp phong thủy. Quy trình công khai, minh bạch.
                         </p>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover-lift cursor-pointer group animate-fade-in stagger-2" id="service-assets">
-                        <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+                    <!-- Card 2 - Assets -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer group" id="service-assets" style="box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
                             <i data-lucide="home" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">Đấu giá tài sản</h3>
-                        <p class="text-gray-600 text-sm">
-                            Đấu giá đa dạng các loại tài sản khác như: tang vật, phương tiện vi phạm hành chính, tài sản thi hành án...
+                        <h3 class="text-xl font-bold mb-3 transition-colors" style="color: var(--charcoal, #1A1A1A);">
+                            Đấu giá tài sản
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Đấu giá đa dạng tài sản: tang vật, phương tiện, tài sản thi hành án...
                         </p>
                     </div>
 
-                    <!-- Card 3 - Special Border -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm hover-lift border border-blue-600 cursor-pointer group animate-fade-in stagger-3">
-                        <div class="w-14 h-14 bg-yellow-600 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform">
+                    <!-- Card 3 - Organizations -->
+                    <div class="bg-white p-6 rounded-2xl border-2 transition-all duration-300 hover:shadow-xl cursor-pointer group" style="border-color: var(--gold, #F59E0B); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
                             <i data-lucide="gavel" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors">Dành cho các tổ chức</h3>
-                        <p class="text-gray-600 text-sm">
-                            Đăng ký sử dụng dịch vụ tổ chức đấu giá tài sản trực tuyến trên nền tảng của VPA.
+                        <h3 class="text-xl font-bold mb-3 transition-colors" style="color: var(--charcoal, #1A1A1A);">
+                            Dành cho tổ chức
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Đăng ký sử dụng dịch vụ tổ chức đấu giá tài sản trên nền tảng VPA.
                         </p>
                     </div>
                 </div>
@@ -168,13 +176,15 @@ function Services({ onNavigate }) {
  */
 function Partners() {
     const html = `
-        <div class="py-12 bg-blue-50">
+        <div class="py-12 md:py-16" style="background: var(--cream, #FAF9F6);">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold text-gray-900 mb-10">Đối tác</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-10" style="font-family: 'Playfair Display', serif; color: var(--charcoal, #1A1A1A);">
+                    Đối tác
+                </h2>
                 
                 <div class="flex items-center justify-center gap-4 md:gap-12 flex-wrap relative">
                     <!-- Navigation Buttons -->
-                    <button class="absolute left-0 md:left-4 w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-white hover:shadow-md hidden md:flex">
+                    <button class="absolute left-0 md:left-4 w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-gray-600 hover:shadow-md transition hidden md:flex">
                         <i data-lucide="chevron-left" style="width: 24px; height: 24px;"></i>
                     </button>
                     
@@ -185,7 +195,7 @@ function Partners() {
                             <span class="text-blue-500 ml-1">✦</span>
                         </div>
                         
-                        <div class="h-16 w-16 bg-[#2563EB] rounded flex items-center justify-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100 text-white font-bold">
+                        <div class="h-16 w-16 rounded flex items-center justify-center grayscale hover:grayscale-0 transition opacity-70 hover:opacity-100 text-white font-bold" style="background: #F59E0B;">
                             AGRIBANK
                         </div>
 
@@ -202,7 +212,7 @@ function Partners() {
                         </div>
                     </div>
 
-                    <button class="absolute right-0 md:right-4 w-10 h-10 rounded-full bg-[#2563EB] flex items-center justify-center text-white hover:bg-blue-700 shadow-md hidden md:flex">
+                    <button class="absolute right-0 md:right-4 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-md transition hidden md:flex" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
                         <i data-lucide="chevron-right" style="width: 24px; height: 24px;"></i>
                     </button>
                 </div>
@@ -333,103 +343,116 @@ export function HomePage({ onNavigate }) {
     // Create registration modal
     const registrationModal = AuctionRegistrationModal();
 
-    // Ultra-Premium Hero Section - VPA Theme
-    const premiumHero = createFromHTML(`
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
-            <!-- Animated Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23F59E0B\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-            </div>
-
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
-
-            <!-- Content -->
-            <div class="relative z-10 container mx-auto px-4 py-20 text-center">
-                <!-- Logo Mark -->
-                <div class="mb-8 animate-fade-in-up">
-                    <div class="inline-block">
-                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-blue-500/50">
-                            <i data-lucide="gavel" class="w-10 h-10 text-white"></i>
+    // ============================================
+    // LUXURY HERO SECTION - "Where Value Meets Opportunity"
+    // ============================================
+    const luxuryHero = createFromHTML(`
+        <section class="relative flex items-center overflow-hidden" style="min-height: 80vh; background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #3D3D3D 100%);">
+            <!-- Subtle gradient overlays -->
+            <div class="absolute top-0 right-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-20" style="background: #F59E0B;"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-10" style="background: #2563EB;"></div>
+            
+            <div class="container mx-auto px-4 py-12 md:py-16 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                    
+                    <!-- LEFT CONTENT -->
+                    <div class="text-white">
+                        <!-- Live Badge -->
+                        <div class="inline-flex items-center gap-2 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full px-4 py-2 mb-6 animate-fade-in-up">
+                            <span class="relative flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                            </span>
+                            <span class="text-sm font-semibold uppercase tracking-wider">ĐẤU GIÁ TRỰC TUYẾN ĐANG MỞ</span>
+                        </div>
+                        
+                        <!-- Main Heading -->
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight animate-fade-in-up" style="animation-delay: 0.2s; font-family: 'Playfair Display', serif; letter-spacing: -0.02em;">
+                            <span class="block text-white">Nơi Giá Trị</span>
+                            <span class="block text-white">Gặp Gỡ</span>
+                            <span class="block italic" style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Cơ Hội</span>
+                        </h1>
+                        
+                        <!-- Description -->
+                        <p class="text-base md:text-lg mb-6 max-w-lg leading-relaxed animate-fade-in-up" style="animation-delay: 0.4s; color: #E5E7EB;">
+                            Khám phá nền tảng đấu giá tài sản, biển số xe cao cấp và độc quyền. Tham gia thị trường đấu giá đáng tin cậy nhất Việt Nam.
+                        </p>
+                        
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-in-up" style="animation-delay: 0.6s;">
+                            <button id="browse-auctions-hero" class="group relative px-8 py-4 rounded-lg font-bold flex items-center justify-center gap-2 shadow-xl transition-all duration-300 hover:scale-105" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #1A1A1A; box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);">
+                                <i data-lucide="search" class="w-5 h-5"></i>
+                                <span>Khám Phá Đấu Giá</span>
+                            </button>
+                            <button id="start-selling-hero" class="group border-2 border-gray-600 hover:border-gray-500 text-white font-semibold px-8 py-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:bg-gray-800/50">
+                                <i data-lucide="tag" class="w-5 h-5"></i>
+                                <span>Đăng Ký Bán</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Stats Counter -->
+                        <div class="grid grid-cols-3 gap-8 animate-fade-in-up" style="animation-delay: 0.8s;">
+                            <div class="text-center">
+                                <div class="text-4xl font-black mb-1" data-counter="15000" style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">0</div>
+                                <div class="text-sm uppercase tracking-wide" style="color: #D1D5DB;">Người Tham Gia</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-black mb-1" style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">45 Tỷ</div>
+                                <div class="text-sm uppercase tracking-wide" style="color: #D1D5DB;">Giá Trị Giao Dịch</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-black mb-1" data-counter="99" style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">0</div>
+                                <div class="text-sm uppercase tracking-wide" style="color: #D1D5DB;">Tỷ Lệ Thành Công</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- RIGHT CONTENT - Gavel Showcase -->
+                    <div class="relative flex items-center justify-center">
+                        <!-- Main gavel frame with 3D effect -->
+                        <div class="relative z-10 group">
+                            <!-- Golden frame border -->
+                            <div class="relative p-2 rounded-3xl backdrop-blur-sm transform transition duration-500 group-hover:scale-105" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%); border: 4px solid rgba(245, 158, 11, 0.3);">
+                                <!-- Dark inner frame -->
+                                <div class="rounded-2xl overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);">
+                                    <!-- Real Gavel Image -->
+                                    <img 
+                                        src="images/gavel-luxury.jpg" 
+                                        alt="Luxury Gavel" 
+                                        class="w-full h-auto object-cover"
+                                        style="filter: drop-shadow(0 10px 30px rgba(245, 158, 11, 0.4)); max-height: 400px;"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating decorative icons -->
+                        <div class="absolute top-10 right-10 hidden lg:block animate-float-slow">
+                            <div class="bg-gray-800/80 backdrop-blur-sm border border-gray-700 p-3 rounded-full shadow-xl">
+                                <i data-lucide="landmark" class="w-6 h-6" style="color: #F59E0B;"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-32 right-16 hidden lg:block animate-float-medium">
+                            <div class="bg-gray-800/80 backdrop-blur-sm border border-gray-700 p-3 rounded-full shadow-xl">
+                                <i data-lucide="dollar-sign" class="w-6 h-6" style="color: #F59E0B;"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-10 left-10 hidden lg:block animate-float-fast">
+                            <div class="bg-gray-800/80 backdrop-blur-sm border border-gray-700 p-3 rounded-full shadow-xl">
+                                <i data-lucide="trending-up" class="w-6 h-6" style="color: #F59E0B;"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Main Heading -->
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 animate-fade-in-up" style="animation-delay: 0.2s; font-family: 'Playfair Display', serif; letter-spacing: -0.02em;">
-                    <span class="bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 bg-clip-text text-transparent">
-                        VIETNAM PROPERTY AUCTION
-                    </span>
-                </h1>
-                <!-- Tagline -->
-                <p class="text-xl md:text-2xl text-gray-200 mb-4 font-light animate-fade-in-up" style="animation-delay: 0.4s; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.05em;">
-                    Where Premium Meets Excellence
-                </p>
-
-                <p class="text-base md:text-lg text-gray-300 mb-12 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.6s;">
-                    Discover Vietnam's most prestigious auction platform for premium license plates and exclusive assets
-                </p>
-
-                <!-- CTA Buttons with Ripple Effect -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up" style="animation-delay: 0.6s;">
-                    <button class="explore-btn group relative px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-lg overflow-hidden font-bold text-white shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-500 hover:scale-105 btn-ripple">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <span class="relative z-10 flex items-center gap-2">
-                            <i data-lucide="search" class="w-5 h-5"></i>
-                            Khám phá ngay
-                        </span>
-                    </button>
-                    <button class="learn-btn px-8 py-4 border-2 border-blue-400 text-blue-200 rounded-lg font-semibold hover:bg-blue-500/10 transition-all duration-300 flex items-center gap-2 btn-ripple">
-                        <i data-lucide="info" class="w-5 h-5"></i>
-                        Tìm hiểu thêm
-                    </button>
-                </div>
-
-                <!-- Stats Counter -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 1s;">
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-black text-blue-400 mb-2" data-counter="10000">0</div>
-                        <div class="text-sm text-gray-400 uppercase tracking-widest">Successful Auctions</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-black text-blue-400 mb-2" data-counter="50000">0</div>
-                        <div class="text-sm text-gray-400 uppercase tracking-widest">Registered Users</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-black text-blue-400 mb-2" data-counter="99">0</div>
-                        <div class="text-sm text-gray-400 uppercase tracking-widest">Satisfaction Rate %</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-                <i data-lucide="chevron-down" class="w-8 h-8 text-blue-400"></i>
             </div>
         </section>
-
-        <!-- Add required styles -->
-        <style>
-            @keyframes fade-in-up {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            .animate-fade-in-up {
-                animation: fade-in-up 0.8s ease-out both;
-            }
-        </style>
     `);
 
     // Animated counter functionality
     setTimeout(() => {
-        const counters = premiumHero.querySelectorAll('[data-counter]');
+        const counters = luxuryHero.querySelectorAll('[data-counter]');
         counters.forEach(counter => {
             const target = parseInt(counter.dataset.counter);
             const duration = 2000;
@@ -442,40 +465,113 @@ export function HomePage({ onNavigate }) {
                     counter.textContent = Math.floor(current).toLocaleString();
                     requestAnimationFrame(updateCounter);
                 } else {
-                    counter.textContent = target.toLocaleString() + (counter.dataset.counter === '99' ? '' : '+');
+                    counter.textContent = target === 99 ? '99%' : target.toLocaleString() + '+';
                 }
             };
             updateCounter();
         });
     }, 1000);
 
-    // Event listeners
-    premiumHero.querySelector('.explore-btn').addEventListener('click', () => onNavigate('assets'));
-    premiumHero.querySelector('.learn-btn').addEventListener('click', () => {
-        document.getElementById('home-about')?.scrollIntoView({ behavior: 'smooth' });
-    });
+    // Event listeners for buttons
+    luxuryHero.querySelector('#browse-auctions-hero').addEventListener('click', () => onNavigate('cars'));
+    luxuryHero.querySelector('#start-selling-hero').addEventListener('click', () => onNavigate('assets'));
 
-    container.appendChild(premiumHero);
-
-    // Add Hero component
-    container.appendChild(Hero({ registrationModal }));
+    container.appendChild(luxuryHero);
 
     // Keep existing sections with updated styling
     container.appendChild(Services({ onNavigate }));
 
-    // Premium CTA Banner - VPA Theme
+    // ============================================
+    // HOW IT WORKS SECTION - New luxury design
+    // ============================================
+    const howItWorks = createFromHTML(`
+        <section class="py-16 md:py-20" style="background: var(--cream, #FAF9F6);">
+            <div class="container mx-auto px-4">
+                <!-- Section Header -->
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4" style="font-family: 'Playfair Display', serif; color: var(--charcoal, #1A1A1A);">
+                        Cách Thức Hoạt Động
+                    </h2>
+                    <p class="text-base md:text-lg max-w-2xl mx-auto" style="color: #6B7280;">
+                        Mua hay bán, nền tảng của chúng tôi khiến đấu giá trở nên đơn giản và minh bạch
+                    </p>
+                </div>
+
+                <!-- Steps Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block mb-6">
+                            <!-- Circle with number -->
+                            <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-2xl font-black transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #1A1A1A; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
+                                <i data-lucide="user-plus" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <!-- Step number badge -->
+                            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 flex items-center justify-center font-bold text-sm" style="border-color: var(--gold, #F59E0B); color: var(--gold, #F59E0B);">
+                                1
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: #1A1A1A;">Tạo Tài Khoản</h3>
+                        <p class="text-sm leading-relaxed" style="color: #6B7280;">
+                            Đăng ký nhanh chóng và bảo mật để bắt đầu đấu giá tài sản cao cấp
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block mb-6">
+                            <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-2xl font-black transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #1A1A1A; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
+                                <i data-lucide="hand-coins" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 flex items-center justify-center font-bold text-sm" style="border-color: var(--gold, #F59E0B); color: var(--gold, #F59E0B);">
+                                2
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: #1A1A1A;">Đặt Giá Thầu</h3>
+                        <p class="text-sm leading-relaxed" style="color: #6B7280;">
+                            Duyệt các phiên đấu giá và đưa ra mức giá cạnh tranh theo thời gian thực
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block mb-6">
+                            <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-2xl font-black transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #1A1A1A; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
+                                <i data-lucide="trophy" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white border-2 flex items-center justify-center font-bold text-sm" style="border-color: var(--gold, #F59E0B); color: var(--gold, #F59E0B);">
+                                3
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" style="color: #1A1A1A;">Thắng & Nhận Hàng</h3>
+                        <p class="text-sm leading-relaxed" style="color: #6B7280;">
+                            Thắng đấu giá và hoàn tất quy trình giao dịch bảo mật
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `);
+    initIcons(howItWorks);
+    container.appendChild(howItWorks);
+
+    // Premium CTA Banner - Luxury Gold Theme
     const ctaBanner = createFromHTML(`
-        <div class="relative bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 py-20 text-white text-center overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\"80\" height=\"80\" viewBox=\"0 0 80 80\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.3\"%3E%3Cpath d=\"M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z\" /%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <div class="relative py-20 text-white text-center overflow-hidden" style="background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 rounded-full filter blur-3xl opacity-10" style="background: #F59E0B;"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-10" style="background: #F59E0B;"></div>
+            
             <div class="container mx-auto relative z-10 px-4">
                 <h2 class="text-3xl md:text-4xl font-black mb-4" style="font-family: 'Playfair Display', serif;">
-                    <span class="bg-gradient-to-r from-blue-200 to-blue-400 bg-clip-text text-transparent">Ready to Start Bidding?</span>
+                    <span style="background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Sẵn sàng bước vào?</span>
                 </h2>
-                <p class="text-lg mb-8 text-blue-50 max-w-2xl mx-auto">Discover thousands of premium license plates waiting for you</p>
+                <p class="text-lg mb-8 max-w-2xl mx-auto" style="color: #D1D5DB;">Tham gia cùng hàng ngàn nhà sưu tầm và nhà đầu tư trên nền tảng đấu giá uy tín nhất</p>
                 <button 
                     id="banner-contact-btn"
-                    class="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white px-10 py-4 rounded-xl font-bold text-lg inline-flex items-center gap-3 shadow-2xl transform transition hover:scale-105 hover:shadow-blue-500/50">
-                    View Auction Catalog
+                    class="relative px-10 py-4 rounded-xl font-bold text-lg inline-flex items-center gap-3 shadow-2xl transform transition hover:scale-105" 
+                    style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: #1A1A1A; box-shadow: 0 10px 40px rgba(245, 158, 11, 0.3);">
+                    Bắt Đầu Đấu Giá
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </button>
             </div>

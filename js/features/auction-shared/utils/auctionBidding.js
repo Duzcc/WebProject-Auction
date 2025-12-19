@@ -157,7 +157,7 @@ export function placeBid(auctionId, bidAmount) {
         auctions: [...auctions]
     });
 
-    toast.success(`🎉 Đặt giá thành công: ${bidAmount.toLocaleString('vi-VN')} VNĐ`);
+    toast.success('Đặt giá thành công');
 
     // Simulate other bidders (10% chance)
     if (Math.random() < 0.1) {
@@ -235,7 +235,7 @@ function simulateCompetingBid(auctionId, yourBid) {
     });
 
     // Notify user they were outbid
-    toast.warning(`⚠️ Bạn đã bị trả giá! Giá mới: ${competingBid.toLocaleString('vi-VN')} VNĐ`);
+    toast.warning(`Bị trả giá. Giá mới: ${competingBid.toLocaleString('vi-VN')} VNĐ`);
 
     createNotification({
         userId: authState.user.email,
@@ -353,7 +353,7 @@ export function enableAutoBid(auctionId, maxBid) {
         autoBids: [...autoBids]
     });
 
-    toast.success(`✓ Đặt giá tự động: Tối đa ${maxBid.toLocaleString('vi-VN')} VNĐ`);
+    toast.success(`Đặt giá tự động: Tối đa ${maxBid.toLocaleString('vi-VN')} VNĐ`);
     return true;
 }
 
@@ -375,7 +375,7 @@ export function disableAutoBid(auctionId) {
         autoBids: [...autoBids]
     });
 
-    toast.info('Đã tắt đặt giá tự động');
+    toast.info('Tắt đặt giá tự động');
 }
 
 /**

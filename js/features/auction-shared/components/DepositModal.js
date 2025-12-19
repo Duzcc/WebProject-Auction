@@ -1,5 +1,5 @@
 import { createElement, createFromHTML } from '../../../shared/utils/dom.js';
-import { createDepositPayment, uploadPaymentProof, getDepositStatus } from '../utils/deposit.js';
+import { createDepositPayment, uploadPaymentProof, getDepositStatus, calculateDeposit, DEPOSIT_PERCENTAGE } from '../utils/deposit.js';
 import { generateVietQR, getBankInfo, formatTransferDescription, copyToClipboard } from '../../../features/payment/utils/qrCode.js';
 import { CountdownTimer } from '../../../shared/components/CountdownTimer.js';
 import toast from '../../../shared/utils/toast.js';
@@ -90,7 +90,7 @@ export function DepositModal() {
                                 <div class="text-sm text-gray-500 dark:text-gray-400">VNĐ</div>
                                 <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                     <p class="text-xs text-gray-600 dark:text-gray-400">
-                                        = 10% giá khởi điểm
+                                        = ${DEPOSIT_PERCENTAGE}% giá khởi điểm
                                     </p>
                                 </div>
                             </div>
@@ -330,7 +330,8 @@ export function DepositModal() {
             deposit = existingDeposit;
         } else {
             // Create new deposit
-            const depositAmount = Math.floor(parseInt(item.startPrice.replace(/\D/g, '')) * 0.1);
+            const startPriceNumeric = parseInt(item.startPrice.replace(/\D/g, ''));
+            const depositAmount = calculateDeposit(startPriceNumeric);
             deposit = createDepositPayment({
                 auctionId: item.id,
                 itemName: item.plateNumber,

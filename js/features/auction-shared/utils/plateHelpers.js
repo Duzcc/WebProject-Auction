@@ -3,6 +3,8 @@
  * Utility functions for license plate auction operations
  */
 
+import { calculateDeposit as calcDepositUtil, DEPOSIT_PERCENTAGE } from './deposit.js';
+
 /**
  * Calculate deposit amount (20% of start price)
  * @param {string} startPriceStr - Price string (e.g., "40.000.000 VNĐ")
@@ -10,7 +12,7 @@
  */
 export function calculateDeposit(startPriceStr) {
     const price = parsePrice(startPriceStr);
-    return Math.round(price * 0.2);
+    return calcDepositUtil(price, DEPOSIT_PERCENTAGE);
 }
 
 /**

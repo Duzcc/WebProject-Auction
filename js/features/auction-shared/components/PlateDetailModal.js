@@ -5,6 +5,7 @@
 
 import { createElement, createFromHTML } from '../../../shared/utils/dom.js';
 import { BiddingInterface } from '../components/BiddingInterface.js';
+import { calculateDeposit as calcDepositUtil, DEPOSIT_PERCENTAGE } from '../utils/deposit.js';
 
 export function PlateDetailModal() {
     let isOpen = false;
@@ -76,7 +77,7 @@ export function PlateDetailModal() {
         const plateImageUrl = `https://picsum.photos/seed/${plateData.plateNumber}/600/200`;
 
         content.innerHTML = `
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 gap-6">
                 <!-- Left: Plate Details -->
                 <div class="space-y-6">
                     <!-- Header -->
@@ -103,53 +104,53 @@ export function PlateDetailModal() {
                     </div>
 
                     <!-- Information Grid -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4">
-                            <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Giá khởi điểm</div>
-                            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">${plateData.startPrice}</div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Giá khởi điểm</div>
+                            <div class="text-lg font-bold text-blue-600 dark:text-blue-400">${plateData.startPrice}</div>
                         </div>
 
-                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4">
-                            <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Tỉnh, Thành phố</div>
-                            <div class="text-lg font-semibold text-gray-900 dark:text-white">${plateData.province}</div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Tỉnh, Thành phố</div>
+                            <div class="text-base font-semibold text-gray-900 dark:text-white">${plateData.province}</div>
                         </div>
 
                         ${plateData.type ? `
-                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4">
-                            <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Loại biển</div>
-                            <div class="text-lg font-semibold text-gray-900 dark:text-white">${plateData.type}</div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Loại biển</div>
+                            <div class="text-base font-semibold text-gray-900 dark:text-white">${plateData.type}</div>
                         </div>
                         ` : ''}
 
                         ${plateData.auctionTime ? `
-                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4">
-                            <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Thời gian đấu giá</div>
-                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 col-span-3">
+                            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Thời gian đấu giá</div>
+                            <div class="text-base font-semibold text-gray-900 dark:text-white">
                                 <i data-lucide="calendar" class="w-4 h-4 inline mr-2"></i>
                                 ${plateData.auctionTime}
                             </div>
                         </div>
                         ` : ''}
 
-                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-                            <div class="text-sm text-blue-800 dark:text-blue-200 mb-2 font-semibold">
-                                <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-2 border-blue-300 dark:border-blue-700 rounded-lg p-3 col-span-2">
+                            <div class="text-xs text-blue-700 dark:text-blue-300 mb-1 font-semibold">
+                                <i data-lucide="info" class="w-3 h-3 inline mr-1"></i>
                                 Tiền đặt trước
                             </div>
-                            <div class="text-2xl font-black text-blue-600 dark:text-blue-400">
-                                ${calculateDeposit(plateData.startPrice)}
+                            <div class="text-xl font-black text-blue-600 dark:text-blue-400">
+                                ${formatDepositDisplay(plateData.startPrice)}
                             </div>
-                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                                (40% giá khởi điểm)
+                            <div class="text-xs text-blue-600 dark:text-blue-400 mt-0.5">
+                                (${DEPOSIT_PERCENTAGE}% giá khởi điểm)
                             </div>
                         </div>
 
-                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4">
-                            <div class="text-sm text-yellow-800 dark:text-yellow-200 font-semibold mb-2">
-                                <i data-lucide="sparkles" class="w-4 h-4 inline mr-1"></i>
-                                Đặc điểm nổi bật
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                            <div class="text-xs text-yellow-700 dark:text-yellow-300 font-semibold mb-1">
+                                <i data-lucide="sparkles" class="w-3 h-3 inline mr-1"></i>
+                                Đặc điểm
                             </div>
-                            <div class="text-sm text-yellow-700 dark:text-yellow-300">
+                            <div class="text-xs text-yellow-700 dark:text-yellow-300">
                                 ${getPlateFeatures(plateData.plateNumber)}
                             </div>
                         </div>
@@ -213,10 +214,10 @@ export function PlateDetailModal() {
         });
     }
 
-    function calculateDeposit(startPrice) {
-        // Remove all non-numeric characters except decimal point
-        const numericPrice = parseFloat(startPrice.replace(/[^\d.]/g, ''));
-        const deposit = numericPrice * 0.4;
+    function formatDepositDisplay(startPriceStr) {
+        // Remove all non-numeric characters (including dots used as thousand separators)
+        const numericPrice = parseFloat(startPriceStr.replace(/[^\d]/g, ''));
+        const deposit = calcDepositUtil(numericPrice);
         return deposit.toLocaleString('vi-VN') + ' đ';
     }
 

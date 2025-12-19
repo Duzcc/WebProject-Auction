@@ -4,6 +4,40 @@
 /* Custom CSS for VPA Application */
 
 /* ============================================
+   LUXURY GOLD THEME - New Design System
+   ============================================ */
+:root {
+    /* === LUXURY COLOR PALETTE === */
+    /* Gold/Yellow */
+    --gold: #F59E0B;
+    --gold-light: #FBBF24;
+    --gold-dark: #D97706;
+    --gold-darker: #B45309;
+
+    /* Dark Charcoal */
+    --charcoal: #1A1A1A;
+    --charcoal-light: #2D2D2D;
+    --charcoal-lighter: #3D3D3D;
+
+    /* Light/Cream */
+    --cream: #FAF9F6;
+    --off-white: #F5F5F5;
+
+    /* Accent Colors */
+    --red-badge: #EF4444;
+    --green-badge: #10B981;
+
+    /* === TYPOGRAPHY === */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Cormorant Garamond', serif;
+
+    /* === SHADOWS === */
+    --shadow-gold: 0 10px 40px rgba(245, 158, 11, 0.3);
+    --shadow-card-premium: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
    UNIFIED PREMIUM DESIGN SYSTEM
    Mix: Luxury + Modern Glassmorphism
    ============================================ */
@@ -1417,7 +1451,9 @@ label.flex {
 .fab {
     display: inline-block;
     vertical-align: middle;
-}/* ============================================
+}
+
+/* ============================================
    ENHANCED MODERN DESIGN STYLES
    ============================================ */
 

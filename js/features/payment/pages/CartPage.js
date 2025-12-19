@@ -429,7 +429,7 @@ export function CartPage() {
 
                     // Show success toast
                     import('../../utils/toast.js').then(({ default: toast }) => {
-                        toast.success(`Đã xóa ${itemName} khỏi giỏ hàng`);
+                        toast.success(`Đã xóa ${itemName}`);
                     });
 
                     // Force re-render
