@@ -37,7 +37,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
     const banner = createElement('div', {
         className: 'relative h-80 bg-cover bg-center overflow-hidden'
     });
-    banner.style.backgroundImage = 'url("images/banners/motorbike_auction.png")';
+    banner.style.backgroundImage = 'url("images/banners/motobike_auction1.jpg")';
     banner.innerHTML = `
         <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
@@ -85,7 +85,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         const banner = createElement('div', {
             className: 'relative h-80 bg-cover bg-center overflow-hidden'
         });
-        banner.style.backgroundImage = 'url("images/banners/motorbike_auction.png")';
+        banner.style.backgroundImage = 'url("images/banners/motobike_auction1.jpg")';
         banner.innerHTML = `
             <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
             <div class="relative h-full container mx-auto px-4 flex flex-col justify-center">
@@ -265,12 +265,12 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
     function createAccordion(section, title, options, selectedOptions) {
         const isOpen = state.openSections[section];
 
-        // VPA Official Style: Pink background with dark red text
-        const accordion = createElement('div', { className: 'rounded-[16px] bg-rose-50 overflow-hidden' });
+        // VPA Official Style: Header pink, content white
+        const accordion = createElement('div', { className: 'rounded-[16px] bg-white overflow-hidden border border-rose-50' });
 
         // Header with pink background and dark red text
         const button = createElement('button', {
-            className: 'w-full flex items-center justify-between px-5 py-4 text-red-900 text-base font-bold hover:bg-rose-100 transition-colors'
+            className: 'w-full flex items-center justify-between px-5 py-4 text-red-900 text-base font-bold bg-rose-50 hover:bg-rose-100 transition-colors'
         });
 
         const buttonText = createElement('span', {}, title);
@@ -290,7 +290,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
 
         // Checkbox list with proper spacing
         if (isOpen) {
-            const content = createElement('div', { className: 'px-5 pb-5 pt-2 space-y-3' });
+            const content = createElement('div', { className: 'px-5 pb-5 pt-2 space-y-3 bg-white border-t border-rose-100' });
 
             options.forEach(option => {
                 const checkbox = createCheckbox(option, selectedOptions.includes(option), (checked) => {
@@ -510,14 +510,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                 <th class="px-6 py-4">Giá khởi điểm</th>
                 <th class="px-6 py-4">Tỉnh, Thành phố</th>
                 <th class="px-6 py-4">Loại biển</th>
-                ${state.activeTab === 'official' ? `
-                    <th class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center gap-1">
-                            Thời gian đấu giá
-                            <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
-                        </div>
-                    </th>
-                ` : ''}
+
                 <th class="px-6 py-4">Lựa chọn</th>
             `;
         }
@@ -538,7 +531,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
                             <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer opacity-0" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border border-gray-200 px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap bg-white text-gray-800 group-hover:border-[#AA8C3C] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
+                            <span class="font-bold border border-gray-200 w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate bg-white text-gray-800 group-hover:border-[#AA8C3C] cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
@@ -549,16 +542,14 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4"></td>
                 `;
             } else {
-                const plateBgClass = state.activeTab === 'official'
-                    ? 'bg-[#eecc48] border-[#eecc48] text-gray-900'
-                    : 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
+                const plateBgClass = 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
 
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
                             <i data-lucide="star" class="text-blue-400 fill-yellow-400 cursor-pointer" style="width: 18px; height: 18px;"></i>
-                            <span class="font-bold border px-3 py-1.5 rounded shadow-sm transition-colors whitespace-nowrap ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
+                            <span class="font-bold border w-28 py-1.5 rounded shadow-sm transition-colors text-center overflow-hidden truncate ${plateBgClass} cursor-pointer hover:bg-blue-50" data-plate-number="${item.plateNumber}">
                                 ${item.plateNumber}
                             </span>
                         </div>
@@ -566,7 +557,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
-                    ${state.activeTab === 'official' ? `<td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>` : ''}
+
                     <td class="px-6 py-4">
                         <a href="#" class="text-[#AA8C3C] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
                     </td>
