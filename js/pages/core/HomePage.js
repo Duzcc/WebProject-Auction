@@ -219,7 +219,6 @@ function Partners() {
 
     return element;
 }
-
 /**
  * AboutIntro Component - Introduction text
  */
