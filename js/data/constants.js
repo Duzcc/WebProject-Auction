@@ -675,7 +675,58 @@ const newsData = [
         <strong>Nguyễn Ngọc Dương – Viện KSND khu vực 1.</strong>
       </p>
       ` },
-  { id: 4, category: "Dân trí", title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước", date: "18:26 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/bee3fded-0ff0-4448-ad53-5cea0ba77604.png", excerpt: "Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.", content: `Theo báo cáo của Cục CSGT, từ ngày 15/9/2023 đến 14/5 năm sau, tổng số tiền người trúng đấu giá biển số đã nộp vào ngân sách là 5.200 tỷ đồng. Điều này cho thấy hình thức đấu giá biển số đóng góp đáng kể vào nguồn thu của nhà nước.` },
+  { id: 4,
+    category: "Dân trí",
+    title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước",
+    date: "18:26 16/05/2025",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/bee3fded-0ff0-4448-ad53-5cea0ba77604.png",
+    excerpt: "Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.",
+    content: `
+      <p><strong>(Dân trí) - Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</strong></p>
+      <br>
+      <p>Sáng 15/5, trao đổi với phóng viên Dân trí, đại diện Cục CSGT (C08, Bộ Công an) cho biết, trong phiên đấu giá biển số xe lần thứ 6 (từ ngày 8/4 đến nay), tổng số biển được niêm yết lên sàn là hơn 1,5 triệu biển số xe; 
+        tổng số biển đấu giá thành là hơn 34.600 biển số; tổng giá trị tài sản đấu thành là hơn 1.600 tỷ đồng.</p>
+      <p>Trong đó, tổng số biển ô tô niêm yết là 342.000 biển số; tổng số biển đấu giá thành là hơn 11.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 1.200 tỷ đồng.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/594e449b-a750-4fb7-8eb8-064bb055e6a8.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng (Ảnh: Trần Thanh).
+            </figcaption>
+      </figure>
+      <p>Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
+      <p>Cục C08 cho biết, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước của phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) là 830 tỷ đồng. 
+        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/594e449b-a750-4fb7-8eb8-064bb055e6a8.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng (Ảnh: Trần Thanh).
+            </figcaption>
+      </figure>
+      <p>Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
+      <br>
+      <p>Cục C08 cho biết, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước của phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) là 830 tỷ đồng. 
+        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/4fa77a3e-78e5-48b7-a7d7-79249e6a3b68.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Một biển số xe máy trúng đấu giá với số tiền hàng trăm triệu đồng (Ảnh: Chụp màn hình).
+            </figcaption>
+      </figure>
+      <p>Cũng theo C08, từ khi bắt đầu đấu giá biển số xe (từ ngày 15/9/2023 đến hết ngày 14/5), tổng số biển đã niêm yết lên sàn là hơn 3,5 triệu biển số; tổng số biển đấu giá thành là hơn 85.800 biển số; tổng giá trị tài sản đấu giá thành là hơn 6.000 tỷ đồng.</p>
+      <br>
+      <p>Đặc biệt, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</p>
+      <p>Một số biển ô tô mà chủ nhân đã nộp đủ tiền trúng đấu giá trong phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) đơn cử gồm: 35A-555.55 hơn 3,1 tỷ đồng; 47A-899.99 hơn 2 tỷ đồng; 15K-555.55 hơn 2,1 tỷ đồng.</p>
+      <p>Một số biển xe máy có số tiền trúng đấu giá cao mà chủ nhân đã nộp đủ tiền gồm: 50A-888.88 hơn 1,4 tỷ đồng; 50A-567.89 854 triệu đồng; 29AC-666.66 735 triệu đồng...</p>
+      <p class="text-base text-black-1000">
+        <strong>Trần Thanh.</strong>
+      </p>
+      ` },
   { id: 5, category: "XD OL", title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng", date: "17:57 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png", excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.", content: `Báo cáo cho biết, kể từ ngày bắt đầu một chuỗi đấu giá, tổng số tiền thu được từ người trúng đấu giá biển số đạt khoảng 830 tỷ đồng, thể hiện sự quan tâm của người dân tới biển số đẹp.` },
   { id: 6, category: "", title: "ĐẤU GIÁ THÀNH CÔNG LÔ TÀI SẢN THÍ ĐIỂM ĐẤU GIÁ TÀI SẢN VI PHẠM HÀNH CHÍNH TRONG ỨNG DỤNG VNEID", date: "18:26 28/02/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2c13ab91-efab-4509-b3f5-d4a7e4095004.jpg", excerpt: "Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.", content: `Một lô tài sản thí điểm gồm nhiều mặt hàng tang vật vi phạm hành chính đã được tổ chức đấu giá thành công. Trong đó có 4 chiếc động cơ máy thủy thương hiệu YAMAHA, tất cả đã tìm được chủ mới.` },
   { id: 7, category: "Dân trí", title: "Đấu ấn một năm thí điểm đấu giá biển số trực tuyến", date: "10:47 27/12/2024", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/ba5c1fda-d91d-48a0-a40e-0d2a284d6b79.png", excerpt: "Tháng 9/2023, phiên đấu giá biển số xe trực tuyến đầu tiên được Công ty đấu giá hợp danh Việt Nam (VPA) tổ chức thành công với vai trò là đơn vị duy nhất được Bộ Công an lựa chọn thực hiện đấu giá biển số xe ô tô.", content: `Sau một năm thí điểm, hình thức đấu giá biển số trực tuyến đã chứng minh tính hiệu quả, thuận tiện và mang lại nguồn thu đáng kể cho ngân sách.` },
