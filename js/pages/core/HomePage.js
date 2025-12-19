@@ -163,9 +163,6 @@ function Services({ onNavigate }) {
     initIcons(element);
     return element;
 }
-
-
-
 /**
  * Partners Component - Partner logos
  */
