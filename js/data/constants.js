@@ -632,7 +632,49 @@ const newsData = [
         <strong>Trung Nguyên/Báo Tin tức và Dân tộc.</strong>
       </p>
     ` },
-  { id: 3, category: "Viện Kiểm Sát", title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến", date: "14:44 31/07/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/5730c3f8-5d0b-45c9-9bc6-93a8af2ed52a.png", excerpt: " Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia, là chìa khóa thúc đẩy sự phát triển toàn diện của đất nước. Mục tiêu cơ bản của chuyển đổi số là việc ứng dụng công nghệ thông tin trong các hoạt động của mọi lĩnh vực.", content: `Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia. Việc tiến hành đấu giá tài sản bằng hình thức trực tuyến được cho là minh bạch và tiện lợi, tuy nhiên Viện KSND khu vực 1 đã tiến hành kiểm sát để đảm bảo quy trình đúng pháp luật, bảo vệ quyền lợi của người tham gia.` },
+  { id: 3,
+    category: "Viện Kiểm Sát",
+    title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến",
+    date: "14:44 31/07/2025",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/5730c3f8-5d0b-45c9-9bc6-93a8af2ed52a.png",
+    excerpt: " Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia, là chìa khóa thúc đẩy sự phát triển toàn diện của đất nước. Mục tiêu cơ bản của chuyển đổi số là việc ứng dụng công nghệ thông tin trong các hoạt động của mọi lĩnh vực.",
+    content: `
+      <p> Trong bối cảnh hiện nay, ứng dụng công nghệ thông tin và chuyển đổi số là mục tiêu Quốc gia, là chìa khóa thúc đẩy sự phát triển toàn diện của đất nước. 
+        Mục tiêu cơ bản của chuyển đổi số là việc ứng dụng công nghệ thông tin trong các hoạt động của mọi lĩnh vực. Chuyển đổi số không chỉ là áp dụng, thay đổi về mặt công nghệ mà còn thay đổi về tư duy, cách thức điều hành, cách thức hoạt động một cách linh hoạt, nhanh chóng và tiện lợi. 
+        Từ những mục tiêu đó, Viện KSND khu vực 1 đã phối hợp cùng Phòng Thi hành án dân sự khu vực 1 - Hà Nội đã thực hiện việc đấu giá tài sản bằng hình thức trực tuyến.
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/c62c7b82-ccfa-47d3-89d4-c61ec5ea9a5f.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">Toàn cảnh phiên đấu giá tài sản bằng hình thức trực tuyến.</figcaption>
+      </figure>
+      <p>Nhận được sự quan tâm, chỉ đạo của Lãnh đạo 02 ngành; Chấp hành viên đã phối hợp cùng Kiểm sát viên xây dựng kế hoạch đấu giá tài sản bằng hình thức trực tuyến. Sau khi nghiên cứu các quy định của Nhà nước về hình thức đấu giá trực tuyến, phù hợp với các quy định của Luật Thi hành án dân sự, 
+        Luật Đấu giá tài sản và các Nghị định của Chính phủ quy định về đấu giá trực tuyến, Chấp hành viên đã lựa chọn Công ty đấu giá Hợp danh Việt Nam VPA làm đơn vị tổ chức dấu giá trực tuyến cho tài sản cần xử lý. Công ty VPA là công ty có nhiều kinh nghiệm trong việc đấu giá trực tuyến tài sản; 
+        là Công ty được lựa chọn đấu giá biển số xe và tài sản vi phạm hành chính của Bộ Công an. Kiểm sát viên và Chấp hành viên đã trực tiếp làm việc với Công ty VPA, đánh giá điều kiện về cơ sở vật chất, tính bảo mật và tiến hành nhiều lần thử nghiệm đấu giá tài sản bằng hình thức trực tuyến.
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/c8af9b0c-bd00-4674-a3f4-63d138ff736b.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:600px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">Kiểm sát viên, Chấp hành viên, Đấu giá viên tại phiên đấu giá.</figcaption>
+      </figure>
+      <p> Từ kết quả của các buổi thử nghiệm đấu giá tại Công ty VPA, Kiểm sát viên báo cáo đề xuất Lãnh đạo viện và được Lãnh đạo Viện đồng ý thực hiện việc đấu giá tài sản bằng hình thức trực tuyến. Buổi đấu giá đã được thực hiện ngày 10/7/2025.</p>
+      <br>
+      <p> Đánh giá kết quả của việc đấu giá tài sản bằng hình thức trực tuyến, Kiểm sát viên có một số kiến nghị như sau:</p>
+      <p> Về ưu điểm:</p>
+      <p> - Tài sản được đấu giá bằng hình thức trực tuyến được đăng công khai minh bạch về thông tin tài sản trên Cổng thông tin đấu giá Quốc gia và trang thông tin điện tử của Tổ chức đấu giá. </p>
+      <p> - Việc bán hồ sơ tham gia đấu giá được thực hiện trực tuyến, tạo thuận lợi và dễ dàng cho mọi khách hàng có thể tiếp cận một cách công bằng, minh bạch. Khách hàng mua hồ sơ đấu giá đều được xác thực bằng phần mềm VNeID, đảm bảo thông tin khách hàng chính xác, không có hồ sơ ảo.</p>
+      <p> - Thông tin khách hàng được mã hóa, tăng tính bảo mật cho cuộc đấu giá. Khách hàng không biết có bao nhiêu người cùng tham gia đấu giá, không biết thông tin của nhau và không biết ai đang là người trả giá nên tránh được tình trạng “quân xanh, quân đỏ”.</p>
+      <p> - Khách hàng có thể tham gia buổi đấu giá một cách dễ dàng bằng thiết bị di động có kết nối Internet. Kết quả đấu giá được xác thực nhanh chóng bằng chữ ký số thông qua phần mềm VNeID. </p>
+      <br>
+      <p> Một số hạn chế và kiến nghị: </p>
+      <p> - Chưa có hướng dẫn việc kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến; Cơ quan THADS và Viện KSND đang vận dụng các quy định của Luật Thi hành án dân sự, Luật Đấu giá tài sản, Nghị định 172/2024/NĐ-CP ngày 27/12/2024 quy định chi tiết một số điều luật của Luật Đấu giá tài sản. Do đó kiến nghị sớm có hướng dẫn cụ thể việc kiểm sát đấu giá bằng hình thức trực tuyến. </p>
+      <p> - Tổ chức đấu giá đã tạo tài khoản giám sát cho Chấp hành viên, tuy nhiên chưa tạo tài khoản kiểm sát cho Kiểm sát viên. Tại buổi đấu giá, Kiểm sát viên phải dùng chung tài khoản giám sát của Chấp hành viên./.</p>
+      <br>
+      <p class="text-base text-black-1000">
+        <strong>Nguyễn Ngọc Dương – Viện KSND khu vực 1.</strong>
+      </p>
+      ` },
   { id: 4, category: "Dân trí", title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước", date: "18:26 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/bee3fded-0ff0-4448-ad53-5cea0ba77604.png", excerpt: "Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.", content: `Theo báo cáo của Cục CSGT, từ ngày 15/9/2023 đến 14/5 năm sau, tổng số tiền người trúng đấu giá biển số đã nộp vào ngân sách là 5.200 tỷ đồng. Điều này cho thấy hình thức đấu giá biển số đóng góp đáng kể vào nguồn thu của nhà nước.` },
   { id: 5, category: "XD OL", title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng", date: "17:57 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png", excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.", content: `Báo cáo cho biết, kể từ ngày bắt đầu một chuỗi đấu giá, tổng số tiền thu được từ người trúng đấu giá biển số đạt khoảng 830 tỷ đồng, thể hiện sự quan tâm của người dân tới biển số đẹp.` },
   { id: 6, category: "", title: "ĐẤU GIÁ THÀNH CÔNG LÔ TÀI SẢN THÍ ĐIỂM ĐẤU GIÁ TÀI SẢN VI PHẠM HÀNH CHÍNH TRONG ỨNG DỤNG VNEID", date: "18:26 28/02/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2c13ab91-efab-4509-b3f5-d4a7e4095004.jpg", excerpt: "Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.", content: `Một lô tài sản thí điểm gồm nhiều mặt hàng tang vật vi phạm hành chính đã được tổ chức đấu giá thành công. Trong đó có 4 chiếc động cơ máy thủy thương hiệu YAMAHA, tất cả đã tìm được chủ mới.` },
