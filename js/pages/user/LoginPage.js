@@ -1,6 +1,9 @@
 import { createElement } from '../../utils/dom.js';
 import { validateEmail, validatePassword, validateName, showError, clearError, validateForm } from '../../utils/validation.js';
 import { login } from '../../utils/auth.js';
+import { createElement } from '../../../shared/utils/dom.js';
+import { validateEmail, validatePassword, validateName, showError, clearError, validateForm } from '../utils/validation.js';
+import { login, register, authenticate } from '../utils/auth.js';
 
 /**
  * LoginPage Component
@@ -533,9 +536,6 @@ async function handleSignUpSubmit(e, form, submitBtn) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang xử lý...';
 
     try {
-        // Import register function
-        const { register } = await import('../../utils/auth.js');
-
         // Attempt registration
         const result = register(formData);
 
@@ -614,9 +614,6 @@ async function handleSignInSubmit(e, form, submitBtn, onLoginSuccess) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang xử lý...';
 
     try {
-        // Import auth functions
-        const { authenticate, login } = await import('../../utils/auth.js');
-
         // Attempt authentication
         const result = authenticate(formData.email, formData.password);
 
