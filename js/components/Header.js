@@ -75,13 +75,14 @@ export function Header({ activePage, onNavigate }) {
             <!-- Top Bar with Ticker -->
             <div class="bg-[#1E40AF] text-white text-xs py-2 px-4 flex justify-between items-center">
                 <div class="overflow-hidden w-full max-w-4xl whitespace-nowrap">
-                    <div class="inline-block animate-marquee pl-4">
-                        33.33, 68AA-888.88, 49AA-888.88, 47AD-444.44, 74H-024.68, 22H-024.68, 29E-444.40, 29E-433.33, 29E-444.47, 29E-411.11.
+                    <div class="inline-block animate-marquee pl-4" id="marquee-ticker">
+                        <span class="inline-block pr-8">Biển số nổi bật ngày <span class="ticker-date"></span>: 22A-123.45, 68AA-888.88, 49AA-888.88, 47AD-444.44, 74H-024.68, 22H-024.68, 29E-444.40, 29E-433.33, 29E-444.47, 29E-411.11.</span>
+                        <span class="inline-block pr-8">Biển số nổi bật ngày <span class="ticker-date"></span>: 22A-123.45, 68AA-888.88, 49AA-888.88, 47AD-444.44, 74H-024.68, 22H-024.68, 29E-444.40, 29E-433.33, 29E-444.47, 29E-411.11.</span>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center gap-2 font-bold ml-4 whitespace-nowrap bg-white text-[#1E40AF] px-3 py-1 rounded-full">
                     <i data-lucide="phone" class="w-3.5 h-3.5" fill="#1E40AF"></i>
-                    <span>1900.0555.15</span>
+                    <span>1900.8888.88</span>
                 </div>
             </div>
 
@@ -93,7 +94,7 @@ export function Header({ activePage, onNavigate }) {
                         <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-red-600 rounded-md flex items-center justify-center transform rotate-45">
                             <div class="w-6 h-6 bg-white transform -rotate-45" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%)"></div>
                         </div>
-                        <span class="text-3xl font-bold text-blue-600">VPA</span>
+                        <span class="text-3xl font-bold text-blue-600">NPA</span>
                     </div>
 
                     <!-- Nav Links - Desktop -->
@@ -345,6 +346,21 @@ export function Header({ activePage, onNavigate }) {
 
     // Initialize Lucide icons
     initIcons(header);
+
+    // Set current date in ticker
+    const formatDate = () => {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    const dateString = formatDate();
+    const tickerDates = header.querySelectorAll('.ticker-date');
+    tickerDates.forEach(element => {
+        element.textContent = dateString;
+    });
 
     return header;
 }
