@@ -727,7 +727,40 @@ const newsData = [
         <strong>Trần Thanh.</strong>
       </p>
       ` },
-  { id: 5, category: "XD OL", title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng", date: "17:57 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png", excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.", content: `Báo cáo cho biết, kể từ ngày bắt đầu một chuỗi đấu giá, tổng số tiền thu được từ người trúng đấu giá biển số đạt khoảng 830 tỷ đồng, thể hiện sự quan tâm của người dân tới biển số đẹp.` },
+  { id: 5,
+    category: "XD OL",
+    title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng",
+    date: "17:57 16/05/2025",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png",
+    excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.",
+    content: `
+      <strong> Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.</strong>
+      <br>
+      <p>Ngày 15/5, thông tin từ Cục CSGT (Bộ Công an) cho biết, qua gần 40 ngày triển khai phiên đấu giá biển số xe thứ 6 (từ ngày 8/4 - 14/5) theo Nghị định số 156/2024/NĐ-CP về đấu giá biển số xe (Nghị định 156), các đơn vị liên quan đã tổ chức đấu giá thành công trên 34.600 biển số.
+       Tổng giá trị tài sản đấu giá thành công khoảng 1.650 tỷ đồng.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/c8fc9e46-799d-4993-abdf-b30e2cd34033.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Một số kết quả trúng đấu giá biển số xe máy.
+            </figcaption> 
+      </figure>
+      <p>Trong đó, có hơn 11.300 biển số ô tô với tổng trị giá trên 1.200 tỷ đồng và hơn 23.300 biển số xe máy giá trị khoảng 387 tỷ đồng.</p>
+      <p>Trong số này, khoảng 830 tỷ đồng là tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp vào ngân sách Nhà nước.</p>
+      <p>Như vậy, theo thống kê, từ thời điểm thực hiện đấu giá biển số xe (ngày 15/9/2023 - nay), tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của Cục CSGT để nộp vào ngân sách Nhà nước là hơn 5.200 tỷ đồng.</p>
+      <p>Phiên đấu giá biển số lần thứ 6 bắt đầu từ sáng 8/4 với hơn 2,18 triệu biển số xe đưa ra đấu giá. Trong đó, hơn 1,55 triệu biển số lần đầu được đấu giá dành cho mô tô, xe gắn máy.</p>
+      <p>Đáng chú ý, nhiều biển số xe máy được trả với mức khá cao và người trúng đấu giá đã nộp đủ tiền, như: 50AA-888.88 (TP.HCM) 1,455 tỷ đồng; 50AA-567.89 (TP.HCM) 854 triệu đồng; 29AC-666.66 (Hà Nội) 735 triệu đồng; 95AA-222.22 (Hậu Giang) 603 triệu đồng; 50AB-222.22 (TP.HCM) 562 triệu đồng...</p>
+      <br>
+      <p>Một số biển dành cho ô tô cũng có kết quả trúng đấu giá thành công, hoàn tất nộp tiền, như: 35A-555.55 (Ninh Bình) 3,15 tỷ đồng; 47A-899.99 (Lâm Đồng) 2,075 tỷ đồng; 15K-555.55 (Hải Phòng) 2,145 tỷ đồng; 93A-567.89 (Bình Phước) 1,805 tỷ đồng; 93A-555.55 (Bình Phước) 1,75 tỷ đồng...</p>
+      <p>Hiện nay, Nghị định 156 quy định đấu giá biển số xe là đấu giá theo hình thức trực tuyến. Phương thức đấu giá là phương thức trả giá lên.</p>
+      <p>Trong đó, giá khởi điểm đấu giá biển số xe ô tô là 40 triệu đồng, 3 năm tăng 1 lần tính từ ngày 1/1/2025, mỗi lần tăng 5 triệu đồng. Còn giá khởi điểm đấu giá của biển số xe máy là 5 triệu đồng, 3 năm cũng tăng 1 lần tính từ ngày 1/1/2025, mỗi lần tăng 1 triệu đồng.</p>
+      <p>Giá khởi điểm của biển số xe có định dạng AAAAA (A>4), ABCDE ( A < B < C < D < E, A>4) đưa ra đấu giá lại sau lần thứ hai là 500 triệu đồng (biển số xe ô tô) và 50 triệu đồng (biển số xe máy).</p>
+      <br>
+      <p class="text-base text-black-1000">
+        <strong>Hoàng Lam.</strong>
+      </p>
+    ` },
   { id: 6, category: "", title: "ĐẤU GIÁ THÀNH CÔNG LÔ TÀI SẢN THÍ ĐIỂM ĐẤU GIÁ TÀI SẢN VI PHẠM HÀNH CHÍNH TRONG ỨNG DỤNG VNEID", date: "18:26 28/02/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2c13ab91-efab-4509-b3f5-d4a7e4095004.jpg", excerpt: "Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.", content: `Một lô tài sản thí điểm gồm nhiều mặt hàng tang vật vi phạm hành chính đã được tổ chức đấu giá thành công. Trong đó có 4 chiếc động cơ máy thủy thương hiệu YAMAHA, tất cả đã tìm được chủ mới.` },
   { id: 7, category: "Dân trí", title: "Đấu ấn một năm thí điểm đấu giá biển số trực tuyến", date: "10:47 27/12/2024", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/ba5c1fda-d91d-48a0-a40e-0d2a284d6b79.png", excerpt: "Tháng 9/2023, phiên đấu giá biển số xe trực tuyến đầu tiên được Công ty đấu giá hợp danh Việt Nam (VPA) tổ chức thành công với vai trò là đơn vị duy nhất được Bộ Công an lựa chọn thực hiện đấu giá biển số xe ô tô.", content: `Sau một năm thí điểm, hình thức đấu giá biển số trực tuyến đã chứng minh tính hiệu quả, thuận tiện và mang lại nguồn thu đáng kể cho ngân sách.` },
   { id: 8, category: "An Ninh Thủ đô", title: "Những trường hợp nào phải đổi đăng ký xe, biển số xe từ năm 2025?", date: "09:42 16/12/2024", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/0d5193ab-5ff5-4e20-b8f3-83516b320eb0.png", excerpt: "Thông tư 79/2024/TT-BCA quy định về cấp, thu hồi chứng nhận đăng ký xe, biển số xe cơ giới, xe máy chuyên dùng. Theo đó, những trường hợp phải đổi chứng nhận đăng ký xe", content: `Thông tư 79/2024/TT-BCA quy định chi tiết các trường hợp phải đổi đăng ký xe, biển số. Người dân cần kiểm tra thông tin chi tiết để thực hiện thủ tục đúng quy định.` }, // Mục này ở cuối ảnh 08.12.49.jpg và đầu ảnh 08.12.56.png
