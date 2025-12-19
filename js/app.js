@@ -6,6 +6,8 @@ import { FloatingActions } from './shared/components/FloatingActions.js';
 import { HomePage } from './core/pages/HomePage.js';
 import { AboutPage } from './core/pages/AboutPage.js';
 import { NewsPage } from './features/news/pages/NewsPage.js';
+import { NewsDetailPage } from './features/news/pages/NewsDetailPage.js';
+import { NotificationDetailPage } from './features/news/pages/NotificationDetailPage.js';
 
 // Trang đấu giá
 import { CarAuctionPage } from './features/auction-car/pages/CarAuctionPage.js';
@@ -119,7 +121,43 @@ function renderApp() {
             break;
 
         case 'news':
-            render(NewsPage(), main);
+            // Support tab parameter for switching between news and notifications
+            const newsTab = currentParams || 'news';
+            render(NewsPage({
+                initialTab: newsTab,
+                onNavigate: (page, id, tab) => {
+                    currentPage = page;
+                    currentParams = tab || id || null;
+                    renderApp();
+                    window.scrollTo(0, 0);
+                }
+            }), main);
+            break;
+
+        case 'news-detail':
+            const newsId = currentParams;
+            render(NewsDetailPage({
+                id: newsId,
+                onNavigate: (page, id, tab) => {
+                    currentPage = page;
+                    currentParams = tab || null;
+                    renderApp();
+                    window.scrollTo(0, 0);
+                }
+            }), main);
+            break;
+
+        case 'notif-detail':
+            const notifId = currentParams;
+            render(NotificationDetailPage({
+                id: notifId,
+                onNavigate: (page, id, tab) => {
+                    currentPage = page;
+                    currentParams = tab || null;
+                    renderApp();
+                    window.scrollTo(0, 0);
+                }
+            }), main);
             break;
 
         case 'cars':
@@ -221,8 +259,8 @@ function handleHashChange() {
     if (!path || path === '') {
         currentPage = 'home';
         currentParams = null;
-    } else if (path === 'asset-detail' && params) {
-        currentPage = 'asset-detail';
+    } else if ((path === 'asset-detail' || path === 'news-detail' || path === 'notif-detail') && params) {
+        currentPage = path;
         currentParams = params;
     } else {
         currentPage = path;

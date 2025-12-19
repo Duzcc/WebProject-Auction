@@ -303,11 +303,11 @@
 /* Marquee animation for ticker */
 @keyframes marquee {
     0% {
-        transform: translateX(0%);
+        transform: translateX(0);
     }
 
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
@@ -412,6 +412,97 @@ html {
 
 .animation-delay-4000 {
     animation-delay: 4s;
+}
+
+/* Banner animations for hero sections */
+@keyframes banner-zoom {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+
+    50% {
+        transform: scale(1.04) translateY(-6px);
+    }
+
+    100% {
+        transform: scale(1.06) translateY(0);
+    }
+}
+
+.banner-gradient {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.28) 35%, rgba(0, 0, 0, 0.08) 70%, rgba(0, 0, 0, 0.0) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    opacity: 0.95;
+    animation: gradient-shift 12s linear infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Slight highlight on hover for banner liveliness */
+.relative.h-80:hover .hero-bg {
+    filter: saturate(1.08) contrast(1.03);
+    transition: filter 300ms ease;
+}
+
+/* Plate badge with fixed width for consistent layout */
+.plate-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Fixed width to avoid fitting to content */
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    padding: 0 0.4rem;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+
+    /* Force a fixed sidebar width so table area matches across tabs
+       Choose 300px as a balanced width that keeps filters usable and
+       ensures the table area is identical on both tabs */
+    .auction-main {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 2rem !important;
+        align-items: flex-start !important;
+    }
+
+    .auction-main .auction-sidebar {
+        flex: 0 0 300px !important;
+        max-width: 300px !important;
+    }
+
+    .auction-main .auction-table-area {
+        flex: 1 1 auto !important;
+        max-width: calc(100% - 300px) !important;
+    }
+
+    /* Mobile: slightly narrower fixed badge to save space */
+    .plate-badge {
+        width: 100px !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
+        padding: 0 0.3rem !important;
+    }
 }
 
 /* Login Container Active State */

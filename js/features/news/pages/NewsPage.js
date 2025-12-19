@@ -52,7 +52,7 @@ function NewsSection({ newsData = [], notifData = [], initialTab, onNavigate } =
     function render() {
         container.innerHTML = '';
 
-            const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
+        const innerContainer = createElement('div', { className: 'container mx-auto px-4' });
 
         // Tab Navigation
         const tabNav = createElement('div', { className: 'flex gap-1 mb-6 border-b border-gray-200' });
@@ -79,7 +79,7 @@ function NewsSection({ newsData = [], notifData = [], initialTab, onNavigate } =
 
         tabNav.appendChild(newsTab);
         tabNav.appendChild(notifTab);
-        innerContainer.appendChild(tabNav); 
+        innerContainer.appendChild(tabNav);
 
         // Main Content Title
         const currentData = activeTab === 'news' ? newsData : notifData;
@@ -195,7 +195,7 @@ export function NewsPage({ onNavigate, initialTab } = {}) {
         backgroundImage: '/images/banners/news_banner.png'
     }));
 
-    // Add news section
+    // Add news section with onNavigate callback
     container.appendChild(NewsSection({ newsData, notifData, initialTab, onNavigate }));
 
     // Initialize Lucide icons
