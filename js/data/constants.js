@@ -861,20 +861,167 @@ const notifData = [
   // Thông báo (Notifications - Tích hợp dữ liệu từ ảnh 08.12.56.png và 08.13.02.jpg)
   { id: 10,
     category: "",
-    title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN",
-    date: "08:56 12/12/2025",
+    title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 26/12/2025",
+    date: "07:49 19/12/2025",
     source: "Thông báo" ,
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2d7cffd4-75ef-4eea-8ce3-f94dc6f894bf.jpg",
-    excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá......",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 26/12/2025 như sau:",
     content: `
-      Công ty Đấu giá hợp danh Việt Nam (Công ty VPA) trân trọng thông báo một phiên đấu giá sắp tới được tổ chức tại trụ sở NO2-T4.03. Phiên đấu giá gồm nhiều mặt hàng tang vật, hồ sơ chi tiết sẽ được đăng tải trên website. Khách hàng quan tâm vui lòng liên hệ hotline để biết thêm chi tiết.
-
-
-      
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 26/12/2025 như sau:</strong> </p> <br>
+      <p class="mb">1. Danh sách biển số xe, thời gian tổ chức đấu giá (Có danh sách chi tiết)</p>
+      <p class="mb">2. Địa điểm đấu giá, thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước, thời lượng đấu giá</p>
+      <p class="mb">- Địa điểm đấu giá: Trang thông tin đấu giá trực tuyến https://vpa.com.vn</p>
+      <p class="mb">- Thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">+ Thời hạn: Trước 16h30’ ngày 24/12/2025 (theo thời gian báo có vào tài khoản của Công ty Đấu giá hợp danh Việt Nam chậm nhất đến 16h30’ ngày 24/12/2025).</p>
+      <p class="mb">- Tiền đặt trước:</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe ô tô đưa ra đấu giá là 40 (bốn mươi) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe mô tô, xe gắn máy đưa ra đấu giá là 5 (năm) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của biển số xe có định dạng  AAAAA (A>4), ABCDE (A<B<C<D<E, A>4)  đưa ra đấu giá lại sau lần thứ hai là 500 (năm trăm) triệu đồng đối với biển số xe ô tô và 50 (năm mươi) triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Tiền bán hồ sơ tham gia đấu giá:</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 100 (một trăm) nghìn đồng trên một biển số xe ô tô.</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 50 (năm mươi) nghìn đồng trên một biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước tham gia đấu giá:</p>
+      <p class="mb">+ Người tham gia đấu giá nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam;</p>
+      <p class="mb">Số tài khoản: 1410999999999;</p>
+      <p class="mb">Tại: Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank chi nhánh Mỹ Đình);</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã thanh toán” trong phần Nội dung chuyển khoản tại mục “Thanh toán biển số xe”.</p>
+      <p class="mb">+ Số tiền: Theo thông tin Số tiền tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến.</p>
+      <p class="mb">- Thời lượng đấu giá: Tối thiểu 25 phút/01 biển số xe.</p>
+      <p class="mb">Lưu ý: Mã xác thực để truy cập đấu giá trực tuyến sẽ được hệ thống gửi đến số điện thoại và email của Quý khách đã đăng ký tối thiểu trước 60 phút khi cuộc đấu giá bắt đầu. Quý khách cần hỗ trợ, vui lòng liên hệ hotline: 1900.05.5515</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">Xem danh sách tại đây:</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1RuLZRlcSTbSx0gTlALOOk_iKYvU2u4bAG1oCvV8nxoA/edit?gid=1951989180#gid=1951989180" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô 
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/16ElwZJt_ng-d5aQCnJw7bWb7mjLYA56rQ2h4O2HzVmw/edit?gid=1790618030#gid=1790618030" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy 
+        </a></p>
     ` },
-  { id: 11, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 19/12/2025", date: "16:57 11/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 19/12/2025 như sau....", content: `Công ty thông báo phiên đấu giá biển số xe ngày 19/12/2025 sẽ diễn ra trực tuyến. Thông tin chi tiết về danh mục biển số, thời gian bắt đầu và hướng dẫn tham gia sẽ được cập nhật trên trang thông báo.` },
-  { id: 12, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 18/12/2025", date: "08:55 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 18/12/2025 như sau...", content: `Phiên đấu giá ngày 18/12/2025 bao gồm các lô biển số xe do các cơ quan thanh lý. Mọi quy trình tham gia được thực hiện trực tuyến.`  },
-  { id: 13, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:20 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo về phiên đấu giá tài sản kèm theo các thông tin chi tiết, danh mục và hướng dẫn tham dự. Khách hàng tham gia vui lòng đọc kỹ thể lệ.`  },
+  { id: 11,
+    category: "",
+    title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 25/12/2025",
+    date: "10:09 18/12/2025",
+    source: "Thông báo" ,
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 25/12/2025 như sau....",
+    content: `
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 25/12/2025 như sau:</strong> </p> <br>
+      <p class="mb">1. Danh sách biển số xe, thời gian tổ chức đấu giá (Có danh sách chi tiết)</p>
+      <p class="mb">2. Địa điểm đấu giá, thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước, thời lượng đấu giá</p>
+      <p class="mb">- Địa điểm đấu giá: Trang thông tin đấu giá trực tuyến https://vpa.com.vn</p>
+      <p class="mb">- Thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">+ Thời hạn: Trước 16h30’ ngày 23/12/2025 (theo thời gian báo có vào tài khoản của Công ty Đấu giá hợp danh Việt Nam chậm nhất đến 16h30’ ngày 24/12/2025).</p>
+      <p class="mb">- Tiền đặt trước:</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe ô tô đưa ra đấu giá là 40 (bốn mươi) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe mô tô, xe gắn máy đưa ra đấu giá là 5 (năm) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của biển số xe có định dạng  AAAAA (A>4), ABCDE (A<B<C<D<E, A>4)  đưa ra đấu giá lại sau lần thứ hai là 500 (năm trăm) triệu đồng đối với biển số xe ô tô và 50 (năm mươi) triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Tiền bán hồ sơ tham gia đấu giá:</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 100 (một trăm) nghìn đồng trên một biển số xe ô tô.</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 50 (năm mươi) nghìn đồng trên một biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước tham gia đấu giá:</p>
+      <p class="mb">+ Người tham gia đấu giá nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam;</p>
+      <p class="mb">Số tài khoản: 1410999999999;</p>
+      <p class="mb">Tại: Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank chi nhánh Mỹ Đình);</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã thanh toán” trong phần Nội dung chuyển khoản tại mục “Thanh toán biển số xe”.</p>
+      <p class="mb">+ Số tiền: Theo thông tin Số tiền tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến.</p>
+      <p class="mb">- Thời lượng đấu giá: Tối thiểu 25 phút/01 biển số xe.</p>
+      <p class="mb">Lưu ý: Mã xác thực để truy cập đấu giá trực tuyến sẽ được hệ thống gửi đến số điện thoại và email của Quý khách đã đăng ký tối thiểu trước 60 phút khi cuộc đấu giá bắt đầu. Quý khách cần hỗ trợ, vui lòng liên hệ hotline: 1900.05.5515</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">Xem danh sách tại đây:</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1jCX5Y7b6KCXgeBgE_xt9unMVF_ti4WhX0Is2FLQMzqw/edit?gid=1196612422#gid=1196612422" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô 
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1nYdG6Nl0jxPS7z3VUrOI7MMniixVp84zkdnCOLvPfew/edit?gid=1433481292#gid=1433481292" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy 
+        </a></p>
+    ` },
+  { id: 12,
+    category: "",
+    title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN",
+    date: "08:18 18/12/2025",
+    source: "Thông báo",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá",
+    content: `
+      <p class="mb"><em> Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá:</em> </p>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>1. Thông tin đấu giá tài sản</strong> </p>
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/761b891c-9886-493a-a5f9-0963eb637064.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:700px;border-radius:6px;" />
+      </figure>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/8a915121-c6c1-44e6-9a84-9ba63e4b13a0.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+      </figure>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/a51b8278-e5e2-4472-bc7d-87344ef1bd47.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+      </figure>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>2. Đối tượng, điều kiện tham gia đấu giá</strong> </p> <br>
+      </p>
+      <p class="mb">- Các tổ chức, cá nhân có nhu cầu tham gia đấu giá, đã nộp hồ sơ tham gia đấu giá, nộp tiền đặt trước theo đúng quy định, trừ những đối tượng không được đăng ký tham gia đấu giá theo quy định tại khoản 4 Điều 38 Luật Đấu giá tài sản hiện hành.</p>
+      <p class="mb">- Cá nhân, tổ chức đăng ký tham gia đấu giá không thuộc trường hợp quy định tại khoản 5 Điều 9 Luật Đấu giá tài sản.</p>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>3. Cách thức tham gia</strong> </p> <br>
+      </p>
+      <p class="mb">Mọi thủ tục được quy định tại Quy chế cuộc đấu giá và thực hiện toàn trình trên trang thông tin đấu giá trực tuyến của Công ty VPA: https://vpa.com.vn</p>
+      <p class="mb">Điện thoại liên hệ: 1900.055.515 hoặc 0961.750.003.</p>
+ `  },
+  { id: 13,
+    category: "",
+    title: "THÔNG BÁO CÔNG BỐ DANH SÁCH BIỂN SỐ XE ĐƯA RA ĐẤU GIÁ PHIÊN ĐẤU GIÁ THỨ 9",
+    date: "19:57 17/12/2025",
+    source: "Thông báo",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam thông báo về việc công bố biển số xe đưa ra đấu giá Phiên đấu giá thứ 9 như sau:",
+    content: `
+      <p class="mb"><em> Công ty Đấu giá hợp danh Việt Nam thông báo về việc công bố biển số xe đưa ra đấu giá Phiên đấu giá thứ 9 như sau:</em> </p>
+      <p class="mb">1. Số lượng biển số xe đưa ra đấu giá: 2.527.197 biển số (Có danh sách biển số xe đưa ra đấu giá kèm theo).</p>
+      <p class="mb">Chi tiết biển số xe tại Trang thông tin đấu giá trực tuyến https://vpa.com.vn và phân hệ Trang thông tin đấu giá trực tuyến biển số xe: https://dgbs.vpa.com.vn.</p>
+      <p class="mb">2. Giá khởi điểm, tiền đặt trước:</p>
+      <p class="mb">Giá khởi điểm, tiền đặt trước của biển số xe đưa ra đấu giá là 40 triệu đồng đối với biển số xe ô tô và 5 triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">Giá khởi điểm, tiền đặt trước của biển số xe có định dạng AAAAA (A&gt;4), ABCDE (A&lt;B&lt;C&lt;D&lt;E, A&gt;4) đưa ra đấu giá lại sau lần thứ hai là 500 triệu đồng đối với biển số xe ô tô và 50 triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">3. Tiền bán hồ sơ tham gia đấu giá: Tiền bán hồ sơ tham gia đấu giá của biển số xe đưa ra đấu giá là 100 nghìn đồng đối với biển số xe ô tô và 50 nghìn đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">4. Cách thức đăng ký, nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">- Cách thức đăng ký tham gia đấu giá tại Trang thông tin đấu giá trực tuyến biển số xe: https://dgbs.vpa.com.vn.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước: Khách hàng tham gia đấu giá quét mã QR trên trang thông tin đấu giá trực tuyến và làm theo hướng dẫn hoặc nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">+ Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam.</p>
+      <p class="mb">+ Số tài khoản: 1410999999999.</p>
+      <p class="mb">+ Tại: Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank Mỹ Đình).</p>
+      <p class="mb">Hoặc:</p>
+      <p class="mb">+ Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam.</p>
+      <p class="mb">+ Số tài khoản: 22999999.</p>
+      <p class="mb">+ Tại: Ngân hàng TMCP Đầu tư và Phát triển Việt Nam, chi nhánh Hà Nội (BIDV chi nhánh Hà Nội).</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã số thanh toán” trong phần Nội dung chuyển khoản/Nội dung giao dịch tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến biển số xe.</p>
+      <p class="mb">- Thời gian thông báo công khai, niêm yết biển số xe đưa ra đấu giá ít nhất 30 ngày trước ngày tổ chức phiên đấu giá.</p>
+      <p class="mb">Mọi thông tin cần hỗ trợ vui lòng liên hệ tổng đài chăm sóc khách hàng: 1900.05.5515 hoặc gửi về hòm thư điện tử: dgbs@vpa.com.vn.</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1_o9PiWjAvMLfITCWKYWQZRtB9Z4_28bUz8jouc5fX9Q/edit?gid=3101261#gid=3101261" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô phiên 9
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/124DNhbAu7qoBMtFYIFlsqgD9d_01Ynj8WkxmYJuFnp4/edit?gid=1394743317#gid=1394743317" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy phiên 9
+        </a></p>
+`  },
   { id: 14, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 17/12/2025", date: "08:48 10/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 17/12/2025 như sau:", content: `Phiên đấu giá ngày 17/12/2025 sẽ diễn ra theo lịch và hướng dẫn đã đăng tải. Vui lòng kiểm tra kỹ thông tin lô và quy định tham gia.` },
   { id: 15, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:25 08/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/30fe8fa2-00c4-4fa4-a2ef-3fd5828c5230.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo các tài sản đưa ra bán, điều kiện và thể lệ tham gia.` },
   { id: 16, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 16/12/2025", date: "16:42 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 16/12/2025 như sau...", content: `Thông tin chi tiết về phiên đấu giá ngày 16/12/2025 đã được cập nhật.`  },
