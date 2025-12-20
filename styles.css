@@ -315,6 +315,10 @@
     animation: marquee 30s linear infinite;
     will-change: transform;
 }
+/*dan dong tin tuc*/
+.mb {
+    margin-bottom: 16px; /* có thể đổi 20px, 24px */
+}
 
 /* ============================================
    BASE STYLES - Enhanced Light Mode
@@ -751,6 +755,12 @@ svg {
     /* 16:9 aspect ratio */
 }
 
+.news-row img {
+    width: 224px; /* larger thumbnail tin tức and thông báo */
+    height: 144px;
+    object-fit: cover;
+    border-radius: 6px;
+}
 .skeleton-avatar {
     border-radius: 50%;
 }
@@ -763,7 +773,6 @@ svg {
             #2d3748 100%);
     background-size: 1000px 100%;
 }
-
 /* ============================================
    DARK MODE SUPPORT
    ============================================ */

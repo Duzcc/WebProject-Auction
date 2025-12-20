@@ -573,27 +573,24 @@ const assets = [
 
 const newsData = [
   // Tin tức (News - Tích hợp dữ liệu từ ảnh 08.12.43.jpg và 08.12.49.jpg)
-  {
-    id: 1,
+  { id: 1, 
     category: "Dân trí",
     title: "Biển số ô tô 99A-999.99 trúng đấu giá gần 28 tỷ đồng",
     date: "12:32 11/12/2025",
     source: "Tin tức",
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/801c3346-4529-480b-a002-d10522f5beda.png",
-    excerpt: "Ngày 11/11, trao đổi với phóng viên Dân trí, đại diện công ty đấu giá biển số ô tô cho biết sáng cùng ngày đơn vị này vừa phối hợp với Cục CSGT (Bộ Công an) tổ chức đấu giá loạt biển số ô tô. Đáng chú ý, biển số ô tô 99A-999.99 đã tìm được chủ nhân với số tiền trúng đấu giá lên tới gần 28 tỷ đồng.",
+    excerpt: "Ngày 11/11, trao đổi với phóng viên Dân trí, đại diện công ty đấu giá biển số ô tô cho biết sáng cùng ngày đơn vị này vừa phối hợp với Cục CSGT (Bộ Công an) tổ chức đấu giá loạt biển số ô tô. Đáng chú ý, biển số ô tô 99A-999.99 đã tìm được chủ nhân với số tiền trúng đấu giá lên tới gần 28 tỷ đồng.", 
     content: `
-      <p><strong>Ngày 11/11/2025</strong> — Tại phiên đấu giá do Công ty Đấu giá hợp danh Việt Nam tổ chức phối hợp với Cục CSGT, biển số <em>99A-999.99</em> đã được bán với mức giá kỷ lục gần 28 tỷ đồng.
-      </p>
-      <p> Đại diện đơn vị tổ chức cho biết, phiên đấu giá thu hút nhiều nhà đầu tư và người sưu tập quan tâm. Quy trình đấu giá được thực hiện công khai, minh bạch với sự giám sát của cơ quan chức năng.
-      </p>
+      <p><strong>Ngày 11/11/2025</strong> — Tại phiên đấu giá do Công ty Đấu giá hợp danh Việt Nam tổ chức phối hợp với Cục CSGT, biển số <em>99A-999.99</em> đã được bán với mức giá kỷ lục gần 28 tỷ đồng.</p>
+      <br>
+      <p> Đại diện đơn vị tổ chức cho biết, phiên đấu giá thu hút nhiều nhà đầu tư và người sưu tập quan tâm. Quy trình đấu giá được thực hiện công khai, minh bạch với sự giám sát của cơ quan chức năng.</p>
       <figure class="my-4">
         <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/3a8a0074-00c7-4740-b488-21b09c29a3ff.png" alt=""
           style="display:block;margin:0 auto;width:100%;max-width:400px;height:400px;border-radius:6px;" />
             <figcaption class="text-sm text-gray-500 mt-2 text-center">Ảnh: Biển số ô tô 99A-999.99 trúng đấu giá lên tới gần 28 tỷ đồng (Ảnh: Chụp màn hình).</figcaption>
       </figure>
       <p>Theo vị đại diện, đây là lần thứ 2 biển số ô tô 99A-999.99 này được đưa ra đấu giá, trước đó biển số này được đưa ra đấu giá lần 1 vào chiều 12/8 với số tiền trúng cao kỷ lục - hơn 21,8 tỷ đồng, tuy nhiên trong lần 1 người đấu giá đã bỏ cọc.
-        Các biển số ô tô có trúng đấu giá cao trong sáng nay gồm: 99A-999.99 giá trúng gần 28 tỷ đồng, 51N-234.56 giá trúng đấu giá 915 triệu đồng, 11A-234.56 giá trúng đấu giá 550 triệu đồng, 36B-111.11 giá trúng đấu giá 320 triệu đồng....
-      </p>
+        Các biển số ô tô có trúng đấu giá cao trong sáng nay gồm: 99A-999.99 giá trúng gần 28 tỷ đồng, 51N-234.56 giá trúng đấu giá 915 triệu đồng, 11A-234.56 giá trúng đấu giá 550 triệu đồng, 36B-111.11 giá trúng đấu giá 320 triệu đồng....</p>
       <figure class="my-4">
         <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/f5762249-b36e-424a-b537-f0e93d558ca5.png" alt="Mô tả ảnh"
         style="display:block;margin:0 auto;width:100%;max-width:600px;border-radius:6px;" />
@@ -602,14 +599,13 @@ const newsData = [
         </figcaption>
       </figure>
       <p>Cục CSGT cho biết, từ ngày 15/9/2023 đến ngày 20/10, tổng số biển đấu giá thành/niêm yết là 150.914 biển số, tương đương hơn 8.300 tỷ đồng. Trong đó, biển số ô tô đấu giá thành/niêm yết là 87.939 biển số, tương đương hơn 7.500 tỷ đồng, biển số xe máy đấu giá thành là 62.975 biển số, tương đương hơn 804 tỷ đồng.
-        Tổng số tiền mà lực lượng chức năng đã thu về tài khoản chuyên thu, để nộp ngân sách nhà nước là 8.100 tỷ đồng từ đấu giá biển số xe.
-      </p>
-      <p class="text-base text-black-1000">
+        Tổng số tiền mà lực lượng chức năng đã thu về tài khoản chuyên thu, để nộp ngân sách nhà nước là 8.100 tỷ đồng từ đấu giá biển số xe.</p>
+      <br>
+        <p class="text-base text-black-1000">
         <strong>Trần Thanh/ Báo Dân trí.</strong>
       </p>`
   },
-  {
-    id: 2,
+  { id: 2,
     category: "Báo tin tức",
     title: "Lần đầu tiên lô rượu ngoại 'khủng' lên sàn đấu giá với mức khởi điểm 3,7 tỷ đồng",
     date: "10:24 11/12/2025",
@@ -622,20 +618,20 @@ const newsData = [
       </p>
       <figure class="my-4">
         <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/fd726e37-b0f8-407c-a5b2-d41668b94323.png" alt=""
-          style="display:block;margin:0 auto;width:100%;max-width:400px;height:400px;border-radius:6px;" />
+          style="display:block;margin:0 auto;width:100%;max-width:700px;height:400px;border-radius:6px;" />
             <figcaption class="text-sm text-gray-500 mt-2 text-center">.</figcaption>
       </figure>
-      <p> Thông tin về lô rượu ngoại sắp lên sàn đấu giá, được đăng tải công khai trên trang web của Công ty Đấu giá hợp danh Việt Nam.</p>
-      <p>Giá khởi điểm của toàn bộ lô tài sản được đưa ra là 3.763.700.000 đồng. Người tham gia đấu giá phải mua hồ sơ với mức 200.000 đồng và đặt trước số tiền 600.000.000 đồng. Bước giá trong phiên được ấn định là 10.000.000 đồng cho mỗi lần trả giá.</p>
-      <p>Phiên đấu giá sẽ diễn ra theo hình thức đấu giá trực tuyến, áp dụng phương thức trả giá lên - tức người trả giá cao hơn sẽ trở thành người có quyền trúng đấu giá nếu đáp ứng đủ điều kiện. Thời gian đấu giá được ấn định vào khung 10 giờ - 10 giờ 30 phút ngày 12/12/2025.</p>
-      <p>Việc đưa lô rượu ngoại số lượng lớn ra đấu giá thu hút sự quan tâm của nhiều tổ chức và cá nhân có nhu cầu kinh doanh hoặc sưu tầm sản phẩm. Theo đánh giá từ các đơn vị thẩm định, mức giá khởi điểm được xác định dựa trên thị trường hàng hóa, tình trạng thực tế của sản phẩm và hồ sơ pháp lý đi kèm.</p>
-      <p>Các bên quan tâm có thể đăng ký tham gia trong thời hạn quy định trước khi phiên đấu giá chính thức bắt đầu.</p>
+      <p class="mb">Thông tin về lô rượu ngoại sắp lên sàn đấu giá, được đăng tải công khai trên trang web của Công ty Đấu giá hợp danh Việt Nam.</p>
+      <p class="mb">Giá khởi điểm của toàn bộ lô tài sản được đưa ra là 3.763.700.000 đồng. Người tham gia đấu giá phải mua hồ sơ với mức 200.000 đồng và đặt trước số tiền 600.000.000 đồng. Bước giá trong phiên được ấn định là 10.000.000 đồng cho mỗi lần trả giá.</p>
+      <p class="mb">Phiên đấu giá sẽ diễn ra theo hình thức đấu giá trực tuyến, áp dụng phương thức trả giá lên - tức người trả giá cao hơn sẽ trở thành người có quyền trúng đấu giá nếu đáp ứng đủ điều kiện. Thời gian đấu giá được ấn định vào khung 10 giờ - 10 giờ 30 phút ngày 12/12/2025.</p>
+      <p class="mb">Việc đưa lô rượu ngoại số lượng lớn ra đấu giá thu hút sự quan tâm của nhiều tổ chức và cá nhân có nhu cầu kinh doanh hoặc sưu tầm sản phẩm. Theo đánh giá từ các đơn vị thẩm định, mức giá khởi điểm được xác định dựa trên thị trường hàng hóa, tình trạng thực tế của sản phẩm và hồ sơ pháp lý đi kèm.</p>
+      <p class="mb">Các bên quan tâm có thể đăng ký tham gia trong thời hạn quy định trước khi phiên đấu giá chính thức bắt đầu.</p>
+
       <p class="text-base text-black-1000">
         <strong>Trung Nguyên/Báo Tin tức và Dân tộc.</strong>
       </p>
     ` },
-  {
-    id: 3,
+  { id: 3,
     category: "Viện Kiểm Sát",
     title: "Viện KSND khu vực 1 kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến",
     date: "14:44 31/07/2025",
@@ -661,25 +657,21 @@ const newsData = [
           style="display:block;margin:0 auto;width:100%;max-width:800px;height:600px;border-radius:6px;" />
             <figcaption class="text-sm text-gray-500 mt-2 text-center">Kiểm sát viên, Chấp hành viên, Đấu giá viên tại phiên đấu giá.</figcaption>
       </figure>
-      <p> Từ kết quả của các buổi thử nghiệm đấu giá tại Công ty VPA, Kiểm sát viên báo cáo đề xuất Lãnh đạo viện và được Lãnh đạo Viện đồng ý thực hiện việc đấu giá tài sản bằng hình thức trực tuyến. Buổi đấu giá đã được thực hiện ngày 10/7/2025.</p>
-      <br>
-      <p> Đánh giá kết quả của việc đấu giá tài sản bằng hình thức trực tuyến, Kiểm sát viên có một số kiến nghị như sau:</p>
+      <p class="mb"> Từ kết quả của các buổi thử nghiệm đấu giá tại Công ty VPA, Kiểm sát viên báo cáo đề xuất Lãnh đạo viện và được Lãnh đạo Viện đồng ý thực hiện việc đấu giá tài sản bằng hình thức trực tuyến. Buổi đấu giá đã được thực hiện ngày 10/7/2025.</p>
+      <p class="mb"> Đánh giá kết quả của việc đấu giá tài sản bằng hình thức trực tuyến, Kiểm sát viên có một số kiến nghị như sau:</p>
       <p> Về ưu điểm:</p>
       <p> - Tài sản được đấu giá bằng hình thức trực tuyến được đăng công khai minh bạch về thông tin tài sản trên Cổng thông tin đấu giá Quốc gia và trang thông tin điện tử của Tổ chức đấu giá. </p>
       <p> - Việc bán hồ sơ tham gia đấu giá được thực hiện trực tuyến, tạo thuận lợi và dễ dàng cho mọi khách hàng có thể tiếp cận một cách công bằng, minh bạch. Khách hàng mua hồ sơ đấu giá đều được xác thực bằng phần mềm VNeID, đảm bảo thông tin khách hàng chính xác, không có hồ sơ ảo.</p>
       <p> - Thông tin khách hàng được mã hóa, tăng tính bảo mật cho cuộc đấu giá. Khách hàng không biết có bao nhiêu người cùng tham gia đấu giá, không biết thông tin của nhau và không biết ai đang là người trả giá nên tránh được tình trạng “quân xanh, quân đỏ”.</p>
-      <p> - Khách hàng có thể tham gia buổi đấu giá một cách dễ dàng bằng thiết bị di động có kết nối Internet. Kết quả đấu giá được xác thực nhanh chóng bằng chữ ký số thông qua phần mềm VNeID. </p>
-      <br>
+      <p class="mb"> - Khách hàng có thể tham gia buổi đấu giá một cách dễ dàng bằng thiết bị di động có kết nối Internet. Kết quả đấu giá được xác thực nhanh chóng bằng chữ ký số thông qua phần mềm VNeID. </p>
       <p> Một số hạn chế và kiến nghị: </p>
       <p> - Chưa có hướng dẫn việc kiểm sát việc đấu giá tài sản bằng hình thức trực tuyến; Cơ quan THADS và Viện KSND đang vận dụng các quy định của Luật Thi hành án dân sự, Luật Đấu giá tài sản, Nghị định 172/2024/NĐ-CP ngày 27/12/2024 quy định chi tiết một số điều luật của Luật Đấu giá tài sản. Do đó kiến nghị sớm có hướng dẫn cụ thể việc kiểm sát đấu giá bằng hình thức trực tuyến. </p>
-      <p> - Tổ chức đấu giá đã tạo tài khoản giám sát cho Chấp hành viên, tuy nhiên chưa tạo tài khoản kiểm sát cho Kiểm sát viên. Tại buổi đấu giá, Kiểm sát viên phải dùng chung tài khoản giám sát của Chấp hành viên./.</p>
-      <br>
+      <p class="mb"> - Tổ chức đấu giá đã tạo tài khoản giám sát cho Chấp hành viên, tuy nhiên chưa tạo tài khoản kiểm sát cho Kiểm sát viên. Tại buổi đấu giá, Kiểm sát viên phải dùng chung tài khoản giám sát của Chấp hành viên./.</p>
       <p class="text-base text-black-1000">
-        <strong>Nguyễn Ngọc Dương – Viện KSND khu vực 1.</strong>
-      </p>
-      ` },
-  {
-    id: 4,
+        <strong>Nguyễn Ngọc Dương – Viện KSND khu vực 1.</strong> </p>
+      ` 
+  },
+  { id: 4,
     category: "Dân trí",
     title: "Đấu giá biển số xe mang về 5.200 tỷ đồng cho ngân sách nhà nước",
     date: "18:26 16/05/2025",
@@ -687,9 +679,8 @@ const newsData = [
     image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/bee3fded-0ff0-4448-ad53-5cea0ba77604.png",
     excerpt: "Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.",
     content: `
-      <p><strong>(Dân trí) - Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</strong></p>
-      <br>
-      <p>Sáng 15/5, trao đổi với phóng viên Dân trí, đại diện Cục CSGT (C08, Bộ Công an) cho biết, trong phiên đấu giá biển số xe lần thứ 6 (từ ngày 8/4 đến nay), tổng số biển được niêm yết lên sàn là hơn 1,5 triệu biển số xe; 
+      <p class="mb"><strong>(Dân trí) - Theo Cục CSGT, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08 để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</strong></p>
+      <p class="mb">Sáng 15/5, trao đổi với phóng viên Dân trí, đại diện Cục CSGT (C08, Bộ Công an) cho biết, trong phiên đấu giá biển số xe lần thứ 6 (từ ngày 8/4 đến nay), tổng số biển được niêm yết lên sàn là hơn 1,5 triệu biển số xe; 
         tổng số biển đấu giá thành là hơn 34.600 biển số; tổng giá trị tài sản đấu thành là hơn 1.600 tỷ đồng.</p>
       <p>Trong đó, tổng số biển ô tô niêm yết là 342.000 biển số; tổng số biển đấu giá thành là hơn 11.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 1.200 tỷ đồng.</p>
       <figure class="my-4">
@@ -699,10 +690,9 @@ const newsData = [
               Tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng (Ảnh: Trần Thanh).
             </figcaption>
       </figure>
-      <p>Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
+      <p class="mb">Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
       <p>Cục C08 cho biết, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước của phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) là 830 tỷ đồng. 
-        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.
-      </p>
+        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.</p>
       <figure class="my-4">
         <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/594e449b-a750-4fb7-8eb8-064bb055e6a8.png" alt=""
           style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
@@ -710,11 +700,9 @@ const newsData = [
               Tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng (Ảnh: Trần Thanh).
             </figcaption>
       </figure>
-      <p>Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
-      <br>
+      <p class="mb">Đối với biển số xe máy, tổng số biển được niêm yết lên sàn là 1,2 triệu biển số; tổng số biển đấu giá thành là hơn 23.300 biển số; tổng giá trị tài sản đấu giá thành là hơn 387 tỷ đồng.</p>
       <p>Cục C08 cho biết, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước của phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) là 830 tỷ đồng. 
-        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.
-      </p>
+        Trong đó số tiền thu được từ đấu giá xe máy là 230 tỷ đồng, thu được từ đấu giá ô tô là 600 tỷ đồng.</p>
       <figure class="my-4">
         <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/4fa77a3e-78e5-48b7-a7d7-79249e6a3b68.png" alt=""
           style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
@@ -723,30 +711,320 @@ const newsData = [
             </figcaption> 
       </figure>
       <p>Cũng theo C08, từ khi bắt đầu đấu giá biển số xe (từ ngày 15/9/2023 đến hết ngày 14/5), tổng số biển đã niêm yết lên sàn là hơn 3,5 triệu biển số; tổng số biển đấu giá thành là hơn 85.800 biển số; tổng giá trị tài sản đấu giá thành là hơn 6.000 tỷ đồng.</p>
-      <br>
-      <p>Đặc biệt, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</p>
-      <p>Một số biển ô tô mà chủ nhân đã nộp đủ tiền trúng đấu giá trong phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) đơn cử gồm: 35A-555.55 hơn 3,1 tỷ đồng; 47A-899.99 hơn 2 tỷ đồng; 15K-555.55 hơn 2,1 tỷ đồng.</p>
-      <p>Một số biển xe máy có số tiền trúng đấu giá cao mà chủ nhân đã nộp đủ tiền gồm: 50A-888.88 hơn 1,4 tỷ đồng; 50A-567.89 854 triệu đồng; 29AC-666.66 735 triệu đồng...</p>
+      <p class="mb">Đặc biệt, tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của C08, để nộp ngân sách nhà nước (từ ngày bắt đầu đấu giá 15/9/2023 đến hết ngày 14/5) là 5.200 tỷ đồng.</p>
+      <p class="mb">Một số biển ô tô mà chủ nhân đã nộp đủ tiền trúng đấu giá trong phiên đấu giá thứ 6 (từ ngày 8/4 đến hết ngày 14/5) đơn cử gồm: 35A-555.55 hơn 3,1 tỷ đồng; 47A-899.99 hơn 2 tỷ đồng; 15K-555.55 hơn 2,1 tỷ đồng.</p>
+      <p class="mb">Một số biển xe máy có số tiền trúng đấu giá cao mà chủ nhân đã nộp đủ tiền gồm: 50A-888.88 hơn 1,4 tỷ đồng; 50A-567.89 854 triệu đồng; 29AC-666.66 735 triệu đồng...</p>
       <p class="text-base text-black-1000">
         <strong>Trần Thanh.</strong>
       </p>
       ` },
-  { id: 5, category: "XD OL", title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng", date: "17:57 16/05/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png", excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.", content: `Báo cáo cho biết, kể từ ngày bắt đầu một chuỗi đấu giá, tổng số tiền thu được từ người trúng đấu giá biển số đạt khoảng 830 tỷ đồng, thể hiện sự quan tâm của người dân tới biển số đẹp.` },
-  { id: 6, category: "", title: "ĐẤU GIÁ THÀNH CÔNG LÔ TÀI SẢN THÍ ĐIỂM ĐẤU GIÁ TÀI SẢN VI PHẠM HÀNH CHÍNH TRONG ỨNG DỤNG VNEID", date: "18:26 28/02/2025", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2c13ab91-efab-4509-b3f5-d4a7e4095004.jpg", excerpt: "Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.", content: `Một lô tài sản thí điểm gồm nhiều mặt hàng tang vật vi phạm hành chính đã được tổ chức đấu giá thành công. Trong đó có 4 chiếc động cơ máy thủy thương hiệu YAMAHA, tất cả đã tìm được chủ mới.` },
-  { id: 7, category: "Dân trí", title: "Đấu ấn một năm thí điểm đấu giá biển số trực tuyến", date: "10:47 27/12/2024", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/ba5c1fda-d91d-48a0-a40e-0d2a284d6b79.png", excerpt: "Tháng 9/2023, phiên đấu giá biển số xe trực tuyến đầu tiên được Công ty đấu giá hợp danh Việt Nam (VPA) tổ chức thành công với vai trò là đơn vị duy nhất được Bộ Công an lựa chọn thực hiện đấu giá biển số xe ô tô.", content: `Sau một năm thí điểm, hình thức đấu giá biển số trực tuyến đã chứng minh tính hiệu quả, thuận tiện và mang lại nguồn thu đáng kể cho ngân sách.` },
-  { id: 8, category: "An Ninh Thủ đô", title: "Những trường hợp nào phải đổi đăng ký xe, biển số xe từ năm 2025?", date: "09:42 16/12/2024", source: "Tin tức", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/0d5193ab-5ff5-4e20-b8f3-83516b320eb0.png", excerpt: "Thông tư 79/2024/TT-BCA quy định về cấp, thu hồi chứng nhận đăng ký xe, biển số xe cơ giới, xe máy chuyên dùng. Theo đó, những trường hợp phải đổi chứng nhận đăng ký xe", content: `Thông tư 79/2024/TT-BCA quy định chi tiết các trường hợp phải đổi đăng ký xe, biển số. Người dân cần kiểm tra thông tin chi tiết để thực hiện thủ tục đúng quy định.` }, // Mục này ở cuối ảnh 08.12.49.jpg và đầu ảnh 08.12.56.png
-
+  { id: 5,
+    category: "XD OL",
+    title: "Người trúng đấu giá biển số xe phiên thứ 6 đã nộp 830 tỷ đồng",
+    date: "17:57 16/05/2025",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/8c818f89-0183-4c63-825b-eb4935abe3f9.png",
+    excerpt: "Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.",
+    content: `
+      <strong> Từ ngày 8/4 đến nay, tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp ngân sách Nhà nước khoảng 830 tỷ đồng.</strong>
+      <br>
+      <p>Ngày 15/5, thông tin từ Cục CSGT (Bộ Công an) cho biết, qua gần 40 ngày triển khai phiên đấu giá biển số xe thứ 6 (từ ngày 8/4 - 14/5) theo Nghị định số 156/2024/NĐ-CP về đấu giá biển số xe (Nghị định 156), các đơn vị liên quan đã tổ chức đấu giá thành công trên 34.600 biển số.
+       Tổng giá trị tài sản đấu giá thành công khoảng 1.650 tỷ đồng.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/c8fc9e46-799d-4993-abdf-b30e2cd34033.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:800px;height:500px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Một số kết quả trúng đấu giá biển số xe máy.
+            </figcaption> 
+      </figure>
+      <p class="mb">Trong đó, có hơn 11.300 biển số ô tô với tổng trị giá trên 1.200 tỷ đồng và hơn 23.300 biển số xe máy giá trị khoảng 387 tỷ đồng.</p>
+      <p class="mb">Trong số này, khoảng 830 tỷ đồng là tổng số tiền người trúng đấu giá biển số ô tô và xe máy đã nộp vào ngân sách Nhà nước.</p>
+      <p class="mb">Như vậy, theo thống kê, từ thời điểm thực hiện đấu giá biển số xe (ngày 15/9/2023 - nay), tổng số tiền người trúng đấu giá đã nộp vào tài khoản chuyên thu của Cục CSGT để nộp vào ngân sách Nhà nước là hơn 5.200 tỷ đồng.</p>
+      <p class="mb">Phiên đấu giá biển số lần thứ 6 bắt đầu từ sáng 8/4 với hơn 2,18 triệu biển số xe đưa ra đấu giá. Trong đó, hơn 1,55 triệu biển số lần đầu được đấu giá dành cho mô tô, xe gắn máy.</p>
+      <p class="mb">Đáng chú ý, nhiều biển số xe máy được trả với mức khá cao và người trúng đấu giá đã nộp đủ tiền, như: 50AA-888.88 (TP.HCM) 1,455 tỷ đồng; 50AA-567.89 (TP.HCM) 854 triệu đồng; 29AC-666.66 (Hà Nội) 735 triệu đồng; 95AA-222.22 (Hậu Giang) 603 triệu đồng; 50AB-222.22 (TP.HCM) 562 triệu đồng...</p>
+      <p class="mb">Một số biển dành cho ô tô cũng có kết quả trúng đấu giá thành công, hoàn tất nộp tiền, như: 35A-555.55 (Ninh Bình) 3,15 tỷ đồng; 47A-899.99 (Lâm Đồng) 2,075 tỷ đồng; 15K-555.55 (Hải Phòng) 2,145 tỷ đồng; 93A-567.89 (Bình Phước) 1,805 tỷ đồng; 93A-555.55 (Bình Phước) 1,75 tỷ đồng...</p>
+      <p class="mb">Hiện nay, Nghị định 156 quy định đấu giá biển số xe là đấu giá theo hình thức trực tuyến. Phương thức đấu giá là phương thức trả giá lên.</p>
+      <p class="mb">Trong đó, giá khởi điểm đấu giá biển số xe ô tô là 40 triệu đồng, 3 năm tăng 1 lần tính từ ngày 1/1/2025, mỗi lần tăng 5 triệu đồng. Còn giá khởi điểm đấu giá của biển số xe máy là 5 triệu đồng, 3 năm cũng tăng 1 lần tính từ ngày 1/1/2025, mỗi lần tăng 1 triệu đồng.</p>
+      <p class="mb">Giá khởi điểm của biển số xe có định dạng AAAAA (A>4), ABCDE ( A < B < C < D < E, A>4) đưa ra đấu giá lại sau lần thứ hai là 500 triệu đồng (biển số xe ô tô) và 50 triệu đồng (biển số xe máy).</p>
+      <p class="text-base text-black-1000">
+        <strong>Hoàng Lam.</strong>
+      </p>
+    ` },
+  { id: 6,
+    category: "",
+    title: "ĐẤU GIÁ THÀNH CÔNG LÔ TÀI SẢN THÍ ĐIỂM ĐẤU GIÁ TÀI SẢN VI PHẠM HÀNH CHÍNH TRONG ỨNG DỤNG VNEID",
+    date: "18:26 28/02/2025",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2c13ab91-efab-4509-b3f5-d4a7e4095004.jpg",
+    excerpt: "Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.",
+    content: `
+      <p class="mb"><em> Bốn chiếc động cơ máy thủy cano, nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản vừa được đấu giá thành công.</em></p>
+      <p class="mb">Sáng ngày 28/2/2025, Công ty Đấu giá Hợp danh Việt Nam (VPA) đã tổ chức thành công phiên đấu giá trực tuyến 4 động cơ máy thủy cano nhãn hiệu YAMAHA 200ET (không có chân vịt), xuất xứ Nhật Bản với giá trúng đấu giá là 982 triệu đồng, cao hơn gấp 3 lần so với giá khởi điểm là 320 triệu đồng.</p>
+      <p class="mb">Để đăng ký tham gia đấu giá, khách hàng phải thực hiện xác thực danh tính người tham gia bằng cách đăng nhập ứng dụng VNeID trên Trang thông tin đấu giá tài sản của Công ty VPA. Điều này không chỉ giúp xác thực danh tính người tham gia chính xác, 
+        giảm thiểu nguy cơ giả mạo hồ sơ của người tham gia đấu giá mà còn tối giản thủ tục đăng ký, giúp người tham gia đấu giá thuận tiện hơn và đảm bảo tính công khai, nâng cao hiệu quả hoạt động đấu giá tài sản.</p>
+      <p class="mb">Là một trong những đơn vị tiên phong tích hợp VNeID vào đấu giá trực tuyến, đại diện VPA nhấn mạnh, việc ứng dụng công nghệ định danh điện tử không chỉ giúp quản lý chặt chẽ hơn, mà còn tạo nền tảng để phát triển đấu giá trực tuyến theo hướng hiện đại, 
+        minh bạch và hiệu quả. Khách hàng quan tâm đến các phiên đấu giá tài sản vi phạm hành chính có thể theo dõi thông báo đấu giá trên Cổng thông tin đấu giá tài sản của Bộ Công an tại địa chỉ: https://dgts.bocongan.gov.vn hoặc Trang thông tin đấu giá trực tuyến của VPA tại địa chỉ https://vpa.com.vn.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/975d9e03-8355-42a3-bec7-38e2e2cb74c1.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:500px;height:300px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Hình ảnh tài sản đưa ra đấu giá
+            </figcaption> 
+      </figure>
+      <p class="mb">Lô tài sản đấu giá lần này thuộc quản lý của Công an thành phố Móng Cái, bị tịch thu theo Quyết định xử phạt vi phạm hành chính số 04/QĐ-XPHC ngày 02/01/2024 của UBND thành phố Móng Cái.</p>
+      <p class="mb">Phiên đấu giá được tổ chức từ 09 giờ 00 phút đến 09 giờ 30 phút trên Trang thông tin đấu giá trực tuyến của VPA, phương thức đấu giá trả giá lên, với sự giám sát của đại diện Bộ Công an và chủ tài sản.
+       Sau khi hoàn tất thanh toán, người trúng đấu giá sẽ thực hiện các thủ tục liên quan đến thuế, phí và chuyển nhượng theo quy định pháp luật.</p>
+      <p>Trong thời gian tới, VPA sẽ tiếp tục mở rộng việc ứng dụng công nghệ vào các quy trình đấu giá, góp phần nâng cao hiệu quả quản lý, đảm bảo quyền lợi hợp pháp của các bên và thúc đẩy sự phát triển bền vững của thị trường đấu giá tài sản tại Việt Nam./.</p>
+ ` },
+  { id: 7,
+    category: "Dân trí",
+    title: "Đấu ấn một năm thí điểm đấu giá biển số trực tuyến",
+    date: "10:47 27/12/2024",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/ba5c1fda-d91d-48a0-a40e-0d2a284d6b79.png",
+    excerpt: "Tháng 9/2023, phiên đấu giá biển số xe trực tuyến đầu tiên được Công ty đấu giá hợp danh Việt Nam (VPA) tổ chức thành công với vai trò là đơn vị duy nhất được Bộ Công an lựa chọn thực hiện đấu giá biển số xe ô tô.",
+    content: `
+      <p class="mb"> Tháng 9/2023, phiên đấu giá biển số xe trực tuyến đầu tiên được Công ty đấu giá hợp danh Việt Nam (VPA) tổ chức thành công với vai trò là đơn vị duy nhất được Bộ Công an lựa chọn thực hiện đấu giá biển số xe ô tô. Đến nay, sau hơn 1 năm, việc đấu giá biển số ô tô trực tuyến đã mang tới những kết quả ấn tượng, tạo nên cuộc cách mạng trong ngành đấu giá và đóng góp tích cực vào kinh tế - xã hội Việt Nam.</p>
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Đột phá công nghệ, hiệu quả kinh tế</strong> </p> <br>
+      <p class="mb">Đấu giá biển số xe ô tô được đưa ra nhằm đáp ứng nhu cầu, nguyện vọng của người dân đăng ký biển số theo sở thích. Với một thị trường ô tô đang phát triển mạnh như Việt Nam, nhu cầu biển số đẹp của người dân mỗi năm rất lớn. Do đó, áp lực lên đơn vị đấu giá cũng không nhỏ, khi mỗi phiên đấu giá có hàng chục nghìn biển số được đưa lên hệ thống để người dân lựa chọn.</p>
+      <p class="mb">Để thực hiện hiệu quả hoạt động này, VPA áp dụng nhiều công nghệ hiện đại và liên tục cải tiến quy trình nhằm hỗ trợ người dân thuận lợi khi tham gia đấu giá. Không cần đến trực tiếp, khách hàng từ mọi miền đất nước có thể tham gia chỉ với vài thao tác đơn giản và dễ tiếp cận, xóa bỏ nhiều rào cản từng khiến người dân khó tiếp cận với hoạt động đấu giá chuyên nghiệp. 
+        Chính nhờ những công nghệ hiện đại và quy trình chặt chẽ, VPA giúp đưa lĩnh vực đấu giá của Việt Nam có bước tiến vượt bậc, đáp ứng kỳ vọng hiện đại hóa và chuyển đổi số của quốc gia.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/0bd46eb6-b3df-43c2-9ab6-9a56c01c1ce4.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:400px;height:400px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Công nghệ và vận hành tinh gọn đã mang tới những phiên đấu giá hiệu quả, tiết kiệm trong hơn 1 năm qua.
+            </figcaption> 
+      </figure>
+      <p class="mb">Với bộ máy tinh gọn và thực hiện hoàn toàn online, chi phí cho mỗi phiên đấu giá được tối ưu, mang lại hiệu quả kinh tế cao.</p>
+      <p class="mb">Theo đại diện VPA, chỉ trong hơn một năm thí điểm, hơn 2 triệu biển số được đấu giá với hơn 50.000 biển số xe được đấu giá thành công, thu về cho ngân sách nhà nước gần 4.500 tỷ đồng.
+       Đây là thành tích ấn tượng với hoạt động chỉ mới thực hiện thí điểm trong vòng hơn 1 năm, tạo ra nguồn thu mới ổn định cho ngân sách, giảm bớt gánh nặng từ các nguồn thu truyền thống, tăng dư địa cho chính sách tài khóa của chính phủ.</p>
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Minh bạch và công khai, bước đệm cho phát triển bền vững</strong> </p> <br>
+      <p class="mb"> Ngoài đáp ứng nhu cầu, nguyện vọng của người dân, đấu giá biển số xe còn giúp khai thác có hiệu quả tài sản công là kho biển số nhằm tạo nguồn thu cho ngân sách Nhà nước và công khai, minh bạch trong công tác đăng ký, quản lý xe với tiêu chí cải cách thủ tục hành chính, đo lường sự hài lòng của người dân.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/91f233eb-951f-44c8-8010-75b01ab1cdf0.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Minh bạch là một trong những yếu tố được đánh giá cao của các phiên đấu giá biển số xe do VPA điều hành.
+            </figcaption> 
+      </figure>
+      <p class="mb">Những thành tựu đạt được của VPA sau hơn một năm điều hành hoạt động đấu giá biển số ô tô là kết quả của tầm nhìn chiến lược, sự đầu tư bài bản về cả công nghệ, con người, truyền thông, đặt nền móng cho việc triển khai các quy định mới của Luật Trật tự, An toàn giao thông đường bộ và Nghị định của Chính phủ. Mới đây, Bộ Công an ban hành Thông tư số 79 quy định biển số xe trúng đấu giá sẽ được gắn tem nhận diện nền màu đỏ và màu vàng, chữ màu xanh; nhằm phân biệt với biển số thường hoặc biển số xe sử dụng năng lượng sạch.</p>
+      <p class="mb">Từ thành công của hoạt động đấu giá biển số xe ô tô, biển số xe máy cũng sẽ được đưa vào đấu giá công khai theo thông tin được nêu tại Nghị định 156/2024 quy định về đấu giá biển số xe có hiệu lực từ 1/1/2025. Đây là nghị định quy định chi tiết điều 37 và 38 Luật Trật tự, an toàn giao thông đường bộ 2024 về đấu giá biển số xe.</p>
+      <p class="mb">Những bước đi tiên phong của VPA đóng góp rất lớn cho mục tiêu phát triển bền vững của lĩnh vực đấu giá biển số nói riêng và ngành đấu giá Việt Nam nói chung, chứng minh năng lực của Việt Nam trong dòng chảy của xu thế quốc tế.</p>
+      <p class="text-base text-black-1000">
+        <strong>Tiến Thịnh.</strong> </p>
+  ` },
+  { id: 8,
+    category: "Người đưa tin ",
+    title: "Những trường hợp được đổi biển số xe từ 1/1/2025, ai cũng nên biết",
+    date: "09:42 16/12/2024",
+    source: "Tin tức",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3d23cb26-10a1-44a3-bbbf-fa6d00c3c4be.png",
+    excerpt: "Điều 18 Thông tư 79/2024/TT-BCA quy định về trường hợp đổi chứng nhận đăng ký xe, biển số xe như sau:",
+    content: `
+      <p class="mb">Điều 18 Thông tư 79/2024/TT-BCA quy định về trường hợp đổi chứng nhận đăng ký xe, biển số xe như sau:</p>
+      <p class="mb">1. Chứng nhận đăng ký xe, biển số xe bị mờ, hỏng.</p>
+      <p class="mb">2. Xe cải tạo; xe thay đổi màu sơn.</p>
+      <p class="mb">3. Xe đã đăng ký, cấp biển số xe nền màu trắng, chữ và số màu đen đổi sang biển số xe nền màu vàng, chữ và số màu đen (xe hoạt động kinh doanh vận tải bằng ô tô) và ngược lại.</p>
+      <p class="mb">4. Thay đổi các thông tin của chủ xe (tên chủ xe, số định danh) hoặc chủ xe có nhu cầu đổi chứng nhận đăng ký xe theo địa chỉ mới.</p>
+      <p class="mb">5. Chứng nhận đăng ký xe hết thời hạn sử dụng.</p>
+      <p class="mb">6. Đổi chứng nhận đăng ký xe cũ, biển số xe cũ sang chứng nhận đăng ký xe, biển số xe theo quy định tại Thông tư này; chủ xe có nhu cầu đổi biển ngắn sang biển dài hoặc ngược lại.</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/f70143d4-e9b2-441a-8b02-c9b03f4d1896.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+            <figcaption class="text-sm text-gray-500 mt-2 text-center">
+              Ảnh minh họa.
+            </figcaption> 
+      </figure>
+      <p class="mb">Điều 19 Thông tư 79/2024/TT-BCA quy định về hồ sơ đổi chứng nhận đăng ký xe, biển số xe như sau:</p>
+      <p class="mb">1. Giấy khai đăng ký xe.</p>
+      <p class="mb">2. Giấy tờ của chủ xe theo quy định tại Điều 10 Thông tư này.</p>
+      <p class="mb">3. Chứng nhận đăng ký xe (trường hợp đổi chứng nhận đăng ký xe) hoặc biển số xe (trường hợp đổi biển số xe).</p>
+      <p class="mb">4. Một số giấy tờ khác:</p>
+      <p class="mb">a) Xe cải tạo thay đổi tổng thành máy, tổng thành khung thì phải có thêm chứng nhận nguồn gốc, chứng từ nộp lệ phí trước bạ, chứng từ chuyển quyền sở hữu của tổng thành máy hoặc tổng thành khung đó theo quy định. Trường hợp tổng thành máy, tổng thành khung không cùng kiểu loại thì phải có thêm giấy chứng nhận an toàn kỹ thuật và bảo vệ môi trường xe cơ giới, xe máy chuyên dùng cải tạo theo quy định;</p>
+      <p class="mb">b) Xe cải tạo thay tổng thành máy của xe đã đăng ký thì phải có chứng nhận thu hồi chứng nhận đăng ký xe, biển số của xe có tổng thành đó;</p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/c73957cc-d886-4af1-ba86-b1988785a7ee.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+      </figure>
+      <p class="mb">c) Xe cải tạo thay đổi kiểu loại xe thì phải có thêm giấy chứng nhận an toàn kỹ thuật và bảo vệ môi trường xe cơ giới, xe máy chuyên dùng cải tạo theo quy định;</p>
+      <p class="mb">d) Trường hợp đổi biển số xe nền màu vàng, chữ và số màu đen sang biển số xe nền màu trắng, chữ và số màu đen, phải có thêm văn bản thu hồi giấy phép kinh doanh vận tải hoặc văn bản thu hồi phù hiệu, biển hiệu;</p>
+      <p class="mb">đ) Đối với trường hợp chủ xe có nhu cầu đổi chứng nhận đăng ký xe khi thay đổi trụ sở, nơi cư trú đến địa chỉ mới ngoài phạm vi đăng ký của cơ quan đổi chứng nhận đăng ký xe, biển số xe, phải có thêm giấy xác nhận hồ sơ xe theo mẫu ĐKX14 ban hành kèm theo Thông tư này.</p>
+      <p class="text-base text-black-1000">
+        <strong>Minh Hoa.</strong> </p>
+    ` },
 ];
 
 const notifData = [
   // Thông báo (Notifications - Tích hợp dữ liệu từ ảnh 08.12.56.png và 08.13.02.jpg)
-  { id: 10, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:56 12/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2d7cffd4-75ef-4eea-8ce3-f94dc6f894bf.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá......", content: `Công ty Đấu giá hợp danh Việt Nam (Công ty VPA) trân trọng thông báo một phiên đấu giá sắp tới được tổ chức tại trụ sở NO2-T4.03. Phiên đấu giá gồm nhiều mặt hàng tang vật, hồ sơ chi tiết sẽ được đăng tải trên website. Khách hàng quan tâm vui lòng liên hệ hotline để biết thêm chi tiết.` },
-  { id: 11, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 19/12/2025", date: "16:57 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 19/12/2025 như sau....", content: `Công ty thông báo phiên đấu giá biển số xe ngày 19/12/2025 sẽ diễn ra trực tuyến. Thông tin chi tiết về danh mục biển số, thời gian bắt đầu và hướng dẫn tham gia sẽ được cập nhật trên trang thông báo.` },
-  { id: 12, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 18/12/2025", date: "08:55 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 18/12/2025 như sau...", content: `Phiên đấu giá ngày 18/12/2025 bao gồm các lô biển số xe do các cơ quan thanh lý. Mọi quy trình tham gia được thực hiện trực tuyến.` },
-  { id: 13, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:20 11/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo về phiên đấu giá tài sản kèm theo các thông tin chi tiết, danh mục và hướng dẫn tham dự. Khách hàng tham gia vui lòng đọc kỹ thể lệ.` },
-  { id: 14, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 17/12/2025", date: "08:48 10/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 17/12/2025 như sau:", content: `Phiên đấu giá ngày 17/12/2025 sẽ diễn ra theo lịch và hướng dẫn đã đăng tải. Vui lòng kiểm tra kỹ thông tin lô và quy định tham gia.` },
-  { id: 15, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:25 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/30fe8fa2-00c4-4fa4-a2ef-3fd5828c5230.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo các tài sản đưa ra bán, điều kiện và thể lệ tham gia.` },
-  { id: 16, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 16/12/2025", date: "16:42 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 16/12/2025 như sau...", content: `Thông tin chi tiết về phiên đấu giá ngày 16/12/2025 đã được cập nhật.` },
+  { id: 10,
+    category: "",
+    title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 26/12/2025",
+    date: "07:49 19/12/2025",
+    source: "Thông báo" ,
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/2d7cffd4-75ef-4eea-8ce3-f94dc6f894bf.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 26/12/2025 như sau:",
+    content: `
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 26/12/2025 như sau:</strong> </p> <br>
+      <p class="mb">1. Danh sách biển số xe, thời gian tổ chức đấu giá (Có danh sách chi tiết)</p>
+      <p class="mb">2. Địa điểm đấu giá, thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước, thời lượng đấu giá</p>
+      <p class="mb">- Địa điểm đấu giá: Trang thông tin đấu giá trực tuyến https://vpa.com.vn</p>
+      <p class="mb">- Thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">+ Thời hạn: Trước 16h30’ ngày 24/12/2025 (theo thời gian báo có vào tài khoản của Công ty Đấu giá hợp danh Việt Nam chậm nhất đến 16h30’ ngày 24/12/2025).</p>
+      <p class="mb">- Tiền đặt trước:</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe ô tô đưa ra đấu giá là 40 (bốn mươi) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe mô tô, xe gắn máy đưa ra đấu giá là 5 (năm) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của biển số xe có định dạng  AAAAA (A>4), ABCDE (A<B<C<D<E, A>4)  đưa ra đấu giá lại sau lần thứ hai là 500 (năm trăm) triệu đồng đối với biển số xe ô tô và 50 (năm mươi) triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Tiền bán hồ sơ tham gia đấu giá:</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 100 (một trăm) nghìn đồng trên một biển số xe ô tô.</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 50 (năm mươi) nghìn đồng trên một biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước tham gia đấu giá:</p>
+      <p class="mb">+ Người tham gia đấu giá nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam;</p>
+      <p class="mb">Số tài khoản: 1410999999999;</p>
+      <p class="mb">Tại: Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank chi nhánh Mỹ Đình);</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã thanh toán” trong phần Nội dung chuyển khoản tại mục “Thanh toán biển số xe”.</p>
+      <p class="mb">+ Số tiền: Theo thông tin Số tiền tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến.</p>
+      <p class="mb">- Thời lượng đấu giá: Tối thiểu 25 phút/01 biển số xe.</p>
+      <p class="mb">Lưu ý: Mã xác thực để truy cập đấu giá trực tuyến sẽ được hệ thống gửi đến số điện thoại và email của Quý khách đã đăng ký tối thiểu trước 60 phút khi cuộc đấu giá bắt đầu. Quý khách cần hỗ trợ, vui lòng liên hệ hotline: 1900.05.5515</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">Xem danh sách tại đây:</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1RuLZRlcSTbSx0gTlALOOk_iKYvU2u4bAG1oCvV8nxoA/edit?gid=1951989180#gid=1951989180" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô 
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/16ElwZJt_ng-d5aQCnJw7bWb7mjLYA56rQ2h4O2HzVmw/edit?gid=1790618030#gid=1790618030" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy 
+        </a></p>
+    ` },
+  { id: 11,
+    category: "",
+    title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 25/12/2025",
+    date: "10:09 18/12/2025",
+    source: "Thông báo" ,
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/b476eb62-0563-4454-82bf-8fdf890c68d1.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 25/12/2025 như sau....",
+    content: `
+      <p class="mb"><p class="text-xl text-black-1000">
+        <strong>Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 25/12/2025 như sau:</strong> </p> <br>
+      <p class="mb">1. Danh sách biển số xe, thời gian tổ chức đấu giá (Có danh sách chi tiết)</p>
+      <p class="mb">2. Địa điểm đấu giá, thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước, thời lượng đấu giá</p>
+      <p class="mb">- Địa điểm đấu giá: Trang thông tin đấu giá trực tuyến https://vpa.com.vn</p>
+      <p class="mb">- Thời hạn, cách thức nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">+ Thời hạn: Trước 16h30’ ngày 23/12/2025 (theo thời gian báo có vào tài khoản của Công ty Đấu giá hợp danh Việt Nam chậm nhất đến 16h30’ ngày 24/12/2025).</p>
+      <p class="mb">- Tiền đặt trước:</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe ô tô đưa ra đấu giá là 40 (bốn mươi) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của một biển số xe mô tô, xe gắn máy đưa ra đấu giá là 5 (năm) triệu đồng.</p>
+      <p class="mb">+ Tiền đặt trước của biển số xe có định dạng  AAAAA (A>4), ABCDE (A<B<C<D<E, A>4)  đưa ra đấu giá lại sau lần thứ hai là 500 (năm trăm) triệu đồng đối với biển số xe ô tô và 50 (năm mươi) triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Tiền bán hồ sơ tham gia đấu giá:</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 100 (một trăm) nghìn đồng trên một biển số xe ô tô.</p>
+      <p class="mb">+ Tiền bán hồ sơ tham gia đấu giá là 50 (năm mươi) nghìn đồng trên một biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước tham gia đấu giá:</p>
+      <p class="mb">+ Người tham gia đấu giá nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam;</p>
+      <p class="mb">Số tài khoản: 1410999999999;</p>
+      <p class="mb">Tại: Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank chi nhánh Mỹ Đình);</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã thanh toán” trong phần Nội dung chuyển khoản tại mục “Thanh toán biển số xe”.</p>
+      <p class="mb">+ Số tiền: Theo thông tin Số tiền tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến.</p>
+      <p class="mb">- Thời lượng đấu giá: Tối thiểu 25 phút/01 biển số xe.</p>
+      <p class="mb">Lưu ý: Mã xác thực để truy cập đấu giá trực tuyến sẽ được hệ thống gửi đến số điện thoại và email của Quý khách đã đăng ký tối thiểu trước 60 phút khi cuộc đấu giá bắt đầu. Quý khách cần hỗ trợ, vui lòng liên hệ hotline: 1900.05.5515</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">Xem danh sách tại đây:</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1jCX5Y7b6KCXgeBgE_xt9unMVF_ti4WhX0Is2FLQMzqw/edit?gid=1196612422#gid=1196612422" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô 
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1nYdG6Nl0jxPS7z3VUrOI7MMniixVp84zkdnCOLvPfew/edit?gid=1433481292#gid=1433481292" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy 
+        </a></p>
+    ` },
+  { id: 12,
+    category: "",
+    title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN",
+    date: "08:18 18/12/2025",
+    source: "Thông báo",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/3a9d5e72-d89d-4933-8a74-5761eab495fe.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá",
+    content: `
+      <p class="mb"><em> Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá:</em> </p>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>1. Thông tin đấu giá tài sản</strong> </p>
+      </p>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/761b891c-9886-493a-a5f9-0963eb637064.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:700px;border-radius:6px;" />
+      </figure>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/8a915121-c6c1-44e6-9a84-9ba63e4b13a0.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+      </figure>
+      <figure class="my-4">
+        <img src="https://s3-hfx03.fptcloud.com/vpa-web/photos/a51b8278-e5e2-4472-bc7d-87344ef1bd47.png" alt=""
+          style="display:block;margin:0 auto;width:100%;max-width:600px;height:400px;border-radius:6px;" />
+      </figure>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>2. Đối tượng, điều kiện tham gia đấu giá</strong> </p> <br>
+      </p>
+      <p class="mb">- Các tổ chức, cá nhân có nhu cầu tham gia đấu giá, đã nộp hồ sơ tham gia đấu giá, nộp tiền đặt trước theo đúng quy định, trừ những đối tượng không được đăng ký tham gia đấu giá theo quy định tại khoản 4 Điều 38 Luật Đấu giá tài sản hiện hành.</p>
+      <p class="mb">- Cá nhân, tổ chức đăng ký tham gia đấu giá không thuộc trường hợp quy định tại khoản 5 Điều 9 Luật Đấu giá tài sản.</p>
+      <p class ="mb"> </p><p class="text-base text-black-1000">
+        <strong>3. Cách thức tham gia</strong> </p> <br>
+      </p>
+      <p class="mb">Mọi thủ tục được quy định tại Quy chế cuộc đấu giá và thực hiện toàn trình trên trang thông tin đấu giá trực tuyến của Công ty VPA: https://vpa.com.vn</p>
+      <p class="mb">Điện thoại liên hệ: 1900.055.515 hoặc 0961.750.003.</p>
+ `  },
+  { id: 13,
+    category: "",
+    title: "THÔNG BÁO CÔNG BỐ DANH SÁCH BIỂN SỐ XE ĐƯA RA ĐẤU GIÁ PHIÊN ĐẤU GIÁ THỨ 9",
+    date: "19:57 17/12/2025",
+    source: "Thông báo",
+    image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/407c13ec-276b-421e-807c-6d6ccbd72e19.jpg",
+    excerpt: "Công ty Đấu giá hợp danh Việt Nam thông báo về việc công bố biển số xe đưa ra đấu giá Phiên đấu giá thứ 9 như sau:",
+    content: `
+      <p class="mb"><em> Công ty Đấu giá hợp danh Việt Nam thông báo về việc công bố biển số xe đưa ra đấu giá Phiên đấu giá thứ 9 như sau:</em> </p>
+      <p class="mb">1. Số lượng biển số xe đưa ra đấu giá: 2.527.197 biển số (Có danh sách biển số xe đưa ra đấu giá kèm theo).</p>
+      <p class="mb">Chi tiết biển số xe tại Trang thông tin đấu giá trực tuyến https://vpa.com.vn và phân hệ Trang thông tin đấu giá trực tuyến biển số xe: https://dgbs.vpa.com.vn.</p>
+      <p class="mb">2. Giá khởi điểm, tiền đặt trước:</p>
+      <p class="mb">Giá khởi điểm, tiền đặt trước của biển số xe đưa ra đấu giá là 40 triệu đồng đối với biển số xe ô tô và 5 triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">Giá khởi điểm, tiền đặt trước của biển số xe có định dạng AAAAA (A&gt;4), ABCDE (A&lt;B&lt;C&lt;D&lt;E, A&gt;4) đưa ra đấu giá lại sau lần thứ hai là 500 triệu đồng đối với biển số xe ô tô và 50 triệu đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">3. Tiền bán hồ sơ tham gia đấu giá: Tiền bán hồ sơ tham gia đấu giá của biển số xe đưa ra đấu giá là 100 nghìn đồng đối với biển số xe ô tô và 50 nghìn đồng đối với biển số xe mô tô, xe gắn máy.</p>
+      <p class="mb">4. Cách thức đăng ký, nộp tiền hồ sơ, tiền đặt trước:</p>
+      <p class="mb">- Cách thức đăng ký tham gia đấu giá tại Trang thông tin đấu giá trực tuyến biển số xe: https://dgbs.vpa.com.vn.</p>
+      <p class="mb">- Cách thức nộp tiền hồ sơ, tiền đặt trước: Khách hàng tham gia đấu giá quét mã QR trên trang thông tin đấu giá trực tuyến và làm theo hướng dẫn hoặc nộp tiền vào tài khoản/chuyển khoản theo chỉ dẫn sau:</p>
+      <p class="mb">+ Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam.</p>
+      <p class="mb">+ Số tài khoản: 1410999999999.</p>
+      <p class="mb">+ Tại: Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam, chi nhánh Mỹ Đình (Agribank Mỹ Đình).</p>
+      <p class="mb">Hoặc:</p>
+      <p class="mb">+ Tên tài khoản: Công ty Đấu giá hợp danh Việt Nam.</p>
+      <p class="mb">+ Số tài khoản: 22999999.</p>
+      <p class="mb">+ Tại: Ngân hàng TMCP Đầu tư và Phát triển Việt Nam, chi nhánh Hà Nội (BIDV chi nhánh Hà Nội).</p>
+      <p class="mb">+ Nội dung chuyển khoản: nhập “mã số thanh toán” trong phần Nội dung chuyển khoản/Nội dung giao dịch tại mục “Thanh toán biển số xe” trên Trang thông tin đấu giá trực tuyến biển số xe.</p>
+      <p class="mb">- Thời gian thông báo công khai, niêm yết biển số xe đưa ra đấu giá ít nhất 30 ngày trước ngày tổ chức phiên đấu giá.</p>
+      <p class="mb">Mọi thông tin cần hỗ trợ vui lòng liên hệ tổng đài chăm sóc khách hàng: 1900.05.5515 hoặc gửi về hòm thư điện tử: dgbs@vpa.com.vn.</p>
+      <p class="mb">Trân trọng./.</p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/1_o9PiWjAvMLfITCWKYWQZRtB9Z4_28bUz8jouc5fX9Q/edit?gid=3101261#gid=3101261" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe ô tô phiên 9
+        </a></p>
+      <p class="mb">
+        <a href="https://docs.google.com/spreadsheets/d/124DNhbAu7qoBMtFYIFlsqgD9d_01Ynj8WkxmYJuFnp4/edit?gid=1394743317#gid=1394743317" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-indigo-600 underline">Danh sách biển số xe mô tô, xe gắn máy phiên 9
+        </a></p>
+`  },
+  { id: 14, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 17/12/2025", date: "08:48 10/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 17/12/2025 như sau:", content: `Phiên đấu giá ngày 17/12/2025 sẽ diễn ra theo lịch và hướng dẫn đã đăng tải. Vui lòng kiểm tra kỹ thông tin lô và quy định tham gia.` },
+  { id: 15, category: "", title: "THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "08:25 08/12/2025", source: "Thông báo" , image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/30fe8fa2-00c4-4fa4-a2ef-3fd5828c5230.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam (Công ty VPA). Địa chỉ trụ sở: NO2-T4.03, tầng 4 tòa nhà NO2 - TNL Plaza Goldseason, số 47 Nguyễn Tuân, phường Thanh Xuân, thành phố Hà Nội thông báo đấu giá", content: `Thông báo các tài sản đưa ra bán, điều kiện và thể lệ tham gia.` },
+  { id: 16, category: "", title: "THÔNG BÁO THỜI GIAN ĐẤU GIÁ TRỰC TUYẾN BIỂN SỐ XE NGÀY 16/12/2025", date: "16:42 08/12/2025", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/9f9c9c30-a5f5-4c85-8182-38c9b0a732f6.jpg", excerpt: "Công ty Đấu giá hợp danh Việt Nam trân trọng thông báo thời gian tổ chức đấu giá biển số xe ngày 16/12/2025 như sau...", content: `Thông tin chi tiết về phiên đấu giá ngày 16/12/2025 đã được cập nhật.`  },
   { id: 17, category: "", title: "CÔNG TY ĐẤU GIÁ HỢP DANH ĐẤU GIÁ VIỆT NAM THÔNG BÁO ĐẤU GIÁ TÀI SẢN", date: "09:42 08/12/2024", source: "Thông báo", image: "https://s3-hfx03.fptcloud.com/vpa-web/photos/531f2b9a-6022-481f-8a01-5caf6ef66b1e.jpg", excerpt: "", content: `` },
 ];
 
