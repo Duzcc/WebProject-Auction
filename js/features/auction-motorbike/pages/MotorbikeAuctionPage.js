@@ -19,6 +19,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         selectedYears: [],
         selectedAvoids: [],
         selectedPlateColors: [], // NEW: Plate color filter
+        sortConfig: { key: null, direction: 'asc' }, // key: 'auctionTime', direction: 'asc'/'desc'
         startDate: '',
         endDate: '',
         // Pagination state
@@ -182,7 +183,6 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         sidebar.appendChild(createSearchInput());
 
         // Dropdowns
-        sidebar.appendChild(createPlateColorDropdown());
         sidebar.appendChild(createProvinceDropdown());
 
         // Date range (only for official/results)
@@ -227,18 +227,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         return element;
     }
 
-    function createPlateColorDropdown() {
-        const html = `
-            <div class="relative z-10">
-                <select class="w-full border border-gray-300 rounded-[28px] py-4 px-5 appearance-none text-gray-700 text-base focus:outline-none focus:border-gray-400 bg-white cursor-pointer hover:border-gray-400 transition-colors">
-                    <option>Chọn màu biển</option>
-                    <option>Biển trắng</option>
-                </select>
-                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none" style="width: 18px; height: 18px;"></i>
-            </div>
-        `;
-        return createFromHTML(html);
-    }
+    
 
     function createProvinceDropdown() {
         const html = `
@@ -404,42 +393,42 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         return tableArea;
     }
 
-    function getFilteredData() {
+  function getFilteredData() {
         let sourceData = [];
+        // Xác định nguồn dữ liệu dựa trên Tab đang chọn (Dành cho Xe máy)
         if (state.activeTab === 'announced') sourceData = motorbikePlates;
         else if (state.activeTab === 'official') sourceData = officialMotorbikePlates;
         else if (state.activeTab === 'results') sourceData = motorbikeAuctionResults;
 
-        return sourceData.filter(item => {
+        // BƯỚC 1: LỌC DỮ LIỆU
+        const filtered = sourceData.filter(item => {
             const plateNumber = item.plateNumber.toLowerCase();
 
-            // Search filter
+            // 1. Tìm kiếm
             if (state.searchTerm && !plateNumber.includes(state.searchTerm.toLowerCase())) {
                 return false;
             }
 
-            // Province filter - Check plate number prefix against province codes
+            // 2. Tỉnh/Thành phố
             if (state.selectedProvince) {
-                // Extract codes from format "Name-15/16" or "Name-29/30/31/32/33/40"
                 const codes = state.selectedProvince.split('-')[1];
                 if (codes) {
-                    // Split multiple codes by '/'
                     const provinceCodes = codes.split('/');
-                    // Extract plate prefix (first 2 digits before the letter)
                     const platePrefix = item.plateNumber.match(/^(\d+)/)?.[1];
-                    // Check if plate prefix matches any of the province codes
                     if (!platePrefix || !provinceCodes.includes(platePrefix)) {
                         return false;
                     }
                 }
             }
 
-            // Type filter
-            if (state.selectedTypes.length > 0 && item.type && !state.selectedTypes.includes(item.type)) {
-                return false;
+            // 3. Loại biển
+            if (state.selectedTypes.length > 0) {
+                if (!item.type || !state.selectedTypes.includes(item.type)) {
+                    return false;
+                }
             }
 
-            // Year filter (last 2 digits)
+            // 4. Năm sinh
             if (state.selectedYears.length > 0) {
                 const lastFourDigits = plateNumber.slice(-4).replace('.', '');
                 if (lastFourDigits.length === 4) {
@@ -459,7 +448,7 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                 }
             }
 
-            // Avoid filter
+            // 5. Tránh số
             if (state.selectedAvoids.length > 0) {
                 const plateDigits = plateNumber.replace(/[^0-9]/g, '');
                 const avoids = state.selectedAvoids.map(a => a.split(' ')[1]);
@@ -467,21 +456,13 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                 if (includesAvoid) return false;
             }
 
-            // Plate color filter
-            if (state.selectedPlateColors.length > 0 && item.plateColor) {
-                const colorMapping = {
-                    'Biển trắng': 'white',
-                    'Biển vàng': 'yellow'
-                };
-                const selectedColors = state.selectedPlateColors.map(c => colorMapping[c]);
-                if (!selectedColors.includes(item.plateColor)) {
-                    return false;
-                }
-            }
+            // (Bỏ qua lọc màu biển vì xe máy thường chỉ có biển trắng)
 
-            // Date filter (for official/results)
+            // 6. Lọc theo Ngày (cho tab Chính thức & Kết quả)
             if ((state.activeTab === 'official' || state.activeTab === 'results') && (state.startDate || state.endDate)) {
-                const auctionTimeString = item.auctionTime?.split(' ')[1];
+                if (!item.auctionTime) return false;
+                
+                const auctionTimeString = item.auctionTime.split(' ')[1];
                 if (auctionTimeString) {
                     const [day, month, year] = auctionTimeString.split('/').map(Number);
                     const itemTime = new Date(Date.UTC(year, month - 1, day)).getTime();
@@ -497,13 +478,37 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                         const endTime = new Date(Date.UTC(eYear, eMonth - 1, eDay)).getTime();
                         if (itemTime > endTime) return false;
                     }
-                } else if (state.startDate || state.endDate) {
-                    return false;
                 }
             }
 
             return true;
         });
+
+        // BƯỚC 2: SẮP XẾP THỜI GIAN (Logic giống bên Oto)
+        if (state.sortConfig && state.sortConfig.key === 'auctionTime') {
+            filtered.sort((a, b) => {
+                const parseTime = (str) => {
+                    if (!str) return 0;
+                    try {
+                        const [time, date] = str.split(' ');
+                        const [hours, minutes] = time.split(':');
+                        const [day, month, year] = date.split('/');
+                        return new Date(year, month - 1, day, hours, minutes).getTime();
+                    } catch (e) { return 0; }
+                };
+
+                const timeA = parseTime(a.auctionTime);
+                const timeB = parseTime(b.auctionTime);
+
+                if (state.sortConfig.direction === 'asc') {
+                    return timeA - timeB;
+                } else {
+                    return timeB - timeA;
+                }
+            });
+        }
+
+        return filtered;
     }
 
     // NEW: Get paginated data
@@ -533,52 +538,74 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
         };
     }
 
-    function createTableHeader() {
+function createTableHeader() {
         const thead = createElement('thead', { className: 'bg-[#e5e5e5] text-gray-900 font-bold' });
         const tr = createElement('tr');
 
         if (state.activeTab === 'results') {
+            // Xác định icon dựa trên chiều sắp xếp hiện tại
+            let sortIcon = 'arrow-up-down';
+            if (state.sortConfig.key === 'auctionTime') {
+                sortIcon = state.sortConfig.direction === 'asc' ? 'arrow-up' : 'arrow-down';
+            }
+
+            // Render HTML
             tr.innerHTML = `
                 <th class="px-6 py-4 w-16 text-center">STT</th>
                 <th class="px-6 py-4 text-center">Biển số</th>
                 <th class="px-6 py-4">Giá trúng đấu giá</th>
                 <th class="px-6 py-4">Tỉnh, Thành phố</th>
-                <th class="px-6 py-4 whitespace-nowrap">
+                
+                <th class="px-6 py-4 whitespace-nowrap cursor-pointer hover:bg-gray-200 transition-colors select-none" id="sort-time-header">
                     <div class="flex items-center gap-1">
                         Thời gian đấu giá
-                        <i data-lucide="arrow-up-down" style="width: 14px; height: 14px;" class="text-gray-500"></i>
+                        <i data-lucide="${sortIcon}" style="width: 14px; height: 14px;" class="text-gray-500"></i>
                     </div>
                 </th>
-                <th class="px-6 py-4">Lựa chọn</th>
+                
+                <th class="px-6 py-4 text-center">Lựa chọn</th>
             `;
+
+            // Thêm sự kiện Click
+            const sortHeader = tr.querySelector('#sort-time-header');
+            if (sortHeader) {
+                sortHeader.addEventListener('click', () => {
+                    // Logic đảo chiều: Nếu chưa sort hoặc đang desc -> asc, ngược lại -> desc
+                    if (state.sortConfig.key === 'auctionTime' && state.sortConfig.direction === 'asc') {
+                        state.sortConfig.direction = 'desc';
+                    } else {
+                        state.sortConfig.key = 'auctionTime';
+                        state.sortConfig.direction = 'asc';
+                    }
+                    // Render lại bảng
+                    updateTableOnly();
+                });
+            }
+
         } else {
+            // Giữ nguyên header cho các tab khác
             tr.innerHTML = `
                 <th class="px-6 py-4 w-16 text-center">STT</th>
                 <th class="px-6 py-4 text-center">Biển số</th>
                 <th class="px-6 py-4">Giá khởi điểm</th>
                 <th class="px-6 py-4">Tỉnh, Thành phố</th>
                 <th class="px-6 py-4">Loại biển</th>
-
-                <th class="px-6 py-4">Lựa chọn</th>
+                <th class="px-6 py-4 text-center">Lựa chọn</th>
             `;
         }
 
         thead.appendChild(tr);
         return thead;
     }
-
    function createTableBody(data) {
         const tbody = createElement('tbody', { className: 'divide-y divide-gray-100' });
 
         data.forEach((item, index) => {
             const tr = createElement('tr', { className: 'hover:bg-blue-50 transition-colors group' });
 
-            // LOGIC QUAN TRỌNG: Kiểm tra trạng thái yêu thích để hiển thị ngôi sao vàng
-            // Thêm state.activeTab vào để đảm bảo check đúng tab như bên Car
+            const plateBgClass = 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
+
             const isFav = isFavorite(item.id || item.plateNumber, item.type || 'motorbike', state.activeTab);
-            
-            // Nếu đã thích: hiện sao vàng (fill-yellow-400)
-            // Nếu chưa thích: ẩn đi (opacity-0) nhưng vẫn giữ chỗ
             const starClass = isFav 
                 ? 'text-blue-400 fill-yellow-400 cursor-pointer' 
                 : 'text-blue-400 fill-yellow-400 cursor-pointer opacity-0';
@@ -597,11 +624,11 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap">${item.startPrice}</td>
                     <td class="px-6 py-4 text-gray-700 whitespace-nowrap">${item.province}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.auctionTime || ''}</td>
-                    <td class="px-6 py-4"></td>
+                    <td class="px-6 py-4">
+                         <div class="flex items-center justify-center w-full h-full"></div>
+                    </td>
                 `;
             } else {
-                const plateBgClass = 'bg-white border-gray-200 text-gray-800 group-hover:border-[#AA8C3C]';
-
                 tr.innerHTML = `
                     <td class="px-6 py-4 text-center font-medium text-gray-900">${index + 1}</td>
                     <td class="px-6 py-4 text-center">
@@ -616,12 +643,14 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.province}</td>
                     <td class="px-6 py-4 text-gray-900 font-medium whitespace-nowrap">${item.type}</td>
                     <td class="px-6 py-4">
-                        <a href="#" class="text-[#AA8C3C] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
+                        <div class="flex items-center justify-center w-full">
+                            <a href="#" class="text-[#AA8C3C] font-bold hover:underline decoration-2 underline-offset-2 whitespace-nowrap">Đăng ký đấu giá</a>
+                        </div>
                     </td>
                 `;
             }
 
-            // Xử lý sự kiện khi bấm vào biển số để mở Modal chi tiết
+            // Logic sự kiện (Giữ nguyên)
             const plateNumber = tr.querySelector('[data-plate-number]');
             if (plateNumber) {
                 plateNumber.addEventListener('click', () => {
@@ -630,7 +659,6 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                         type: item.type || 'motorbike',
                         scope: state.activeTab,
                         onRegister: () => {
-                            // Mở modal đăng ký
                             registrationModal.open({
                                 auctionId: `motorbike-plate-${item.plateNumber.replace(/[^a-zA-Z0-9]/g, '-')}`,
                                 auctionName: `Biển số ${item.plateNumber}`,
@@ -639,15 +667,19 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
                                 auctionDate: parseAuctionDate(item.auctionTime)
                             });
                         },
-                        // LOGIC QUAN TRỌNG: Đẩy lên đầu danh sách khi thích
                         onFavorite: (isFav) => {
-                            if (isFav) moveItemToTop(item);
+                            if (isFav) {
+                                moveItemToTop(item);
+                                showToast(`Đã thêm biển ${item.plateNumber} vào danh sách yêu thích!`, 'success');
+                            } else {
+                                
+                                showToast(`Đã bỏ yêu thích biển ${item.plateNumber}`, 'error');
+                            }
                         }
                     });
                 });
             }
 
-            // Xử lý nút Đăng ký đấu giá
             const registerLink = tr.querySelector('a[href="#"]');
             if (registerLink && state.activeTab !== 'results') {
                 registerLink.addEventListener('click', (e) => {
@@ -667,7 +699,6 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
 
         return tbody;
     }
-
     function createPagination() {
         const paginationInfo = getPaginatedData();
         const { totalPages, currentPage } = paginationInfo;
@@ -786,7 +817,59 @@ export function MotorbikeAuctionPage({ motorbikePlates = [], officialMotorbikePl
 
         return btn;
     }
+// --- HELPER: TOAST NOTIFICATION (Thông báo nổi) ---
+function showToast(message, type = 'success') {
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = 'position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px;';
+        document.body.appendChild(toastContainer);
+    }
 
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? '#10B981' : '#EF4444'; 
+    const iconName = type === 'success' ? 'check-circle' : 'alert-circle';
+
+    toast.style.cssText = `
+        display: flex; align-items: center; gap: 12px;
+        background-color: white; 
+        border-left: 4px solid ${bgColor};
+        padding: 16px 20px;
+        border-radius: 4px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        min-width: 300px;
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        font-family: sans-serif;
+    `;
+
+    toast.innerHTML = `
+        <i data-lucide="${iconName}" style="color: ${bgColor}; width: 24px; height: 24px;"></i>
+        <div>
+            <h4 style="margin: 0; font-weight: 600; color: #111827; font-size: 14px;">Thông báo</h4>
+            <p style="margin: 4px 0 0; color: #6B7280; font-size: 13px;">${message}</p>
+        </div>
+    `;
+
+    toastContainer.appendChild(toast);
+    
+    if (window.lucide) window.lucide.createIcons();
+
+    requestAnimationFrame(() => {
+        toast.style.transform = 'translateX(0)';
+        toast.style.opacity = '1';
+    });
+
+    setTimeout(() => {
+        toast.style.transform = 'translateX(120%)';
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            if (toast.parentElement) toast.remove();
+        }, 400);
+    }, 3000);
+}
     // Update only table without full re-render (for real-time search)
     function updateTableOnly() {
         const tableWrapper = container.querySelector('.overflow-x-auto');
