@@ -9,6 +9,12 @@ import { NewsPage } from './features/news/pages/NewsPage.js';
 import { NewsDetailPage } from './features/news/pages/NewsDetailPage.js';
 import { NotificationDetailPage } from './features/news/pages/NotificationDetailPage.js';
 
+// Demo pages
+import { Phase1DemoPage } from './features/demo/Phase1DemoPage.js';
+import { DepositDemoPage } from './features/demo/DepositDemoPage.js';
+import { PaymentDemoPage } from './features/demo/PaymentDemoPage.js';
+import { NotificationArchivePage } from './features/demo/NotificationArchivePage.js';
+
 // Trang đấu giá
 import { CarAuctionPage } from './features/auction-car/pages/CarAuctionPage.js';
 import { MotorbikeAuctionPage } from './features/auction-motorbike/pages/MotorbikeAuctionPage.js';
@@ -158,6 +164,22 @@ function renderApp() {
                     window.scrollTo(0, 0);
                 }
             }), main);
+            break;
+
+        case 'phase1-demo':
+            render(Phase1DemoPage(), main);
+            break;
+
+        case 'deposit-demo':
+            render(DepositDemoPage(), main);
+            break;
+
+        case 'payment-demo':
+            render(PaymentDemoPage(), main);
+            break;
+
+        case 'notifications':
+            render(NotificationArchivePage({ notifData }), main);
             break;
 
         case 'cars':
